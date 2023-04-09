@@ -1,0 +1,28 @@
+:host {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+app-toolbar{
+    height: 40px;
+    background-color: blue;
+}
+
+.body {
+    display: flex;
+    flex: 1;
+
+    app-library{
+        width: 200px;
+        background-color: skyblue;
+    }
+    app-canvas{
+        flex: 1;
+        background-color: pink;
+    }
+    app-property{
+        width: 100px;
+    }
+}
