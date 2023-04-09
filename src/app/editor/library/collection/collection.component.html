@@ -1,0 +1,10 @@
+<div class="header">
+<!--    <i nz-icon nzType="right"></i>-->
+    {{data.name}}
+</div>
+<div class="content">
+    <div class="item" *ngFor="let c of data.components">
+        <img class="icon" [src]="c.icon || '/assets/component.svg'">
+        <div class="name">{{c.name}}</div>
+    </div>
+</div>

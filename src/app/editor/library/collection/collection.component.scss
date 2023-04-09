@@ -1,0 +1,26 @@
+
+.header {
+    //border-top: 1px solid #a8a8a8;
+    border-bottom: 1px solid #a8a8a8;
+    padding: 4px;
+}
+
+.content {
+    padding: 4px;
+    border-bottom: 1px solid #a8a8a8;
+
+    .item {
+        display: inline-block;
+        text-align: center;
+        padding: 4px;
+
+        .icon {
+            width: 30px;
+            height: 30px;
+        }
+
+        .name {
+
+        }
+    }
+}

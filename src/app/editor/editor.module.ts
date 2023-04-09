@@ -24,11 +24,14 @@ import {
     VerticalAlignTopOutline,
     VerticalAlignMiddleOutline,
     VerticalAlignBottomOutline,
+    VerticalLeftOutline,
+    VerticalRightOutline,
     UpOutline,
     DownOutline,
     GroupOutline,
     UngroupOutline
 } from '@ant-design/icons-angular/icons';
+import {CollectionComponent} from './library/collection/collection.component';
 
 @NgModule({
     declarations: [
@@ -37,12 +40,18 @@ import {
         CanvasComponent,
         PropertyComponent,
         ToolbarComponent,
+        CollectionComponent,
     ],
     imports: [
         CommonModule,
         EditorRoutingModule,
         NzIconModule.forChild([
-            SaveOutline, ExportOutline, UndoOutline, RedoOutline, ScissorOutline, CopyOutline, SnippetsOutline, DeleteOutline, AlignLeftOutline, AlignCenterOutline, AlignRightOutline, VerticalAlignTopOutline, VerticalAlignMiddleOutline, VerticalAlignBottomOutline, UpOutline, DownOutline, GroupOutline, UngroupOutline
+            SaveOutline, ExportOutline, UndoOutline, RedoOutline, ScissorOutline,
+            CopyOutline, SnippetsOutline, DeleteOutline, AlignLeftOutline,
+            AlignCenterOutline, AlignRightOutline, VerticalAlignTopOutline,
+            VerticalAlignMiddleOutline, VerticalAlignBottomOutline,
+            VerticalLeftOutline, VerticalRightOutline,
+            UpOutline, DownOutline, GroupOutline, UngroupOutline
         ]),
         NzDividerModule
     ]

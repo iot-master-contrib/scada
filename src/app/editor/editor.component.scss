@@ -13,15 +13,7 @@ app-toolbar{
     display: flex;
     flex: 1;
 
-    app-library{
-        width: 200px;
-        background-color: skyblue;
-    }
     app-canvas{
         flex: 1;
-        background-color: pink;
-    }
-    app-property{
-        width: 100px;
     }
 }
