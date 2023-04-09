@@ -1,0 +1,18 @@
+:host {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    font-size: 20px;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+i{
+    padding: 2px 5px;
+    cursor: pointer;
+
+    &:hover{
+        transform: scale(1.2);
+        //transition: all 0.5s;
+    }
+}
