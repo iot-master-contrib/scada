@@ -1,5 +1,12 @@
 import {Component, ElementRef} from '@angular/core';
-import { Graph } from '@antv/x6';
+import {Graph} from '@antv/x6';
+import {Transform} from "@antv/x6-plugin-transform";
+import {Snapline} from "@antv/x6-plugin-snapline";
+import {Clipboard} from "@antv/x6-plugin-clipboard";
+import {Keyboard} from "@antv/x6-plugin-keyboard";
+import {History} from "@antv/x6-plugin-history";
+import {Selection} from "@antv/x6-plugin-selection";
+import {Export} from "@antv/x6-plugin-export";
 
 const data = {
     // 节点
@@ -31,9 +38,9 @@ const data = {
 };
 
 @Component({
-  selector: 'app-canvas',
-  templateUrl: './canvas.component.html',
-  styleUrls: ['./canvas.component.scss']
+    selector: 'app-canvas',
+    templateUrl: './canvas.component.html',
+    styleUrls: ['./canvas.component.scss']
 })
 export class CanvasComponent {
 
@@ -47,14 +54,32 @@ export class CanvasComponent {
             },
             grid: {
                 size: 10,      // 网格大小 10px
+                type: 'mesh',
                 visible: true, // 渲染网格背景
             },
-            panning: true,
+            panning: {
+                enabled: true,
+                eventTypes: ['rightMouseDown']
+            },
             mousewheel: {
                 enabled: true,
                 modifiers: ['ctrl', 'meta'],
             },
         });
+
+        //补充插件
+        graph.use(new Transform({resizing: {enabled: true}, rotating: {enabled: true}}));
+        graph.use(new Snapline({enabled: true}))
+        graph.use(new Clipboard({enabled: true}))
+        graph.use(new Keyboard({enabled: true}));
+        graph.use(new History({enabled: true}));
+        graph.use(new Selection({
+            enabled: true, multiple: true,
+            rubberband: true, movable: true,
+            showNodeSelectionBox: true,
+        }));
+        graph.use(new Export());
+
         graph.fromJSON(data)
     }
 }
