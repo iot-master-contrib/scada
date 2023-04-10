@@ -1,5 +1,5 @@
-import {Component, ElementRef} from '@angular/core';
-import {Graph} from '@antv/x6';
+import {Component, ElementRef, Injector} from '@angular/core';
+import {Graph, Node} from '@antv/x6';
 import {Transform} from "@antv/x6-plugin-transform";
 import {Snapline} from "@antv/x6-plugin-snapline";
 import {Clipboard} from "@antv/x6-plugin-clipboard";
@@ -9,6 +9,7 @@ import {Selection} from "@antv/x6-plugin-selection";
 import {Export} from "@antv/x6-plugin-export";
 import {Dnd} from "@antv/x6-plugin-dnd";
 import {HmiDrag} from "../../hmi";
+import {register} from "@antv/x6-angular-shape";
 
 const data = {
     // 节点
@@ -46,11 +47,11 @@ const data = {
 })
 export class CanvasComponent {
 
-    graph: Graph;
+    public graph: Graph;
 
     dnd: Dnd;
 
-    constructor(private element: ElementRef) {
+    constructor(private element: ElementRef, private injector: Injector) {
         this.graph = new Graph({
             container: element.nativeElement,
             width: 800,
@@ -93,11 +94,27 @@ export class CanvasComponent {
     }
 
     public Drop($event: HmiDrag) {
-        const node = this.graph.createNode({
-            shape: "rect",
-            width: 100,
-            height: 40,
-        });
-        this.dnd.start(node, $event.event);
+        let node!: Node
+        let component = $event.component
+        switch (component.type) {
+            case "shape":
+                if (component.meta) node = this.graph.createNode(component.meta)
+                break;
+            case "angular":
+                register({
+                    shape: component.id,
+                    content: component.content,
+                    width: 100,
+                    height: 60,
+                    injector: this.injector,
+                })
+                if (component.content) node = this.graph.createNode({
+                    shape: component.id,
+                    data: {}
+                })
+                break;
+        }
+        if (node)
+            this.dnd.start(node, $event.event);
     }
 }
