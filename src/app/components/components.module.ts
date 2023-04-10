@@ -11,6 +11,12 @@ import { ChartBarComponent } from './chart-bar/chart-bar.component';
 import { ChartLineComponent } from './chart-line/chart-line.component';
 import { ChartGaugeComponent } from './chart-gauge/chart-gauge.component';
 import { SliderComponent } from './slider/slider.component';
+import {NzProgressModule} from "ng-zorro-antd/progress";
+import {NzButtonModule} from "ng-zorro-antd/button";
+import {NzInputModule} from "ng-zorro-antd/input";
+import {NzSliderModule} from "ng-zorro-antd/slider";
+import {NzSwitchModule} from "ng-zorro-antd/switch";
+import {NzTableModule} from "ng-zorro-antd/table";
 
 
 
@@ -28,8 +34,14 @@ import { SliderComponent } from './slider/slider.component';
     ChartGaugeComponent,
     SliderComponent
   ],
-  imports: [
-    CommonModule
-  ]
+    imports: [
+        CommonModule,
+        NzProgressModule,
+        NzButtonModule,
+        NzInputModule,
+        NzSliderModule,
+        NzSwitchModule,
+        NzTableModule
+    ]
 })
 export class ComponentsModule { }

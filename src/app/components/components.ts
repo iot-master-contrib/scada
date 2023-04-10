@@ -6,6 +6,7 @@ import {SwitchComponent} from "./switch/switch.component";
 import {ProgressComponent} from "./progress/progress.component";
 import {TableComponent} from "./table/table.component";
 import {SliderComponent} from "./slider/slider.component";
+import {ButtonComponent} from "./button/button.component";
 
 export var COMPONENTS: HmiCollection[] = [
     {
@@ -26,9 +27,7 @@ export var COMPONENTS: HmiCollection[] = [
                     shape: 'image', width: 100, height: 80
                 }
             },
-            {
-                name: '按钮', id: 'button', icon: '/assets/button.svg', type: "angular"
-            },
+            {name: '按钮', id: 'button', icon: '/assets/button.svg', type: "angular", content: ButtonComponent},
             {name: '输入框', id: 'input', icon: '/assets/input.svg', type: "angular", content: InputComponent},
             {name: '文本框', id: 'text', icon: '/assets/text.svg', type: "angular", content: TextComponent},
             {name: '表格', id: 'table', icon: '/assets/table.svg', type: "angular", content: TableComponent},

@@ -32,6 +32,7 @@ import {
     UngroupOutline
 } from '@ant-design/icons-angular/icons';
 import {CollectionComponent} from './library/collection/collection.component';
+import {ComponentsModule} from "../components/components.module";
 
 @NgModule({
     declarations: [
@@ -44,6 +45,7 @@ import {CollectionComponent} from './library/collection/collection.component';
     ],
     imports: [
         CommonModule,
+        ComponentsModule,
         EditorRoutingModule,
         NzIconModule.forChild([
             SaveOutline, ExportOutline, UndoOutline, RedoOutline, ScissorOutline,
