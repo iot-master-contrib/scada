@@ -7,6 +7,7 @@ import {Keyboard} from "@antv/x6-plugin-keyboard";
 import {History} from "@antv/x6-plugin-history";
 import {Selection} from "@antv/x6-plugin-selection";
 import {Export} from "@antv/x6-plugin-export";
+import {Dnd} from "@antv/x6-plugin-dnd";
 
 const data = {
     // 节点
@@ -44,8 +45,12 @@ const data = {
 })
 export class CanvasComponent {
 
+    graph: Graph;
+
+    dnd: Dnd;
+
     constructor(private element: ElementRef) {
-        const graph = new Graph({
+        this.graph = new Graph({
             container: element.nativeElement,
             width: 800,
             height: 600,
@@ -67,19 +72,31 @@ export class CanvasComponent {
             },
         });
 
+
         //补充插件
-        graph.use(new Transform({resizing: {enabled: true}, rotating: {enabled: true}}));
-        graph.use(new Snapline({enabled: true}))
-        graph.use(new Clipboard({enabled: true}))
-        graph.use(new Keyboard({enabled: true}));
-        graph.use(new History({enabled: true}));
-        graph.use(new Selection({
+        this.graph.use(new Transform({resizing: {enabled: true}, rotating: {enabled: true}}));
+        this.graph.use(new Snapline({enabled: true}))
+        this.graph.use(new Clipboard({enabled: true}))
+        this.graph.use(new Keyboard({enabled: true}));
+        this.graph.use(new History({enabled: true}));
+        this.graph.use(new Selection({
             enabled: true, multiple: true,
             rubberband: true, movable: true,
             showNodeSelectionBox: true,
         }));
-        graph.use(new Export());
+        this.graph.use(new Export());
 
-        graph.fromJSON(data)
+        this.dnd = new Dnd({target: this.graph});
+
+        this.graph.fromJSON(data)
+    }
+
+    public drop(event: MouseEvent) {
+        const node = this.graph.createNode({
+            shape: "rect",
+            width: 100,
+            height: 40,
+        });
+        //this.dnd.start(node, event.nativeEvent);
     }
 }
