@@ -10,3 +10,8 @@ export declare interface HmiCollection {
 
     components: HmiComponent[]
 }
+
+export declare interface HmiDrag {
+    event: DragEvent
+    component: HmiComponent
+}

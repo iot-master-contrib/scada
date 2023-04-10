@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
-import {HmiCollection} from "../../hmi";
+import {Component, EventEmitter, Output} from '@angular/core';
+import {HmiCollection, HmiComponent, HmiDrag} from "../../hmi";
+
 
 @Component({
     selector: 'app-library',
@@ -7,6 +8,9 @@ import {HmiCollection} from "../../hmi";
     styleUrls: ['./library.component.scss']
 })
 export class LibraryComponent {
+
+
+    @Output() onDrag = new EventEmitter<HmiDrag>()
 
     collections: HmiCollection[] = [
         {

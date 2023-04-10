@@ -8,6 +8,7 @@ import {History} from "@antv/x6-plugin-history";
 import {Selection} from "@antv/x6-plugin-selection";
 import {Export} from "@antv/x6-plugin-export";
 import {Dnd} from "@antv/x6-plugin-dnd";
+import {HmiDrag} from "../../hmi";
 
 const data = {
     // 节点
@@ -91,12 +92,12 @@ export class CanvasComponent {
         this.graph.fromJSON(data)
     }
 
-    public drop(event: MouseEvent) {
+    public Drop($event: HmiDrag) {
         const node = this.graph.createNode({
             shape: "rect",
             width: 100,
             height: 40,
         });
-        //this.dnd.start(node, event.nativeEvent);
+        this.dnd.start(node, $event.event);
     }
 }

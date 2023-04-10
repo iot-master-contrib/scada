@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {HmiCollection} from "../../../hmi";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {HmiCollection, HmiDrag} from "../../../hmi";
 
 @Component({
   selector: 'app-collection',
@@ -9,6 +9,7 @@ import {HmiCollection} from "../../../hmi";
 export class CollectionComponent {
     @Input() data!: HmiCollection
 
+    @Output() onDrag = new EventEmitter<HmiDrag>()
 
 
 

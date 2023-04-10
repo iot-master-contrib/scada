@@ -3,7 +3,7 @@
     {{data.name}}
 </div>
 <div class="content">
-    <div class="item" *ngFor="let c of data.components">
+    <div class="item" *ngFor="let c of data.components" (dragstart)="onDrag.emit({event: $event, component:c})">
         <img class="icon" [src]="c.icon || '/assets/component.svg'">
         <div class="name">{{c.name}}</div>
     </div>

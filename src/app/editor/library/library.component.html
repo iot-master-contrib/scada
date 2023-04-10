@@ -1,2 +1,2 @@
 
-<app-collection *ngFor="let c of collections" [data]="c"></app-collection>
+<app-collection *ngFor="let c of collections" [data]="c" (onDrag)="onDrag.emit($event)"></app-collection>
