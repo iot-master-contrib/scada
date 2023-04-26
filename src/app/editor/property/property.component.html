@@ -7,7 +7,7 @@
         <td style="width: 80px">{{p.name}}</td>
         <td>
             <ng-container [ngSwitch]="p.type">
-                <input *ngSwitchCase="'text'" (change)="change($event, p)">
+                <input *ngSwitchCase="'text'" [value]="cell.getAttrByPath(p.path)" (change)="change($event, p)">
             </ng-container>
 
         </td>
