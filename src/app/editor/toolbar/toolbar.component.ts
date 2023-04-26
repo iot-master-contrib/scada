@@ -183,4 +183,10 @@ export class ToolbarComponent {
     }
 
 
+    isGroup(): boolean {
+        if (this.graph.getSelectedCellCount() !== 1) return false;
+        let current = this.graph.getSelectedCells()[0];
+        //if (!current) return false;
+        return current.getChildCount() > 0;
+    }
 }

@@ -1,6 +1,6 @@
 :host {
     height: 40px;
-    line-height: 40px;
+    //line-height: 40px;
     padding: 0 10px;
     font-size: 20px;
     font-weight: bold;
@@ -8,12 +8,18 @@
     border-bottom: 1px solid #a8a8a8;
 }
 
-i{
+a {
     padding: 2px 5px;
     cursor: pointer;
+    text-decoration: none;
 
-    &:hover{
-        transform: scale(1.2);
-        //transition: all 0.5s;
+    &.disabled{
+        color: grey;
+        cursor: default;
     }
+
+    //&:hover {
+    //    transform: scale(1.2);
+    //    //transition: all 0.5s;
+    //}
 }

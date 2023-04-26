@@ -8,8 +8,8 @@ import {History} from "@antv/x6-plugin-history";
 import {Selection} from "@antv/x6-plugin-selection";
 import {Export} from "@antv/x6-plugin-export";
 import {Dnd} from "@antv/x6-plugin-dnd";
-import {HmiDrag} from "../../hmi";
 import {register} from "@antv/x6-angular-shape";
+import {HmiDrag} from "../../hmi";
 
 const data = {
     // 节点
@@ -116,6 +116,7 @@ export class CanvasComponent {
                 if (component.meta) node = this.graph.createNode(component.meta)
                 break;
             case "angular":
+                //重复注册
                 register({
                     shape: component.id,
                     content: component.content,
@@ -125,7 +126,14 @@ export class CanvasComponent {
                 })
                 if (component.content) node = this.graph.createNode({
                     shape: component.id,
-                    data: {}
+                    ...component.meta,
+                    data: {},
+                    attrs:{
+                        body:{
+                            width: "100%",
+                            height: "100%",
+                        }
+                    }
                 })
                 break;
         }
