@@ -7,9 +7,9 @@
         <td style="width: 80px">{{p.name}}</td>
         <td>
             <ng-container [ngSwitch]="p.type">
-
+                <input *ngSwitchCase="'text'" (change)="change($event, p)">
             </ng-container>
-            <input style="width: 100px" placeholder="测试">
+
         </td>
     </tr>
 </table>
