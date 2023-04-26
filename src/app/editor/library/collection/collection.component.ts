@@ -11,6 +11,8 @@ export class CollectionComponent {
 
     @Output() onDrag = new EventEmitter<HmiDrag>()
 
+    open = true
+
 
 
 }

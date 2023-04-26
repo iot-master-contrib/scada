@@ -24,7 +24,8 @@ export var COMPONENTS: HmiCollection[] = [
             },
             {
                 name: '图片', id: 'image', icon: '/assets/image.svg', type: "shape", meta: {
-                    shape: 'image', width: 100, height: 80
+                    shape: 'image', width: 100, height: 80,
+                    imageUrl: '/assets/image.svg',
                 }
             },
             {name: '按钮', id: 'button', icon: '/assets/button.svg', type: "angular", content: ButtonComponent},

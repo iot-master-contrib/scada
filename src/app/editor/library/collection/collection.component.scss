@@ -9,6 +9,15 @@
     padding: 4px;
     border-bottom: 1px solid #a8a8a8;
 
+    max-height: 200px;
+    overflow-y: auto;
+    transition: max-height .5s linear 0s;
+
+    &.close {
+        max-height: 0;
+        overflow: hidden;
+    }
+
     .item {
         display: inline-block;
         text-align: center;
