@@ -1,4 +1,4 @@
-<app-toolbar (action)="action($event)"></app-toolbar>
+<app-toolbar [graph]="canvas.graph"></app-toolbar>
 <div class="body">
     <app-library (onDrag)="onDrag($event)"></app-library>
     <app-canvas #canvas></app-canvas>

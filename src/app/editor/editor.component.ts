@@ -18,8 +18,4 @@ export class EditorComponent {
     onDrag($event: HmiDrag) {
         this.canvas.Drop($event)
     }
-
-    action($event: string) {
-        this.canvas.HandleToolbar($event)
-    }
 }

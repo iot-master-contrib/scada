@@ -33,6 +33,7 @@ import {
 } from '@ant-design/icons-angular/icons';
 import {CollectionComponent} from './library/collection/collection.component';
 import {ComponentsModule} from "../components/components.module";
+import {NzButtonModule} from "ng-zorro-antd/button";
 
 @NgModule({
     declarations: [
@@ -55,7 +56,8 @@ import {ComponentsModule} from "../components/components.module";
             VerticalLeftOutline, VerticalRightOutline,
             UpOutline, DownOutline, GroupOutline, UngroupOutline
         ]),
-        NzDividerModule
+        NzDividerModule,
+        NzButtonModule
     ]
 })
 export class EditorModule {
