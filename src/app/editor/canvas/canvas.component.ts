@@ -117,4 +117,164 @@ export class CanvasComponent {
         if (node)
             this.dnd.start(node, $event.event);
     }
+
+    HandleToolbar($event: string) {
+        console.log("handleToolbar", $event)
+        switch ($event) {
+            case "save":
+                break;
+            case "export":
+                this.graph.exportJPEG()
+                break;
+            case"undo":
+                this.graph.undo
+                break;
+            case"redo":
+                this.graph.redo()
+                break;
+            case"cut":
+                this.graph.cut(this.graph.getSelectedCells())
+                break;
+            case"copy":
+                this.graph.copy(this.graph.getSelectedCells())
+                break;
+            case"paste":
+                this.graph.paste()
+                break;
+            case "delete":
+                this.graph.getSelectedCells().forEach(cell => cell.remove())
+                break
+            case"align-left":
+                let left: any = undefined
+                this.graph.getSelectedCells().forEach(cell => {
+                    if (!cell.isNode()) return
+                    let node = cell as Node
+                    let pos = node.position()
+                    if (left === undefined) {
+                        left = pos.x
+                    } else {
+                        pos.x = left
+                        node.setPosition(pos)
+                    }
+                })
+                break;
+            case"align-center":
+                let center: any = undefined
+                this.graph.getSelectedCells().forEach(cell => {
+                    if (!cell.isNode()) return
+                    let node = cell as Node
+                    let pos = node.position()
+                    let size = node.size()
+                    if (center === undefined) {
+                        center = pos.x + size.width * 0.5
+                    } else {
+                        pos.x = center - size.width * 0.5
+                        node.setPosition(pos)
+                    }
+                })
+                break;
+            case"align-right":
+                let right: any = undefined
+                this.graph.getSelectedCells().forEach(cell => {
+                    if (!cell.isNode()) return
+                    let node = cell as Node
+                    let pos = node.position()
+                    let size = node.size()
+                    if (right === undefined) {
+                        right = pos.x + size.width
+                    } else {
+                        pos.x = right - size.width
+                        node.setPosition(pos)
+                    }
+                })
+                break;
+            case"valign-top":
+                let top: any = undefined
+                this.graph.getSelectedCells().forEach(cell => {
+                    if (!cell.isNode()) return
+                    let node = cell as Node
+                    let pos = node.position()
+                    if (top === undefined) {
+                        top = pos.y
+                    } else {
+                        pos.y = top
+                        node.setPosition(pos)
+                    }
+                })
+                break;
+            case"valign-middle":
+                let middle: any = undefined
+                this.graph.getSelectedCells().forEach(cell => {
+                    if (!cell.isNode()) return
+                    let node = cell as Node
+                    let pos = node.position()
+                    let size = node.size()
+                    if (middle === undefined) {
+                        middle = pos.y + size.height * 0.5
+                    } else {
+                        pos.y = middle - size.height * 0.5
+                        node.setPosition(pos)
+                    }
+                })
+                break;
+            case"valign-bottom":
+                let bottom: any = undefined
+                this.graph.getSelectedCells().forEach(cell => {
+                    if (!cell.isNode()) return
+                    let node = cell as Node
+                    let pos = node.position()
+                    let size = node.size()
+                    if (bottom === undefined) {
+                        bottom = pos.y + size.height
+                    } else {
+                        pos.y = bottom - size.height
+                        node.setPosition(pos)
+                    }
+                })
+                break;
+            case"move-top":
+                //this.graph.getSelectedCells().forEach(cell=>cell.)
+                break;
+            case"move-up":
+                break;
+            case"move-down":
+                break;
+            case"move-bottom":
+                break;
+            case"group":
+                let boxes = this.graph.getSelectedCells().map(n => n.getBBox())
+                let meta = {
+                    x: boxes.reduce((p, n) => p.x < n.x ? p : n).x,
+                    y: boxes.reduce((p, n) => p.y < n.y ? p : n).y,
+                    right: boxes.reduce((p, n) => p.right > n.right ? p : n).right,
+                    bottom: boxes.reduce((p, n) => p.bottom > n.bottom ? p : n).bottom,
+                }
+                console.log("group", meta)
+                let parent = this.graph.addNode({
+                    shape: "rect",
+                    x: meta.x, y: meta.y,
+                    width: meta.right - meta.x,
+                    height: meta.bottom - meta.y,
+                    attrs: {
+                        //TODO 透明 zindex处理
+                        body: {
+                            fill: "none",
+                            stroke: "none"
+                        }
+                    }
+                })
+                console.log("parent", parent)
+                //this.graph.getSelectedCells().forEach(cell => cell.setParent(parent))
+                this.graph.getSelectedCells().forEach(cell => parent.addChild(cell))
+                break;
+            case"ungroup":
+                this.graph.getSelectedCells().forEach(cell => {
+                    //if (cell.hasParent()) return;
+                    cell.setChildren(null);
+                    cell.remove() //TODO 会误删除
+                })
+                break;
+
+        }
+    }
 }
