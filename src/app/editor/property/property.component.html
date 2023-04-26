@@ -1,11 +1,14 @@
-<table>
+<table *ngIf="cmp">
     <tr>
         <th>属性</th>
         <th>配置</th>
     </tr>
-    <tr>
-        <td style="width: 80px">文本</td>
+    <tr *ngFor="let p of cmp.properties">
+        <td style="width: 80px">{{p.name}}</td>
         <td>
+            <ng-container [ngSwitch]="p.type">
+
+            </ng-container>
             <input style="width: 100px" placeholder="测试">
         </td>
     </tr>

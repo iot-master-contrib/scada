@@ -4,6 +4,7 @@ import {Component} from "@angular/core";
 export declare interface HmiComponent {
 
     id: string
+
     name: string
 
     icon: string
@@ -13,6 +14,9 @@ export declare interface HmiComponent {
     meta?: Node.Metadata
 
     content?: any //Component
+    registered?: boolean
+
+    properties?: HmiProperty[]
 }
 
 export declare interface HmiCollection {
@@ -24,4 +28,20 @@ export declare interface HmiCollection {
 export declare interface HmiDrag {
     event: DragEvent
     component: HmiComponent
+}
+
+export declare interface HmiPropertyOption {
+    name: string
+    value: any
+}
+
+export declare interface HmiProperty {
+    name: string
+    path: string
+    type: "number" | "text" | "color" | "select" | "checkbox"
+    default?: any
+    options?: HmiPropertyOption[]
+    max?: number
+    min?: number
+    step?: number
 }

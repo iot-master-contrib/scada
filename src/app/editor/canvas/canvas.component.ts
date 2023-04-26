@@ -106,6 +106,11 @@ export class CanvasComponent {
         this.graph.bindKey('ctrl+c', () => this.graph.copy(this.graph.getSelectedCells()))
         this.graph.bindKey('ctrl+v', () => this.graph.paste())
 
+        //this.graph.getSelectedCells()[0].shape
+
+        this.graph.on("selection:changed", () => {
+
+        })
     }
 
     public Drop($event: HmiDrag) {
@@ -113,27 +118,26 @@ export class CanvasComponent {
         let component = $event.component
         switch (component.type) {
             case "shape":
-                if (component.meta) node = this.graph.createNode(component.meta)
+                if (component.meta) node = this.graph.createNode({
+                    ...component.meta,
+                    data: {id: component.id},
+                })
                 break;
             case "angular":
-                //重复注册
-                register({
+
+                //避免重复注册
+                if (!component.registered) register({
                     shape: component.id,
                     content: component.content,
                     width: 100,
                     height: 60,
                     injector: this.injector,
                 })
+
                 if (component.content) node = this.graph.createNode({
                     shape: component.id,
                     ...component.meta,
-                    data: {},
-                    attrs:{
-                        body:{
-                            width: "100%",
-                            height: "100%",
-                        }
-                    }
+                    data: {id: component.id},
                 })
                 break;
         }

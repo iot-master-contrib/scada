@@ -2,6 +2,6 @@
 <div class="body">
     <app-library (onDrag)="onDrag($event)"></app-library>
     <app-canvas #canvas></app-canvas>
-    <app-property></app-property>
+    <app-property [graph]="canvas.graph"></app-property>
 </div>
 

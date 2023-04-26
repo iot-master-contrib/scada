@@ -8,18 +8,22 @@ import {TableComponent} from "./table/table.component";
 import {SliderComponent} from "./slider/slider.component";
 import {ButtonComponent} from "./button/button.component";
 
+
 export var COMPONENTS: HmiCollection[] = [
     {
         name: '基础组件',
         components: [
             {
                 name: '矩形', id: 'rect', icon: '/assets/rect.svg', type: "shape", meta: {
-                    shape: 'rect', width: 100, height: 40
-                }
+                    shape: 'rect', width: 100, height: 40,
+                },
+                properties: [
+                    {name: "填充", path: "fill", type: "color"},
+                ]
             },
             {
                 name: '圆形', id: 'circle', icon: '/assets/circle.svg', type: "shape", meta: {
-                    shape: 'ellipse', width: 100, height: 100
+                    shape: 'ellipse', width: 100, height: 100,
                 }
             },
             {
