@@ -7,7 +7,14 @@
         <td style="width: 80px">{{p.name}}</td>
         <td>
             <ng-container [ngSwitch]="p.type">
-                <input *ngSwitchCase="'text'" [value]="cell.getAttrByPath(p.path)" (change)="change($event, p)">
+                <input *ngSwitchCase="'text'"
+                       [value]="cell.getAttrByPath(p.path)"
+                       (change)="inputChange($event, p)">
+                <input *ngSwitchCase="'color'"
+                       [value]="cell.getAttrByPath(p.path)"
+                       [colorPicker]="cell.getAttrByPath(p.path)"
+                       [style.background]="cell.getAttrByPath(p.path)"
+                       (colorPickerChange)="change($event, p)">
             </ng-container>
 
         </td>

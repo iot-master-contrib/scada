@@ -34,6 +34,7 @@ import {
 import {CollectionComponent} from './library/collection/collection.component';
 import {ComponentsModule} from "../components/components.module";
 import {NzButtonModule} from "ng-zorro-antd/button";
+import {ColorPickerModule} from "ngx-color-picker";
 
 @NgModule({
     declarations: [
@@ -57,7 +58,8 @@ import {NzButtonModule} from "ng-zorro-antd/button";
             UpOutline, DownOutline, GroupOutline, UngroupOutline
         ]),
         NzDividerModule,
-        NzButtonModule
+        NzButtonModule,
+        ColorPickerModule,
     ]
 })
 export class EditorModule {

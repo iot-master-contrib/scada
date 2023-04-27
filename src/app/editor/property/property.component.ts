@@ -33,9 +33,13 @@ export class PropertyComponent {
     cell!: Cell
     cmp!: HmiComponent
 
+    inputChange($event: any, p: HmiProperty) {
+        console.log("property input change", p.path, $event)
+        this.cell.setAttrByPath(p.path, $event.target.value)
+    }
 
     change($event: any, p: HmiProperty) {
-        //console.log($event.target.value, p)
-        this.cell.setAttrByPath(p.path, $event.target.value)
+        console.log("property change", p.path, $event)
+        this.cell.setAttrByPath(p.path, $event)
     }
 }

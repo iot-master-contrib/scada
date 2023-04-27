@@ -19,6 +19,7 @@ export var COMPONENTS: HmiCollection[] = [
                 },
                 properties: [
                     {name: "填充", path: "rect/fill", type: "color"},
+                    {name: "边框", path: "rect/stroke", type: "color"},
                     {name: "文本", path: "label/text", type: "text"},
                 ]
             },

@@ -10,6 +10,7 @@ export class ToolbarComponent {
     @Input() graph!: Graph;
 
     handleSave() {
+        console.log("save", this.graph.toJSON())
     }
 
     handleExport() {
