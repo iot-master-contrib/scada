@@ -19,7 +19,8 @@ export var COMPONENTS: HmiCollection[] = [
                 },
                 properties: [
                     {name: "填充", path: "rect/fill", type: "color"},
-                    {name: "边框", path: "rect/stroke", type: "color"},
+                    {name: "边框颜色", path: "rect/stroke", type: "color"},
+                    {name: "边框大小", path: "rect/stroke-width", type: "stroke"},
                     {name: "文本", path: "label/text", type: "text"},
                 ]
             },
@@ -32,7 +33,10 @@ export var COMPONENTS: HmiCollection[] = [
                 name: '图片', id: 'image', icon: '/assets/image.svg', type: "shape", meta: {
                     shape: 'image', width: 100, height: 80,
                     imageUrl: '/assets/image.svg',
-                }
+                },
+                properties: [
+                    {name: "图片", path: "image/xlink:href", type: "text"},
+                ]
             },
             {name: '按钮', id: 'button', icon: '/assets/button.svg', type: "angular", content: ButtonComponent},
             {name: '输入框', id: 'input', icon: '/assets/input.svg', type: "angular", content: InputComponent},

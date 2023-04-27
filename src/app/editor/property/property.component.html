@@ -4,10 +4,16 @@
         <th>配置</th>
     </tr>
     <tr *ngFor="let p of cmp.properties">
-        <td style="width: 80px">{{p.name}}</td>
+        <td style="min-width: 80px">{{p.name}}</td>
         <td>
             <ng-container [ngSwitch]="p.type">
                 <input *ngSwitchCase="'text'"
+                       [value]="cell.getAttrByPath(p.path) || ''"
+                       (change)="inputChange($event, p)">
+                <input *ngSwitchCase="'number'" type="number"
+                       [value]="cell.getAttrByPath(p.path)"
+                       (change)="inputChange($event, p)">
+                <input *ngSwitchCase="'boolean'" type="checkbox"
                        [value]="cell.getAttrByPath(p.path)"
                        (change)="inputChange($event, p)">
                 <input *ngSwitchCase="'color'"
@@ -15,6 +21,15 @@
                        [colorPicker]="cell.getAttrByPath(p.path)"
                        [style.background]="cell.getAttrByPath(p.path)"
                        (colorPickerChange)="change($event, p)">
+                <select *ngSwitchCase="'select'"
+                        [value]="cell.getAttrByPath(p.path)"
+                        (change)="inputChange($event, p)">
+                    <option *ngFor="let o of p.options" [value]="o.value">{{o.name}}</option>
+                </select>
+                <input *ngSwitchCase="'stroke'" type="number"
+                       [value]="cell.getAttrByPath(p.path)"
+                       (change)="inputChange($event, p)">
+
             </ng-container>
 
         </td>

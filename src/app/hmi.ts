@@ -39,7 +39,7 @@ export declare interface HmiProperty {
     name: string
     path: string
     type: "number" | "text" | "color" | "select" |
-        "checkbox" | "font" | "font-size" | "font-style" | "stroke"
+        "boolean" | "font" | "font-size" | "font-style" | "stroke"
     default?: any
     options?: HmiPropertyOption[]
     max?: number
