@@ -1,24 +1,26 @@
-<form *ngIf="cmp && cell.isNode()" [formGroup]="formGroup">
+<form *ngIf="cmp && cell.isNode()" [formGroup]="formPosition" (change)="onPositionChange($event)">
+
     <table>
         <tr>
-            <th style="min-width: 80px">位置</th>
-            <th></th>
-        </tr>
-        <tr>
-            <td>X</td>
-            <td><input type="number" formGroupName="x"></td>
+            <td style="min-width: 80px">X</td>
+            <td><input type="number" formControlName="x"></td>
         </tr>
         <tr>
             <td>Y</td>
-            <td><input type="number" formGroupName="y"></td>
+            <td><input type="number" formControlName="y"></td>
         </tr>
+    </table>
+</form>
+
+<form *ngIf="cmp && cell.isNode()" [formGroup]="formSize" (change)="onSizeChange($event)">
+    <table>
         <tr>
-            <td>宽度</td>
-            <td><input type="number" formGroupName="width"></td>
+            <td style="min-width: 80px">宽度</td>
+            <td><input type="number" formControlName="width"></td>
         </tr>
         <tr>
             <td>高度</td>
-            <td><input type="number" formGroupName="height"></td>
+            <td><input type="number" formControlName="height"></td>
         </tr>
     </table>
 </form>

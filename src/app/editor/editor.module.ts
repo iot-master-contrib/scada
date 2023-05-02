@@ -35,7 +35,10 @@ import {CollectionComponent} from './library/collection/collection.component';
 import {ComponentsModule} from "../components/components.module";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {ColorPickerModule} from "ngx-color-picker";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {BrowserModule} from "@angular/platform-browser";
+import {NzFormModule} from "ng-zorro-antd/form";
+import {NzInputModule} from "ng-zorro-antd/input";
 
 @NgModule({
     declarations: [
@@ -48,6 +51,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     ],
     imports: [
         CommonModule,
+        ReactiveFormsModule,
         ComponentsModule,
         EditorRoutingModule,
         NzIconModule.forChild([
@@ -61,7 +65,8 @@ import {ReactiveFormsModule} from "@angular/forms";
         NzDividerModule,
         NzButtonModule,
         ColorPickerModule,
-        ReactiveFormsModule,
+        NzFormModule,
+        NzInputModule,
     ]
 })
 export class EditorModule {

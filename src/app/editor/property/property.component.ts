@@ -1,13 +1,13 @@
-import {Component, Input} from '@angular/core';
+import {ApplicationRef, ChangeDetectionStrategy, Component, Input, NgZone} from '@angular/core';
 import {HmiComponent, HmiProperty} from "../../hmi";
 import {Cell, Graph} from "@antv/x6";
 import {COMPONENTS} from "../../components/components";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
     selector: 'app-property',
     templateUrl: './property.component.html',
-    styleUrls: ['./property.component.scss']
+    styleUrls: ['./property.component.scss'],
 })
 export class PropertyComponent {
 
@@ -22,9 +22,14 @@ export class PropertyComponent {
 
                 if (this.cell.isNode()) {
                     const pos = this.cell.getPosition()
+                    this.formPosition.patchValue(pos)
                     const size = this.cell.getSize()
-                    this.formGroup.patchValue({...pos, ...size})
-                    console.log(pos,size)
+                    this.formSize.patchValue(size)
+                    //const value = {...pos, ...size}
+                    //console.log("position", value)
+                    //setTimeout(()=>this.group.patchValue(value), 0)
+                    //this.group.patchValue(value)
+                    //this.zone.run(()=>this.formPosition.patchValue(value))
                 }
 
                 //找到组件 TODO 应该索引
@@ -42,15 +47,19 @@ export class PropertyComponent {
     cell!: Cell
     cmp!: HmiComponent
 
-    formGroup: any;
+    formPosition!: FormGroup;
+    formSize!: FormGroup;
 
-    constructor(private fb: FormBuilder) {
-        this.formGroup = fb.group({
-            x: [0],
-            y: [0],
-            width: [0],
-            height: [0],
+    constructor(private fb: FormBuilder, private zone: NgZone) {
+        this.formPosition = fb.group({
+            x: [0, [Validators.required]],
+            y: [0, [Validators.required]],
         })
+        this.formSize = fb.group({
+            width: [0, [Validators.required]],
+            height: [0, [Validators.required]],
+        })
+        //this.formPosition.patchValue({x:1,y:2})
     }
 
     inputChange($event: any, p: HmiProperty) {
@@ -63,5 +72,20 @@ export class PropertyComponent {
         console.log("property change", p.path, $event)
         //this.cell.setAttrByPath(p.path, $event)
         this.cell.setPropByPath(p.path, $event)
+    }
+
+    onPositionChange($event: Event) {
+        console.log("onPositionChange", this.formPosition.value)
+        if (this.cell.isNode()) {
+            this.cell.setPosition(this.formPosition.value)
+        }
+
+    }
+
+    onSizeChange($event: Event) {
+        console.log("onPositionChange", this.formSize.value)
+        if (this.cell.isNode()) {
+            this.cell.setSize(this.formSize.value)
+        }
     }
 }
