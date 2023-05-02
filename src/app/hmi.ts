@@ -1,4 +1,4 @@
-import {Node} from "@antv/x6";
+import {Edge, Node, Registry} from "@antv/x6";
 import {Component} from "@angular/core";
 
 export declare interface HmiComponent {
@@ -11,9 +11,12 @@ export declare interface HmiComponent {
 
     type: string
 
-    meta?: Node.Metadata
+    inherit?: any //继承 shape 或 edge
+
+    meta?: Node.Metadata | Edge.Metadata
 
     content?: any //Component
+
     registered?: boolean
 
     properties?: HmiProperty[]
@@ -25,8 +28,8 @@ export declare interface HmiCollection {
     components: HmiComponent[]
 }
 
-export declare interface HmiDrag {
-    event: DragEvent
+export declare interface HmiDraw {
+    event?: DragEvent
     component: HmiComponent
 }
 

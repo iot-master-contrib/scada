@@ -4,7 +4,9 @@
     {{data.name}}
 </div>
 <div class="content" [ngClass]="{close:!open}">
-    <div class="item" *ngFor="let c of data.components" (dragstart)="onDrag.emit({event: $event, component:c})">
+    <div class="item" *ngFor="let c of data.components"
+         (click)="onClick(c)"
+         (dragstart)="onDragStart($event, c)">
         <img class="icon" [src]="c.icon || '/assets/component.svg'">
         <div class="name">{{c.name}}</div>
     </div>

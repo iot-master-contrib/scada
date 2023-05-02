@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {HmiCollection, HmiComponent, HmiDrag} from "../../hmi";
+import {HmiCollection, HmiComponent, HmiDraw} from "../../hmi";
 import {COMPONENTS} from "../../components/components";
 
 
@@ -11,7 +11,8 @@ import {COMPONENTS} from "../../components/components";
 export class LibraryComponent {
 
 
-    @Output() onDrag = new EventEmitter<HmiDrag>()
+    @Output() onDrag = new EventEmitter<HmiDraw>()
+    @Output() onDrawLine = new EventEmitter<HmiComponent>()
 
     collections: HmiCollection[] = COMPONENTS
 

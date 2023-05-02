@@ -1,4 +1,4 @@
-import {HmiCollection} from "../hmi";
+import {HmiCollection, HmiProperty} from "../hmi";
 import {InputComponent} from "./input/input.component";
 import {TimeComponent} from "./time/time.component";
 import {TextComponent} from "./text/text.component";
@@ -8,29 +8,47 @@ import {TableComponent} from "./table/table.component";
 import {SliderComponent} from "./slider/slider.component";
 import {ButtonComponent} from "./button/button.component";
 
+export var strokeProperties: HmiProperty[] = [
+    {name: "填充", path: "rect/fill", type: "color"},
+    {name: "边框颜色", path: "rect/stroke", type: "color"},
+    {name: "边框大小", path: "rect/stroke-width", type: "stroke"},
+]
+
 
 export var COMPONENTS: HmiCollection[] = [
     {
         name: '基础组件',
         components: [
             {
-                name: '直线', id: 'line', icon: '/assets/line.svg', type: "line", meta: {
-                    shape: 'edge', width: 100, height: 40,
+                name: '线条', id: 'line', icon: '/assets/line.svg', type: "line",
+                meta: {
+                    shape: 'line', width: 100, height: 40,
                 },
+                inherit: {
+                    inherit: "edge",
+                    attrs: {
+                        line: {targetMarker: null} //删除箭头
+                    }
+                },
+                properties: [
+                    {name: "线条颜色", path: "line/stroke", type: "color"},
+                    {name: "线条大小", path: "line/stroke-width", type: "stroke"},
+                ],
             },
             {
                 name: '矩形', id: 'rect', icon: '/assets/rect.svg', type: "shape", meta: {
                     shape: 'rect', width: 100, height: 40,
+                    //tools: ["node-editor"]
                 },
                 properties: [
                     {name: "填充", path: "rect/fill", type: "color"},
                     {name: "边框颜色", path: "rect/stroke", type: "color"},
                     {name: "边框大小", path: "rect/stroke-width", type: "stroke"},
                     {name: "文本", path: "label/text", type: "text"},
-                ]
+                ],
             },
             {
-                name: '圆形', id: 'circle', icon: '/assets/circle.svg', type: "shape", meta: {
+                name: '圆形', id: 'ellipse', icon: '/assets/circle.svg', type: "shape", meta: {
                     shape: 'ellipse', width: 100, height: 100,
                 }
             },

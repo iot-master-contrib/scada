@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {Title} from "@angular/platform-browser";
-import {HmiComponent, HmiDrag} from "../hmi";
+import {HmiComponent, HmiDraw} from "../hmi";
 import {CanvasComponent} from "./canvas/canvas.component";
 
 @Component({
@@ -15,7 +15,7 @@ export class EditorComponent {
         title.setTitle("组态编辑器")
     }
 
-    onDrag($event: HmiDrag) {
-        this.canvas.Drop($event)
+    onDrag($event: HmiDraw) {
+        this.canvas.Draw($event)
     }
 }

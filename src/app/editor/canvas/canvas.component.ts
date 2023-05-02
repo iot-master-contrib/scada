@@ -1,5 +1,5 @@
 import {Component, ElementRef, Injector} from '@angular/core';
-import {Graph, Node} from '@antv/x6';
+import {Edge, Graph, Node, Shape} from '@antv/x6';
 import {Transform} from "@antv/x6-plugin-transform";
 import {Snapline} from "@antv/x6-plugin-snapline";
 import {Clipboard} from "@antv/x6-plugin-clipboard";
@@ -9,7 +9,7 @@ import {Selection} from "@antv/x6-plugin-selection";
 import {Export} from "@antv/x6-plugin-export";
 import {Dnd} from "@antv/x6-plugin-dnd";
 import {register} from "@antv/x6-angular-shape";
-import {HmiDrag} from "../../hmi";
+import {HmiComponent, HmiDraw} from "../../hmi";
 
 const data = {
     // 节点
@@ -40,6 +40,7 @@ const data = {
     ],
 };
 
+
 @Component({
     selector: 'app-canvas',
     templateUrl: './canvas.component.html',
@@ -47,9 +48,13 @@ const data = {
 })
 export class CanvasComponent {
 
+
     public graph: Graph;
 
     dnd: Dnd;
+
+    line: HmiComponent | undefined;
+    edge: Edge | undefined;
 
     constructor(private element: ElementRef, private injector: Injector) {
         this.graph = new Graph({
@@ -108,32 +113,61 @@ export class CanvasComponent {
 
 
         this.graph.on("selection:changed", ($event) => {
-            $event.removed.forEach(c=>c.removeTools())
-            $event.added.forEach(c=>c.isEdge() && c.addTools(["vertices", "segments", "source-arrowhead", "target-arrowhead"]))
+            $event.removed.forEach(c => c.removeTools())
+            $event.added.forEach(c => c.isEdge() && c.addTools(["vertices", "segments", "source-arrowhead", "target-arrowhead"]))
         })
+
+        //this.graph.on("edge:click")
+
+        this.graph.container.onclick = (event) => {
+            //只有画线才处理
+            if (this.line) {
+                if (this.edge) {
+                    this.edge = undefined
+                    this.line = undefined //仅画一次
+                } else {
+                    this.edge = this.graph.addEdge({
+                        source: [event.offsetX, event.offsetY],
+                        target: [event.offsetX, event.offsetY],
+                        ...this.line.meta
+                    })
+                }
+            }
+        }
+
+        this.graph.container.onmousemove = (event) => {
+            if (this.line) {
+                if (this.edge) {
+                    //console.log("move", event)
+                    this.edge.setTarget({x: event.offsetX, y: event.offsetY})
+                }
+            }
+        }
     }
 
-    public Drop($event: HmiDrag) {
+    public Draw($event: HmiDraw) {
         let node!: Node
         let component = $event.component
         switch (component.type) {
             case "line":
-                console.log("draw line")
-                const edge = this.graph.addEdge({
-                    source: [100, 100],
-                    target: [500, 500],
-                    vertices: [
-                        {x: 100, y: 200},
-                        {x: 300, y: 120},
-                    ],
-                    //tools: ["vertices", "segments", "source-arrowhead", "target-arrowhead"]
-                })
-                //edge.on()
-                break;
+                if (this.line == component) {
+                    this.line = undefined
+                    return;
+                }
+                this.line = component
+                //注册组件
+                if (component.inherit && !component.registered) {
+                    Graph.registerEdge(component.id, component.inherit)
+                }
+                return;//剩下的交给画线工具了
             case "shape":
+                //注册组件
+                if (component.inherit && !component.registered) {
+                    Graph.registerNode(component.id, component.inherit)
+                }
                 if (component.meta) node = this.graph.createNode({
-                    ...component.meta,
-                    data: {id: component.id},
+                ...component.meta,
+                data: {id: component.id},
                 })
                 break;
             case "angular":
@@ -154,7 +188,7 @@ export class CanvasComponent {
                 })
                 break;
         }
-        if (node)
+        if (node && $event.event)
             this.dnd.start(node, $event.event);
     }
 
