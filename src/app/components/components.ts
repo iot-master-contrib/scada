@@ -14,6 +14,11 @@ export var COMPONENTS: HmiCollection[] = [
         name: '基础组件',
         components: [
             {
+                name: '直线', id: 'line', icon: '/assets/line.svg', type: "line", meta: {
+                    shape: 'edge', width: 100, height: 40,
+                },
+            },
+            {
                 name: '矩形', id: 'rect', icon: '/assets/rect.svg', type: "shape", meta: {
                     shape: 'rect', width: 100, height: 40,
                 },

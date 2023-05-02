@@ -106,10 +106,10 @@ export class CanvasComponent {
         this.graph.bindKey('ctrl+c', () => this.graph.copy(this.graph.getSelectedCells()))
         this.graph.bindKey('ctrl+v', () => this.graph.paste())
 
-        //this.graph.getSelectedCells()[0].shape
 
-        this.graph.on("selection:changed", () => {
-
+        this.graph.on("selection:changed", ($event) => {
+            $event.removed.forEach(c=>c.removeTools())
+            $event.added.forEach(c=>c.isEdge() && c.addTools(["vertices", "segments", "source-arrowhead", "target-arrowhead"]))
         })
     }
 
@@ -117,6 +117,19 @@ export class CanvasComponent {
         let node!: Node
         let component = $event.component
         switch (component.type) {
+            case "line":
+                console.log("draw line")
+                const edge = this.graph.addEdge({
+                    source: [100, 100],
+                    target: [500, 500],
+                    vertices: [
+                        {x: 100, y: 200},
+                        {x: 300, y: 120},
+                    ],
+                    //tools: ["vertices", "segments", "source-arrowhead", "target-arrowhead"]
+                })
+                //edge.on()
+                break;
             case "shape":
                 if (component.meta) node = this.graph.createNode({
                     ...component.meta,
