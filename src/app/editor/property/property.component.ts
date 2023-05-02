@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {HmiComponent, HmiProperty} from "../../hmi";
 import {Cell, Graph} from "@antv/x6";
 import {COMPONENTS} from "../../components/components";
+import {FormBuilder} from "@angular/forms";
 
 @Component({
     selector: 'app-property',
@@ -19,6 +20,13 @@ export class PropertyComponent {
                 //this.cmp = g.getSelectedCells()[0].getData()
                 //console.log(this.cmp)
 
+                if (this.cell.isNode()) {
+                    const pos = this.cell.getPosition()
+                    const size = this.cell.getSize()
+                    this.formGroup.patchValue({...pos, ...size})
+                    console.log(pos,size)
+                }
+
                 //找到组件 TODO 应该索引
                 COMPONENTS.find(g => g.components.find(c => {
                     if (c.id === this.cell.shape) {
@@ -34,13 +42,26 @@ export class PropertyComponent {
     cell!: Cell
     cmp!: HmiComponent
 
+    formGroup: any;
+
+    constructor(private fb: FormBuilder) {
+        this.formGroup = fb.group({
+            x: [0],
+            y: [0],
+            width: [0],
+            height: [0],
+        })
+    }
+
     inputChange($event: any, p: HmiProperty) {
         console.log("property input change", p.path, $event)
-        this.cell.setAttrByPath(p.path, $event.target.value)
+        //this.cell.setAttrByPath(p.path, $event.target.value)
+        this.cell.setPropByPath(p.path, $event.target.value)
     }
 
     change($event: any, p: HmiProperty) {
         console.log("property change", p.path, $event)
-        this.cell.setAttrByPath(p.path, $event)
+        //this.cell.setAttrByPath(p.path, $event)
+        this.cell.setPropByPath(p.path, $event)
     }
 }

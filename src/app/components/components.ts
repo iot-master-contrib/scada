@@ -1,7 +1,6 @@
 import {HmiCollection, HmiProperty} from "../hmi";
 import {InputComponent} from "./input/input.component";
 import {TimeComponent} from "./time/time.component";
-import {TextComponent} from "./text/text.component";
 import {SwitchComponent} from "./switch/switch.component";
 import {ProgressComponent} from "./progress/progress.component";
 import {TableComponent} from "./table/table.component";
@@ -21,36 +20,63 @@ export var COMPONENTS: HmiCollection[] = [
         components: [
             {
                 name: '线条', id: 'line', icon: '/assets/line.svg', type: "line",
-                meta: {
-                    shape: 'line', width: 100, height: 40,
-                },
                 inherit: {
                     inherit: "edge",
                     attrs: {
                         line: {targetMarker: null} //删除箭头
                     }
                 },
+                meta: {
+                    shape: 'line', width: 100, height: 40,
+                },
                 properties: [
-                    {name: "线条颜色", path: "line/stroke", type: "color"},
-                    {name: "线条大小", path: "line/stroke-width", type: "stroke"},
+                    {name: "线条颜色", path: "attrs/line/stroke", type: "color"},
+                    {name: "线条大小", path: "attrs/line/stroke-width", type: "stroke"},
+                ],
+            },
+            {
+                name: '圆形', id: 'circle', icon: '/assets/circle.svg', type: "shape", meta: {
+                    shape: 'circle', width: 100, height: 100,
+                },
+                properties: [
+                    {name: "填充", path: "attrs/circle/fill", type: "color"},
+                    {name: "边框颜色", path: "attrs/circle/stroke", type: "color"},
+                    {name: "边框大小", path: "attrs/circle/stroke-width", type: "stroke"},
+                ],
+            },
+            {
+                name: '椭圆', id: 'ellipse', icon: '/assets/ellipse.svg', type: "shape", meta: {
+                    shape: 'ellipse', width: 100, height: 60,
+                },
+                properties: [
+                    {name: "填充", path: "attrs/ellipse/fill", type: "color"},
+                    {name: "边框颜色", path: "attrs/ellipse/stroke", type: "color"},
+                    {name: "边框大小", path: "attrs/ellipse/stroke-width", type: "stroke"},
                 ],
             },
             {
                 name: '矩形', id: 'rect', icon: '/assets/rect.svg', type: "shape", meta: {
                     shape: 'rect', width: 100, height: 40,
-                    //tools: ["node-editor"]
                 },
                 properties: [
-                    {name: "填充", path: "rect/fill", type: "color"},
-                    {name: "边框颜色", path: "rect/stroke", type: "color"},
-                    {name: "边框大小", path: "rect/stroke-width", type: "stroke"},
-                    {name: "文本", path: "label/text", type: "text"},
+                    {name: "填充", path: "attrs/rect/fill", type: "color"},
+                    {name: "边框颜色", path: "attrs/rect/stroke", type: "color"},
+                    {name: "边框大小", path: "attrs/rect/stroke-width", type: "stroke"},
                 ],
             },
             {
-                name: '圆形', id: 'ellipse', icon: '/assets/circle.svg', type: "shape", meta: {
-                    shape: 'ellipse', width: 100, height: 100,
-                }
+                name: '文本', id: 'text-block', icon: '/assets/text.svg', type: "shape", meta: {
+                    shape: 'text-block', width: 100, height: 40,
+                },
+                properties: [
+                    {name: "文本", path: "attrs/label/text", type: "text"},
+                    {name: "颜色", path: "attrs/label/color", type: "color"},
+                    {name: "字体", path: "attrs/label/font", type: "font"},
+                    {name: "字号", path: "attrs/label/font-size", type: "stroke"},
+                    {name: "填充", path: "attrs/rect/fill", type: "color"},
+                    {name: "边框颜色", path: "attrs/rect/stroke", type: "color"},
+                    {name: "边框大小", path: "attrs/rect/stroke-width", type: "stroke"},
+                ],
             },
             {
                 name: '图片', id: 'image', icon: '/assets/image.svg', type: "shape", meta: {
@@ -58,12 +84,11 @@ export var COMPONENTS: HmiCollection[] = [
                     imageUrl: '/assets/image.svg',
                 },
                 properties: [
-                    {name: "图片", path: "image/xlink:href", type: "text"},
+                    {name: "图片", path: "attrs/image/xlink:href", type: "text"},
                 ]
             },
             {name: '按钮', id: 'button', icon: '/assets/button.svg', type: "angular", content: ButtonComponent},
             {name: '输入框', id: 'input', icon: '/assets/input.svg', type: "angular", content: InputComponent},
-            {name: '文本框', id: 'text', icon: '/assets/text.svg', type: "angular", content: TextComponent},
             {name: '表格', id: 'table', icon: '/assets/table.svg', type: "angular", content: TableComponent},
             {name: '时间', id: 'time', icon: '/assets/time.svg', type: "angular", content: TimeComponent},
             {name: '开关', id: 'switch', icon: '/assets/switch.svg', type: "angular", content: SwitchComponent},

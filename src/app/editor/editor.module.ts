@@ -35,6 +35,7 @@ import {CollectionComponent} from './library/collection/collection.component';
 import {ComponentsModule} from "../components/components.module";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {ColorPickerModule} from "ngx-color-picker";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -60,6 +61,7 @@ import {ColorPickerModule} from "ngx-color-picker";
         NzDividerModule,
         NzButtonModule,
         ColorPickerModule,
+        ReactiveFormsModule,
     ]
 })
 export class EditorModule {

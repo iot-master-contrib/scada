@@ -1,33 +1,60 @@
+<form *ngIf="cmp && cell.isNode()" [formGroup]="formGroup">
+    <table>
+        <tr>
+            <th style="min-width: 80px">位置</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>X</td>
+            <td><input type="number" formGroupName="x"></td>
+        </tr>
+        <tr>
+            <td>Y</td>
+            <td><input type="number" formGroupName="y"></td>
+        </tr>
+        <tr>
+            <td>宽度</td>
+            <td><input type="number" formGroupName="width"></td>
+        </tr>
+        <tr>
+            <td>高度</td>
+            <td><input type="number" formGroupName="height"></td>
+        </tr>
+    </table>
+</form>
+
+
 <table *ngIf="cmp">
     <tr>
-        <th>属性</th>
+        <th style="min-width: 80px">属性</th>
         <th>配置</th>
     </tr>
+
     <tr *ngFor="let p of cmp.properties">
-        <td style="min-width: 80px">{{p.name}}</td>
+        <td>{{p.name}}</td>
         <td>
             <ng-container [ngSwitch]="p.type">
                 <input *ngSwitchCase="'text'"
-                       [value]="cell.getAttrByPath(p.path) || ''"
+                       [value]="cell.getPropByPath(p.path) || ''"
                        (change)="inputChange($event, p)">
                 <input *ngSwitchCase="'number'" type="number"
-                       [value]="cell.getAttrByPath(p.path)"
+                       [value]="cell.getPropByPath(p.path)"
                        (change)="inputChange($event, p)">
                 <input *ngSwitchCase="'boolean'" type="checkbox"
-                       [value]="cell.getAttrByPath(p.path)"
+                       [value]="cell.getPropByPath(p.path)"
                        (change)="inputChange($event, p)">
                 <input *ngSwitchCase="'color'"
-                       [value]="cell.getAttrByPath(p.path)"
-                       [colorPicker]="cell.getAttrByPath(p.path)"
-                       [style.background]="cell.getAttrByPath(p.path)"
+                       [value]="cell.getPropByPath(p.path)"
+                       [colorPicker]="cell.getPropByPath(p.path)"
+                       [style.background]="cell.getPropByPath(p.path)"
                        (colorPickerChange)="change($event, p)">
                 <select *ngSwitchCase="'select'"
-                        [value]="cell.getAttrByPath(p.path)"
+                        [value]="cell.getPropByPath(p.path)"
                         (change)="inputChange($event, p)">
                     <option *ngFor="let o of p.options" [value]="o.value">{{o.name}}</option>
                 </select>
                 <input *ngSwitchCase="'stroke'" type="number"
-                       [value]="cell.getAttrByPath(p.path)"
+                       [value]="cell.getPropByPath(p.path)"
                        (change)="inputChange($event, p)">
 
             </ng-container>
