@@ -131,26 +131,29 @@ export class CanvasComponent {
                 }
                 return;//剩下的交给画线工具了
             case "shape":
-                //注册组件
+                //注册衍生组件
                 if (component.inherit && !component.registered) {
                     Graph.registerNode(component.id, component.inherit)
+                    component.registered = true
                 }
                 if (component.meta) node = this.graph.createNode({
-                ...component.meta,
-                data: {id: component.id},
+                    shape: component.id,
+                    ...component.meta,
+                    data: {id: component.id},
                 })
                 break;
             case "angular":
-
                 //避免重复注册
-                if (!component.registered) register({
-                    shape: component.id,
-                    content: component.content,
-                    width: 100,
-                    height: 60,
-                    injector: this.injector,
-                })
-
+                if (!component.registered) {
+                    register({
+                        shape: component.id,
+                        content: component.content,
+                        width: 100,
+                        height: 60,
+                        injector: this.injector,
+                    })
+                    component.registered = true
+                }
                 if (component.content) node = this.graph.createNode({
                     shape: component.id,
                     ...component.meta,
