@@ -12,6 +12,20 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class PropertyComponent {
 
     @Input() set graph(g: Graph) {
+        g.on("cell:change:size", (event) => {
+            if (event.cell == this.cell)
+                this.formSize.patchValue(event.current as any)
+        })
+        g.on("cell:change:position", (event) => {
+            if (event.cell == this.cell)
+                this.formPosition.patchValue(event.current as any)
+        })
+        g.on("cell:unselected", (event) => {
+            if (event.cell == this.cell) {
+                // @ts-ignore
+                this.cmp = undefined
+            }
+        })
         g.on("selection:changed", () => {
             if (g.getSelectedCellCount() === 1) {
                 this.cell = g.getSelectedCells()[0]
