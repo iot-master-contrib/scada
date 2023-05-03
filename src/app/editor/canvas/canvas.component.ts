@@ -97,6 +97,7 @@ export class CanvasComponent {
                     this.line = undefined //仅画一次
                 } else {
                     this.edge = this.graph.addEdge({
+                        id: this.line.id,
                         source: [event.offsetX, event.offsetY],
                         target: [event.offsetX, event.offsetY],
                         ...this.line.meta

@@ -22,11 +22,9 @@ export var COMPONENTS: HmiCollection[] = [
                 name: '线条', id: 'line', icon: '/assets/line.svg', type: "line",
                 inherit: {
                     inherit: "edge",
-                    attrs: {
-                        line: {targetMarker: null} //删除箭头
-                    }
+                    attrs: {line: {targetMarker: null}} //删除箭头(无效)
                 },
-                meta: {},
+                meta: {attrs: {line: {targetMarker: null}}},
                 properties: [
                     {name: "线条颜色", path: "attrs/line/stroke", type: "color"},
                     {name: "线条大小", path: "attrs/line/stroke-width", type: "stroke"},
