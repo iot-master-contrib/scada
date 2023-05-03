@@ -26,10 +26,12 @@ export class ToolbarComponent {
     }
 
     handleCut() {
+        this.graph.getSelectedCells().forEach(c=>c.removeTools())
         this.graph.cut(this.graph.getSelectedCells())
     }
 
     handleCopy() {
+        this.graph.getSelectedCells().forEach(c=>c.removeTools())
         this.graph.copy(this.graph.getSelectedCells())
     }
 
