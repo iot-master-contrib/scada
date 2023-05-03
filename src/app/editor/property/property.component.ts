@@ -1,4 +1,4 @@
-import {ApplicationRef, ChangeDetectionStrategy, Component, Input, NgZone} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {HmiComponent, HmiProperty} from "../../hmi";
 import {Cell, Graph} from "@antv/x6";
 import {COMPONENTS} from "../../components/components";
@@ -64,7 +64,7 @@ export class PropertyComponent {
     formPosition!: FormGroup;
     formSize!: FormGroup;
 
-    constructor(private fb: FormBuilder, private zone: NgZone) {
+    constructor(private fb: FormBuilder) {
         this.formPosition = fb.group({
             x: [0, [Validators.required]],
             y: [0, [Validators.required]],

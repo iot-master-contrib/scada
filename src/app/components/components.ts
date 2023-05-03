@@ -103,5 +103,27 @@ export var COMPONENTS: HmiCollection[] = [
             {name: '曲线图', id: 'chart-line', icon: '/assets/chart-line.svg', type: "angular"},
             {name: '仪表盘', id: 'chart-gauge', icon: '/assets/chart-gauge.svg', type: "angular"},
         ]
+    },
+    {
+        name: '工业组件',
+        components: [
+
+            {
+                name: '线条', id: 'image-test', icon: '/assets/image.svg', type: "shape",
+                inherit: {
+                    inherit: "image",
+                    attrs: {
+                        line: {targetMarker: null} //删除箭头
+                    }
+                },
+                meta: {
+                    shape: 'image-test', width: 100, height: 40,
+                    imageUrl: '/assets/image.svg',
+                },
+                properties: [
+                ],
+            },
+        ]
+
     }
 ]
