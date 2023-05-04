@@ -20,7 +20,7 @@ export var COMPONENTS: HmiCollection[] = [
         components: [
             {
                 name: '线条', id: 'line', icon: '/assets/line.svg', type: "line",
-                inherit: {
+                extends: {
                     inherit: "edge",
                     attrs: {line: {targetMarker: null}} //删除箭头(无效)
                 },
@@ -99,12 +99,7 @@ export var COMPONENTS: HmiCollection[] = [
         components: [
             {
                 name: '测试', id: 'image-test', icon: '/assets/image.svg', type: "shape",
-                inherit: {
-                    inherit: "image",
-                    attrs: {
-                        line: {targetMarker: null} //删除箭头
-                    }
-                },
+                extends: {inherit: "image"},
                 meta: {width: 100, height: 40, imageUrl: '/assets/image.svg'},
                 properties: [],
             },

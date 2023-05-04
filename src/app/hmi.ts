@@ -11,7 +11,7 @@ export declare interface HmiComponent {
 
     type: string
 
-    inherit?: any //继承 shape 或 edge
+    extends?: any //继承 shape 或 edge
 
     meta?: Node.Metadata | Edge.Metadata
 

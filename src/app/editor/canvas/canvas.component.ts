@@ -97,7 +97,7 @@ export class CanvasComponent {
                     this.line = undefined //仅画一次
                 } else {
                     this.edge = this.graph.addEdge({
-                        id: this.line.id,
+                        shape: this.line.id,
                         source: [event.offsetX, event.offsetY],
                         target: [event.offsetX, event.offsetY],
                         ...this.line.meta
@@ -127,14 +127,15 @@ export class CanvasComponent {
                 }
                 this.line = component
                 //注册组件
-                if (component.inherit && !component.registered) {
-                    Graph.registerEdge(component.id, component.inherit)
+                if (component.extends && !component.registered) {
+                    Graph.registerEdge(component.id, component.extends)
+                    component.registered = true
                 }
                 return;//剩下的交给画线工具了
             case "shape":
                 //注册衍生组件
-                if (component.inherit && !component.registered) {
-                    Graph.registerNode(component.id, component.inherit)
+                if (component.extends && !component.registered) {
+                    Graph.registerNode(component.id, component.extends)
                     component.registered = true
                 }
                 if (component.meta) node = this.graph.createNode({
