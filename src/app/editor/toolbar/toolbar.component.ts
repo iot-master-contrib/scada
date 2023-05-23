@@ -18,7 +18,7 @@ export class ToolbarComponent {
     }
 
     handleUndo() {
-        this.graph.undo
+        this.graph.undo()
     }
 
     handleRedo() {

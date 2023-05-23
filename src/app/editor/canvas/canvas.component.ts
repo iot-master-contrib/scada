@@ -1,15 +1,15 @@
-import {Component, ElementRef, Injector} from '@angular/core';
-import {Edge, Graph, Node, Shape} from '@antv/x6';
-import {Transform} from "@antv/x6-plugin-transform";
-import {Snapline} from "@antv/x6-plugin-snapline";
-import {Clipboard} from "@antv/x6-plugin-clipboard";
-import {Keyboard} from "@antv/x6-plugin-keyboard";
-import {History} from "@antv/x6-plugin-history";
-import {Selection} from "@antv/x6-plugin-selection";
-import {Export} from "@antv/x6-plugin-export";
-import {Dnd} from "@antv/x6-plugin-dnd";
-import {register} from "@antv/x6-angular-shape";
-import {HmiComponent, HmiDraw} from "../../hmi";
+import { Component, ElementRef, Injector } from '@angular/core';
+import { Edge, Graph, Node, Shape } from '@antv/x6';
+import { Transform } from "@antv/x6-plugin-transform";
+import { Snapline } from "@antv/x6-plugin-snapline";
+import { Clipboard } from "@antv/x6-plugin-clipboard";
+import { Keyboard } from "@antv/x6-plugin-keyboard";
+import { History } from "@antv/x6-plugin-history";
+import { Selection } from "@antv/x6-plugin-selection";
+import { Export } from "@antv/x6-plugin-export";
+import { Dnd } from "@antv/x6-plugin-dnd";
+import { register } from "@antv/x6-angular-shape";
+import { HmiComponent, HmiDraw } from "../../hmi";
 
 @Component({
     selector: 'app-canvas',
@@ -53,11 +53,11 @@ export class CanvasComponent {
         // this.graph.enableKeyboard()
 
         //补充插件
-        this.graph.use(new Keyboard({enabled: true}));
-        this.graph.use(new Transform({resizing: {enabled: true}, rotating: {enabled: true}}));
-        this.graph.use(new Snapline({enabled: true}))
-        this.graph.use(new Clipboard({enabled: true}))
-        this.graph.use(new History({enabled: true}));
+        this.graph.use(new Keyboard({ enabled: true }));
+        this.graph.use(new Transform({ resizing: { enabled: true }, rotating: { enabled: true } }));
+        this.graph.use(new Snapline({ enabled: true }))
+        this.graph.use(new Clipboard({ enabled: true }))
+        this.graph.use(new History({ enabled: true }));
         this.graph.use(new Selection({
             enabled: true, multiple: true,
             rubberband: true, movable: true,
@@ -65,7 +65,7 @@ export class CanvasComponent {
         }));
         this.graph.use(new Export());
 
-        this.dnd = new Dnd({target: this.graph});
+        this.dnd = new Dnd({ target: this.graph });
 
         //this.graph.fromJSON(data)
 
@@ -75,11 +75,12 @@ export class CanvasComponent {
         })
 
         //快捷键
-        this.graph.bindKey('ctrl+z', () => this.graph.undo)
-        this.graph.bindKey('ctrl+shift+z', () => this.graph.redo())
+        this.graph.bindKey('ctrl+z', () => this.graph.undo())
+        this.graph.bindKey('ctrl+y', () => this.graph.redo())
         this.graph.bindKey('ctrl+x', () => this.graph.cut(this.graph.getSelectedCells()))
         this.graph.bindKey('ctrl+c', () => this.graph.copy(this.graph.getSelectedCells()))
         this.graph.bindKey('ctrl+v', () => this.graph.paste())
+        this.graph.bindKey('backspace', () => this.graph.getSelectedCells().forEach(cell => cell.remove()))
 
 
         this.graph.on("selection:changed", ($event) => {
@@ -110,7 +111,7 @@ export class CanvasComponent {
             if (this.line) {
                 if (this.edge) {
                     //console.log("move", event)
-                    this.edge.setTarget({x: event.offsetX, y: event.offsetY})
+                    this.edge.setTarget({ x: event.offsetX, y: event.offsetY })
                 }
             }
         }
@@ -141,7 +142,7 @@ export class CanvasComponent {
                 if (component.meta) node = this.graph.createNode({
                     shape: component.id,
                     ...component.meta,
-                    data: {id: component.id},
+                    data: { id: component.id },
                 })
                 break;
             case "angular":
@@ -159,7 +160,7 @@ export class CanvasComponent {
                 if (component.content) node = this.graph.createNode({
                     shape: component.id,
                     ...component.meta,
-                    data: {id: component.id},
+                    data: { id: component.id },
                 })
                 break;
         }

@@ -7,26 +7,26 @@
 
 <nz-divider nzType="vertical"></nz-divider>
 
-<a (click)="handleUndo()" nz-button [disabled]="!graph.canUndo()">
-    <i nz-icon nzType="undo" title="撤销"></i>
+<a (click)="handleUndo()" nz-button [disabled]="!graph.canUndo()" title="撤销(ctrl+z)">
+    <i nz-icon nzType="undo"></i>
 </a>
-<a (click)="handleRedo()" nz-button [disabled]="!graph.canRedo()">
-    <i nz-icon nzType="redo" title="重做"></i>
+<a (click)="handleRedo()" nz-button [disabled]="!graph.canRedo()" title="重做(ctrl+y)">
+    <i nz-icon nzType="redo"></i>
 </a>
 
 <nz-divider nzType="vertical"></nz-divider>
 
-<a (click)="handleCut()" nz-button [disabled]="!graph.getSelectedCellCount()">
-    <i nz-icon nzType="scissor" title="剪切"></i>
+<a (click)="handleCut()" nz-button [disabled]="!graph.getSelectedCellCount()" title="剪切(ctrl+x)">
+    <i nz-icon nzType="scissor"></i>
 </a>
-<a (click)="handleCopy()" nz-button [disabled]="!graph.getSelectedCellCount()">
-    <i nz-icon nzType="copy" title="复制"></i>
+<a (click)="handleCopy()" nz-button [disabled]="!graph.getSelectedCellCount()" title="复制(ctrl+c)">
+    <i nz-icon nzType="copy"></i>
 </a>
-<a (click)="handlePaste()" nz-button [disabled]="!graph.getCellsInClipboard().length">
-    <i nz-icon nzType="snippets" title="粘贴"></i>
+<a (click)="handlePaste()" nz-button [disabled]="!graph.getCellsInClipboard().length" title="粘贴(ctrl+v)">
+    <i nz-icon nzType="snippets"></i>
 </a>
-<a (click)="handleDelete()" nz-button [disabled]="!graph.getSelectedCellCount()">
-    <i nz-icon nzType="delete" title="删除"></i></a>
+<a (click)="handleDelete()" nz-button [disabled]="!graph.getSelectedCellCount()" title="删除">
+    <i nz-icon nzType="delete"></i></a>
 
 <nz-divider nzType="vertical"></nz-divider>
 
