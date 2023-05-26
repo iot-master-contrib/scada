@@ -169,7 +169,7 @@ export class CanvasComponent {
                 if (component.meta) node = this.graph.createNode({
                     shape: component.id,
                     ...component.meta,
-                    data: { id: component.id },
+                    data: { id: component.id, ...(component.meta.data || {}) },
                 })
                 break;
             case "angular":

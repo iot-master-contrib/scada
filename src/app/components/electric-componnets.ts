@@ -1,9 +1,9 @@
-const switchCenter = {
+export const switchCenter = {
     x: 35,
     y: -2,
 }
-const switchOpen = `rotate(-30 ${switchCenter.x} ${switchCenter.y})`
-const switchClose = `rotate(-12 ${switchCenter.x} ${switchCenter.y})`;
+export const switchOpen = `rotate(-30 ${switchCenter.x} ${switchCenter.y})`
+export const switchClose = `rotate(-12 ${switchCenter.x} ${switchCenter.y})`;
 const isOpen = true;
 const electricArr = [];
 for (let index = 1; index < 21; index++) {
@@ -20,7 +20,7 @@ electricArr.push({
     meta: {
         width: 120, height: 130,
         data: {
-            isOpen
+            value: isOpen
         },
         markup: [
             {

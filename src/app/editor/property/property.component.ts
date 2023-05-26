@@ -1,9 +1,9 @@
-import {Component, Input} from '@angular/core';
-import {HmiComponent, HmiProperty} from "../../hmi";
-import {Cell, Graph} from "@antv/x6";
-import {COMPONENTS} from "../../components/components";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-
+import { Component, Input } from '@angular/core';
+import { HmiComponent, HmiProperty } from "../../hmi";
+import { Cell, Graph } from "@antv/x6";
+import { COMPONENTS } from "../../components/components";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { switchOpen, switchClose, switchCenter } from 'src/app/components/electric-componnets';
 @Component({
     selector: 'app-property',
     templateUrl: './property.component.html',
@@ -45,7 +45,24 @@ export class PropertyComponent {
                     //this.group.patchValue(value)
                     //this.zone.run(()=>this.formPosition.patchValue(value))
                 }
-
+                console.log(this.cell.data)
+                const data = this.cell.data;
+                if (data.id.includes('switch')) {
+                    const attrPath = 'attrs/switch/transform';
+                    const target = data.value ? switchClose : switchOpen;
+                    data.value = !data.value;
+                    this.cell.transition(attrPath, target, {
+                        interp: (a: string, b: string) => {
+                            const reg = /-?\d+/g
+                            const start = parseInt(a.match(reg)![0], 10)
+                            const end = parseInt(b.match(reg)![0], 10)
+                            const d = end - start
+                            return (t: number) => {
+                                return `rotate(${start + d * t} ${switchCenter.x} ${switchCenter.y})`
+                            }
+                        },
+                    })
+                }
                 //找到组件 TODO 应该索引
                 COMPONENTS.find(g => g.components.find(c => {
                     if (c.id === this.cell.shape) {
