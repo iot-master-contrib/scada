@@ -32,12 +32,23 @@ export class CanvasComponent {
             width: 800,
             height: 600,
             background: {
-                color: '#fffbe6', // 设置画布背景颜色
+                color: '#fff', // 设置画布背景颜色
             },
             grid: {
                 size: 10,      // 网格大小 10px
-                type: 'mesh',
                 visible: true, // 渲染网格背景
+                type: 'doubleMesh',
+                args: [
+                    {
+                        color: '#f0f0f0', // 主网格线颜色
+                        thickness: 1, // 主网格线宽度
+                    },
+                    {
+                        color: '#d0d0d0', // 次网格线颜色
+                        thickness: 1, // 次网格线宽度
+                        factor: 4, // 主次网格线间隔
+                    },
+                ],
             },
             panning: {
                 enabled: true,
@@ -46,6 +57,22 @@ export class CanvasComponent {
             mousewheel: {
                 enabled: true,
                 modifiers: ['ctrl', 'meta'],
+            },
+            connecting: { //连接器
+                connector: 'normal'
+            },
+            highlighting: {
+                // 当连接桩可以被链接时，在连接桩外围渲染一个 2px 宽的红色矩形框
+                magnetAvailable: {
+                    name: 'stroke',
+                    args: {
+                        padding: 4,
+                        attrs: {
+                            strokeWidth: 2,
+                            stroke: 'rgba(223,234,255)',
+                        },
+                    },
+                },
             },
         });
         // this.graph.enableHistory()

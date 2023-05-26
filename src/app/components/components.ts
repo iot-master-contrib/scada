@@ -1,4 +1,4 @@
-import { HmiCollection, HmiProperty } from "../hmi";
+import { HmiCollection, HmiProperty, HmiComponent } from "../hmi";
 import { InputComponent } from "./input/input.component";
 import { TimeComponent } from "./time/time.component";
 import { SwitchComponent } from "./switch/switch.component";
@@ -7,16 +7,18 @@ import { TableComponent } from "./table/table.component";
 import { SliderComponent } from "./slider/slider.component";
 import { ButtonComponent } from "./button/button.component";
 
+import industryComponents from './industry-components';
+import electricComponents from "./electric-componnets";
 export var strokeProperties: HmiProperty[] = [
     { name: "填充", path: "rect/fill", type: "color" },
     { name: "边框颜色", path: "rect/stroke", type: "color" },
     { name: "边框大小", path: "rect/stroke-width", type: "stroke" },
 ]
 
-
 export var COMPONENTS: HmiCollection[] = [
     {
         name: '基础组件',
+        nameEn: 'base',
         components: [
             {
                 name: '线条', id: 'line', icon: '/assets/line.svg', type: "line",
@@ -88,22 +90,13 @@ export var COMPONENTS: HmiCollection[] = [
     },
     {
         name: '图表组件',
+        nameEn: 'chart',
         components: [
             { name: '柱状图', id: 'chart-bar', icon: '/assets/chart-bar.svg', type: "angular" },
             { name: '曲线图', id: 'chart-line', icon: '/assets/chart-line.svg', type: "angular" },
             { name: '仪表盘', id: 'chart-gauge', icon: '/assets/chart-gauge.svg', type: "angular" },
         ]
     },
-    {
-        name: '工业组件',
-        components: [
-            {
-                name: '测试', id: 'image-test', icon: '/assets/image.svg', type: "shape",
-                extends: { inherit: "image" },
-                meta: { width: 100, height: 40, imageUrl: '/assets/image.svg' },
-                properties: [],
-            },
-        ]
-
-    }
+    ...[industryComponents],
+    ...[electricComponents]
 ]
