@@ -1,35 +1,40 @@
-<form [formGroup]="formPosition" *ngIf="cmp && cell.isNode()" (change)="onPositionChange($event)">
-    <table>
-        <tr>
-            <td style="min-width: 80px">X</td>
-            <td><input type="number" formControlName="x"></td>
-        </tr>
-        <tr>
-            <td>Y</td>
-            <td><input type="number" formControlName="y"></td>
-        </tr>
-    </table>
-</form>
+<ng-template *ngIf="cmp && cell.isNode(); else gridSettingTemp">
+    <form [formGroup]="formPosition" (change)="onPositionChange($event)">
+        <table>
+            <tr>
+                <td style="min-width: 80px">X</td>
+                <td><input type="number" formControlName="x"></td>
+            </tr>
+            <tr>
+                <td>Y</td>
+                <td><input type="number" formControlName="y"></td>
+            </tr>
+        </table>
+    </form>
 
-<form [formGroup]="formSize" *ngIf="cmp && cell.isNode()" (change)="onSizeChange($event)">
-    <table>
-        <tr>
-            <td style="min-width: 80px;">宽度</td>
-            <td><input type="number" formControlName="width"></td>
-        </tr>
-        <tr>
-            <td>高度</td>
-            <td><input type="number" formControlName="height"></td>
-        </tr>
-    </table>
-</form>
-<div *ngIf="cmp && cell.isNode()" style="width: 100%;">
-    <nz-divider></nz-divider>
-    <button nz-button nzSize="small" style="width:100%;" (click)="handleEditData()">
-        编辑数据
-    </button>
-    <nz-divider></nz-divider>
-</div>
+    <form [formGroup]="formSize" (change)="onSizeChange($event)">
+        <table>
+            <tr>
+                <td style="min-width: 80px;">宽度</td>
+                <td><input type="number" formControlName="width"></td>
+            </tr>
+            <tr>
+                <td>高度</td>
+                <td><input type="number" formControlName="height"></td>
+            </tr>
+        </table>
+    </form>
+    <div style="width: 100%;">
+        <nz-divider></nz-divider>
+        <button nz-button nzSize="small" style="width:100%;" (click)="handleEditData()">
+            编辑数据
+        </button>
+        <nz-divider></nz-divider>
+    </div>
+</ng-template>
+<ng-template #gridSettingTemp>
+</ng-template>
+
 <table *ngIf="cmp">
     <tr>
         <th style="min-width: 80px;">属性</th>

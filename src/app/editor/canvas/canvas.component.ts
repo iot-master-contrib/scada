@@ -30,7 +30,8 @@ export class CanvasComponent {
         this.graph = new Graph({
             container: element.nativeElement,
             width: 800,
-            height: 600,
+            // height: 600,
+            autoResize: true,
             background: {
                 color: '#fff', // 设置画布背景颜色
             },
@@ -50,7 +51,7 @@ export class CanvasComponent {
                     },
                 ],
             },
-            panning: {
+            panning: {//画布是否可以拖拽平移，默认禁用
                 enabled: true,
                 eventTypes: ['rightMouseDown']
             },
@@ -65,12 +66,9 @@ export class CanvasComponent {
                     return new Shape.Edge({
                         attrs: {
                             line: {
-                                stroke: '#1890ff',
+                                stroke: '#333',
                                 strokeWidth: 1,
-                                targetMarker: {
-                                    name: 'classic',
-                                    size: 8
-                                },
+                                targetMarker: null,
                                 strokeDasharray: 0, //虚线
                                 style: {
                                     animation: 'ant-line 30s infinite linear',
@@ -138,13 +136,10 @@ export class CanvasComponent {
         this.graph.bindKey('ctrl+v', () => this.graph.paste())
         this.graph.bindKey('backspace', () => this.graph.getSelectedCells().forEach(cell => cell.remove()))
 
-
         this.graph.on("selection:changed", ($event) => {
             $event.removed.forEach(c => c.removeTools())
             $event.added.forEach(c => c.isEdge() && c.addTools(["vertices", "segments", "source-arrowhead", "target-arrowhead"]))
         })
-
-        //this.graph.on("edge:click")
 
         this.graph.container.onclick = (event) => {
             //只有画线才处理

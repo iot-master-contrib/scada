@@ -77,7 +77,6 @@ export class PropertyComponent {
                 })
             }
         })
-
         // 鼠标移入移出节点
         g.on('node:mouseenter', FunctionExt.debounce(({ e }) => {
             const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
@@ -85,6 +84,10 @@ export class PropertyComponent {
         }), 500);
         g.on('node:mouseleave', ({ e }) => {
             const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
+            this.showPorts(ports, false);
+        });
+        g.on('blank:click', () => {
+            const ports = document.querySelectorAll(".x6-port-body");
             this.showPorts(ports, false);
         })
     }
