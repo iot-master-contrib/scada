@@ -10,7 +10,7 @@ import { Export } from "@antv/x6-plugin-export";
 import { Dnd } from "@antv/x6-plugin-dnd";
 import { register } from "@antv/x6-angular-shape";
 import { HmiComponent, HmiDraw } from "../../hmi";
-
+import { ports } from 'src/app/components/ports';
 @Component({
     selector: 'app-canvas',
     templateUrl: './canvas.component.html',
@@ -58,8 +58,34 @@ export class CanvasComponent {
                 enabled: true,
                 modifiers: ['ctrl', 'meta'],
             },
-            connecting: { //连接器
-                connector: 'normal'
+            connecting: { //连线交互
+                snap: true,//是否自动吸附
+                connector: 'normal',
+                createEdge() {
+                    return new Shape.Edge({
+                        attrs: {
+                            line: {
+                                stroke: '#1890ff',
+                                strokeWidth: 1,
+                                targetMarker: {
+                                    name: 'classic',
+                                    size: 8
+                                },
+                                strokeDasharray: 0, //虚线
+                                style: {
+                                    animation: 'ant-line 30s infinite linear',
+                                },
+                            },
+                        },
+                        label: {
+                            text: ''
+                        },
+                        router: {
+                            name: 'normal'
+                        },
+                    })
+                },
+
             },
             highlighting: {
                 // 当连接桩可以被链接时，在连接桩外围渲染一个 2px 宽的红色矩形框
@@ -86,8 +112,11 @@ export class CanvasComponent {
         this.graph.use(new Clipboard({ enabled: true }))
         this.graph.use(new History({ enabled: true }));
         this.graph.use(new Selection({
-            enabled: true, multiple: true,
-            rubberband: true, movable: true,
+            enabled: true,
+            multiple: true,
+            rubberband: true,
+            movable: true,
+            strict: true,
             showNodeSelectionBox: true,
         }));
         this.graph.use(new Export());
@@ -170,6 +199,7 @@ export class CanvasComponent {
                     shape: component.id,
                     ...component.meta,
                     data: { id: component.id, ...(component.meta.data || {}) },
+                    ports
                 })
                 break;
             case "angular":
@@ -188,6 +218,7 @@ export class CanvasComponent {
                     shape: component.id,
                     ...component.meta,
                     data: { id: component.id },
+                    ports
                 })
                 break;
         }

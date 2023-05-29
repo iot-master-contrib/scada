@@ -1,5 +1,4 @@
-<form *ngIf="cmp && cell.isNode()" [formGroup]="formPosition" (change)="onPositionChange($event)">
-
+<form [formGroup]="formPosition" *ngIf="cmp && cell.isNode()" (change)="onPositionChange($event)">
     <table>
         <tr>
             <td style="min-width: 80px">X</td>
@@ -12,7 +11,7 @@
     </table>
 </form>
 
-<form *ngIf="cmp && cell.isNode()" [formGroup]="formSize" (change)="onSizeChange($event)">
+<form [formGroup]="formSize" *ngIf="cmp && cell.isNode()" (change)="onSizeChange($event)">
     <table>
         <tr>
             <td style="min-width: 80px;">宽度</td>
@@ -24,14 +23,18 @@
         </tr>
     </table>
 </form>
-
-
-<table *ngIf="cmp" style="width: 100%;">
-    <tr style="background: #e5e5e5;">
-        <th style="min-width: 80px;border-right: 5px solid #fff;">属性</th>
+<div *ngIf="cmp && cell.isNode()" style="width: 100%;">
+    <nz-divider></nz-divider>
+    <button nz-button nzSize="small" style="width:100%;" (click)="handleEditData()">
+        编辑数据
+    </button>
+    <nz-divider></nz-divider>
+</div>
+<table *ngIf="cmp">
+    <tr>
+        <th style="min-width: 80px;">属性</th>
         <th>值</th>
     </tr>
-
     <tr *ngFor="let p of cmp.properties">
         <td>{{p.name}}</td>
         <td>

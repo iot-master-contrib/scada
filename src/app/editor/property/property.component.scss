@@ -12,3 +12,6 @@ input {
         //border: none;
     }
 }
+::ng-deep.ant-divider-horizontal{
+    margin: 10px 0;
+}

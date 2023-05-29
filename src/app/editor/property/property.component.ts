@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { HmiComponent, HmiProperty } from "../../hmi";
-import { Cell, Graph } from "@antv/x6";
+import { Cell, FunctionExt, Graph } from "@antv/x6";
 import { COMPONENTS } from "../../components/components";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { switchOpen, switchClose, switchCenter } from 'src/app/components/electric-componnets';
@@ -55,7 +55,10 @@ export class PropertyComponent {
                 }))
             }
         })
-        g.on('node:click', ({ node }) => {
+        g.on('node:click', ({ node, e }) => {
+            const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
+            this.showPorts(ports, false);
+
             const data = node.data;
             if (data.id.includes('switch')) {
                 const attrPath = 'attrs/switch/transform';
@@ -73,6 +76,16 @@ export class PropertyComponent {
                     },
                 })
             }
+        })
+
+        // 鼠标移入移出节点
+        g.on('node:mouseenter', FunctionExt.debounce(({ e }) => {
+            const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
+            this.showPorts(ports, true);
+        }), 500);
+        g.on('node:mouseleave', ({ e }) => {
+            const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
+            this.showPorts(ports, false);
         })
     }
 
@@ -118,6 +131,16 @@ export class PropertyComponent {
         console.log("onPositionChange", this.formSize.value)
         if (this.cell.isNode()) {
             this.cell.setSize(this.formSize.value)
+        }
+    }
+
+    handleEditData() {
+
+    }
+
+    showPorts(ports: any, show: boolean) {
+        for (let i = 0, len = ports.length; i < len; i = i + 1) {
+            ports[i].style.visibility = show ? 'visible' : 'hidden';
         }
     }
 }
