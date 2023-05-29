@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {HmiCollection, HmiComponent, HmiDraw} from "../../../hmi";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { HmiCollection, HmiComponent, HmiDraw } from "../../../hmi";
 
 @Component({
     selector: 'app-collection',
@@ -15,12 +15,12 @@ export class CollectionComponent {
 
 
     onDragStart($event: DragEvent, c: HmiComponent) {
-        if (c.type != "line")
-            this.onDraw.emit({event: $event, component: c})
+        // if (c.type != "line")
+        this.onDraw.emit({ event: $event, component: c });
     }
 
     onClick(c: HmiComponent) {
-        if (c.type == "line")
-            this.onDraw.emit({component: c})
+        // if (c.type == "line")
+        // this.onDraw.emit({ component: c, eventType: 'click' })
     }
 }

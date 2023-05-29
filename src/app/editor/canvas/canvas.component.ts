@@ -11,14 +11,16 @@ import { Dnd } from "@antv/x6-plugin-dnd";
 import { register } from "@antv/x6-angular-shape";
 import { HmiComponent, HmiDraw } from "../../hmi";
 import { ports } from 'src/app/components/ports';
+const source = { x: 520, y: 320 };
+const target = { x: 400, y: 400 };
+
 @Component({
     selector: 'app-canvas',
     templateUrl: './canvas.component.html',
     styleUrls: ['./canvas.component.scss']
 })
+
 export class CanvasComponent {
-
-
     public graph: Graph;
 
     dnd: Dnd;
@@ -109,13 +111,14 @@ export class CanvasComponent {
         this.graph.use(new Snapline({ enabled: true }))
         this.graph.use(new Clipboard({ enabled: true }))
         this.graph.use(new History({ enabled: true }));
-        this.graph.use(new Selection({
+        this.graph.use(new Selection({//选中
             enabled: true,
             multiple: true,
             rubberband: true,
             movable: true,
             strict: true,
             showNodeSelectionBox: true,
+            showEdgeSelectionBox: true
         }));
         this.graph.use(new Export());
 
@@ -138,52 +141,57 @@ export class CanvasComponent {
 
         this.graph.on("selection:changed", ($event) => {
             $event.removed.forEach(c => c.removeTools())
-            $event.added.forEach(c => c.isEdge() && c.addTools(["vertices", "segments", "source-arrowhead", "target-arrowhead"]))
+            // $event.added.forEach(c => c.isEdge() && c.addTools(["vertices", "segments", "source-arrowhead", "target-arrowhead"]))
+            $event.added.forEach(c => c.isEdge() && c.addTools(["vertices", "segments"]))
         })
 
-        this.graph.container.onclick = (event) => {
-            //只有画线才处理
-            if (this.line) {
-                if (this.edge) {
-                    this.edge = undefined
-                    this.line = undefined //仅画一次
-                } else {
-                    this.edge = this.graph.addEdge({
-                        shape: this.line.id,
-                        source: [event.offsetX, event.offsetY],
-                        target: [event.offsetX, event.offsetY],
-                        ...this.line.meta
-                    })
-                }
-            }
-        }
+        // this.graph.container.onclick = (event) => {
+        //     //只有画线才处理
+        //     if (this.line) {
+        //         if (this.edge) {
+        //             this.edge = undefined
+        //             this.line = undefined //仅画一次
+        //         } else {
+        //             this.edge = this.graph.addEdge({
+        //                 shape: this.line.id,
+        //                 source: [event.offsetX, event.offsetY],
+        //                 target: [event.offsetX, event.offsetY],
+        //                 ...this.line.meta
+        //             })
+        //         }
+        //     }
+        // }
 
         this.graph.container.onmousemove = (event) => {
             if (this.line) {
-                if (this.edge) {
-                    //console.log("move", event)
-                    this.edge.setTarget({ x: event.offsetX, y: event.offsetY })
-                }
+                const edge = this.graph.addEdge({
+                    shape: this.line.id,
+                    source: [event.offsetX, event.offsetY],
+                    target: [(event.offsetX) - 120, (event.offsetY) + 80],
+                    ...this.line.meta
+                });
+                this.line = undefined;
+                // this.graph.resetSelection();
+                // this.graph.select([edge]);
             }
         }
     }
 
     public Draw($event: HmiDraw) {
         let node!: Node
-        let component = $event.component
+        let { component } = $event;
         switch (component.type) {
             case "line":
-                if (this.line == component) {
-                    this.line = undefined
-                    return;
-                }
-                this.line = component
                 //注册组件
                 if (component.extends && !component.registered) {
                     Graph.registerEdge(component.id, component.extends)
                     component.registered = true
                 }
-                return;//剩下的交给画线工具了
+                this.line = component;
+                this.graph.createEdge({
+                    shape: component.id,
+                })
+                return
             case "shape":
                 //注册衍生组件
                 if (component.extends && !component.registered) {
