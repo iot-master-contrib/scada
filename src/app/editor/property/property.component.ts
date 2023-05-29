@@ -33,7 +33,6 @@ export class PropertyComponent {
                 // cell.getData()
                 //this.cmp = g.getSelectedCells()[0].getData()
                 //console.log(this.cmp)
-
                 if (this.cell.isNode()) {
                     const pos = this.cell.getPosition()
                     this.formPosition.patchValue(pos)
@@ -45,24 +44,7 @@ export class PropertyComponent {
                     //this.group.patchValue(value)
                     //this.zone.run(()=>this.formPosition.patchValue(value))
                 }
-                console.log(this.cell.data)
-                const data = this.cell.data;
-                if (data.id.includes('switch')) {
-                    const attrPath = 'attrs/switch/transform';
-                    const target = data.value ? switchClose : switchOpen;
-                    data.value = !data.value;
-                    this.cell.transition(attrPath, target, {
-                        interp: (a: string, b: string) => {
-                            const reg = /-?\d+/g
-                            const start = parseInt(a.match(reg)![0], 10)
-                            const end = parseInt(b.match(reg)![0], 10)
-                            const d = end - start
-                            return (t: number) => {
-                                return `rotate(${start + d * t} ${switchCenter.x} ${switchCenter.y})`
-                            }
-                        },
-                    })
-                }
+
                 //找到组件 TODO 应该索引
                 COMPONENTS.find(g => g.components.find(c => {
                     if (c.id === this.cell.shape) {
@@ -71,6 +53,25 @@ export class PropertyComponent {
                     }
                     return false
                 }))
+            }
+        })
+        g.on('node:click', ({ node }) => {
+            const data = node.data;
+            if (data.id.includes('switch')) {
+                const attrPath = 'attrs/switch/transform';
+                const target = data.value ? switchClose : switchOpen;
+                data.value = !data.value;
+                this.cell.transition(attrPath, target, {
+                    interp: (a: string, b: string) => {
+                        const reg = /-?\d+/g
+                        const start = parseInt(a.match(reg)![0], 10)
+                        const end = parseInt(b.match(reg)![0], 10)
+                        const d = end - start
+                        return (t: number) => {
+                            return `rotate(${start + d * t} ${switchCenter.x} ${switchCenter.y})`
+                        }
+                    },
+                })
             }
         })
     }
