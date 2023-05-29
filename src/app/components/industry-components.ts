@@ -8,7 +8,7 @@ for (let index = 0; index < pipeImg.length; index++) {
     industryArr.push({
         name: '', id: `pipe${index}`, icon: `/assets/industry/${item}.svg`, type: "shape",
         extends: { inherit: "image" },
-        meta: { width: 120, height: 130, imageUrl: `/assets/industry/${item}.svg` },
+        meta: { width: 80, height: 80, imageUrl: `/assets/industry/${item}.svg` },
         properties: [],
     })
 };

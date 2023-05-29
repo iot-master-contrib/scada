@@ -10,7 +10,7 @@ for (let index = 1; index < 21; index++) {
     electricArr.push({
         name: '', id: `electric${index}`, icon: `/assets/electric/electric${index}.svg`, type: "shape",
         extends: { inherit: "image" },
-        meta: { width: 120, height: 130, imageUrl: `/assets/electric/electric${index}.svg` },
+        meta: { width: 80, height: 80, imageUrl: `/assets/electric/electric${index}.svg` },
         properties: [],
     });
 }
