@@ -1,9 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { HmiComponent, HmiProperty } from "../../hmi";
-import { Cell, FunctionExt, Graph } from "@antv/x6";
+import { Cell, Graph } from "@antv/x6";
 import { COMPONENTS } from "../../components/components";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { switchOpen, switchClose, switchCenter } from 'src/app/components/electric-componnets';
 @Component({
     selector: 'app-property',
     templateUrl: './property.component.html',
@@ -55,41 +54,6 @@ export class PropertyComponent {
                 }))
             }
         })
-        g.on('node:click', ({ node, e }) => {
-            const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
-            this.showPorts(ports, false);
-
-            const data = node.data;
-            if (data.id.includes('switch')) {
-                const attrPath = 'attrs/switch/transform';
-                const target = data.value ? switchClose : switchOpen;
-                data.value = !data.value;
-                this.cell.transition(attrPath, target, {
-                    interp: (a: string, b: string) => {
-                        const reg = /-?\d+/g
-                        const start = parseInt(a.match(reg)![0], 10)
-                        const end = parseInt(b.match(reg)![0], 10)
-                        const d = end - start
-                        return (t: number) => {
-                            return `rotate(${start + d * t} ${switchCenter.x} ${switchCenter.y})`
-                        }
-                    },
-                })
-            }
-        })
-        // 鼠标移入移出节点
-        g.on('node:mouseenter', FunctionExt.debounce(({ e }) => {
-            const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
-            this.showPorts(ports, true);
-        }), 500);
-        g.on('node:mouseleave', ({ e }) => {
-            const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
-            this.showPorts(ports, false);
-        });
-        g.on('blank:click', () => {
-            const ports = document.querySelectorAll(".x6-port-body");
-            this.showPorts(ports, false);
-        })
     }
 
     cell!: Cell
@@ -127,7 +91,6 @@ export class PropertyComponent {
         if (this.cell.isNode()) {
             this.cell.setPosition(this.formPosition.value)
         }
-
     }
 
     onSizeChange($event: Event) {
@@ -139,11 +102,5 @@ export class PropertyComponent {
 
     handleEditData() {
 
-    }
-
-    showPorts(ports: any, show: boolean) {
-        for (let i = 0, len = ports.length; i < len; i = i + 1) {
-            ports[i].style.visibility = show ? 'visible' : 'hidden';
-        }
     }
 }
