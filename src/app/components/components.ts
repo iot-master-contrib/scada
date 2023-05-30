@@ -7,31 +7,20 @@ import { TableComponent } from "./table/table.component";
 import { SliderComponent } from "./slider/slider.component";
 import { ButtonComponent } from "./button/button.component";
 
-import industryComponents from './industry-components';
-import electricComponents from "./electric-componnets";
+import industryComponents from './configs/industry-components';
+import electricComponents from "./configs/electric-components";
+import lineConfig from "./configs/line-config";
 export var strokeProperties: HmiProperty[] = [
     { name: "填充", path: "rect/fill", type: "color" },
     { name: "边框颜色", path: "rect/stroke", type: "color" },
     { name: "边框大小", path: "rect/stroke-width", type: "stroke" },
 ]
-
 export var COMPONENTS: HmiCollection[] = [
     {
         name: '基础组件',
         nameEn: 'base',
         components: [
-            {
-                name: '线条', id: 'line', icon: '/assets/line.svg', type: "line",
-                extends: {
-                    inherit: "edge",
-                    attrs: { line: { targetMarker: null } } //删除箭头
-                },
-                meta: {},
-                properties: [
-                    { name: "线条颜色", path: "attrs/line/stroke", type: "color" },
-                    { name: "线条大小", path: "attrs/line/stroke-width", type: "stroke" },
-                ],
-            },
+            lineConfig,
             {
                 name: '圆形', id: 'circle', icon: '/assets/circle.svg', type: "shape",
                 meta: { width: 100, height: 100 },

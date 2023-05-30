@@ -1,5 +1,5 @@
 import { Component, ElementRef, Injector } from '@angular/core';
-import { Edge, Graph, Node, Shape } from '@antv/x6';
+import { Edge, FunctionExt, Graph, Node, Shape } from '@antv/x6';
 import { Transform } from "@antv/x6-plugin-transform";
 import { Snapline } from "@antv/x6-plugin-snapline";
 import { Clipboard } from "@antv/x6-plugin-clipboard";
@@ -10,9 +10,8 @@ import { Export } from "@antv/x6-plugin-export";
 import { Dnd } from "@antv/x6-plugin-dnd";
 import { register } from "@antv/x6-angular-shape";
 import { HmiComponent, HmiDraw } from "../../hmi";
-import { ports } from 'src/app/components/ports';
-const source = { x: 520, y: 320 };
-const target = { x: 400, y: 400 };
+import { ports } from 'src/app/components/configs/ports';
+import { switchOpen, switchClose, switchCenter } from 'src/app/components/configs/electric-components';
 
 @Component({
     selector: 'app-canvas',
@@ -117,8 +116,7 @@ export class CanvasComponent {
             rubberband: true,
             movable: true,
             strict: true,
-            showNodeSelectionBox: true,
-            showEdgeSelectionBox: true
+            showNodeSelectionBox: true
         }));
         this.graph.use(new Export());
 
@@ -136,47 +134,88 @@ export class CanvasComponent {
         this.graph.bindKey('ctrl+y', () => this.graph.redo())
         this.graph.bindKey('ctrl+x', () => this.graph.cut(this.graph.getSelectedCells()))
         this.graph.bindKey('ctrl+c', () => this.graph.copy(this.graph.getSelectedCells()))
-        this.graph.bindKey('ctrl+v', () => this.graph.paste())
+        this.graph.bindKey('ctrl+v', () => this.graph.resetSelection(this.graph.paste()))
         this.graph.bindKey('backspace', () => this.graph.getSelectedCells().forEach(cell => cell.remove()))
-
-        this.graph.on("selection:changed", ($event) => {
-            $event.removed.forEach(c => c.removeTools())
-            // $event.added.forEach(c => c.isEdge() && c.addTools(["vertices", "segments", "source-arrowhead", "target-arrowhead"]))
-            $event.added.forEach(c => c.isEdge() && c.addTools(["vertices", "segments"]))
-        })
-
-        // this.graph.container.onclick = (event) => {
-        //     //只有画线才处理
-        //     if (this.line) {
-        //         if (this.edge) {
-        //             this.edge = undefined
-        //             this.line = undefined //仅画一次
-        //         } else {
-        //             this.edge = this.graph.addEdge({
-        //                 shape: this.line.id,
-        //                 source: [event.offsetX, event.offsetY],
-        //                 target: [event.offsetX, event.offsetY],
-        //                 ...this.line.meta
-        //             })
-        //         }
-        //     }
-        // }
 
         this.graph.container.onmousemove = (event) => {
             if (this.line) {
-                const edge = this.graph.addEdge({
+                this.graph.addEdge({
                     shape: this.line.id,
                     source: [event.offsetX, event.offsetY],
                     target: [(event.offsetX) - 120, (event.offsetY) + 80],
                     ...this.line.meta
                 });
                 this.line = undefined;
-                // this.graph.resetSelection();
-                // this.graph.select([edge]);
             }
         }
-    }
 
+        this.graph.on('edge:selected', FunctionExt.debounce(({ edge }) => {
+            edge.addTools([{
+                name: 'source-arrowhead',
+                args: {
+                    attrs: {
+                        cursor: 'pointer',
+                        fill: '#3c9566',
+                    }
+                }
+            }, {
+                name: 'target-arrowhead',
+                args: {
+                    attrs: {
+                        cursor: 'pointer',
+                        fill: '#3c9566',
+                    }
+                }
+            }, {
+                name: 'vertices',
+                args: {
+                    attrs: {
+                        fill: '#3c9566',
+                        cursor: 'crosshair',
+                    },
+                    stopPropagation: false
+                },
+            }])
+        }))
+
+        this.graph.on('edge:unselected', ({ cell }) => {
+            cell.removeTools();
+        })
+
+        // 鼠标移入移出节点
+        this.graph.on('node:mouseenter', FunctionExt.debounce(({ e }) => {
+            const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
+            this.showPorts(ports, true);
+        }), 500);
+        this.graph.on('node:mouseleave', ({ e }) => {
+            const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
+            this.showPorts(ports, false);
+        });
+        this.graph.on('blank:click', () => {
+            const ports = document.querySelectorAll(".x6-port-body");
+            this.showPorts(ports, false);
+        })
+
+        this.graph.on('node:click', ({ node, e }) => {
+            const data = node.data;
+            if (data.id.includes('switch')) {
+                const attrPath = 'attrs/switch/transform';
+                const target = data.value ? switchClose : switchOpen;
+                data.value = !data.value;
+                node.transition(attrPath, target, {
+                    interp: (a: string, b: string) => {
+                        const reg = /-?\d+/g
+                        const start = parseInt(a.match(reg)![0], 10)
+                        const end = parseInt(b.match(reg)![0], 10)
+                        const d = end - start
+                        return (t: number) => {
+                            return `rotate(${start + d * t} ${switchCenter.x} ${switchCenter.y})`
+                        }
+                    },
+                })
+            }
+        });
+    }
     public Draw($event: HmiDraw) {
         let node!: Node
         let { component } = $event;
@@ -228,5 +267,9 @@ export class CanvasComponent {
         if (node && $event.event)
             this.dnd.start(node, $event.event);
     }
-
+    public showPorts(ports: any, show: boolean) {
+        for (let i = 0, len = ports.length; i < len; i = i + 1) {
+            ports[i].style.visibility = show ? 'visible' : 'hidden';
+        }
+    }
 }
