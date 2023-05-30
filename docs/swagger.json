@@ -1,0 +1,1268 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API文档",
+        "title": "设备分类数据接口文档",
+        "contact": {},
+        "version": "1.0 版本"
+    },
+    "basePath": "/app/scada/api/",
+    "paths": {
+        "/project/area/count": {
+            "post": {
+                "description": "查询区域数量",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-area"
+                ],
+                "summary": "查询区域数量",
+                "parameters": [
+                    {
+                        "description": "查询参数",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.ParamSearch"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-int64"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/area/create": {
+            "post": {
+                "description": "创建区域",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-area"
+                ],
+                "summary": "创建区域",
+                "parameters": [
+                    {
+                        "description": "区域信息",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/types.DeviceArea"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_DeviceArea"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/area/export": {
+            "get": {
+                "description": "导出区域",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/octet-stream"
+                ],
+                "tags": [
+                    "project-area"
+                ],
+                "summary": "导出区域",
+                "responses": {}
+            }
+        },
+        "/project/area/import": {
+            "post": {
+                "description": "导入区域",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-area"
+                ],
+                "summary": "导入区域",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "压缩包",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-int64"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/area/list": {
+            "get": {
+                "description": "查询区域",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-area"
+                ],
+                "summary": "查询区域",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "skip",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyList-types_DeviceArea"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/area/search": {
+            "post": {
+                "description": "查询区域",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-area"
+                ],
+                "summary": "查询区域",
+                "parameters": [
+                    {
+                        "description": "查询参数",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.ParamSearch"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyList-types_DeviceArea"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/area/{id}": {
+            "get": {
+                "description": "获取区域",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-area"
+                ],
+                "summary": "获取区域",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "区域ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_DeviceArea"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "修改区域",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-area"
+                ],
+                "summary": "修改区域",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "区域ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "区域信息",
+                        "name": "project-area",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/types.DeviceArea"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_DeviceArea"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/area/{id}/delete": {
+            "get": {
+                "description": "删除区域",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-area"
+                ],
+                "summary": "删除区域",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "区域ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_DeviceArea"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/group/count": {
+            "post": {
+                "description": "查询分组数量",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-group"
+                ],
+                "summary": "查询分组数量",
+                "parameters": [
+                    {
+                        "description": "查询参数",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.ParamSearch"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-int64"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/group/create": {
+            "post": {
+                "description": "创建分组",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-group"
+                ],
+                "summary": "创建分组",
+                "parameters": [
+                    {
+                        "description": "分组信息",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/types.DeviceGroup"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_DeviceGroup"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/group/export": {
+            "get": {
+                "description": "导出分组",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/octet-stream"
+                ],
+                "tags": [
+                    "project-group"
+                ],
+                "summary": "导出分组",
+                "responses": {}
+            }
+        },
+        "/project/group/import": {
+            "post": {
+                "description": "导入分组",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-group"
+                ],
+                "summary": "导入分组",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "压缩包",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-int64"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/group/list": {
+            "get": {
+                "description": "查询分组",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-group"
+                ],
+                "summary": "查询分组",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "skip",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyList-types_DeviceGroup"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/group/search": {
+            "post": {
+                "description": "查询分组",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-group"
+                ],
+                "summary": "查询分组",
+                "parameters": [
+                    {
+                        "description": "查询参数",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.ParamSearch"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyList-types_DeviceGroup"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/group/{id}": {
+            "get": {
+                "description": "获取分组",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-group"
+                ],
+                "summary": "获取分组",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "分组ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_DeviceGroup"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "修改分组",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-group"
+                ],
+                "summary": "修改分组",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "分组ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "分组信息",
+                        "name": "project-group",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/types.DeviceGroup"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_DeviceGroup"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/group/{id}/delete": {
+            "get": {
+                "description": "删除分组",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-group"
+                ],
+                "summary": "删除分组",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "分组ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_DeviceGroup"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/list": {
+            "get": {
+                "description": "查询工程",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project"
+                ],
+                "summary": "查询工程",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "skip",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyList-api_Device"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/search": {
+            "post": {
+                "description": "查询工程",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project"
+                ],
+                "summary": "查询工程",
+                "parameters": [
+                    {
+                        "description": "查询参数",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.ParamSearch"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyList-api_Device"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/type/count": {
+            "post": {
+                "description": "查询设备类型数量",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-type"
+                ],
+                "summary": "查询设备类型数量",
+                "parameters": [
+                    {
+                        "description": "查询参数",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.ParamSearch"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-int64"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/type/create": {
+            "post": {
+                "description": "创建设备类型",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-type"
+                ],
+                "summary": "创建设备类型",
+                "parameters": [
+                    {
+                        "description": "设备类型信息",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/types.DeviceType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_DeviceType"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/type/export": {
+            "get": {
+                "description": "导出设备类型",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/octet-stream"
+                ],
+                "tags": [
+                    "project-type"
+                ],
+                "summary": "导出设备类型",
+                "responses": {}
+            }
+        },
+        "/project/type/import": {
+            "post": {
+                "description": "导入设备类型",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-type"
+                ],
+                "summary": "导入设备类型",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "压缩包",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-int64"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/type/list": {
+            "get": {
+                "description": "查询设备类型",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-type"
+                ],
+                "summary": "查询设备类型",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "skip",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyList-types_DeviceType"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/type/search": {
+            "post": {
+                "description": "查询设备类型",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-type"
+                ],
+                "summary": "查询设备类型",
+                "parameters": [
+                    {
+                        "description": "查询参数",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.ParamSearch"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyList-types_DeviceType"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/type/{id}": {
+            "get": {
+                "description": "获取设备类型",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-type"
+                ],
+                "summary": "获取设备类型",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "设备类型ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_DeviceType"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "修改设备类型",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-type"
+                ],
+                "summary": "修改设备类型",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "设备类型ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "设备类型信息",
+                        "name": "project-type",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/types.DeviceType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_DeviceType"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/type/{id}/delete": {
+            "get": {
+                "description": "删除设备类型",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project-type"
+                ],
+                "summary": "删除设备类型",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "设备类型ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_DeviceType"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/{id}": {
+            "get": {
+                "description": "获取工程",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project"
+                ],
+                "summary": "获取工程",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "工程ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-api_Device"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "修改工程",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project"
+                ],
+                "summary": "修改工程",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "工程ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "工程信息",
+                        "name": "project",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.Device"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-api_Device"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "api.Device": {
+            "type": "object",
+            "properties": {
+                "area_id": {
+                    "description": "区域",
+                    "type": "string"
+                },
+                "created": {
+                    "type": "string"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "disabled": {
+                    "type": "boolean"
+                },
+                "gateway_id": {
+                    "type": "string"
+                },
+                "group_id": {
+                    "description": "分组",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ClientID",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "parameters": {
+                    "description": "模型参数，用于报警检查",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "number"
+                    }
+                },
+                "product_id": {
+                    "type": "string"
+                },
+                "type_id": {
+                    "description": "类型",
+                    "type": "string"
+                }
+            }
+        },
+        "api.ParamSearch": {
+            "type": "object",
+            "properties": {
+                "filter": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "keyword": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "skip": {
+                    "type": "integer"
+                },
+                "sort": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "api.ReplyData-api_Device": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/api.Device"
+                },
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.ReplyData-int64": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "integer"
+                },
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.ReplyData-types_DeviceArea": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/types.DeviceArea"
+                },
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.ReplyData-types_DeviceGroup": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/types.DeviceGroup"
+                },
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.ReplyData-types_DeviceType": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/types.DeviceType"
+                },
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.ReplyList-api_Device": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/api.Device"
+                    }
+                },
+                "error": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "api.ReplyList-types_DeviceArea": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/types.DeviceArea"
+                    }
+                },
+                "error": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "api.ReplyList-types_DeviceGroup": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/types.DeviceGroup"
+                    }
+                },
+                "error": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "api.ReplyList-types_DeviceType": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/types.DeviceType"
+                    }
+                },
+                "error": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "types.DeviceArea": {
+            "type": "object",
+            "properties": {
+                "created": {
+                    "type": "string"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "types.DeviceGroup": {
+            "type": "object",
+            "properties": {
+                "area_id": {
+                    "type": "string"
+                },
+                "created": {
+                    "type": "string"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "types.DeviceType": {
+            "type": "object",
+            "properties": {
+                "created": {
+                    "type": "string"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
