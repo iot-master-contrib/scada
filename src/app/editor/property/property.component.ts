@@ -32,6 +32,7 @@ export class PropertyComponent {
                 // cell.getData()
                 //this.cmp = g.getSelectedCells()[0].getData()
                 //console.log(this.cmp)
+                console.log(this.cell)
                 if (this.cell.isNode()) {
                     const pos = this.cell.getPosition()
                     this.formPosition.patchValue(pos)

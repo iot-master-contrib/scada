@@ -61,10 +61,11 @@ export class CanvasComponent {
                 modifiers: ['ctrl', 'meta'],
             },
             connecting: { //连线交互
-                snap: true,//是否自动吸附
+                snap: false,//是否自动吸附
                 connector: 'normal',
                 createEdge() {
                     return new Shape.Edge({
+                        shape: 'line',
                         attrs: {
                             line: {
                                 stroke: '#333',
@@ -197,8 +198,12 @@ export class CanvasComponent {
         })
 
         this.graph.on('node:click', ({ node, e }) => {
+            console.log('node')
+            const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
+            this.showPorts(ports, false);
+
             const data = node.data;
-            if (data.id.includes('switch')) {
+            if (data.id && data.id.includes('switch')) {
                 const attrPath = 'attrs/switch/transform';
                 const target = data.value ? switchClose : switchOpen;
                 data.value = !data.value;
@@ -227,9 +232,9 @@ export class CanvasComponent {
                     component.registered = true
                 }
                 this.line = component;
-                this.graph.createEdge({
-                    shape: component.id,
-                })
+                // this.graph.createEdge({
+                //     shape: component.id,
+                // })
                 return
             case "shape":
                 //注册衍生组件

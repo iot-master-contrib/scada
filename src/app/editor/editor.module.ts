@@ -42,6 +42,7 @@ import { NzFormModule } from "ng-zorro-antd/form";
 import { NzInputModule } from "ng-zorro-antd/input";
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { SetLeftPanelDataComponent } from './set-left-panel-data/set-left-panel-data.component';
 
 @NgModule({
@@ -74,7 +75,8 @@ import { SetLeftPanelDataComponent } from './set-left-panel-data/set-left-panel-
         NzInputModule,
         NzModalModule,
         NzLayoutModule,
-        NzSpaceModule
+        NzSpaceModule,
+        NzTabsModule
     ]
 })
 export class EditorModule {
