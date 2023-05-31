@@ -43,7 +43,7 @@ const config: HmiComponent = {
     meta: {},
     properties: [
         { name: "线条颜色", path: "attrs/line/stroke", type: "color" },
-        { name: "线条大小", path: "attrs/line/stroke-width", type: "stroke" },
+        { name: "线条宽度", path: "attrs/line/strokeWidth", type: "stroke" },
     ],
 }
 export default config

@@ -31,18 +31,20 @@ export class PropertyComponent {
                 console.log("selection:changed", this.cell)
                 // cell.getData()
                 //this.cmp = g.getSelectedCells()[0].getData()
-                //console.log(this.cmp)
-                console.log(this.cell)
                 if (this.cell.isNode()) {
                     const pos = this.cell.getPosition()
                     this.formPosition.patchValue(pos)
                     const size = this.cell.getSize()
-                    this.formSize.patchValue(size)
+                    this.formSize.patchValue(size);
                     //const value = {...pos, ...size}
                     //console.log("position", value)
                     //setTimeout(()=>this.group.patchValue(value), 0)
                     //this.group.patchValue(value)
                     //this.zone.run(()=>this.formPosition.patchValue(value))
+                } else if (this.cell.isEdge()) {
+                    const source = this.cell.getProp('source');
+                    const target = this.cell.getProp('target');
+                    this.formLinePosition.patchValue({ source, target });
                 }
 
                 //找到组件 TODO 应该索引
@@ -62,6 +64,7 @@ export class PropertyComponent {
 
     formPosition!: FormGroup;
     formSize!: FormGroup;
+    formLinePosition!: FormGroup;
 
     constructor(private fb: FormBuilder) {
         this.formPosition = fb.group({
@@ -71,6 +74,16 @@ export class PropertyComponent {
         this.formSize = fb.group({
             width: [0, [Validators.required]],
             height: [0, [Validators.required]],
+        })
+        this.formLinePosition = fb.group({
+            source: fb.group({
+                x: [0, [Validators.required]],
+                y: [0, [Validators.required]],
+            }),
+            target: fb.group({
+                x: [0, [Validators.required]],
+                y: [0, [Validators.required]],
+            })
         })
         //this.formPosition.patchValue({x:1,y:2})
     }
@@ -100,7 +113,9 @@ export class PropertyComponent {
             this.cell.setSize(this.formSize.value)
         }
     }
-
+    onLinePositionChange($event: Event) {
+        this.cell.setProp(this.formLinePosition.value);
+    }
     handleEditData() {
 
     }

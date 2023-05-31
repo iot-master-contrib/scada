@@ -76,7 +76,7 @@ import { SetLeftPanelDataComponent } from './set-left-panel-data/set-left-panel-
         NzModalModule,
         NzLayoutModule,
         NzSpaceModule,
-        NzTabsModule
+        NzTabsModule,
     ]
 })
 export class EditorModule {
