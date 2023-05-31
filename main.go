@@ -8,7 +8,6 @@ import (
 	"github.com/iot-master-contrib/scada/types"
 	"github.com/zgwit/iot-master/v3/model"
 	"github.com/zgwit/iot-master/v3/pkg/db"
-	"github.com/zgwit/iot-master/v3/pkg/log"
 	"github.com/zgwit/iot-master/v3/pkg/mqtt"
 	"github.com/zgwit/iot-master/v3/pkg/web"
 	"net/http"
@@ -42,10 +41,12 @@ func Startup(app *web.Engine) error {
 
 	//同步表结构
 	err := db.Engine.Sync2(
-		new(types.HmiProject), new(types.HmiDevice),
+		new(types.HmiProject),
 	)
 	if err != nil {
-		log.Fatal(err)
+
+		return err
+
 	}
 
 	//注册前端接口
