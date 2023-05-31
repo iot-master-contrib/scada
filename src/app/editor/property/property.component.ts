@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
     styleUrls: ['./property.component.scss'],
 })
 export class PropertyComponent {
+    selected: any = [];
 
     @Input() set graph(g: Graph) {
         g.on("cell:change:size", (event) => {
@@ -19,16 +20,21 @@ export class PropertyComponent {
             if (event.cell == this.cell)
                 this.formPosition.patchValue(event.current as any)
         })
-        g.on("cell:unselected", (event) => {
-            if (event.cell == this.cell) {
+        g.on("cell:unselected", ({ cell }) => {
+            if (cell == this.cell) {
                 // @ts-ignore
-                this.cmp = undefined
+                this.cmp = undefined;
+            }
+            if (cell.shape === 'text-block') {
+                const view = g.findViewByCell(cell.id);
+                const ele = view?.container.querySelector('foreignObject')?.querySelector('div') as unknown as HTMLElement;
+                this.cell.setPropByPath('attrs/label/text', ele.innerText)
             }
         })
-        g.on("selection:changed", () => {
+        g.on("selection:changed", ({ selected }) => {
+            this.selected = selected;
             if (g.getSelectedCellCount() === 1) {
                 this.cell = g.getSelectedCells()[0]
-                console.log("selection:changed", this.cell)
                 // cell.getData()
                 //this.cmp = g.getSelectedCells()[0].getData()
                 if (this.cell.isNode()) {
@@ -118,5 +124,9 @@ export class PropertyComponent {
     }
     handleEditData() {
 
+    }
+    colorCheckChange(selected: boolean, p: HmiProperty) {
+        const color = selected ? '#333' : 'none';
+        this.cell.setPropByPath(p.path, color)
     }
 }

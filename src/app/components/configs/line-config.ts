@@ -39,6 +39,7 @@ const config: HmiComponent = {
                 targetMarker: null,
             },
         },
+        tools: ['edge-editor'],
     },
     meta: {},
     properties: [

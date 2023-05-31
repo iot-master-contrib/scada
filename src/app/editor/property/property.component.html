@@ -1,74 +1,88 @@
 <nz-tabset nzType="card">
-    <nz-tab nzTitle="样式">
-        <form [formGroup]="formPosition" (change)="onPositionChange($event)" *ngIf="cmp && cell.isNode();">
-            <table>
-                <tr>
-                    <td style="min-width: 80px">X</td>
-                    <td><input type="number" formControlName="x"></td>
-                </tr>
-                <tr>
-                    <td>Y</td>
-                    <td><input type="number" formControlName="y"></td>
-                </tr>
-            </table>
-        </form>
-
-        <form [formGroup]="formSize" (change)="onSizeChange($event)" *ngIf="cmp && cell.isNode();">
-            <table>
-                <tr>
-                    <td style="min-width: 80px;">宽度</td>
-                    <td><input type="number" formControlName="width"></td>
-                </tr>
-                <tr>
-                    <td>高度</td>
-                    <td><input type="number" formControlName="height"></td>
-                </tr>
-            </table>
-        </form>
-
-        <form [formGroup]="formLinePosition" (change)="onLinePositionChange($event)" *ngIf="cmp && cell.isEdge();">
-            <table>
-                <tr formGroupName="source">
-                    <td style="min-width: 80px;">起点</td>
-                    <td>X:<input type="number" formControlName="x"></td>
-                    <td>Y:<input type="number" formControlName="y"></td>
-                </tr>
-                <tr formGroupName="target">
-                    <td>终点</td>
-                    <td>X:<input type="number" formControlName="x"></td>
-                    <td>Y:<input type="number" formControlName="y"></td>
-                </tr>
-            </table>
-        </form>
-        <ng-template [ngIf]="cmp">
-            <nz-divider></nz-divider>
-            <table style="width: 100%;">
-                <tr *ngFor="let p of cmp.properties">
-                    <td>{{p.name}}</td>
-                    <td>
-                        <ng-container [ngSwitch]="p.type">
-                            <input *ngSwitchCase="'text'" [value]="cell.getPropByPath(p.path) || ''"
-                                (change)="inputChange($event, p)">
-                            <input *ngSwitchCase="'number'" type="number" [value]="cell.getPropByPath(p.path)"
-                                (change)="inputChange($event, p)">
-                            <input *ngSwitchCase="'boolean'" type="checkbox" [value]="cell.getPropByPath(p.path)"
-                                (change)="inputChange($event, p)">
-                            <input *ngSwitchCase="'color'" [value]="cell.getPropByPath(p.path)"
-                                [colorPicker]="cell.getPropByPath(p.path)"
-                                [style.background]="cell.getPropByPath(p.path)" (colorPickerChange)="change($event, p)">
-                            <select *ngSwitchCase="'select'" [value]="cell.getPropByPath(p.path)"
-                                (change)="inputChange($event, p)">
-                                <option *ngFor="let o of p.options" [value]="o.value">{{o.name}}</option>
-                            </select>
-                            <input *ngSwitchCase="'stroke'" type="number" [value]="cell.getPropByPath(p.path)"
-                                (change)="inputChange($event, p)">
-                        </ng-container>
-                    </td>
-                </tr>
-            </table>
-        </ng-template>
+    <nz-tab nzTitle="绘图" *ngIf="!selected.length;else otherTemp">
     </nz-tab>
-    <nz-tab nzTitle="属性">
+    <ng-template #otherTemp>
+        <nz-tab nzTitle="样式">
+            <form [formGroup]="formPosition" (change)="onPositionChange($event)" *ngIf="cmp && cell.isNode();">
+                <table>
+                    <tr>
+                        <td style="min-width: 80px">X</td>
+                        <td><input type="number" formControlName="x"></td>
+                    </tr>
+                    <tr>
+                        <td>Y</td>
+                        <td><input type="number" formControlName="y"></td>
+                    </tr>
+                </table>
+            </form>
 
-    </nz-tab>
+            <form [formGroup]="formSize" (change)="onSizeChange($event)" *ngIf="cmp && cell.isNode();">
+                <table>
+                    <tr>
+                        <td style="min-width: 80px;">宽度</td>
+                        <td><input type="number" formControlName="width"></td>
+                    </tr>
+                    <tr>
+                        <td>高度</td>
+                        <td><input type="number" formControlName="height"></td>
+                    </tr>
+                </table>
+            </form>
+
+            <form [formGroup]="formLinePosition" (change)="onLinePositionChange($event)" *ngIf="cmp && cell.isEdge();">
+                <table>
+                    <tr formGroupName="source">
+                        <td style="min-width: 80px;">起点</td>
+                        <td>X:<input type="number" formControlName="x"></td>
+                        <td>Y:<input type="number" formControlName="y"></td>
+                    </tr>
+                    <tr formGroupName="target">
+                        <td>终点</td>
+                        <td>X:<input type="number" formControlName="x"></td>
+                        <td>Y:<input type="number" formControlName="y"></td>
+                    </tr>
+                </table>
+            </form>
+            <ng-template [ngIf]="cmp">
+                <nz-divider></nz-divider>
+                <table style="width: 100%;">
+                    <tr *ngFor="let p of cmp.properties" style="display:flex;justify-content: space-between;">
+                        <td>
+                            <label *ngIf="p.type=='color'" nz-checkbox
+                                [ngModel]="cell.getPropByPath(p.path) && cell.getPropByPath(p.path)!='transparent'&& cell.getPropByPath(p.path)!='none'"
+                                (ngModelChange)="colorCheckChange($event,p)"></label>
+                            {{p.name}}
+                        </td>
+                        <td>
+                            <ng-container [ngSwitch]="p.type">
+                                <input *ngSwitchCase="'text'" [value]="cell.getPropByPath(p.path) || ''"
+                                    (change)="inputChange($event, p)">
+                                <input *ngSwitchCase="'number'" type="number" [value]="cell.getPropByPath(p.path)"
+                                    (change)="inputChange($event, p)">
+                                <input *ngSwitchCase="'boolean'" type="checkbox" [value]="cell.getPropByPath(p.path)"
+                                    (change)="inputChange($event, p)">
+                                <ng-template
+                                    [ngIf]="cell.getPropByPath(p.path) && cell.getPropByPath(p.path)!='transparent'&& cell.getPropByPath(p.path)!='none'">
+                                    <input *ngSwitchCase="'color'" [value]="cell.getPropByPath(p.path)"
+                                        [colorPicker]="cell.getPropByPath(p.path)"
+                                        [style.background]="cell.getPropByPath(p.path)"
+                                        (colorPickerChange)="change($event, p)">
+                                </ng-template>
+                                <select *ngSwitchCase="'select'" [value]="cell.getPropByPath(p.path)"
+                                    (change)="inputChange($event, p)">
+                                    <option *ngFor="let o of p.options" [value]="o.value">{{o.name}}</option>
+                                </select>
+                                <input *ngSwitchCase="'stroke'" type="number" [value]="cell.getPropByPath(p.path)"
+                                    (change)="inputChange($event, p)">
+                            </ng-container>
+                        </td>
+                    </tr>
+                </table>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="文本">
+        </nz-tab>
+        <nz-tab nzTitle="属性">
+        </nz-tab>
+    </ng-template>
 </nz-tabset>

@@ -21,8 +21,12 @@
     }
 }
 
-input {
-    width: 100%;
+::ng-deep.ant-tabs-content-holder {
+    padding: 0 5px;
+}
+
+input:not([type="checkbox"]) {
+    width: 125px;
     border: 1px solid grey;
 }
 

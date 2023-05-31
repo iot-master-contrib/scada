@@ -43,6 +43,7 @@ import { NzInputModule } from "ng-zorro-antd/input";
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { SetLeftPanelDataComponent } from './set-left-panel-data/set-left-panel-data.component';
 
 @NgModule({
@@ -57,6 +58,7 @@ import { SetLeftPanelDataComponent } from './set-left-panel-data/set-left-panel-
     ],
     imports: [
         CommonModule,
+        FormsModule,
         ReactiveFormsModule,
         ComponentsModule,
         EditorRoutingModule,
@@ -77,6 +79,7 @@ import { SetLeftPanelDataComponent } from './set-left-panel-data/set-left-panel-
         NzLayoutModule,
         NzSpaceModule,
         NzTabsModule,
+        NzCheckboxModule
     ]
 })
 export class EditorModule {

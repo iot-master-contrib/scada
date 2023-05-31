@@ -219,6 +219,7 @@ export class CanvasComponent {
                 })
             }
         });
+
     }
     public Draw($event: HmiDraw) {
         let node!: Node
@@ -237,17 +238,19 @@ export class CanvasComponent {
                 return
             case "shape":
                 //注册衍生组件
-                console.log(component)
                 if (component.extends && !component.registered) {
                     Graph.registerNode(component.id, component.extends)
                     component.registered = true
                 }
-                if (component.meta) node = this.graph.createNode({
-                    shape: component.id,
-                    ...component.meta,
-                    data: { id: component.id, ...(component.meta.data || {}) },
-                    ports
-                })
+                if (component.meta) {
+                    // let tools: any = ['node-editor'];
+                    node = this.graph.createNode({
+                        shape: component.id,
+                        ...component.meta,
+                        data: { id: component.id, ...(component.meta.data || {}) },
+                        // ports
+                    })
+                }
                 break;
             case "angular":
                 //避免重复注册

@@ -4,24 +4,27 @@ const config: HmiComponent = {
     meta: {
         width: 100,
         height: 40,
+        text: 'text',
         attrs: {
             rect: {
                 fill: 'none',
-                stroke: 'transparent'
+                stroke: 'none'
             },
             label: {
-                text: 'Text'
+                fill: '#333',
+                color: '#444',
+                contenteditable: true
             }
         }
     },
     properties: [
         { name: "文本", path: "attrs/label/text", type: "text" },
-        { name: "颜色", path: "attrs/label/fill", type: "color" },
-        { name: "字体", path: "attrs/label/font", type: "font" },
+        { name: "字体颜色", path: "attrs/label/fill", type: "color" },
+        { name: "字体", path: "attrs/label/fontFamily", type: "font" },
         { name: "字号", path: "attrs/label/fontSize", type: "stroke" },
         { name: "填充", path: "attrs/rect/fill", type: "color" },
         { name: "边框颜色", path: "attrs/rect/stroke", type: "color" },
-        { name: "边框大小", path: "attrs/rect/strokeWidth", type: "stroke" },
+        { name: "边框宽度", path: "attrs/rect/strokeWidth", type: "stroke" },
     ],
 }
 export default config;
