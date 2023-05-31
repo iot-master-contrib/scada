@@ -22,7 +22,7 @@ ldflags="-X '${pkg}.Version=$version' \
 export GOARCH=amd64
 
 export GOOS=windows
-go build -ldflags "$ldflags" -o classify.exe main.go
+go build -ldflags "$ldflags" -o scada.exe cmd/main.go
 
 export GOOS=linux
-go build -ldflags "$ldflags" -o classify main.go
+go build -ldflags "$ldflags" -o scada cmd/main.go

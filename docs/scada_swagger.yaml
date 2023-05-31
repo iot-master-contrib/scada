@@ -1,0 +1,275 @@
+basePath: /app/scada/api/
+definitions:
+  api.ParamSearch:
+    properties:
+      filter:
+        additionalProperties: true
+        type: object
+      keyword:
+        additionalProperties:
+          type: string
+        type: object
+      limit:
+        type: integer
+      skip:
+        type: integer
+      sort:
+        additionalProperties:
+          type: integer
+        type: object
+    type: object
+  api.ReplyData-int64:
+    properties:
+      data:
+        type: integer
+      error:
+        type: string
+    type: object
+  api.ReplyData-types_HmiProject:
+    properties:
+      data:
+        $ref: '#/definitions/types.HmiProject'
+      error:
+        type: string
+    type: object
+  api.ReplyList-types_HmiProject:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/types.HmiProject'
+        type: array
+      error:
+        type: string
+      total:
+        type: integer
+    type: object
+  types.HmiDevice:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      productId:
+        type: string
+    type: object
+  types.HmiPage:
+    properties:
+      content:
+        type: string
+      id:
+        type: string
+    type: object
+  types.HmiProject:
+    properties:
+      created:
+        type: string
+      desc:
+        type: string
+      devices:
+        items:
+          $ref: '#/definitions/types.HmiDevice'
+        type: array
+      id:
+        type: string
+      name:
+        type: string
+      pages:
+        items:
+          $ref: '#/definitions/types.HmiPage'
+        type: array
+    type: object
+info:
+  contact: {}
+  description: API文档
+  title: 组态接口文档
+  version: 1.0 版本
+paths:
+  /project/{id}:
+    get:
+      consumes:
+      - application/json
+      description: 获取工程
+      parameters:
+      - description: 工程ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiProject'
+      summary: 获取工程
+      tags:
+      - project
+    post:
+      consumes:
+      - application/json
+      description: 修改工程
+      parameters:
+      - description: 工程ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 工程信息
+        in: body
+        name: project
+        required: true
+        schema:
+          $ref: '#/definitions/types.HmiProject'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiProject'
+      summary: 修改工程
+      tags:
+      - project
+  /project/{id}/delete:
+    get:
+      consumes:
+      - application/json
+      description: 删除工程
+      parameters:
+      - description: 工程ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiProject'
+      summary: 删除工程
+      tags:
+      - project
+  /project/count:
+    post:
+      consumes:
+      - application/json
+      description: 查询工程数量
+      parameters:
+      - description: 查询参数
+        in: body
+        name: search
+        required: true
+        schema:
+          $ref: '#/definitions/api.ParamSearch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-int64'
+      summary: 查询工程数量
+      tags:
+      - project
+  /project/create:
+    post:
+      consumes:
+      - application/json
+      description: 创建工程
+      parameters:
+      - description: 工程信息
+        in: body
+        name: search
+        required: true
+        schema:
+          $ref: '#/definitions/types.HmiProject'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiProject'
+      summary: 创建工程
+      tags:
+      - project
+  /project/export:
+    get:
+      consumes:
+      - application/json
+      description: 导出工程
+      produces:
+      - application/octet-stream
+      responses: {}
+      summary: 导出工程
+      tags:
+      - product
+  /project/import:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 导入工程
+      parameters:
+      - description: 压缩包
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-int64'
+      summary: 导入工程
+      tags:
+      - product
+  /project/list:
+    get:
+      consumes:
+      - application/json
+      description: 查询工程
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: skip
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyList-types_HmiProject'
+      summary: 查询工程
+      tags:
+      - project
+  /project/search:
+    post:
+      consumes:
+      - application/json
+      description: 查询工程
+      parameters:
+      - description: 查询参数
+        in: body
+        name: search
+        required: true
+        schema:
+          $ref: '#/definitions/api.ParamSearch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyList-types_HmiProject'
+      summary: 查询工程
+      tags:
+      - project
+swagger: "2.0"

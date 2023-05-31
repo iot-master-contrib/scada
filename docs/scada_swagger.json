@@ -1,0 +1,422 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API文档",
+        "title": "组态接口文档",
+        "contact": {},
+        "version": "1.0 版本"
+    },
+    "basePath": "/app/scada/api/",
+    "paths": {
+        "/project/count": {
+            "post": {
+                "description": "查询工程数量",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project"
+                ],
+                "summary": "查询工程数量",
+                "parameters": [
+                    {
+                        "description": "查询参数",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.ParamSearch"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-int64"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/create": {
+            "post": {
+                "description": "创建工程",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project"
+                ],
+                "summary": "创建工程",
+                "parameters": [
+                    {
+                        "description": "工程信息",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/types.HmiProject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_HmiProject"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/export": {
+            "get": {
+                "description": "导出工程",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/octet-stream"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "导出工程",
+                "responses": {}
+            }
+        },
+        "/project/import": {
+            "post": {
+                "description": "导入工程",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "导入工程",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "压缩包",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-int64"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/list": {
+            "get": {
+                "description": "查询工程",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project"
+                ],
+                "summary": "查询工程",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "skip",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyList-types_HmiProject"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/search": {
+            "post": {
+                "description": "查询工程",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project"
+                ],
+                "summary": "查询工程",
+                "parameters": [
+                    {
+                        "description": "查询参数",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.ParamSearch"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyList-types_HmiProject"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/{id}": {
+            "get": {
+                "description": "获取工程",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project"
+                ],
+                "summary": "获取工程",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "工程ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_HmiProject"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "修改工程",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project"
+                ],
+                "summary": "修改工程",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "工程ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "工程信息",
+                        "name": "project",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/types.HmiProject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_HmiProject"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/{id}/delete": {
+            "get": {
+                "description": "删除工程",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "project"
+                ],
+                "summary": "删除工程",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "工程ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_HmiProject"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "api.ParamSearch": {
+            "type": "object",
+            "properties": {
+                "filter": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "keyword": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "skip": {
+                    "type": "integer"
+                },
+                "sort": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "api.ReplyData-int64": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "integer"
+                },
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.ReplyData-types_HmiProject": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/types.HmiProject"
+                },
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.ReplyList-types_HmiProject": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/types.HmiProject"
+                    }
+                },
+                "error": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "types.HmiDevice": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "productId": {
+                    "type": "string"
+                }
+            }
+        },
+        "types.HmiPage": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                }
+            }
+        },
+        "types.HmiProject": {
+            "type": "object",
+            "properties": {
+                "created": {
+                    "type": "string"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "devices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/types.HmiDevice"
+                    }
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "pages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/types.HmiPage"
+                    }
+                }
+            }
+        }
+    }
+}
