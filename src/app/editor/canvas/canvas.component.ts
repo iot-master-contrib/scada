@@ -26,7 +26,6 @@ export class CanvasComponent {
 
     line: HmiComponent | undefined;
     edge: Edge | undefined;
-
     constructor(private element: ElementRef, private injector: Injector) {
         this.graph = new Graph({
             container: element.nativeElement,
@@ -238,6 +237,7 @@ export class CanvasComponent {
                 return
             case "shape":
                 //注册衍生组件
+                console.log(component)
                 if (component.extends && !component.registered) {
                     Graph.registerNode(component.id, component.extends)
                     component.registered = true

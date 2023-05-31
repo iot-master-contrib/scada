@@ -9,7 +9,8 @@ import { ButtonComponent } from "./button/button.component";
 
 import industryComponents from './configs/industry-components';
 import electricComponents from "./configs/electric-components";
-import lineConfig from "./configs/line-config";
+import LineConfig from "./configs/line-config";
+import TextConfig from './configs/text-config';
 export var strokeProperties: HmiProperty[] = [
     { name: "填充", path: "rect/fill", type: "color" },
     { name: "边框颜色", path: "rect/stroke", type: "color" },
@@ -41,21 +42,9 @@ export var COMPONENTS: HmiCollection[] = [
         name: '基础组件',
         nameEn: 'base',
         components: [
-            lineConfig,
+            LineConfig,
             ...componnetsConfig,
-            {
-                name: '文本', id: 'text-block', icon: '/assets/text.svg', type: "shape",
-                meta: { width: 100, height: 40 },
-                properties: [
-                    { name: "文本", path: "attrs/label/text", type: "text" },
-                    { name: "颜色", path: "attrs/label/color", type: "color" },
-                    { name: "字体", path: "attrs/label/font", type: "font" },
-                    { name: "字号", path: "attrs/label/font-size", type: "stroke" },
-                    { name: "填充", path: "attrs/rect/fill", type: "color" },
-                    { name: "边框颜色", path: "attrs/rect/stroke", type: "color" },
-                    { name: "边框大小", path: "attrs/rect/stroke-width", type: "stroke" },
-                ],
-            },
+            TextConfig,
             {
                 name: '图片', id: 'image', icon: '/assets/image.svg', type: "shape",
                 meta: { width: 100, height: 80, imageUrl: '/assets/image.svg', },
