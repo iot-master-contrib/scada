@@ -1,6 +1,6 @@
 <app-collection *ngFor="let c of collections" [data]="c" (onDraw)="onDrag.emit($event)"></app-collection>
 <div class="more-btn">
-    <button nz-button nzType="primary" (click)="handleClick()">
+    <button nz-button nzType="primary">
         更多图形
     </button>
 </div>

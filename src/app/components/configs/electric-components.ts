@@ -5,12 +5,18 @@ export const switchCenter = {
 export const switchOpen = `rotate(-30 ${switchCenter.x} ${switchCenter.y})`
 export const switchClose = `rotate(-12 ${switchCenter.x} ${switchCenter.y})`;
 const isOpen = true;
-const electricArr = [];
+const imgArr = ['capacitor'];
 for (let index = 1; index < 21; index++) {
+    imgArr.push(`electric${index}`);
+}
+const electricArr = [];
+
+for (let index = 0; index < imgArr.length; index++) {
+    const item = imgArr[index];
     electricArr.push({
-        name: '', id: `electric${index}`, icon: `/assets/electric/electric${index}.svg`, type: "shape",
+        name: '', id: `electric${index}`, icon: `/assets/electric/${item}.svg`, type: "shape",
         extends: { inherit: "image" },
-        meta: { width: 50, height: 50, imageUrl: `/assets/electric/electric${index}.svg` },
+        meta: { width: 50, height: 50, imageUrl: `/assets/electric/${item}.svg` },
         properties: [],
     });
 }

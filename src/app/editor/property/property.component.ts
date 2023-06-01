@@ -1,8 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewContainerRef } from '@angular/core';
 import { HmiComponent, HmiProperty } from "../../hmi";
 import { Cell, Graph } from "@antv/x6";
 import { COMPONENTS } from "../../components/components";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { EditTableComponent } from 'src/app/base/edit-table/edit-table.component';
 @Component({
     selector: 'app-property',
     templateUrl: './property.component.html',
@@ -10,7 +12,11 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 })
 export class PropertyComponent {
     selected: any = [];
-
+    textProperties: HmiProperty[] = [
+        { name: "文本", path: "attrs/text/text", type: "text" },
+        { name: "文本颜色", path: "attrs/text/fill", type: "color" },
+        { name: "字号", path: "attrs/text/fontSize", type: "stroke" },
+    ]
     @Input() set graph(g: Graph) {
         g.on("cell:change:size", (event) => {
             if (event.cell == this.cell)
@@ -35,6 +41,8 @@ export class PropertyComponent {
             this.selected = selected;
             if (g.getSelectedCellCount() === 1) {
                 this.cell = g.getSelectedCells()[0]
+                console.log("🚀 ~ file: property.component.ts:38 ~ PropertyComponent ~ g.on ~ this.cell:", this.cell)
+
                 // cell.getData()
                 //this.cmp = g.getSelectedCells()[0].getData()
                 if (this.cell.isNode()) {
@@ -72,7 +80,11 @@ export class PropertyComponent {
     formSize!: FormGroup;
     formLinePosition!: FormGroup;
 
-    constructor(private fb: FormBuilder) {
+    constructor(
+        private fb: FormBuilder,
+        private modal: NzModalService,
+        private viewContainerRef: ViewContainerRef
+    ) {
         this.formPosition = fb.group({
             x: [0, [Validators.required]],
             y: [0, [Validators.required]],
@@ -91,19 +103,6 @@ export class PropertyComponent {
                 y: [0, [Validators.required]],
             })
         })
-        //this.formPosition.patchValue({x:1,y:2})
-    }
-
-    inputChange($event: any, p: HmiProperty) {
-        console.log("property input change", p.path, $event)
-        //this.cell.setAttrByPath(p.path, $event.target.value)
-        this.cell.setPropByPath(p.path, $event.target.value)
-    }
-
-    change($event: any, p: HmiProperty) {
-        console.log("property change", p.path, $event)
-        //this.cell.setAttrByPath(p.path, $event)
-        this.cell.setPropByPath(p.path, $event)
     }
 
     onPositionChange($event: Event) {
@@ -112,7 +111,6 @@ export class PropertyComponent {
             this.cell.setPosition(this.formPosition.value)
         }
     }
-
     onSizeChange($event: Event) {
         console.log("onPositionChange", this.formSize.value)
         if (this.cell.isNode()) {
@@ -123,7 +121,33 @@ export class PropertyComponent {
         this.cell.setProp(this.formLinePosition.value);
     }
     handleEditData() {
+        console.log(33333333)
+        const modal: NzModalRef = this.modal.create({
+            nzContent: EditTableComponent,
+            nzComponentParams: {
+                listData: [{
+                    title: '属性名',
+                    keyName: 'name'
+                }, {
+                    title: '属性值',
+                    keyName: 'value'
+                }],
+            },
+            nzViewContainerRef: this.viewContainerRef,
+            nzFooter: [
+                {
+                    label: '取消',
+                    onClick: () => modal.destroy()
+                },
+                {
+                    label: '保存',
+                    type: 'primary',
+                    onClick: () => {
 
+                    }
+                },
+            ]
+        });
     }
     colorCheckChange(selected: boolean, p: HmiProperty) {
         const color = selected ? '#333' : 'none';

@@ -1,0 +1,17 @@
+<ng-container [ngSwitch]="p.type">
+    <input *ngSwitchCase="'text'" [value]="cell.getPropByPath(p.path) || ''" (change)="inputChange($event, p)">
+    <input *ngSwitchCase="'number'" type="number" [value]="cell.getPropByPath(p.path)"
+        (change)="inputChange($event, p)">
+    <input *ngSwitchCase="'boolean'" type="checkbox" [value]="cell.getPropByPath(p.path)"
+        (change)="inputChange($event, p)">
+    <ng-template
+        [ngIf]="cell.getPropByPath(p.path) && cell.getPropByPath(p.path)!='transparent'&& cell.getPropByPath(p.path)!='none'">
+        <input *ngSwitchCase="'color'" [value]="cell.getPropByPath(p.path)" [colorPicker]="cell.getPropByPath(p.path)"
+            [style.background]="cell.getPropByPath(p.path)" (colorPickerChange)="change($event, p)">
+    </ng-template>
+    <select *ngSwitchCase="'select'" [value]="cell.getPropByPath(p.path)" (change)="inputChange($event, p)">
+        <option *ngFor="let o of p.options" [value]="o.value">{{o.name}}</option>
+    </select>
+    <input *ngSwitchCase="'stroke'" type="number" [value]="cell.getPropByPath(p.path)"
+        (change)="inputChange($event, p)">
+</ng-container>

@@ -33,3 +33,12 @@ input:not([type="checkbox"]) {
 ::ng-deep.ant-divider-horizontal {
     margin: 10px 0;
 }
+
+table {
+    width: 100%;
+
+    tr {
+        display: flex;
+        justify-content: space-between;
+    }
+}

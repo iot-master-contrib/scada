@@ -17,14 +17,14 @@ registerLocaleData(zh);
 @NgModule({
   declarations: [
     AppComponent,
-    ViewerComponent
+    ViewerComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN }

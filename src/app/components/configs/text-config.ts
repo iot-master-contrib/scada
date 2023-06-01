@@ -8,7 +8,8 @@ const config: HmiComponent = {
         attrs: {
             rect: {
                 fill: 'none',
-                stroke: 'none'
+                stroke: 'none',
+                strokeWidth: 2
             },
             label: {
                 fill: '#333',

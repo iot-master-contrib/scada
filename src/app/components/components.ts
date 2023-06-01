@@ -30,6 +30,10 @@ const componnetsConfig: HmiComponent[] = [{
     name: '矩形', id: 'rect', icon: '/assets/rect.svg', type: "shape",
     meta: { width: 100, height: 40 },
     properties: [],
+}, {
+    name: '三角形', id: 'path', icon: '/assets/triangle.svg', type: "shape",
+    meta: { width: 100, height: 40, path: 'M20.5 18.5H4.5L12.5 5.5L20.5 18.5Z' },
+    properties: [],
 }];
 for (let index = 0; index < componnetsConfig.length; index++) {
     const item = componnetsConfig[index];
