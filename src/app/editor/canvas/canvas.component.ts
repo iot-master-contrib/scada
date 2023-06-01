@@ -13,6 +13,11 @@ import { HmiComponent, HmiDraw } from "../../hmi";
 import { ports } from 'src/app/components/configs/ports';
 import { switchOpen, switchClose, switchCenter } from 'src/app/components/configs/electric-components';
 
+const graphBgc = {
+    color: '#fff',
+    gridType: 'doubleMesh'
+}
+
 @Component({
     selector: 'app-canvas',
     templateUrl: './canvas.component.html',
@@ -21,9 +26,7 @@ import { switchOpen, switchClose, switchCenter } from 'src/app/components/config
 
 export class CanvasComponent {
     public graph: Graph;
-
     dnd: Dnd;
-
     line: HmiComponent | undefined;
     edge: Edge | undefined;
     constructor(private element: ElementRef, private injector: Injector) {
@@ -33,12 +36,12 @@ export class CanvasComponent {
             // height: 600,
             autoResize: true,
             background: {
-                color: '#fff', // 设置画布背景颜色
+                color: graphBgc.color, // 设置画布背景颜色
             },
             grid: {
                 size: 10,      // 网格大小 10px
                 visible: true, // 渲染网格背景
-                type: 'doubleMesh',
+                type: graphBgc.gridType,
                 args: [
                     {
                         color: '#f0f0f0', // 主网格线颜色

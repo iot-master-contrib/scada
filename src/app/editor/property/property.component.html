@@ -1,5 +1,6 @@
 <nz-tabset nzType="card">
-    <nz-tab nzTitle="绘图" *ngIf="!selected.length;else otherTemp">
+    <nz-tab nzTitle="画布" *ngIf="!selected.length;else otherTemp">
+        <app-graph-settings></app-graph-settings>
     </nz-tab>
     <ng-template #otherTemp>
         <nz-tab nzTitle="样式" *ngIf="cmp">

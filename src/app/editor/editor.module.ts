@@ -46,6 +46,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { SetDataComponent } from './set-data/set-data.component';
 import { BaseModule } from '../base/base.module';
+import { GraphSettingsComponent } from './graph-settings/graph-settings.component';
 
 @NgModule({
     declarations: [
@@ -56,6 +57,7 @@ import { BaseModule } from '../base/base.module';
         ToolbarComponent,
         CollectionComponent,
         SetDataComponent,
+        GraphSettingsComponent,
     ],
     imports: [
         CommonModule,
