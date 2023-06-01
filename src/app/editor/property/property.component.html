@@ -2,11 +2,11 @@
     <nz-tab nzTitle="绘图" *ngIf="!selected.length;else otherTemp">
     </nz-tab>
     <ng-template #otherTemp>
-        <nz-tab nzTitle="样式">
-            <form [formGroup]="formPosition" (change)="onPositionChange($event)" *ngIf="cmp && cell.isNode();">
+        <nz-tab nzTitle="样式" *ngIf="cmp">
+            <form [formGroup]="formPosition" (change)="onPositionChange($event)" *ngIf="cell.isNode();">
                 <table>
                     <tr>
-                        <td style="min-width: 80px">X</td>
+                        <td>X</td>
                         <td><input type="number" formControlName="x"></td>
                     </tr>
                     <tr>
@@ -16,10 +16,10 @@
                 </table>
             </form>
 
-            <form [formGroup]="formSize" (change)="onSizeChange($event)" *ngIf="cmp && cell.isNode();">
+            <form [formGroup]="formSize" (change)="onSizeChange($event)" *ngIf="cell.isNode();">
                 <table>
                     <tr>
-                        <td style="min-width: 80px;">宽度</td>
+                        <td>宽度</td>
                         <td><input type="number" formControlName="width"></td>
                     </tr>
                     <tr>
@@ -29,58 +29,49 @@
                 </table>
             </form>
 
-            <form [formGroup]="formLinePosition" (change)="onLinePositionChange($event)" *ngIf="cmp && cell.isEdge();">
+            <form [formGroup]="formLinePosition" (change)="onLinePositionChange($event)" *ngIf="cell.isEdge();">
                 <table>
                     <tr formGroupName="source">
-                        <td style="min-width: 80px;">起点</td>
-                        <td>X:<input type="number" formControlName="x"></td>
-                        <td>Y:<input type="number" formControlName="y"></td>
+                        <td>起点</td>
+                        <td>X:<input type="number" formControlName="x" style="width:60px"></td>
+                        <td>Y:<input type="number" formControlName="y" style="width:60px"></td>
                     </tr>
                     <tr formGroupName="target">
                         <td>终点</td>
-                        <td>X:<input type="number" formControlName="x"></td>
-                        <td>Y:<input type="number" formControlName="y"></td>
+                        <td>X:<input type="number" formControlName="x" style="width:60px"></td>
+                        <td>Y:<input type="number" formControlName="y" style="width:60px"></td>
                     </tr>
                 </table>
             </form>
-            <ng-template [ngIf]="cmp">
-                <nz-divider></nz-divider>
-                <table style="width: 100%;">
-                    <tr *ngFor="let p of cmp.properties" style="display:flex;justify-content: space-between;">
-                        <td>
-                            <label *ngIf="p.type=='color'" nz-checkbox
-                                [ngModel]="cell.getPropByPath(p.path) && cell.getPropByPath(p.path)!='transparent'&& cell.getPropByPath(p.path)!='none'"
-                                (ngModelChange)="colorCheckChange($event,p)"></label>
-                            {{p.name}}
-                        </td>
-                        <td>
-                            <ng-container [ngSwitch]="p.type">
-                                <input *ngSwitchCase="'text'" [value]="cell.getPropByPath(p.path) || ''"
-                                    (change)="inputChange($event, p)">
-                                <input *ngSwitchCase="'number'" type="number" [value]="cell.getPropByPath(p.path)"
-                                    (change)="inputChange($event, p)">
-                                <input *ngSwitchCase="'boolean'" type="checkbox" [value]="cell.getPropByPath(p.path)"
-                                    (change)="inputChange($event, p)">
-                                <ng-template
-                                    [ngIf]="cell.getPropByPath(p.path) && cell.getPropByPath(p.path)!='transparent'&& cell.getPropByPath(p.path)!='none'">
-                                    <input *ngSwitchCase="'color'" [value]="cell.getPropByPath(p.path)"
-                                        [colorPicker]="cell.getPropByPath(p.path)"
-                                        [style.background]="cell.getPropByPath(p.path)"
-                                        (colorPickerChange)="change($event, p)">
-                                </ng-template>
-                                <select *ngSwitchCase="'select'" [value]="cell.getPropByPath(p.path)"
-                                    (change)="inputChange($event, p)">
-                                    <option *ngFor="let o of p.options" [value]="o.value">{{o.name}}</option>
-                                </select>
-                                <input *ngSwitchCase="'stroke'" type="number" [value]="cell.getPropByPath(p.path)"
-                                    (change)="inputChange($event, p)">
-                            </ng-container>
-                        </td>
-                    </tr>
-                </table>
-            </ng-template>
+            <nz-divider></nz-divider>
+            <table>
+                <tr *ngFor="let p of cmp.properties">
+                    <td>
+                        <label *ngIf="p.type=='color'" nz-checkbox
+                            [ngModel]="cell.getPropByPath(p.path) && cell.getPropByPath(p.path)!='transparent'&& cell.getPropByPath(p.path)!='none'"
+                            (ngModelChange)="colorCheckChange($event,p)"></label>
+                        {{p.name}}
+                    </td>
+                    <td>
+                        <app-switch-input [p]="p" [cell]="cell"></app-switch-input>
+                    </td>
+                </tr>
+            </table>
         </nz-tab>
         <nz-tab nzTitle="文本">
+            <table>
+                <tr *ngFor="let p of textProperties">
+                    <td>
+                        <label *ngIf="p.type=='color'" nz-checkbox
+                            [ngModel]="cell.getPropByPath(p.path) && cell.getPropByPath(p.path)!='transparent'&& cell.getPropByPath(p.path)!='none'"
+                            (ngModelChange)="colorCheckChange($event,p)"></label>
+                        {{p.name}}
+                    </td>
+                    <td>
+                        <app-switch-input [p]="p" [cell]="cell"></app-switch-input>
+                    </td>
+                </tr>
+            </table>
         </nz-tab>
         <nz-tab nzTitle="属性">
         </nz-tab>

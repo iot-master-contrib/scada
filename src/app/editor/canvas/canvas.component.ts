@@ -243,11 +243,15 @@ export class CanvasComponent {
                     component.registered = true
                 }
                 if (component.meta) {
-                    // let tools: any = ['node-editor'];
+                    let tools: any = ['node-editor'];
+                    if (component.id === 'text-block') {
+                        tools = [];
+                    }
                     node = this.graph.createNode({
                         shape: component.id,
                         ...component.meta,
                         data: { id: component.id, ...(component.meta.data || {}) },
+                        tools
                         // ports
                     })
                 }

@@ -10,7 +10,11 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 })
 export class PropertyComponent {
     selected: any = [];
-
+    textProperties: HmiProperty[] = [
+        { name: "文本", path: "attrs/text/text", type: "text" },
+        { name: "文本颜色", path: "attrs/text/fill", type: "color" },
+        { name: "字号", path: "attrs/text/fontSize", type: "stroke" },
+    ]
     @Input() set graph(g: Graph) {
         g.on("cell:change:size", (event) => {
             if (event.cell == this.cell)
@@ -35,6 +39,8 @@ export class PropertyComponent {
             this.selected = selected;
             if (g.getSelectedCellCount() === 1) {
                 this.cell = g.getSelectedCells()[0]
+                console.log("🚀 ~ file: property.component.ts:38 ~ PropertyComponent ~ g.on ~ this.cell:", this.cell)
+
                 // cell.getData()
                 //this.cmp = g.getSelectedCells()[0].getData()
                 if (this.cell.isNode()) {
