@@ -21,8 +21,8 @@ const config: HmiComponent = {
     properties: [
         { name: "文本", path: "attrs/label/text", type: "text" },
         { name: "字体颜色", path: "attrs/label/fill", type: "color" },
-        { name: "字体", path: "attrs/label/fontFamily", type: "font" },
-        { name: "字号", path: "attrs/label/fontSize", type: "stroke" },
+        // { name: "字体", path: "attrs/label/fontFamily", type: "font" },
+        // { name: "字号", path: "attrs/label/fontSize", type: "stroke" },
         { name: "填充", path: "attrs/rect/fill", type: "color" },
         { name: "边框颜色", path: "attrs/rect/stroke", type: "color" },
         { name: "边框宽度", path: "attrs/rect/strokeWidth", type: "stroke" },

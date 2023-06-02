@@ -34,7 +34,7 @@ export class PropertyComponent {
             if (cell.shape === 'text-block') {
                 const view = g.findViewByCell(cell.id);
                 const ele = view?.container.querySelector('foreignObject')?.querySelector('div') as unknown as HTMLElement;
-                this.cell.setPropByPath('attrs/label/text', ele.innerText)
+                ele && this.cell.setPropByPath('attrs/label/text', ele.innerText)
             }
         })
         g.on("selection:changed", ({ selected }) => {
@@ -121,7 +121,6 @@ export class PropertyComponent {
         this.cell.setProp(this.formLinePosition.value);
     }
     handleEditData() {
-        console.log(33333333)
         const modal: NzModalRef = this.modal.create({
             nzContent: EditTableComponent,
             nzComponentParams: {
@@ -143,7 +142,14 @@ export class PropertyComponent {
                     label: '保存',
                     type: 'primary',
                     onClick: () => {
-
+                        const editTable = modal.getContentComponent();
+                        const data = editTable.group.value.keyName;
+                        const dataObj: any = {};
+                        for (let index = 0; index < data.length; index++) {
+                            const { name, value } = data[index];
+                            dataObj[name] = value;
+                        }
+                        console.log("🚀 ~ file: property.component.ts:146 ~ PropertyComponent ~ handleEditData ~ com:", editTable.group.value.keyName, dataObj)
                     }
                 },
             ]

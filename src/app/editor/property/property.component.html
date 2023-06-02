@@ -59,7 +59,7 @@
                 </tr>
             </table>
         </nz-tab>
-        <nz-tab nzTitle="文本">
+        <nz-tab nzTitle="文本" *ngIf="cell.isNode()&&cell.shape!='text-block'">
             <table>
                 <tr *ngFor="let p of textProperties">
                     <td>
