@@ -41,7 +41,6 @@ export class PropertyComponent {
             this.selected = selected;
             if (g.getSelectedCellCount() === 1) {
                 this.cell = g.getSelectedCells()[0]
-                console.log("🚀 ~ file: property.component.ts:38 ~ PropertyComponent ~ g.on ~ this.cell:", this.cell)
 
                 // cell.getData()
                 //this.cmp = g.getSelectedCells()[0].getData()

@@ -205,7 +205,7 @@ export class CanvasComponent {
             this.showPorts(ports, false);
 
             const data = node.data;
-            if (data.id && data.id.includes('switch')) {
+            if (/electric-switch/.test(data.id)) {
                 const attrPath = 'attrs/switch/transform';
                 const target = data.value ? switchClose : switchOpen;
                 data.value = !data.value;
