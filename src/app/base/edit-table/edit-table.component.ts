@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, forwardRef } from '@angular/core';
-import { FormBuilder, FormArray, ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { FormBuilder, FormArray, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { NzMessageService } from "ng-zorro-antd/message";
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 @Component({
@@ -8,21 +8,14 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
   styleUrls: ['./edit-table.component.scss'],
   providers: [
     NzMessageService,
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => EditTableComponent),
-      multi: true
-    }
   ]
 })
-export class EditTableComponent implements OnInit, ControlValueAccessor {
+export class EditTableComponent implements OnInit {
   group!: any;
   row: any = {};
   constListData: any = [];
-  onChanged: any = () => { }
-  onTouched: any = () => { }
 
-  @Input() data: any = {};
+  @Input() data: any
   @Input()
   set listData(data: Array<{ title: string, type?: any, keyName: string, defaultValue?: any }>) {
     const row: any = {};
@@ -39,6 +32,14 @@ export class EditTableComponent implements OnInit, ControlValueAccessor {
   ) { }
   ngOnInit(): void {
     this.group = this.fb.group({ keyName: this.fb.array([]) });
+    const arr = [];
+    for (const key in this.data) {
+      const item = this.data[key];
+      if (key != 'id') {
+        arr.push({ name: key, value: item });
+      }
+    }
+    this.writeValue(arr);
   }
   writeValue(data: any): void {
     const itemObj = JSON.parse(JSON.stringify(this.row));
@@ -50,20 +51,8 @@ export class EditTableComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  registerOnChange(fn: any): void {
-    this.onChanged = fn;
-  }
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  change() {
-    const data = this.aliases.controls.map((item) => item.value);
-    this.onChanged(data);
-  }
   propertyDel(i: number) {
     this.aliases.removeAt(i);
-    this.change();
   }
   get aliases(): FormArray {
     return this.group.get('keyName') as FormArray;

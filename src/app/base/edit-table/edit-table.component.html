@@ -12,10 +12,9 @@
     <tbody formArrayName="keyName">
         <tr *ngFor="let trData of aliases.controls; let i=index;" [formGroupName]="i">
             <td *ngFor="let item of constListData">
-                <nz-input-number *ngIf="item['type']==='number'" [formControlName]="item['keyName']"
-                    (nzBlur)="change()">
+                <nz-input-number *ngIf="item['type']==='number'" [formControlName]="item['keyName']">
                 </nz-input-number>
-                <input *ngIf="!item['type']" nz-input [formControlName]="item['keyName']" (blur)="change()" />
+                <input *ngIf="!item['type']" nz-input [formControlName]="item['keyName']" />
             </td>
             <td class="td-oper">
                 <span nz-icon nzType="delete" nzTheme="outline" title="删除" style="cursor:pointer;"

@@ -131,6 +131,7 @@ export class PropertyComponent {
                     title: '属性值',
                     keyName: 'value'
                 }],
+                data: this.cell.data
             },
             nzViewContainerRef: this.viewContainerRef,
             nzFooter: [
@@ -143,13 +144,14 @@ export class PropertyComponent {
                     type: 'primary',
                     onClick: () => {
                         const editTable = modal.getContentComponent();
-                        const data = editTable.group.value.keyName;
+                        const data = editTable.aliases.value;
                         const dataObj: any = {};
                         for (let index = 0; index < data.length; index++) {
                             const { name, value } = data[index];
                             dataObj[name] = value;
                         }
-                        console.log("🚀 ~ file: property.component.ts:146 ~ PropertyComponent ~ handleEditData ~ com:", editTable.group.value.keyName, dataObj)
+                        this.cell.setData(dataObj, { overwrite: true });
+                        modal.destroy();
                     }
                 },
             ]
