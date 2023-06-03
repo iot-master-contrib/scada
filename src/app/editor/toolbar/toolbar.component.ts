@@ -9,6 +9,11 @@ import {Graph, Node} from "@antv/x6";
 export class ToolbarComponent {
     @Input() graph!: Graph;
 
+    pages: any = [
+        {label: "主页", value: "home"},
+        {label: "设置", value: "setting"},
+    ];
+
     handleSave() {
         console.log("save", this.graph.toJSON())
     }
@@ -191,5 +196,9 @@ export class ToolbarComponent {
         let current = this.graph.getSelectedCells()[0];
         //if (!current) return false;
         return current.getChildCount() > 0;
+    }
+
+    settingPages() {
+
     }
 }

@@ -77,3 +77,12 @@
 <a (click)="handleUngroup()" nz-button [disabled]="!isGroup()">
     <i nz-icon nzType="ungroup" title="解除组合"></i>
 </a>
+
+<nz-divider nzType="vertical"></nz-divider>
+
+
+<nz-select [nzOptions]="pages"></nz-select>
+<a nz-button (click)="settingPages()">
+    <i nz-icon nzType="setting" title="管理"></i>
+</a>
+

@@ -47,6 +47,8 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { SetDataComponent } from './set-data/set-data.component';
 import { BaseModule } from '../base/base.module';
 import { GraphSettingsComponent } from './graph-settings/graph-settings.component';
+import {NzSelectModule} from "ng-zorro-antd/select";
+import { CollapseComponent } from './collapse/collapse.component';
 
 @NgModule({
     declarations: [
@@ -58,6 +60,7 @@ import { GraphSettingsComponent } from './graph-settings/graph-settings.componen
         CollectionComponent,
         SetDataComponent,
         GraphSettingsComponent,
+        CollapseComponent,
     ],
     imports: [
         CommonModule,
@@ -83,7 +86,8 @@ import { GraphSettingsComponent } from './graph-settings/graph-settings.componen
         NzSpaceModule,
         NzTabsModule,
         NzCheckboxModule,
-        BaseModule
+        BaseModule,
+        NzSelectModule
     ]
 })
 export class EditorModule {

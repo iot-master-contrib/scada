@@ -1,0 +1,19 @@
+
+.header {
+    border-top: 1px solid #a8a8a8;
+    border-bottom: 1px solid #a8a8a8;
+    padding: 4px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.content {
+    padding: 4px;
+
+    &.close {
+        max-height: 0;
+        overflow: hidden;
+    }
+}

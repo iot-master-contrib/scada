@@ -1,37 +1,16 @@
 
-.header {
-    border-top: 1px solid #a8a8a8;
-    border-bottom: 1px solid #a8a8a8;
+.item {
+    display: inline-block;
+    text-align: center;
     padding: 4px;
-    background-color: #f0f0f0;
-}
+    cursor: pointer;
 
-.content {
-    padding: 4px;
-    //border-bottom: 1px solid #a8a8a8;
-
-    //max-height: 200px;
-    //overflow-y: auto;
-    //transition: max-height .5s linear 0s;
-
-    &.close {
-        max-height: 0;
-        overflow: hidden;
+    .icon {
+        width: 30px;
+        height: 30px;
     }
 
-    .item {
-        display: inline-block;
-        text-align: center;
-        padding: 4px;
-        cursor: pointer;
-
-        .icon {
-            width: 30px;
-            height: 30px;
-        }
-
-        .name {
-            //font-size: 10px;
-        }
+    .name {
+        //font-size: 10px;
     }
 }

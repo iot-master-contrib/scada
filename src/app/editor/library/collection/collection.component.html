@@ -1,11 +1,6 @@
-<div class="header" (click)="open = !open">
-    <!--    <i nz-icon nzType="right"></i>-->
-    <span nz-icon [nzType]="open ? 'caret-up': 'caret-down'" nzTheme="outline"></span>
-    {{data.name}}
-</div>
-<div class="content" [ngClass]="{close:!open}">
+<app-collapse [title]="data.name">
     <div class="item" *ngFor="let c of data.components" (click)="onClick(c)" (dragstart)="onDragStart($event, c)">
         <img class="icon" [src]="c.icon || '/assets/component.svg'">
         <div class="name">{{c.name}}</div>
     </div>
-</div>
+</app-collapse>
