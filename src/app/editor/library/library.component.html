@@ -1,6 +1,21 @@
-<app-collection *ngFor="let c of collections" [data]="c" (onDraw)="onDrag.emit($event)"></app-collection>
-<div class="more-btn">
-    <button nz-button nzType="primary">
-        更多图形
-    </button>
+<div class="header">
+    <nz-input-group [nzSuffix]="suffixIconSearch" nzSearch [nzAddOnAfter]="suffixIconButton">
+        <input type="text" nz-input placeholder="控件名称" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+        <span nz-icon nzType="search"></span>
+    </ng-template>
+    <ng-template #suffixIconButton>
+        <button nz-button  (click)="more()">更多</button>
+    </ng-template>
 </div>
+<div class="collections">
+    <app-collection *ngFor="let c of collections" [data]="c" (onDraw)="onDrag.emit($event)"></app-collection>
+</div>
+
+
+<!--<div class="more-btn">-->
+<!--    <button nz-button nzType="primary">-->
+<!--        更多图形-->
+<!--    </button>-->
+<!--</div>-->

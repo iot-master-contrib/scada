@@ -42,4 +42,8 @@ export class LibraryComponent {
         //     ]
         // });
     }
+
+    more() {
+
+    }
 }
