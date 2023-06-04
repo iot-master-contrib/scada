@@ -10,9 +10,13 @@
 }
 
 .content {
-    padding: 4px;
+
+    .inner{
+        padding: 4px;
+    }
 
     &.close {
+        height: 0;
         max-height: 0;
         overflow: hidden;
     }

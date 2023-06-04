@@ -9,53 +9,29 @@ import { ButtonComponent } from "./button/button.component";
 
 import industryComponents from './configs/industry-components';
 import electricComponents from "./configs/electric-components";
-import LineConfig from "./configs/line-config";
-import TextConfig from './configs/text-config';
+import {BaseLine} from "./base/line";
+import {BaseCircle} from "./base/circle";
+import {BaseEllipse} from "./base/ellipse";
+import {BaseRect} from "./base/rect";
+import {BaseTriangle} from "./base/triangle";
+import {BaseText} from "./base/text";
+import {BaseImage} from "./base/image";
+
+
 export var strokeProperties: HmiProperty[] = [
     { name: "填充", path: "rect/fill", type: "color" },
     { name: "边框颜色", path: "rect/stroke", type: "color" },
     { name: "边框大小", path: "rect/stroke-width", type: "stroke" },
 ]
-const componnetsConfig: HmiComponent[] = [{
-    name: '圆形', id: 'circle', icon: '/assets/circle.svg', type: "shape",
-    meta: { width: 100, height: 100 },
-    properties: [],
-},
-{
-    name: '椭圆', id: 'ellipse', icon: '/assets/ellipse.svg', type: "shape",
-    meta: { width: 100, height: 60 },
-    properties: [],
-},
-{
-    name: '矩形', id: 'rect', icon: '/assets/rect.svg', type: "shape",
-    meta: { width: 100, height: 40 },
-    properties: [],
-}, {
-    name: '三角形', id: 'path', icon: '/assets/triangle.svg', type: "shape",
-    meta: { width: 100, height: 40, path: 'M20.5 18.5H4.5L12.5 5.5L20.5 18.5Z' },
-    properties: [],
-}];
-for (let index = 0; index < componnetsConfig.length; index++) {
-    const item = componnetsConfig[index];
-    item.properties!.unshift({ name: "边框宽度", path: `attrs/${item.id}/strokeWidth`, type: "stroke" })
-    item.properties!.unshift({ name: "边框颜色", path: `attrs/${item.id}/stroke`, type: "color" });
-    item.properties!.unshift({ name: "填充", path: `attrs/${item.id}/fill`, type: "color" });
-}
+
 export var COMPONENTS: HmiCollection[] = [
     {
         name: '基础组件',
         nameEn: 'base',
         components: [
-            LineConfig,
-            ...componnetsConfig,
-            TextConfig,
-            {
-                name: '图片', id: 'image', icon: '/assets/image.svg', type: "shape",
-                meta: { width: 100, height: 80, imageUrl: '/assets/image.svg', },
-                properties: [
-                    { name: "图片", path: "attrs/image/xlink:href", type: "text" },
-                ]
-            },
+            BaseLine,BaseCircle,BaseEllipse,BaseRect,
+            BaseTriangle,BaseText,BaseImage,
+
             { name: '按钮', id: 'button', icon: '/assets/button.svg', type: "angular", content: ButtonComponent },
             { name: '输入框', id: 'input', icon: '/assets/input.svg', type: "angular", content: InputComponent },
             { name: '表格', id: 'table', icon: '/assets/table.svg', type: "angular", content: TableComponent },

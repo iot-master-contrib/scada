@@ -1,5 +1,5 @@
 <ng-container [ngSwitch]="property.type">
-    <input nz-input nzSize="small" *ngSwitchCase="'text'" [value]="cell.getPropByPath(property.path) || ''"
+    <input nz-input nzSize="small" *ngSwitchCase="'text'" placeholder="空" [value]="cell.getPropByPath(property.path) || ''"
            (change)="inputChange($event)">
     <input nz-input nzSize="small" *ngSwitchCase="'number'" type="number" [value]="cell.getPropByPath(property.path)"
            (change)="inputChange($event)">

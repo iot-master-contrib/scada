@@ -3,5 +3,7 @@
     {{title}}
 </div>
 <div class="content" [ngClass]="{close:!open}">
-    <ng-content></ng-content>
+    <div class="inner">
+        <ng-content></ng-content>
+    </div>
 </div>

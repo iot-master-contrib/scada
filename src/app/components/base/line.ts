@@ -1,6 +1,7 @@
 import { HmiComponent } from "../../hmi";
+import {createStrokeProperties} from "../properties";
 
-const config: HmiComponent = {
+export const BaseLine: HmiComponent = {
     name: '线条', id: 'line', icon: '/assets/line.svg', type: "line",
     extends: {
         inherit: "edge",
@@ -43,8 +44,7 @@ const config: HmiComponent = {
     },
     meta: {},
     properties: [
-        { name: "线条颜色", path: "attrs/line/stroke", type: "color" },
-        { name: "线条宽度", path: "attrs/line/strokeWidth", type: "stroke" },
+
+        ...createStrokeProperties('line'),
     ],
 }
-export default config
