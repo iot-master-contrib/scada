@@ -669,7 +669,7 @@ const docTemplatescada = `{
                     "application/octet-stream"
                 ],
                 "tags": [
-                    "product"
+                    "project"
                 ],
                 "summary": "导出工程",
                 "responses": {}
@@ -685,7 +685,7 @@ const docTemplatescada = `{
                     "application/json"
                 ],
                 "tags": [
-                    "product"
+                    "project"
                 ],
                 "summary": "导入工程",
                 "parameters": [

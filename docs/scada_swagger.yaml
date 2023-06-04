@@ -668,7 +668,7 @@ paths:
       responses: {}
       summary: 导出工程
       tags:
-      - product
+      - project
   /project/import:
     post:
       consumes:
@@ -689,7 +689,7 @@ paths:
             $ref: '#/definitions/api.ReplyData-int64'
       summary: 导入工程
       tags:
-      - product
+      - project
   /project/list:
     get:
       consumes:

@@ -18,12 +18,6 @@ import {BaseText} from "./base/text";
 import {BaseImage} from "./base/image";
 
 
-export var strokeProperties: HmiProperty[] = [
-    { name: "填充", path: "rect/fill", type: "color" },
-    { name: "边框颜色", path: "rect/stroke", type: "color" },
-    { name: "边框大小", path: "rect/stroke-width", type: "stroke" },
-]
-
 export var COMPONENTS: HmiCollection[] = [
     {
         name: '基础组件',

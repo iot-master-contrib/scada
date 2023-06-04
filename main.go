@@ -37,25 +37,19 @@ var wwwFiles embed.FS
 func main() {
 }
 
-func Startup(app *web.Engine) error {
-
-	//同步表结构
-	err := db.Engine.Sync2(
+func Sync() error {
+	return db.Engine.Sync2(
 		new(types.HmiProject), new(types.HmiComponent), new(types.HmiCollection),
 	)
-	if err != nil {
+}
 
-		return err
-
-	}
+func Route(app *web.Engine) {
 
 	//注册前端接口
 	api.RegisterRoutes(app.Group("/app/scada/api"))
 
 	//注册接口文档
 	web.RegisterSwaggerDocs(app.Group("/app/scada"), "scada")
-
-	return nil
 }
 
 func Register() error {
