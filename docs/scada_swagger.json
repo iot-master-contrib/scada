@@ -8,6 +8,582 @@
     },
     "basePath": "/app/scada/api/",
     "paths": {
+        "/collection/count": {
+            "post": {
+                "description": "查询集合数量",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "collection"
+                ],
+                "summary": "查询集合数量",
+                "parameters": [
+                    {
+                        "description": "查询参数",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.ParamSearch"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-int64"
+                        }
+                    }
+                }
+            }
+        },
+        "/collection/create": {
+            "post": {
+                "description": "创建集合",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "collection"
+                ],
+                "summary": "创建集合",
+                "parameters": [
+                    {
+                        "description": "集合信息",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/types.HmiCollection"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_HmiCollection"
+                        }
+                    }
+                }
+            }
+        },
+        "/collection/export": {
+            "get": {
+                "description": "导出集合",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/octet-stream"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "导出集合",
+                "responses": {}
+            }
+        },
+        "/collection/import": {
+            "post": {
+                "description": "导入集合",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "导入集合",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "压缩包",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-int64"
+                        }
+                    }
+                }
+            }
+        },
+        "/collection/list": {
+            "get": {
+                "description": "查询集合",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "collection"
+                ],
+                "summary": "查询集合",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "skip",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyList-types_HmiCollection"
+                        }
+                    }
+                }
+            }
+        },
+        "/collection/search": {
+            "post": {
+                "description": "查询集合",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "collection"
+                ],
+                "summary": "查询集合",
+                "parameters": [
+                    {
+                        "description": "查询参数",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.ParamSearch"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyList-types_HmiCollection"
+                        }
+                    }
+                }
+            }
+        },
+        "/collection/{id}": {
+            "get": {
+                "description": "获取集合",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "collection"
+                ],
+                "summary": "获取集合",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "集合ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_HmiCollection"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "修改集合",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "collection"
+                ],
+                "summary": "修改集合",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "集合ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "集合信息",
+                        "name": "collection",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/types.HmiCollection"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_HmiCollection"
+                        }
+                    }
+                }
+            }
+        },
+        "/collection/{id}/delete": {
+            "get": {
+                "description": "删除集合",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "collection"
+                ],
+                "summary": "删除集合",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "集合ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_HmiCollection"
+                        }
+                    }
+                }
+            }
+        },
+        "/component/count": {
+            "post": {
+                "description": "查询组件数量",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "component"
+                ],
+                "summary": "查询组件数量",
+                "parameters": [
+                    {
+                        "description": "查询参数",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.ParamSearch"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-int64"
+                        }
+                    }
+                }
+            }
+        },
+        "/component/create": {
+            "post": {
+                "description": "创建组件",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "component"
+                ],
+                "summary": "创建组件",
+                "parameters": [
+                    {
+                        "description": "组件信息",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/types.HmiComponent"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_HmiComponent"
+                        }
+                    }
+                }
+            }
+        },
+        "/component/export": {
+            "get": {
+                "description": "导出组件",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/octet-stream"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "导出组件",
+                "responses": {}
+            }
+        },
+        "/component/import": {
+            "post": {
+                "description": "导入组件",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "导入组件",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "压缩包",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-int64"
+                        }
+                    }
+                }
+            }
+        },
+        "/component/list": {
+            "get": {
+                "description": "查询组件",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "component"
+                ],
+                "summary": "查询组件",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "skip",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyList-types_HmiComponent"
+                        }
+                    }
+                }
+            }
+        },
+        "/component/search": {
+            "post": {
+                "description": "查询组件",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "component"
+                ],
+                "summary": "查询组件",
+                "parameters": [
+                    {
+                        "description": "查询参数",
+                        "name": "search",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.ParamSearch"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyList-types_HmiComponent"
+                        }
+                    }
+                }
+            }
+        },
+        "/component/{id}": {
+            "get": {
+                "description": "获取组件",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "component"
+                ],
+                "summary": "获取组件",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "组件ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_HmiComponent"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "修改组件",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "component"
+                ],
+                "summary": "修改组件",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "组件ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "组件信息",
+                        "name": "component",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/types.HmiComponent"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_HmiComponent"
+                        }
+                    }
+                }
+            }
+        },
+        "/component/{id}/delete": {
+            "get": {
+                "description": "删除组件",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "component"
+                ],
+                "summary": "删除组件",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "组件ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ReplyData-types_HmiComponent"
+                        }
+                    }
+                }
+            }
+        },
         "/project/count": {
             "post": {
                 "description": "查询工程数量",
@@ -336,6 +912,28 @@
                 }
             }
         },
+        "api.ReplyData-types_HmiCollection": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/types.HmiCollection"
+                },
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.ReplyData-types_HmiComponent": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/types.HmiComponent"
+                },
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
         "api.ReplyData-types_HmiProject": {
             "type": "object",
             "properties": {
@@ -344,6 +942,40 @@
                 },
                 "error": {
                     "type": "string"
+                }
+            }
+        },
+        "api.ReplyList-types_HmiCollection": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/types.HmiCollection"
+                    }
+                },
+                "error": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "api.ReplyList-types_HmiComponent": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/types.HmiComponent"
+                    }
+                },
+                "error": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "integer"
                 }
             }
         },
@@ -364,17 +996,53 @@
                 }
             }
         },
-        "types.HmiDevice": {
+        "types.HmiCollection": {
             "type": "object",
             "properties": {
+                "created": {
+                    "type": "string"
+                },
+                "desc": {
+                    "type": "string"
+                },
                 "id": {
                     "type": "string"
                 },
                 "name": {
                     "type": "string"
-                },
-                "productId": {
+                }
+            }
+        },
+        "types.HmiComponent": {
+            "type": "object",
+            "properties": {
+                "created": {
                     "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "meta": {},
+                "name": {
+                    "type": "string"
+                },
+                "properties": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/types.HmiProperty"
+                    }
+                },
+                "type": {
+                    "type": "string"
+                },
+                "updated": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "integer"
                 }
             }
         },
@@ -384,7 +1052,7 @@
                 "content": {
                     "type": "string"
                 },
-                "id": {
+                "name": {
                     "type": "string"
                 }
             }
@@ -398,12 +1066,6 @@
                 "desc": {
                     "type": "string"
                 },
-                "devices": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/types.HmiDevice"
-                    }
-                },
                 "id": {
                     "type": "string"
                 },
@@ -415,7 +1077,52 @@
                     "items": {
                         "$ref": "#/definitions/types.HmiPage"
                     }
+                },
+                "updated": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "integer"
                 }
+            }
+        },
+        "types.HmiProperty": {
+            "type": "object",
+            "properties": {
+                "default": {},
+                "max": {
+                    "type": "integer"
+                },
+                "min": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "options": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/types.HmiPropertyOption"
+                    }
+                },
+                "path": {
+                    "type": "string"
+                },
+                "step": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "types.HmiPropertyOption": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {}
             }
         }
     }

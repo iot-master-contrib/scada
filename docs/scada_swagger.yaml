@@ -25,12 +25,48 @@ definitions:
       error:
         type: string
     type: object
+  api.ReplyData-types_HmiCollection:
+    properties:
+      data:
+        $ref: '#/definitions/types.HmiCollection'
+      error:
+        type: string
+    type: object
+  api.ReplyData-types_HmiComponent:
+    properties:
+      data:
+        $ref: '#/definitions/types.HmiComponent'
+      error:
+        type: string
+    type: object
   api.ReplyData-types_HmiProject:
     properties:
       data:
         $ref: '#/definitions/types.HmiProject'
       error:
         type: string
+    type: object
+  api.ReplyList-types_HmiCollection:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/types.HmiCollection'
+        type: array
+      error:
+        type: string
+      total:
+        type: integer
+    type: object
+  api.ReplyList-types_HmiComponent:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/types.HmiComponent'
+        type: array
+      error:
+        type: string
+      total:
+        type: integer
     type: object
   api.ReplyList-types_HmiProject:
     properties:
@@ -43,20 +79,44 @@ definitions:
       total:
         type: integer
     type: object
-  types.HmiDevice:
+  types.HmiCollection:
     properties:
+      created:
+        type: string
+      desc:
+        type: string
       id:
         type: string
       name:
         type: string
-      productId:
+    type: object
+  types.HmiComponent:
+    properties:
+      created:
         type: string
+      icon:
+        type: string
+      id:
+        type: string
+      meta: {}
+      name:
+        type: string
+      properties:
+        items:
+          $ref: '#/definitions/types.HmiProperty'
+        type: array
+      type:
+        type: string
+      updated:
+        type: string
+      version:
+        type: integer
     type: object
   types.HmiPage:
     properties:
       content:
         type: string
-      id:
+      name:
         type: string
     type: object
   types.HmiProject:
@@ -65,10 +125,6 @@ definitions:
         type: string
       desc:
         type: string
-      devices:
-        items:
-          $ref: '#/definitions/types.HmiDevice'
-        type: array
       id:
         type: string
       name:
@@ -77,6 +133,36 @@ definitions:
         items:
           $ref: '#/definitions/types.HmiPage'
         type: array
+      updated:
+        type: string
+      version:
+        type: integer
+    type: object
+  types.HmiProperty:
+    properties:
+      default: {}
+      max:
+        type: integer
+      min:
+        type: integer
+      name:
+        type: string
+      options:
+        items:
+          $ref: '#/definitions/types.HmiPropertyOption'
+        type: array
+      path:
+        type: string
+      step:
+        type: integer
+      type:
+        type: string
+    type: object
+  types.HmiPropertyOption:
+    properties:
+      name:
+        type: string
+      value: {}
     type: object
 info:
   contact: {}
@@ -84,6 +170,382 @@ info:
   title: 组态接口文档
   version: 1.0 版本
 paths:
+  /collection/{id}:
+    get:
+      consumes:
+      - application/json
+      description: 获取集合
+      parameters:
+      - description: 集合ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiCollection'
+      summary: 获取集合
+      tags:
+      - collection
+    post:
+      consumes:
+      - application/json
+      description: 修改集合
+      parameters:
+      - description: 集合ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 集合信息
+        in: body
+        name: collection
+        required: true
+        schema:
+          $ref: '#/definitions/types.HmiCollection'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiCollection'
+      summary: 修改集合
+      tags:
+      - collection
+  /collection/{id}/delete:
+    get:
+      consumes:
+      - application/json
+      description: 删除集合
+      parameters:
+      - description: 集合ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiCollection'
+      summary: 删除集合
+      tags:
+      - collection
+  /collection/count:
+    post:
+      consumes:
+      - application/json
+      description: 查询集合数量
+      parameters:
+      - description: 查询参数
+        in: body
+        name: search
+        required: true
+        schema:
+          $ref: '#/definitions/api.ParamSearch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-int64'
+      summary: 查询集合数量
+      tags:
+      - collection
+  /collection/create:
+    post:
+      consumes:
+      - application/json
+      description: 创建集合
+      parameters:
+      - description: 集合信息
+        in: body
+        name: search
+        required: true
+        schema:
+          $ref: '#/definitions/types.HmiCollection'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiCollection'
+      summary: 创建集合
+      tags:
+      - collection
+  /collection/export:
+    get:
+      consumes:
+      - application/json
+      description: 导出集合
+      produces:
+      - application/octet-stream
+      responses: {}
+      summary: 导出集合
+      tags:
+      - product
+  /collection/import:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 导入集合
+      parameters:
+      - description: 压缩包
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-int64'
+      summary: 导入集合
+      tags:
+      - product
+  /collection/list:
+    get:
+      consumes:
+      - application/json
+      description: 查询集合
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: skip
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyList-types_HmiCollection'
+      summary: 查询集合
+      tags:
+      - collection
+  /collection/search:
+    post:
+      consumes:
+      - application/json
+      description: 查询集合
+      parameters:
+      - description: 查询参数
+        in: body
+        name: search
+        required: true
+        schema:
+          $ref: '#/definitions/api.ParamSearch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyList-types_HmiCollection'
+      summary: 查询集合
+      tags:
+      - collection
+  /component/{id}:
+    get:
+      consumes:
+      - application/json
+      description: 获取组件
+      parameters:
+      - description: 组件ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiComponent'
+      summary: 获取组件
+      tags:
+      - component
+    post:
+      consumes:
+      - application/json
+      description: 修改组件
+      parameters:
+      - description: 组件ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 组件信息
+        in: body
+        name: component
+        required: true
+        schema:
+          $ref: '#/definitions/types.HmiComponent'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiComponent'
+      summary: 修改组件
+      tags:
+      - component
+  /component/{id}/delete:
+    get:
+      consumes:
+      - application/json
+      description: 删除组件
+      parameters:
+      - description: 组件ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiComponent'
+      summary: 删除组件
+      tags:
+      - component
+  /component/count:
+    post:
+      consumes:
+      - application/json
+      description: 查询组件数量
+      parameters:
+      - description: 查询参数
+        in: body
+        name: search
+        required: true
+        schema:
+          $ref: '#/definitions/api.ParamSearch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-int64'
+      summary: 查询组件数量
+      tags:
+      - component
+  /component/create:
+    post:
+      consumes:
+      - application/json
+      description: 创建组件
+      parameters:
+      - description: 组件信息
+        in: body
+        name: search
+        required: true
+        schema:
+          $ref: '#/definitions/types.HmiComponent'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiComponent'
+      summary: 创建组件
+      tags:
+      - component
+  /component/export:
+    get:
+      consumes:
+      - application/json
+      description: 导出组件
+      produces:
+      - application/octet-stream
+      responses: {}
+      summary: 导出组件
+      tags:
+      - product
+  /component/import:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 导入组件
+      parameters:
+      - description: 压缩包
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-int64'
+      summary: 导入组件
+      tags:
+      - product
+  /component/list:
+    get:
+      consumes:
+      - application/json
+      description: 查询组件
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: skip
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyList-types_HmiComponent'
+      summary: 查询组件
+      tags:
+      - component
+  /component/search:
+    post:
+      consumes:
+      - application/json
+      description: 查询组件
+      parameters:
+      - description: 查询参数
+        in: body
+        name: search
+        required: true
+        schema:
+          $ref: '#/definitions/api.ParamSearch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyList-types_HmiComponent'
+      summary: 查询组件
+      tags:
+      - component
   /project/{id}:
     get:
       consumes:
