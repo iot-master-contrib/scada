@@ -7,7 +7,7 @@ export const BaseImage: HmiComponent = {
     type: "shape",
     meta: {
         width: 100, height: 80,
-        imageUrl: '/assets/image.svg',
+        imageUrl: '/app/scada/assets/image.svg',
     },
     properties: [
         {name: "图片", path: "attrs/image/xlink:href", type: "text"},
