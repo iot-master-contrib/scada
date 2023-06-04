@@ -6,9 +6,9 @@ const industryArr = [];
 for (let index = 0; index < pipeImg.length; index++) {
     const item = pipeImg[index];
     industryArr.push({
-        name: '', id: `pipe${index}`, icon: `/assets/industry/${item}.svg`, type: "shape",
+        name: '', id: `pipe${index}`, icon: `/app/scada/assets/industry/${item}.svg`, type: "shape",
         extends: { inherit: "image" },
-        meta: { width: 80, height: 80, imageUrl: `/assets/industry/${item}.svg` },
+        meta: { width: 80, height: 80, imageUrl: `/app/scada/assets/industry/${item}.svg` },
         properties: [],
     })
 };

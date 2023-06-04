@@ -14,14 +14,14 @@ const electricArr = [];
 for (let index = 0; index < imgArr.length; index++) {
     const item = imgArr[index];
     electricArr.push({
-        name: '', id: `electric${index}`, icon: `/assets/electric/${item}.svg`, type: "shape",
+        name: '', id: `electric${index}`, icon: `/app/scada/assets/electric/${item}.svg`, type: "shape",
         extends: { inherit: "image" },
-        meta: { width: 50, height: 50, imageUrl: `/assets/electric/${item}.svg` },
+        meta: { width: 50, height: 50, imageUrl: `/app/scada/assets/electric/${item}.svg` },
         properties: [],
     });
 }
 electricArr.push({
-    name: '', id: 'electric-switch', icon: `/assets/electric/switch.svg`, type: "shape",
+    name: '', id: 'electric-switch', icon: `/app/scada/assets/electric/switch.svg`, type: "shape",
     extends: { inherit: "rect" },
     meta: {
         width: 120, height: 130,

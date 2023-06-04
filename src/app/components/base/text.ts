@@ -1,7 +1,7 @@
 import { HmiComponent } from "../../hmi";
 
 export const BaseText: HmiComponent = {
-    name: '文本', id: 'text-block', icon: '/assets/text.svg', type: "shape",
+    name: '文本', id: 'text-block', icon: '/app/scada/assets/text.svg', type: "shape",
     meta: {
         width: 100,
         height: 40,

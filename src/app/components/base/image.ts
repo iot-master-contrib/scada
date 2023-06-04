@@ -3,7 +3,7 @@ import {HmiComponent} from "../../hmi";
 export const BaseImage: HmiComponent = {
     name: '图片',
     id: 'image',
-    icon: '/assets/image.svg',
+    icon: '/app/scada/assets/image.svg',
     type: "shape",
     meta: {
         width: 100, height: 80,
