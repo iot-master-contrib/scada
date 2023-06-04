@@ -1,4 +1,4 @@
-<app-collapse title="画布" *ngIf="!selected.length">
+<app-collapse title="页面">
     <app-graph-settings></app-graph-settings>
 </app-collapse>
 
@@ -7,11 +7,11 @@
         <table>
             <tr>
                 <td>X</td>
-                <td><input type="number" formControlName="x"></td>
+                <td><input nz-input nzSize="small" type="number" formControlName="x"></td>
             </tr>
             <tr>
                 <td>Y</td>
-                <td><input type="number" formControlName="y"></td>
+                <td><input nz-input nzSize="small" type="number" formControlName="y"></td>
             </tr>
         </table>
     </form>
@@ -20,11 +20,11 @@
         <table>
             <tr>
                 <td>宽度</td>
-                <td><input type="number" formControlName="width"></td>
+                <td><input nz-input nzSize="small" type="number" formControlName="width"></td>
             </tr>
             <tr>
                 <td>高度</td>
-                <td><input type="number" formControlName="height"></td>
+                <td><input nz-input nzSize="small" type="number" formControlName="height"></td>
             </tr>
         </table>
     </form>
@@ -33,13 +33,13 @@
         <table>
             <tr formGroupName="source">
                 <td>起点</td>
-                <td>X:<input type="number" formControlName="x" style="width:60px"></td>
-                <td>Y:<input type="number" formControlName="y" style="width:60px"></td>
+                <td>X:<input nz-input nzSize="small" type="number" formControlName="x" style="width:60px"></td>
+                <td>Y:<input nz-input nzSize="small" type="number" formControlName="y" style="width:60px"></td>
             </tr>
             <tr formGroupName="target">
                 <td>终点</td>
-                <td>X:<input type="number" formControlName="x" style="width:60px"></td>
-                <td>Y:<input type="number" formControlName="y" style="width:60px"></td>
+                <td>X:<input nz-input nzSize="small" type="number" formControlName="x" style="width:60px"></td>
+                <td>Y:<input nz-input nzSize="small" type="number" formControlName="y" style="width:60px"></td>
             </tr>
         </table>
     </form>
@@ -47,30 +47,24 @@
     <table>
         <tr *ngFor="let p of cmp.properties">
             <td>
-                <label *ngIf="p.type=='color'" nz-checkbox
-                       [ngModel]="cell.getPropByPath(p.path) && cell.getPropByPath(p.path)!='transparent'&& cell.getPropByPath(p.path)!='none'"
-                       (ngModelChange)="colorCheckChange($event,p)"></label>
                 {{p.name}}
             </td>
             <td>
-                <app-switch-input [p]="p" [cell]="cell"></app-switch-input>
+                <app-property-input [property]="p" [cell]="cell"></app-property-input>
             </td>
         </tr>
     </table>
 
 </app-collapse>
 
-<app-collapse title="文本" *ngIf="cell.isNode()&&cell.shape!='text-block'">
+<app-collapse title="文本" *ngIf="cmp && cell.isNode() && cell.shape!='text-block'">
     <table>
         <tr *ngFor="let p of textProperties">
             <td>
-                <label *ngIf="p.type=='color'" nz-checkbox
-                       [ngModel]="cell.getPropByPath(p.path) && cell.getPropByPath(p.path)!='transparent'&& cell.getPropByPath(p.path)!='none'"
-                       (ngModelChange)="colorCheckChange($event,p)"></label>
                 {{p.name}}
             </td>
             <td>
-                <app-switch-input [p]="p" [cell]="cell"></app-switch-input>
+                <app-property-input [property]="p" [cell]="cell"></app-property-input>
             </td>
         </tr>
     </table>

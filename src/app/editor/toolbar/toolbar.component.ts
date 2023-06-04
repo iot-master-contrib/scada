@@ -31,12 +31,12 @@ export class ToolbarComponent {
     }
 
     handleCut() {
-        this.graph.getSelectedCells().forEach(c=>c.removeTools())
+        this.graph.getSelectedCells().forEach(c => c.removeTools())
         this.graph.cut(this.graph.getSelectedCells())
     }
 
     handleCopy() {
-        this.graph.getSelectedCells().forEach(c=>c.removeTools())
+        this.graph.getSelectedCells().forEach(c => c.removeTools())
         this.graph.copy(this.graph.getSelectedCells())
     }
 
@@ -198,7 +198,16 @@ export class ToolbarComponent {
         return current.getChildCount() > 0;
     }
 
-    settingPages() {
+
+    showGrid = true
+
+    handleGrid() {
+        if (this.showGrid) this.graph.hideGrid()
+        else this.graph.showGrid()
+        this.showGrid = !this.showGrid
+    }
+
+    settingPage() {
 
     }
 }

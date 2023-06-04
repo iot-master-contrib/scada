@@ -49,6 +49,7 @@ import { BaseModule } from '../base/base.module';
 import { GraphSettingsComponent } from './graph-settings/graph-settings.component';
 import {NzSelectModule} from "ng-zorro-antd/select";
 import { CollapseComponent } from './collapse/collapse.component';
+import {PropertyInputComponent} from "./property-input/property-input.component";
 
 @NgModule({
     declarations: [
@@ -56,6 +57,7 @@ import { CollapseComponent } from './collapse/collapse.component';
         LibraryComponent,
         CanvasComponent,
         PropertyComponent,
+        PropertyInputComponent,
         ToolbarComponent,
         CollectionComponent,
         SetDataComponent,

@@ -8,38 +8,17 @@
     //background: #f1f3f4;
 }
 
-::ng-deep.ant-tabs-nav-list {
-    width: 100%;
-
-    .ant-tabs-tab {
-        width: 50%;
-        text-align: center;
-        color: #707070;
-        font-weight: bold;
-        justify-content: center;
-    }
-
-    .ant-tabs-tab-active {
-        background: #f1f3f4 !important;
-        border-bottom-color: #f1f3f4 !important;
-    }
-}
-
-::ng-deep.ant-tabs-content-holder {
-    padding: 0 5px;
-}
-
-input:not([type="checkbox"]) {
-    width: 125px;
-    border: 1px solid grey;
-}
-
-::ng-deep.ant-divider-horizontal {
-    margin: 10px 0;
-}
-
 table {
     width: 100%;
+    td{
+        //border: 1px solid grey;
+        //border-collapse: collapse;
+        //border-spacing: 0;
+    }
+
+    :first-child(tr) {
+        min-width: 80px;
+    }
 
     tr {
         display: flex;

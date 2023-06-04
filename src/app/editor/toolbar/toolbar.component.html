@@ -79,10 +79,11 @@
 </a>
 
 <nz-divider nzType="vertical"></nz-divider>
+<a nz-button (click)="handleGrid()">
+    <i nz-icon nzType="table" title="显示网格"></i>
+</a>
 
-
-<nz-select [nzOptions]="pages"></nz-select>
-<a nz-button (click)="settingPages()">
-    <i nz-icon nzType="setting" title="管理"></i>
+<a nz-button (click)="settingPage()">
+    <i nz-icon nzType="setting" title="页面设置"></i>
 </a>
 
