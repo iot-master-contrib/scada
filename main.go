@@ -41,7 +41,7 @@ func Startup(app *web.Engine) error {
 
 	//同步表结构
 	err := db.Engine.Sync2(
-		new(types.HmiProject),
+		new(types.HmiProject), new(types.HmiComponent), new(types.HmiCollection),
 	)
 	if err != nil {
 

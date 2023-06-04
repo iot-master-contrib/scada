@@ -1,6 +1,7 @@
 package api
 
 import (
+    "github.com/gin-gonic/gin"
     "github.com/iot-master-contrib/scada/types"
     "github.com/zgwit/iot-master/v3/pkg/curd"
 )
@@ -105,23 +106,23 @@ func noopHmiCollectionImport() {}
 
 func collectionRouter(app *gin.RouterGroup) {
 
-	app.POST("/count", curd.ApiCount[types.HmiCollection]())
+    app.POST("/count", curd.ApiCount[types.HmiCollection]())
 
-	app.POST("/search", curd.ApiSearch[types.HmiCollection]())
+    app.POST("/search", curd.ApiSearch[types.HmiCollection]())
 
-	app.GET("/list", curd.ApiList[types.HmiCollection]())
+    app.GET("/list", curd.ApiList[types.HmiCollection]())
 
-	app.POST("/create", curd.ApiCreateHook[types.HmiCollection](curd.GenerateRandomId[types.HmiCollection](12), nil))
+    app.POST("/create", curd.ApiCreateHook[types.HmiCollection](curd.GenerateRandomId[types.HmiCollection](12), nil))
 
-	app.GET("/:id", curd.ParseParamStringId, curd.ApiGet[types.HmiCollection]())
+    app.GET("/:id", curd.ParseParamStringId, curd.ApiGet[types.HmiCollection]())
 
-	app.POST("/:id", curd.ParseParamStringId, curd.ApiUpdateHook[types.HmiCollection](nil, nil,
-		"id", "name", "desc", "pages", "devices"))
+    app.POST("/:id", curd.ParseParamStringId, curd.ApiUpdateHook[types.HmiCollection](nil, nil,
+        "id", "name", "desc", "pages", "devices"))
 
-	app.POST("/:id/delete", curd.ParseParamStringId, curd.ApiDelete[types.HmiCollection]())
+    app.POST("/:id/delete", curd.ParseParamStringId, curd.ApiDelete[types.HmiCollection]())
 
-	app.GET("/export", curd.ApiExport("hmi_collection", "hmi_collection"))
+    app.GET("/export", curd.ApiExport("hmi_collection", "hmi_collection"))
 
-	app.POST("/import", curd.ApiImport("hmi_collection"))
+    app.POST("/import", curd.ApiImport("hmi_collection"))
 
 }
