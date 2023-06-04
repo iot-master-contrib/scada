@@ -1023,6 +1023,9 @@ const docTemplatescada = `{
         "types.HmiComponent": {
             "type": "object",
             "properties": {
+                "collection": {
+                    "type": "string"
+                },
                 "created": {
                     "type": "string"
                 },

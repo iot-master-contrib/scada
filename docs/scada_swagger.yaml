@@ -92,6 +92,8 @@ definitions:
     type: object
   types.HmiComponent:
     properties:
+      collection:
+        type: string
       created:
         type: string
       icon:

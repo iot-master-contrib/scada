@@ -9,6 +9,7 @@ type HmiComponent struct {
 	Type       string        `json:"type,omitempty"`
 	Meta       any           `json:"meta,omitempty" xorm:"json"`
 	Properties []HmiProperty `json:"properties,omitempty"`
+	Collection string        `json:"collection,omitempty" xorm:"index"`
 	Version    int           `json:"version,omitempty" xorm:"version"`
 	Updated    time.Time     `json:"updated" xorm:"updated"`
 	Created    time.Time     `json:"created" xorm:"created"`

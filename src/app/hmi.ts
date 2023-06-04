@@ -20,6 +20,8 @@ export declare interface HmiComponent {
     registered?: boolean
 
     properties?: HmiProperty[]
+
+    collection?: string
 }
 
 export declare interface HmiCollection {
