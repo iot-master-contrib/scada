@@ -56,3 +56,4 @@ testem.log
 Thumbs.db
 /package-lock.json
 /*.db
+/scada
