@@ -1,4 +1,4 @@
-import {HmiCollection} from "../hmi";
+import {HmiCollection, HmiComponent} from "../hmi";
 
 import {BaseLine} from "./base/line";
 import {BaseCircle} from "./base/circle";
@@ -49,3 +49,4 @@ export var COMPONENTS: HmiCollection[] = [
     ...[industryComponents],
     ...[electricComponents]
 ]
+
