@@ -5,10 +5,16 @@ import { COMPONENTS } from "../../components/components";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { EditTableComponent } from 'src/app/base/edit-table/edit-table.component';
+import { RequestService } from '../../request.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
+
 @Component({
     selector: 'app-property',
     templateUrl: './property.component.html',
     styleUrls: ['./property.component.scss'],
+    providers: [
+        NzMessageService
+    ]
 })
 export class PropertyComponent {
     selected: any = [];
@@ -42,18 +48,11 @@ export class PropertyComponent {
             if (g.getSelectedCellCount() === 1) {
                 this.cell = g.getSelectedCells()[0]
 
-                // cell.getData()
-                //this.cmp = g.getSelectedCells()[0].getData()
                 if (this.cell.isNode()) {
                     const pos = this.cell.getPosition()
                     this.formPosition.patchValue(pos)
                     const size = this.cell.getSize()
                     this.formSize.patchValue(size);
-                    //const value = {...pos, ...size}
-                    //console.log("position", value)
-                    //setTimeout(()=>this.group.patchValue(value), 0)
-                    //this.group.patchValue(value)
-                    //this.zone.run(()=>this.formPosition.patchValue(value))
                 } else if (this.cell.isEdge()) {
                     const source = this.cell.getProp('source');
                     const target = this.cell.getProp('target');
@@ -82,7 +81,9 @@ export class PropertyComponent {
     constructor(
         private fb: FormBuilder,
         private modal: NzModalService,
-        private viewContainerRef: ViewContainerRef
+        private viewContainerRef: ViewContainerRef,
+        private rs: RequestService,
+        private msg: NzMessageService
     ) {
         this.formPosition = fb.group({
             x: [0, [Validators.required]],
@@ -128,7 +129,7 @@ export class PropertyComponent {
                     keyName: 'name'
                 }, {
                     title: '属性值',
-                    keyName: 'value'
+                    keyName: 'content'
                 }],
                 data: this.cell.data
             },
@@ -143,13 +144,11 @@ export class PropertyComponent {
                     type: 'primary',
                     onClick: () => {
                         const editTable = modal.getContentComponent();
-                        const data = editTable.aliases.value;
-                        const dataObj: any = {};
-                        for (let index = 0; index < data.length; index++) {
-                            const { name, value } = data[index];
-                            dataObj[name] = value;
-                        }
+                        const { dataObj, arr } = editTable.save();
                         this.cell.setData(dataObj, { overwrite: true });
+                        // this.rs.post('/app/scada/api/project/create', { Pages: arr }).subscribe((res) => {
+                        //     this.msg.success('保存成功');
+                        // });
                         modal.destroy();
                     }
                 },

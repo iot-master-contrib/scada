@@ -50,6 +50,7 @@ import { GraphSettingsComponent } from './graph-settings/graph-settings.componen
 import {NzSelectModule} from "ng-zorro-antd/select";
 import { CollapseComponent } from './collapse/collapse.component';
 import {PropertyInputComponent} from "./property-input/property-input.component";
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @NgModule({
     declarations: [
@@ -89,8 +90,11 @@ import {PropertyInputComponent} from "./property-input/property-input.component"
         NzTabsModule,
         NzCheckboxModule,
         BaseModule,
-        NzSelectModule
-    ]
+        NzSelectModule,   
+    ],
+    providers:[{
+        provide:NzMessageService
+    }]
 })
 export class EditorModule {
 }

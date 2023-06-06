@@ -36,7 +36,7 @@ export class EditTableComponent implements OnInit {
     for (const key in this.data) {
       const item = this.data[key];
       if (key != 'id') {
-        arr.push({ name: key, value: item });
+        arr.push({ name: key, content: item });
       }
     }
     this.writeValue(arr);
@@ -59,5 +59,23 @@ export class EditTableComponent implements OnInit {
   }
   propertyAdd() {
     this.aliases.insert(0, this.fb.group(this.row));
+  }
+  save() {
+    const data = this.aliases.value;
+    const arr = [];
+    const dataObj: any = {};
+    for (let index = 0; index < data.length; index++) {
+      const item = data[index];
+      const { name, content } = item;
+      if (name && content) {
+        dataObj[name] = content;
+        arr.push(item);
+      } else if (!name) {
+        this.msg.warning(`${content}的属性名不能为空`);
+      } else if (!content) {
+        this.msg.warning(`${content}的属性值不能为空`);
+      }
+    }
+    return { arr, dataObj };
   }
 }
