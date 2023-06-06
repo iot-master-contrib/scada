@@ -1,0 +1,7 @@
+ngx-codemirror{
+    display: block;
+    height: calc(100% - 50px);
+    ::ng-deep.CodeMirror {
+        height: 100%;
+    }
+}
