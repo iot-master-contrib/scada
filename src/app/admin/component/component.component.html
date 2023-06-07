@@ -17,23 +17,25 @@
     <thead>
         <tr>
             <th nzColumnKey="id" [nzSortFn]="true">ID</th>
-            <th nzColumnKey="device_id">设备ID</th>
-            <th nzColumnKey="title">标题</th>
-            <th nzColumnKey="message">消息</th>
+            <th nzColumnKey="name">名称</th>
             <th nzColumnKey="type">类型</th>
-            <th nzColumnKey="created" [nzSortFn]="true">日期</th>
+            <th nzColumnKey="created" [nzSortFn]="true">创建日期</th>
+            <th nzColumnKey="updated" [nzSortFn]="true">更新日期</th>
             <th>操作</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let data of basicTable.data; let i = index">
             <td>{{data.id}}</td>
-            <td>{{data.device || data.device_id}}</td>
-            <td>{{data.title}}</td>
-            <td>{{data.message}}</td>
+            <td>{{data.name}}</td>
             <td>{{data.type}}</td>
-            <td>{{data.created | date}}</td>
+            <td>{{data.created | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td>{{data.updated | date:'yyyy-MM-dd HH:mm:ss'}}</td>
             <td>
+                <a (click)="handleEdit(data.id)">
+                    <i nz-icon nzType="edit"></i>
+                </a>
+                <nz-divider nzType="vertical"></nz-divider>
                 <a (click)="delete(data.id)">
                     <i nz-icon nzType="delete"></i>
                 </a>

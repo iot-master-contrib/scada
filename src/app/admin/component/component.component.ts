@@ -27,7 +27,7 @@ export class ComponentComponent {
     private rs: RequestService,
     private modal: NzModalService,
     private msg: NzMessageService
-  ) {}
+  ) { }
 
   reload() {
     this.datum = [];
@@ -46,7 +46,7 @@ export class ComponentComponent {
   }
 
   delete(id: number, size?: number) {
-    this.rs.get(`alarm/${id}/delete`).subscribe(res => {
+    this.rs.get(`api/component/string1/delete`).subscribe(res => {
       if (!size) {
         this.msg.success("删除成功");
         this.datum = this.datum.filter(d => d.id !== id);
@@ -78,10 +78,13 @@ export class ComponentComponent {
       Message: $event,
     };
     this.query.skip = 0;
-    this.load();
+    // this.load();
   }
 
   add() {
     this.router.navigateByUrl(`admin/component/create`);
+  }
+  handleEdit(id: string) {
+    this.router.navigateByUrl(`admin/component/edit/` + id);
   }
 }

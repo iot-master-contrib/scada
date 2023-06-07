@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { RequestService } from 'src/app/request.service';
 
@@ -10,17 +10,31 @@ import { RequestService } from 'src/app/request.service';
 })
 export class ComponentEditComponent {
   content = '';
+  id: any = '';
   constructor(
     private rs: RequestService,
     private msg: NzMessageService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
+  ngOnInit(): void {
+    if (this.route.snapshot.paramMap.has('id')) {
+      this.id = this.route.snapshot.paramMap.get('id');
+      this.rs.get(`api/component/${this.id}`).subscribe((res) => {
+        const resData = res.data;
+        this.content = JSON.stringify(resData);
+      });
+    }
+  }
   goBack() {
     this.router.navigateByUrl(`admin/component`);
   }
   submit() {
-    console.log(typeof (this.content), this.content)
-    this.rs.post("api/component/create", this.content).subscribe((res) => {
+    let api = "api/component/create";
+    if (this.id) {
+      api = `api/component/${this.id}`
+    }
+    this.rs.post(api, this.content).subscribe((res) => {
       this.msg.success('保存成功');
       this.goBack();
     });
