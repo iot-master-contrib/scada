@@ -34,7 +34,7 @@ export class ComponentEditComponent {
     if (this.id) {
       api = `api/component/${this.id}`
     }
-    
+
     let data = JSON.parse(this.content)
     this.rs.post(api, data).subscribe((res) => {
       this.msg.success('保存成功');
