@@ -119,7 +119,7 @@ func componentRouter(app *gin.RouterGroup) {
 	app.POST("/:id", curd.ParseParamStringId, curd.ApiUpdateHook[types.HmiComponent](nil, nil,
 		"id", "name", "desc", "pages", "devices"))
 
-	app.POST("/:id/delete", curd.ParseParamStringId, curd.ApiDelete[types.HmiComponent]())
+	app.GET("/:id/delete", curd.ParseParamStringId, curd.ApiDelete[types.HmiComponent]())
 
 	app.GET("/export", curd.ApiExport("hmi_component", "hmi_component"))
 

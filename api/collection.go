@@ -119,7 +119,7 @@ func collectionRouter(app *gin.RouterGroup) {
     app.POST("/:id", curd.ParseParamStringId, curd.ApiUpdateHook[types.HmiCollection](nil, nil,
         "id", "name", "desc", "pages", "devices"))
 
-    app.POST("/:id/delete", curd.ParseParamStringId, curd.ApiDelete[types.HmiCollection]())
+    app.GET("/:id/delete", curd.ParseParamStringId, curd.ApiDelete[types.HmiCollection]())
 
     app.GET("/export", curd.ApiExport("hmi_collection", "hmi_collection"))
 

@@ -119,7 +119,7 @@ func projectRouter(app *gin.RouterGroup) {
     app.POST("/:id", curd.ParseParamStringId, curd.ApiUpdateHook[types.HmiProject](nil, nil,
         "id", "name", "desc", "pages", "devices"))
 
-    app.POST("/:id/delete", curd.ParseParamStringId, curd.ApiDelete[types.HmiProject]())
+    app.GET("/:id/delete", curd.ParseParamStringId, curd.ApiDelete[types.HmiProject]())
 
     app.GET("/export", curd.ApiExport("hmi_project", "hmi_project"))
 
