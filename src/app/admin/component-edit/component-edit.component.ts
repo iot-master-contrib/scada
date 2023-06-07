@@ -22,7 +22,7 @@ export class ComponentEditComponent {
       this.id = this.route.snapshot.paramMap.get('id');
       this.rs.get(`api/component/${this.id}`).subscribe((res) => {
         const resData = res.data;
-        this.content = JSON.stringify(resData);
+        this.content = JSON.stringify(resData, undefined, '\t');
       });
     }
   }
@@ -34,7 +34,9 @@ export class ComponentEditComponent {
     if (this.id) {
       api = `api/component/${this.id}`
     }
-    this.rs.post(api, this.content).subscribe((res) => {
+    
+    let data = JSON.parse(this.content)
+    this.rs.post(api, data).subscribe((res) => {
       this.msg.success('保存成功');
       this.goBack();
     });

@@ -1,14 +1,12 @@
 <nz-space>
-  <button nz-button *nzSpaceItem (click)="goBack()" style="margin-right: 10px">
-    取消
-  </button>
-  <button nz-button *nzSpaceItem nzType="primary" (click)="submit()">
-    <i nz-icon nzType="save" nzTheme="outline"></i>
-    保存
-  </button>
+    <button nz-button *nzSpaceItem (click)="goBack()" style="margin-right: 10px">
+        取消
+    </button>
+    <button nz-button *nzSpaceItem nzType="primary" (click)="submit()">
+        <i nz-icon nzType="save" nzTheme="outline"></i>
+        保存
+    </button>
 </nz-space>
-<ngx-codemirror [(ngModel)]="content" [options]="{
-    lineNumbers: true,
-    theme: 'material',
-    mode: 'markdown'
-  }"></ngx-codemirror>
+
+<ngx-codemirror [(ngModel)]="content"
+                [options]="{lineNumbers: true,theme: 'material', mode: 'javascript'}"></ngx-codemirror>
