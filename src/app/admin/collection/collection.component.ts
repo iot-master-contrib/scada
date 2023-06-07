@@ -59,7 +59,7 @@ export class CollectionComponent {
       }
     })
   }
-  cancel(){}
+  cancel() { }
   onQuery($event: NzTableQueryParams) {
     ParseTableQuery($event, this.query)
     this.load();

@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Graph, Node} from "@antv/x6";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Graph, Node } from "@antv/x6";
 
 @Component({
     selector: 'app-toolbar',
@@ -10,8 +10,8 @@ export class ToolbarComponent {
     @Input() graph!: Graph;
 
     pages: any = [
-        {label: "主页", value: "home"},
-        {label: "设置", value: "setting"},
+        { label: "主页", value: "home" },
+        { label: "设置", value: "setting" },
     ];
 
     handleSave() {
@@ -19,7 +19,8 @@ export class ToolbarComponent {
     }
 
     handleExport() {
-        this.graph.exportJPEG()
+        // this.graph.exportJPEG()
+        this.savefiles(this.graph.toJSON(), Date.now() + '')
     }
 
     handleUndo() {
@@ -209,5 +210,14 @@ export class ToolbarComponent {
 
     settingPage() {
 
+    }
+
+    savefiles(data: any, name: string) {
+        const urlObject = window.URL || window.webkitURL || window;
+        const export_blob = new Blob([JSON.stringify(data)]);
+        const save_link = document.createElement("a");
+        save_link.href = urlObject.createObjectURL(export_blob);
+        save_link.download = name;
+        save_link.click();
     }
 }
