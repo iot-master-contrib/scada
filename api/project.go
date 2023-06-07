@@ -1,9 +1,9 @@
 package api
 
 import (
-    "github.com/gin-gonic/gin"
-    "github.com/iot-master-contrib/scada/types"
-    "github.com/zgwit/iot-master/v3/pkg/curd"
+	"github.com/gin-gonic/gin"
+	"github.com/iot-master-contrib/scada/types"
+	"github.com/zgwit/iot-master/v3/pkg/curd"
 )
 
 // @Summary 查询工程数量
@@ -106,23 +106,23 @@ func noopHmiProjectImport() {}
 
 func projectRouter(app *gin.RouterGroup) {
 
-    app.POST("/count", curd.ApiCount[types.HmiProject]())
+	app.POST("/count", curd.ApiCount[types.HmiProject]())
 
-    app.POST("/search", curd.ApiSearch[types.HmiProject]())
+	app.POST("/search", curd.ApiSearch[types.HmiProject]("id", "name", "desc"))
 
-    app.GET("/list", curd.ApiList[types.HmiProject]())
+	app.GET("/list", curd.ApiList[types.HmiProject]("id", "name", "desc"))
 
-    app.POST("/create", curd.ApiCreateHook[types.HmiProject](curd.GenerateRandomId[types.HmiProject](12), nil))
+	app.POST("/create", curd.ApiCreateHook[types.HmiProject](curd.GenerateRandomId[types.HmiProject](12), nil))
 
-    app.GET("/:id", curd.ParseParamStringId, curd.ApiGet[types.HmiProject]())
+	app.GET("/:id", curd.ParseParamStringId, curd.ApiGet[types.HmiProject]())
 
-    app.POST("/:id", curd.ParseParamStringId, curd.ApiUpdateHook[types.HmiProject](nil, nil,
-        "id", "name", "desc", "pages", "devices"))
+	app.POST("/:id", curd.ParseParamStringId, curd.ApiUpdateHook[types.HmiProject](nil, nil,
+		"id", "name", "desc", "pages"))
 
-    app.GET("/:id/delete", curd.ParseParamStringId, curd.ApiDelete[types.HmiProject]())
+	app.GET("/:id/delete", curd.ParseParamStringId, curd.ApiDelete[types.HmiProject]())
 
-    app.GET("/export", curd.ApiExport("hmi_project", "hmi_project"))
+	app.GET("/export", curd.ApiExport("hmi_project", "hmi_project"))
 
-    app.POST("/import", curd.ApiImport("hmi_project"))
+	app.POST("/import", curd.ApiImport("hmi_project"))
 
 }

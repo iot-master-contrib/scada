@@ -108,16 +108,16 @@ func componentRouter(app *gin.RouterGroup) {
 
 	app.POST("/count", curd.ApiCount[types.HmiComponent]())
 
-	app.POST("/search", curd.ApiSearch[types.HmiComponent]())
+	app.POST("/search", curd.ApiSearch[types.HmiComponent]("id", "name", "icon", "type", "collection"))
 
-	app.GET("/list", curd.ApiList[types.HmiComponent]())
+	app.GET("/list", curd.ApiList[types.HmiComponent]("id", "name", "icon", "type", "collection"))
 
 	app.POST("/create", curd.ApiCreateHook[types.HmiComponent](curd.GenerateRandomId[types.HmiComponent](12), nil))
 
 	app.GET("/:id", curd.ParseParamStringId, curd.ApiGet[types.HmiComponent]())
 
 	app.POST("/:id", curd.ParseParamStringId, curd.ApiUpdateHook[types.HmiComponent](nil, nil,
-		"id", "name", "desc", "pages", "devices"))
+		"id", "name", "icon", "type", "meta", "properties", "collection"))
 
 	app.GET("/:id/delete", curd.ParseParamStringId, curd.ApiDelete[types.HmiComponent]())
 
