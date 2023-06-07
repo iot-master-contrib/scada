@@ -46,7 +46,7 @@ export class ComponentComponent {
   }
 
   delete(id: number, size?: number) {
-    this.rs.get(`api/component/string1/delete`).subscribe(res => {
+    this.rs.get(`api/component/${id}/delete`).subscribe(res => {
       if (!size) {
         this.msg.success("删除成功");
         this.datum = this.datum.filter(d => d.id !== id);
@@ -59,7 +59,7 @@ export class ComponentComponent {
       }
     })
   }
-
+  cancel() { }
   onQuery($event: NzTableQueryParams) {
     ParseTableQuery($event, this.query)
     this.load();

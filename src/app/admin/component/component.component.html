@@ -36,7 +36,8 @@
                     <i nz-icon nzType="edit"></i>
                 </a>
                 <nz-divider nzType="vertical"></nz-divider>
-                <a (click)="delete(data.id)">
+                <a nz-popconfirm nzPopconfirmTitle="确定删除?" (nzOnConfirm)="delete(data.id)" (nzOnCancel)="cancel()"
+                    nzPopconfirmPlacement="topLeft">
                     <i nz-icon nzType="delete"></i>
                 </a>
             </td>
