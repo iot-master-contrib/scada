@@ -17,12 +17,15 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     ]
 })
 export class PropertyComponent {
+
     selected: any = [];
+
     textProperties: HmiProperty[] = [
         { name: "文本", path: "attrs/text/text", type: "text" },
         { name: "文本颜色", path: "attrs/text/fill", type: "color" },
         { name: "字号", path: "attrs/text/fontSize", type: "stroke" },
     ]
+
     @Input() set graph(g: Graph) {
         g.on("cell:change:size", (event) => {
             if (event.cell == this.cell)
@@ -120,6 +123,7 @@ export class PropertyComponent {
     onLinePositionChange($event: Event) {
         this.cell.setProp(this.formLinePosition.value);
     }
+
     handleEditData() {
         const modal: NzModalRef = this.modal.create({
             nzContent: EditTableComponent,
@@ -155,8 +159,5 @@ export class PropertyComponent {
             ]
         });
     }
-    colorCheckChange(selected: boolean, p: HmiProperty) {
-        const color = selected ? '#333' : 'none';
-        this.cell.setPropByPath(p.path, color)
-    }
+
 }
