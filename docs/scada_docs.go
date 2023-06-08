@@ -1035,7 +1035,10 @@ const docTemplatescada = `{
                 "id": {
                     "type": "string"
                 },
-                "meta": {},
+                "meta": {
+                    "type": "object",
+                    "additionalProperties": {}
+                },
                 "name": {
                     "type": "string"
                 },
@@ -1059,9 +1062,7 @@ const docTemplatescada = `{
         "types.HmiPage": {
             "type": "object",
             "properties": {
-                "content": {
-                    "type": "string"
-                },
+                "content": {},
                 "name": {
                     "type": "string"
                 }
@@ -1075,6 +1076,9 @@ const docTemplatescada = `{
                 },
                 "desc": {
                     "type": "string"
+                },
+                "height": {
+                    "type": "integer"
                 },
                 "id": {
                     "type": "string"
@@ -1092,6 +1096,9 @@ const docTemplatescada = `{
                     "type": "string"
                 },
                 "version": {
+                    "type": "integer"
+                },
+                "width": {
                     "type": "integer"
                 }
             }

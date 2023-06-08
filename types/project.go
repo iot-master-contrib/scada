@@ -8,7 +8,9 @@ type HmiProject struct {
 	Id      string    `json:"id,omitempty"  xorm:"pk"`
 	Name    string    `json:"name,omitempty"`
 	Desc    string    `json:"desc,omitempty"`
-	Pages   []HmiPage `json:"pages,omitempty"`
+	Width   int       `json:"width,omitempty"`
+	Height  int       `json:"height,omitempty"`
+	Pages   []HmiPage `json:"pages,omitempty" xorm:"json"`
 	Version int       `json:"version,omitempty" xorm:"version"`
 	Updated time.Time `json:"updated,omitempty" xorm:"updated"`
 	Created time.Time `json:"created,omitempty" xorm:"created"`
@@ -16,5 +18,5 @@ type HmiProject struct {
 
 type HmiPage struct {
 	Name    string `json:"name,omitempty"`
-	Content string `json:"content,omitempty"`
+	Content any    `json:"content,omitempty"`
 }

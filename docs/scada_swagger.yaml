@@ -100,7 +100,9 @@ definitions:
         type: string
       id:
         type: string
-      meta: {}
+      meta:
+        additionalProperties: {}
+        type: object
       name:
         type: string
       properties:
@@ -116,8 +118,7 @@ definitions:
     type: object
   types.HmiPage:
     properties:
-      content:
-        type: string
+      content: {}
       name:
         type: string
     type: object
@@ -127,6 +128,8 @@ definitions:
         type: string
       desc:
         type: string
+      height:
+        type: integer
       id:
         type: string
       name:
@@ -138,6 +141,8 @@ definitions:
       updated:
         type: string
       version:
+        type: integer
+      width:
         type: integer
     type: object
   types.HmiProperty:
