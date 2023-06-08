@@ -8,7 +8,7 @@
     <input nz-input nzSize="small" *ngSwitchCase="'boolean'" type="checkbox" [value]="cell.getPropByPath(property.path)"
            (change)="inputChange($event)">
     <input nz-input nzSize="small" *ngSwitchCase="'color'"
-           [value]="cell.getPropByPath(property.path)"
+           [value]="cell.getPropByPath(property.path)||'none'"
            [style.color]="cell.getPropByPath(property.path)"
            [colorPicker]="cell.getPropByPath(property.path)"
            (colorPickerChange)="change($event)"

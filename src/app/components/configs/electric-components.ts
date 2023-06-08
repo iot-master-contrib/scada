@@ -5,7 +5,7 @@ export const switchCenter = {
 export const switchOpen = `rotate(-30 ${switchCenter.x} ${switchCenter.y})`
 export const switchClose = `rotate(-12 ${switchCenter.x} ${switchCenter.y})`;
 const isOpen = true;
-const imgArr = ['capacitor','arrow-up-bold'];
+const imgArr = ['capacitor', 'arrow-up-bold'];
 for (let index = 1; index < 21; index++) {
     imgArr.push(`electric${index}`);
 }

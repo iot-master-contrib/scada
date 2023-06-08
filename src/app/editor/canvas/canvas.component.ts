@@ -12,11 +12,7 @@ import { register } from "@antv/x6-angular-shape";
 import { HmiComponent, HmiDraw } from "../../hmi";
 import { ports } from 'src/app/components/configs/ports';
 import { switchOpen, switchClose, switchCenter } from 'src/app/components/configs/electric-components';
-
-const graphBgc = {
-    color: '#fff',
-    gridType: 'doubleMesh'
-}
+import { graphBgc } from 'src/app/components/configs/graph';
 
 @Component({
     selector: 'app-canvas',
