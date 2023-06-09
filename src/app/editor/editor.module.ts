@@ -37,7 +37,6 @@ import { NzButtonModule } from "ng-zorro-antd/button";
 import { ColorPickerModule } from "ngx-color-picker";
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { BrowserModule } from "@angular/platform-browser";
 import { NzFormModule } from "ng-zorro-antd/form";
 import { NzInputModule } from "ng-zorro-antd/input";
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -46,11 +45,14 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { SetDataComponent } from './set-data/set-data.component';
 import { BaseModule } from '../base/base.module';
-import { GraphSettingsComponent } from './graph-settings/graph-settings.component';
 import {NzSelectModule} from "ng-zorro-antd/select";
 import { CollapseComponent } from './collapse/collapse.component';
 import {PropertyInputComponent} from "./property-input/property-input.component";
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { PagesComponent } from './pages/pages.component';
+import { PageSettingComponent } from './page-setting/page-setting.component';
+import { ProjectSettingComponent } from './project-setting/project-setting.component';
+import { BackgroundComponent } from './background/background.component';
 
 @NgModule({
     declarations: [
@@ -62,8 +64,11 @@ import { NzMessageService } from 'ng-zorro-antd/message';
         ToolbarComponent,
         CollectionComponent,
         SetDataComponent,
-        GraphSettingsComponent,
         CollapseComponent,
+        PagesComponent,
+        PageSettingComponent,
+        ProjectSettingComponent,
+        BackgroundComponent,
     ],
     imports: [
         CommonModule,
@@ -90,7 +95,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
         NzTabsModule,
         NzCheckboxModule,
         BaseModule,
-        NzSelectModule,   
+        NzSelectModule,
     ],
     providers:[{
         provide:NzMessageService

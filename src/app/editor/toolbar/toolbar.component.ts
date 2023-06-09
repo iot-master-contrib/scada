@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Graph, Node } from "@antv/x6";
+import {HmiProject} from "../../hmi";
 
 @Component({
     selector: 'app-toolbar',
@@ -7,6 +8,8 @@ import { Graph, Node } from "@antv/x6";
     styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent {
+    @Input() project!: HmiProject;
+
     @Input() graph!: Graph;
 
     pages: any = [
@@ -208,7 +211,9 @@ export class ToolbarComponent {
         this.showGrid = !this.showGrid
     }
 
-    settingPage() {
+    settingProject() {
+
+        //TODO 弹窗编辑
 
     }
 

@@ -1,7 +1,7 @@
-<app-toolbar [graph]="canvas.graph"></app-toolbar>
+<app-toolbar [graph]="canvas.graph" [project]="project"></app-toolbar>
 <div class="body">
     <app-library (onDrag)="onDrag($event)"></app-library>
-    <app-canvas #canvas></app-canvas>
-    <app-property [graph]="canvas.graph"></app-property>
+    <app-canvas #canvas [width]="project.width" [height]="project.height"></app-canvas>
+    <app-property [graph]="canvas.graph" [project]="project"></app-property>
 </div>
 

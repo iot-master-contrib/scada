@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Title} from "@angular/platform-browser";
-import {HmiComponent, HmiDraw} from "../hmi";
+import {HmiComponent, HmiDraw, HmiProject} from "../hmi";
 import {CanvasComponent} from "./canvas/canvas.component";
 import {RequestService} from "../request.service";
 import {NzMessageService} from "ng-zorro-antd/message";
@@ -12,12 +12,19 @@ import {ActivatedRoute, Router} from "@angular/router";
     styleUrls: ['./editor.component.scss']
 })
 export class EditorComponent implements OnInit {
+
     id: any = ''
-    content: any = {
+
+    project: HmiProject = {
+        id: '',
+        name: '',
+        desc: '',
+        width: 1920, //TODO 自动获取屏幕尺寸
+        height: 1080,
         pages: [
             {
                 name: "首页",
-                content: []
+                content: {}
             }
         ]
     }
@@ -36,7 +43,7 @@ export class EditorComponent implements OnInit {
         if (this.route.snapshot.paramMap.has('id')) {
             this.id = this.route.snapshot.paramMap.get('id');
             this.rs.get(`api/project/${this.id}`).subscribe((res) => {
-                this.content = res.data;
+                this.project = res.data;
                 //this.content = JSON.stringify(resData, undefined, '\t');
             });
         }

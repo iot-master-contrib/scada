@@ -1,5 +1,9 @@
 <app-collapse title="页面">
-    <app-graph-settings></app-graph-settings>
+    <app-pages [graph]="graph" [project]="project"></app-pages>
+</app-collapse>
+
+<app-collapse title="页面">
+    <app-background [graph]="graph"></app-background>
 </app-collapse>
 
 <app-collapse title="属性" *ngIf="selected.length && cmp">

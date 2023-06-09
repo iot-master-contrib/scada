@@ -1,5 +1,5 @@
 import { Component, Input, ViewContainerRef } from '@angular/core';
-import { HmiComponent, HmiProperty } from "../../hmi";
+import {HmiComponent, HmiProject, HmiProperty} from "../../hmi";
 import { Cell, Graph } from "@antv/x6";
 import { COMPONENTS } from "../../components/components";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -17,6 +17,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     ]
 })
 export class PropertyComponent {
+    @Input() project!: HmiProject;
 
     selected: any = [];
 
@@ -26,7 +27,11 @@ export class PropertyComponent {
         { name: "字号", path: "attrs/text/fontSize", type: "stroke" },
     ]
 
+    private g!: Graph;
+    get graph() { return this.g;}
     @Input() set graph(g: Graph) {
+        this.g = g;
+
         g.on("cell:change:size", (event) => {
             if (event.cell == this.cell)
                 this.formSize.patchValue(event.current as any)

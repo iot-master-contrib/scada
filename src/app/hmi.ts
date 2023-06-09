@@ -94,3 +94,18 @@ export declare interface HmiProperty {
     min?: number
     step?: number
 }
+
+
+export declare interface HmiProject {
+    id: string
+    name: string
+    desc: string
+    width: number
+    height: number
+    pages: HmiPage[]
+}
+
+export declare interface HmiPage {
+    name: string
+    content: any
+}

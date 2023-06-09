@@ -1,4 +1,4 @@
-import {Component, ElementRef, Injector} from '@angular/core';
+import {Component, ElementRef, Injector, Input} from '@angular/core';
 
 import {Edge, FunctionExt, Graph, Node, Shape} from '@antv/x6';
 
@@ -27,6 +27,13 @@ import {graphBgc} from 'src/app/components/configs/graph';
 
 export class CanvasComponent {
 
+    @Input() set width(w: number) {
+        this.graph.resize(w)
+    }
+
+    @Input() set height(h: number) {
+        this.graph.resize(undefined, h)
+    }
 
     public graph: Graph;
 
@@ -133,6 +140,7 @@ export class CanvasComponent {
         this.dnd = new Dnd({target: this.graph});
 
         //this.graph.fromJSON(data)
+        this.graph.toJSON()
 
         this.graph.bindKey('ctrl+s', (e) => {
             this.graph.exportPNG();
