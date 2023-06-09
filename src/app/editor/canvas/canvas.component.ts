@@ -54,7 +54,7 @@ export class CanvasComponent {
             },
             grid: {
                 size: 10,      // 网格大小 10px
-                visible: true, // 渲染网格背景
+                visible: JSON.parse(localStorage.getItem("show_grid") || 'true'), // 渲染网格背景
                 type: graphBgc.gridType,
                 args: [
                     {

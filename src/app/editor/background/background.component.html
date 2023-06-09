@@ -5,4 +5,22 @@
             <app-color-input [color]="bgcOption.color" (colorChange)="colorChange($event)"></app-color-input>
         </td>
     </tr>
+    <tr>
+        <td>网格类型</td>
+        <td>
+            <nz-select [(ngModel)]="bgcOption.gridType" nzSize="small" style="width:100% ;"
+                (ngModelChange)="drawGrid()">
+                <nz-option nzValue="dot" nzLabel="dot"></nz-option>
+                <nz-option nzValue="fixedDot" nzLabel="fixedDot"></nz-option>
+                <nz-option nzValue="mesh" nzLabel="mesh"></nz-option>
+                <nz-option nzValue="doubleMesh" nzLabel="doubleMesh"></nz-option>
+            </nz-select>
+        </td>
+    </tr>
+    <tr>
+        <td>背景图片</td>
+        <td>
+            <input type="text" nzSize="small" nz-input placeholder="无" readonly (nzBlur)="handleSetImage()" />
+        </td>
+    </tr>
 </table>

@@ -13,8 +13,18 @@ export class BackgroundComponent {
     this.bgcOption = Object.assign({}, graphBgc);
   }
   colorChange(color: number) {
-    this.bgcOption = Object.assign(this.bgcOption, { color })
+    this.bgcOption = Object.assign(this.bgcOption, { color });
     this.graph.drawBackground(this.bgcOption);
+    this.setLocalStorage();
+  }
+  drawGrid() {
+    this.graph.drawGrid({ type: this.bgcOption.gridType });
+    this.setLocalStorage();
+  }
+  setLocalStorage() {
     localStorage.setItem("bgc-option", JSON.stringify(this.bgcOption))
+  }
+  handleSetImage(){
+    console.log(222222222)
   }
 }
