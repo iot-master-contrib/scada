@@ -1,6 +1,6 @@
 <table>
-    <tr *ngFor="let page of project.pages; let i=index;" (click)="open(index)">
-        <td>
+    <tr *ngFor="let page of project.pages; let i=index;">
+        <td (click)="open(i)">
             {{page.name}}
         </td>
         <td>

@@ -12,9 +12,8 @@ import { ActivatedRoute, Router } from "@angular/router";
     styleUrls: ['./editor.component.scss']
 })
 export class EditorComponent implements OnInit {
-
-
     id: any = ''
+
     initalproject: HmiProject = {
         id: '',
         name: '组态编辑器',
@@ -30,6 +29,7 @@ export class EditorComponent implements OnInit {
     }
 
     project!: HmiProject
+    index = 0;
 
     @ViewChild("canvas") canvas!: CanvasComponent
 
@@ -64,9 +64,28 @@ export class EditorComponent implements OnInit {
     onDrag($event: HmiDraw) {
         this.canvas.Draw($event)
     }
+
     saveProjectSettings(project: HmiProject) {
         this.project = project;
         localStorage.setItem('project_setting', JSON.stringify(project));
     }
-    handleSave() { }
+
+
+    handleSave() {
+        this.project.pages[this.index].content = this.canvas.graph.toJSON()
+
+        let url = this.id ? `api/project/${this.id}` : `api/project/create`
+
+        this.rs.post(url, this.project).subscribe((res) => {
+            //this.project = res.data;
+            //this.content = JSON.stringify(resData, undefined, '\t');
+            this.router.navigateByUrl("/admin/project")
+        });
+    }
+
+    handlePageChange($event: number) {
+        this.project.pages[this.index].content = this.canvas.graph.toJSON()
+        this.index = $event
+        this.canvas.graph.fromJSON(this.project.pages[this.index].content)
+    }
 }

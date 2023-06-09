@@ -19,7 +19,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class PropertyComponent {
     @Input() project!: HmiProject;
 
-    @Output() onSaveProjectSettings = new EventEmitter<number>();
+    @Output() onPageChange = new EventEmitter<number>();
 
     selected: any = [];
 

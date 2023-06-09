@@ -4,5 +4,5 @@
     <div class="content">
         <app-canvas #canvas [style.width]="project.width+'px'" [style.height]="project.height+'px'"></app-canvas>
     </div>
-    <app-property [graph]="canvas.graph" [project]="project"></app-property>
+    <app-property [graph]="canvas.graph" [project]="project" (onPageChange)="handlePageChange($event)"></app-property>
 </div>
