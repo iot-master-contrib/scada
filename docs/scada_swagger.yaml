@@ -92,10 +92,18 @@ definitions:
     type: object
   types.HmiComponent:
     properties:
+      bindings:
+        items:
+          $ref: '#/definitions/types.HmiComponentBinding'
+        type: array
       collection:
         type: string
       created:
         type: string
+      events:
+        items:
+          $ref: '#/definitions/types.HmiComponentEvent'
+        type: array
       icon:
         type: string
       id:
@@ -115,6 +123,22 @@ definitions:
         type: string
       version:
         type: integer
+    type: object
+  types.HmiComponentBinding:
+    properties:
+      label:
+        type: string
+      name:
+        type: string
+      type:
+        type: string
+    type: object
+  types.HmiComponentEvent:
+    properties:
+      label:
+        type: string
+      name:
+        type: string
     type: object
   types.HmiPage:
     properties:

@@ -1,12 +1,12 @@
-<app-collapse title="页面">
+<app-collapse title="页面管理">
     <app-pages [graph]="graph" [project]="project"></app-pages>
 </app-collapse>
 
-<app-collapse title="页面">
+<app-collapse title="页面背景">
     <app-background [graph]="graph"></app-background>
 </app-collapse>
 
-<app-collapse title="属性" *ngIf="selected.length && cmp">
+<app-collapse title="控件属性" *ngIf="selected.length && cmp">
     <form [formGroup]="formPosition" (change)="onPositionChange($event)" *ngIf="cell.isNode();">
         <table>
             <tr>
@@ -61,7 +61,7 @@
 
 </app-collapse>
 
-<app-collapse title="文本" *ngIf="cmp && cell.isNode() && cell.shape!='text-block'">
+<app-collapse title="文本属性" *ngIf="cmp && cell.isNode() && cell.shape!='text-block'">
     <table>
         <tr *ngFor="let p of textProperties">
             <td>

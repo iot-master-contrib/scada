@@ -21,8 +21,24 @@ export declare interface HmiComponent {
 
     properties?: HmiProperty[]
 
+    bindings?: HmiComponentBinding[]
+
+    events?: HmiComponentEvent[]
+
     collection?: string
 }
+
+export declare interface HmiComponentBinding {
+    name: string
+    label: string
+    type: string
+}
+
+export declare interface HmiComponentEvent {
+    name: string
+    label: string
+}
+
 
 export declare interface HmiImageComponent {
     id: string

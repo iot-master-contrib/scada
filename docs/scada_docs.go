@@ -1023,11 +1023,23 @@ const docTemplatescada = `{
         "types.HmiComponent": {
             "type": "object",
             "properties": {
+                "bindings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/types.HmiComponentBinding"
+                    }
+                },
                 "collection": {
                     "type": "string"
                 },
                 "created": {
                     "type": "string"
+                },
+                "events": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/types.HmiComponentEvent"
+                    }
                 },
                 "icon": {
                     "type": "string"
@@ -1056,6 +1068,31 @@ const docTemplatescada = `{
                 },
                 "version": {
                     "type": "integer"
+                }
+            }
+        },
+        "types.HmiComponentBinding": {
+            "type": "object",
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "types.HmiComponentEvent": {
+            "type": "object",
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
                 }
             }
         },
