@@ -185,7 +185,6 @@ export class ToolbarComponent {
                 }
             }
         })
-        console.log("parent", parent)
         //this.graph.getSelectedCells().forEach(cell => cell.setParent(parent))
         this.graph.getSelectedCells().forEach(cell => parent.addChild(cell))
     }
