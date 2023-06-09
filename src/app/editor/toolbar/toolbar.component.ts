@@ -1,18 +1,28 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewContainerRef } from '@angular/core';
 import { Graph, Node } from "@antv/x6";
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { HmiProject } from "../../hmi";
-
+import { ProjectSettingComponent } from '../project-setting/project-setting.component';
 @Component({
     selector: 'app-toolbar',
     templateUrl: './toolbar.component.html',
-    styleUrls: ['./toolbar.component.scss']
+    styleUrls: ['./toolbar.component.scss'],
+    providers: [NzMessageService, NzModalService]
 })
 export class ToolbarComponent {
     @Input() project!: HmiProject;
     // 1200X340
     @Input() graph!: Graph;
-
+    @Output() onSaveProjectSettings = new EventEmitter<HmiProject>()
+    @Output() onSave = new EventEmitter()
+    constructor(
+        private modal: NzModalService,
+        private msg: NzMessageService,
+        private viewContainerRef: ViewContainerRef,
+    ) { }
     handleSave() {
+        this.onSave.emit();
         console.log("save", this.graph.toJSON())
     }
 
@@ -215,8 +225,30 @@ export class ToolbarComponent {
     }
 
     settingProject() {
+        const modal: NzModalRef = this.modal.create({
+            nzTitle: '编辑项目信息',
+            nzContent: ProjectSettingComponent,
+            nzComponentParams: {
+                project: this.project
+            },
+            nzViewContainerRef: this.viewContainerRef,
+            nzFooter: [
+                {
+                    label: '取消',
+                    onClick: () => modal.destroy()
+                },
+                {
+                    label: '保存',
+                    type: 'primary',
+                    onClick: componentInstance => {
+                        const value = componentInstance!.group.value
+                        this.onSaveProjectSettings.emit(value);
+                        modal.destroy()
+                    }
+                },
+            ]
+        });
 
-        //TODO 弹窗编辑
 
     }
 

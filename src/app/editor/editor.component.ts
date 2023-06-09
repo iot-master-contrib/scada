@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Title} from "@angular/platform-browser";
-import {HmiComponent, HmiDraw, HmiProject} from "../hmi";
-import {CanvasComponent} from "./canvas/canvas.component";
-import {RequestService} from "../request.service";
-import {NzMessageService} from "ng-zorro-antd/message";
-import {ActivatedRoute, Router} from "@angular/router";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Title } from "@angular/platform-browser";
+import { HmiComponent, HmiDraw, HmiProject } from "../hmi";
+import { CanvasComponent } from "./canvas/canvas.component";
+import { RequestService } from "../request.service";
+import { NzMessageService } from "ng-zorro-antd/message";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
     selector: 'app-editor',
@@ -14,13 +14,12 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class EditorComponent implements OnInit {
 
     id: any = ''
-
-    project: HmiProject = {
+    initalproject: HmiProject = {
         id: '',
-        name: '',
+        name: '组态编辑器',
         desc: '',
-        width: 1920, //TODO 自动获取屏幕尺寸
-        height: 1080,
+        width: window.screen.width, //自动获取屏幕尺寸
+        height: window.screen.height,
         pages: [
             {
                 name: "首页",
@@ -28,15 +27,22 @@ export class EditorComponent implements OnInit {
             }
         ]
     }
+    project!: HmiProject
 
     @ViewChild("canvas") canvas!: CanvasComponent
 
-    constructor(private title: Title,
-                private rs: RequestService,
-                private msg: NzMessageService,
-                private router: Router,
-                private route: ActivatedRoute,) {
-        title.setTitle("组态编辑器")
+    constructor(
+        private title: Title,
+        private rs: RequestService,
+        private msg: NzMessageService,
+        private router: Router,
+        private route: ActivatedRoute,) {
+        this.project = Object.assign(
+            this.initalproject,
+            JSON.parse(localStorage.getItem('project_setting') || '{}'),
+        );
+        console.log(this.project)
+        title.setTitle(this.project.name)
     }
 
     ngOnInit(): void {
@@ -52,4 +58,9 @@ export class EditorComponent implements OnInit {
     onDrag($event: HmiDraw) {
         this.canvas.Draw($event)
     }
+    saveProjectSettings(project: HmiProject) {
+        this.project = project;
+        localStorage.setItem('project_setting', JSON.stringify(project));
+    }
+    handleSave() { }
 }

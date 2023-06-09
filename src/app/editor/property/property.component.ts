@@ -1,5 +1,5 @@
-import { Component, Input, ViewContainerRef } from '@angular/core';
-import {HmiComponent, HmiProject, HmiProperty} from "../../hmi";
+import { Component, EventEmitter, Input, Output, ViewContainerRef } from '@angular/core';
+import { HmiComponent, HmiProject, HmiProperty } from "../../hmi";
 import { Cell, Graph } from "@antv/x6";
 import { COMPONENTS } from "../../components/components";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -18,7 +18,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class PropertyComponent {
     @Input() project!: HmiProject;
-
+    @Output() onSaveProjectSettings = new EventEmitter<HmiProject>();
     selected: any = [];
 
     textProperties: HmiProperty[] = [
@@ -28,7 +28,7 @@ export class PropertyComponent {
     ]
 
     private g!: Graph;
-    get graph() { return this.g;}
+    get graph() { return this.g; }
     @Input() set graph(g: Graph) {
         this.g = g;
 

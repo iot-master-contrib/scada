@@ -1,1 +1,11 @@
-<p>输入名称</p>
+<form nz-form [formGroup]="group">
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="nameErrorTpl">
+            <input nz-input formControlName="name" />
+            <ng-template #nameErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">请输入名称!</ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+</form>

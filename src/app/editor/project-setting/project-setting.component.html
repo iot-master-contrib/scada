@@ -1,1 +1,29 @@
-<p>TODO: 名称，说明</p>
+<form nz-form [formGroup]="group">
+    <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzRequired nzFor="name">名称</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzErrorTip="名称不可为空!">
+            <input nz-input name="name" formControlName="name" />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzFor="width">宽度</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+            <input nz-input name="width" formControlName="width" />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzFor="height">高度</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+            <input nz-input name="height" formControlName="height" />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzFor="desc">说明</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+            <input nz-input name="desc" formControlName="desc" />
+        </nz-form-control>
+    </nz-form-item>
+</form>

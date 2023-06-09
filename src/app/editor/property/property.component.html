@@ -1,5 +1,6 @@
 <app-collapse title="页面管理">
-    <app-pages [graph]="graph" [project]="project"></app-pages>
+    <app-pages [graph]="graph" [project]="project" (onSaveProjectSettings)="onSaveProjectSettings.emit($event)">
+    </app-pages>
 </app-collapse>
 
 <app-collapse title="页面背景">

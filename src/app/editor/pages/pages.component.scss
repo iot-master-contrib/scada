@@ -1,0 +1,12 @@
+table{
+    width: 100%;
+    tr{
+        td{
+            width: 50%;
+            padding: 5px;
+        }
+        td:last-child{
+            text-align: right;
+        }
+    }
+}

@@ -1,6 +1,19 @@
-<div>
-    ngfor project pages
-
-    TODO 页面列表，名称，重命名，删除（确认）
-</div>
-<p>添加页面</p>
+<button (click)="handleEdit()">
+    <i type="button" nz-icon nzType="plus"></i>
+    添加页面
+</button>
+<table>
+    <tr *ngFor="let trData of project.pages; let i=index;">
+        <td>
+            {{trData.name}}
+        </td>
+        <td>
+            <nz-space>
+                <span nz-icon *nzSpaceItem nzType="edit" nzTheme="outline" title="重命名" style="cursor:pointer;"
+                    (click)="handleEdit(i)"></span>
+                <span nz-icon *nzSpaceItem nzType="delete" nzTheme="outline" title="删除" style="cursor:pointer;"
+                    (click)="handleDel(i)"></span>
+            </nz-space>
+        </td>
+    </tr>
+</table>
