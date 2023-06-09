@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Graph, Node } from "@antv/x6";
-import {HmiProject} from "../../hmi";
+import { HmiProject } from "../../hmi";
 
 @Component({
     selector: 'app-toolbar',
@@ -9,13 +9,8 @@ import {HmiProject} from "../../hmi";
 })
 export class ToolbarComponent {
     @Input() project!: HmiProject;
-
+    // 1200X340
     @Input() graph!: Graph;
-
-    pages: any = [
-        { label: "主页", value: "home" },
-        { label: "设置", value: "setting" },
-    ];
 
     handleSave() {
         console.log("save", this.graph.toJSON())
@@ -147,16 +142,25 @@ export class ToolbarComponent {
     }
 
     handleMoveTop() {
-        //this.graph.getSelectedCells().forEach(cell=>cell.)
+        this.graph.getSelectedCells().forEach((cell) => {
+            cell.toFront();
+        })
     }
 
     handleMoveUp() {
+        const cell = this.graph.getSelectedCells()[0];
+        cell.setZIndex(Number(cell.getZIndex() || 0) + 1);
     }
 
     handleMoveDown() {
+        const cell = this.graph.getSelectedCells()[0];
+        cell.setZIndex(Number(cell.getZIndex() || 0) - 1);
     }
 
     handleMoveBottom() {
+        this.graph.getSelectedCells().forEach((cell) => {
+            cell.toBack();
+        })
     }
 
     handleGroup() {

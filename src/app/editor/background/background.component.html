@@ -1,1 +1,8 @@
-<p>background works!</p>
+<table *ngIf="bgcOption">
+    <tr>
+        <td>背景颜色</td>
+        <td>
+            <app-color-input [color]="bgcOption.color" (colorChange)="colorChange($event)"></app-color-input>
+        </td>
+    </tr>
+</table>

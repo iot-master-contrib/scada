@@ -59,10 +59,10 @@
 <a (click)="handleMoveTop()" nz-button>
     <i nz-icon nzType="vertical-right" title="置顶" [nzRotate]="90"></i>
 </a>
-<a (click)="handleMoveUp()" nz-button>
+<a (click)="handleMoveUp()" nz-button [disabled]="graph.getSelectedCellCount()!=1">
     <i nz-icon nzType="up" title="上移一层"></i>
 </a>
-<a (click)="handleMoveDown()" nz-button>
+<a (click)="handleMoveDown()" nz-button [disabled]="graph.getSelectedCellCount()!=1">
     <i nz-icon nzType="down" title="下移一层"></i>
 </a>
 <a (click)="handleMoveBottom()" nz-button>
@@ -86,4 +86,3 @@
 <a nz-button (click)="settingProject()">
     <i nz-icon nzType="setting" title="项目设置"></i>
 </a>
-

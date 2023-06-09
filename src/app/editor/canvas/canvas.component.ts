@@ -1,23 +1,23 @@
-import {Component, ElementRef, Injector, Input} from '@angular/core';
+import { Component, ElementRef, Injector, Input } from '@angular/core';
 
-import {Edge, FunctionExt, Graph, Node, Shape} from '@antv/x6';
+import { Edge, FunctionExt, Graph, Node, Shape } from '@antv/x6';
 
-import {Transform} from "@antv/x6-plugin-transform";
-import {Snapline} from "@antv/x6-plugin-snapline";
-import {Clipboard} from "@antv/x6-plugin-clipboard";
-import {Keyboard} from "@antv/x6-plugin-keyboard";
-import {History} from "@antv/x6-plugin-history";
-import {Selection} from "@antv/x6-plugin-selection";
-import {Export} from "@antv/x6-plugin-export";
-import {Dnd} from "@antv/x6-plugin-dnd";
-import {register} from "@antv/x6-angular-shape";
+import { Transform } from "@antv/x6-plugin-transform";
+import { Snapline } from "@antv/x6-plugin-snapline";
+import { Clipboard } from "@antv/x6-plugin-clipboard";
+import { Keyboard } from "@antv/x6-plugin-keyboard";
+import { History } from "@antv/x6-plugin-history";
+import { Selection } from "@antv/x6-plugin-selection";
+import { Export } from "@antv/x6-plugin-export";
+import { Dnd } from "@antv/x6-plugin-dnd";
+import { register } from "@antv/x6-angular-shape";
 
-import {HmiComponent, HmiDraw} from "../../hmi";
+import { HmiComponent, HmiDraw } from "../../hmi";
 
-import {ports} from 'src/app/components/configs/ports';
-import {switchOpen, switchClose, switchCenter} from 'src/app/components/configs/electric-components';
+import { ports } from 'src/app/components/configs/ports';
+import { switchOpen, switchClose, switchCenter } from 'src/app/components/configs/electric-components';
 
-import {graphBgc} from 'src/app/components/configs/graph';
+import { graphBgc } from 'src/app/components/configs/graph';
 
 @Component({
     selector: 'app-canvas',
@@ -122,11 +122,11 @@ export class CanvasComponent {
         // this.graph.enableKeyboard()
 
         //补充插件
-        this.graph.use(new Keyboard({enabled: true}));
-        this.graph.use(new Transform({resizing: {enabled: true}, rotating: {enabled: true}}));
-        this.graph.use(new Snapline({enabled: true}))
-        this.graph.use(new Clipboard({enabled: true}))
-        this.graph.use(new History({enabled: true}));
+        this.graph.use(new Keyboard({ enabled: true }));
+        this.graph.use(new Transform({ resizing: { enabled: true }, rotating: { enabled: true } }));
+        this.graph.use(new Snapline({ enabled: true }))
+        this.graph.use(new Clipboard({ enabled: true }))
+        this.graph.use(new History({ enabled: true }));
         this.graph.use(new Selection({//选中
             enabled: true,
             multiple: true,
@@ -137,7 +137,7 @@ export class CanvasComponent {
         }));
         this.graph.use(new Export());
 
-        this.dnd = new Dnd({target: this.graph});
+        this.dnd = new Dnd({ target: this.graph });
 
         //this.graph.fromJSON(data)
         this.graph.toJSON()
@@ -167,7 +167,7 @@ export class CanvasComponent {
             }
         }
 
-        this.graph.on('edge:selected', FunctionExt.debounce(({edge}) => {
+        this.graph.on('edge:selected', FunctionExt.debounce(({ edge }) => {
             edge.addTools([{
                 name: 'source-arrowhead',
                 args: {
@@ -196,16 +196,16 @@ export class CanvasComponent {
             }])
         }))
 
-        this.graph.on('edge:unselected', ({cell}) => {
+        this.graph.on('edge:unselected', ({ cell }) => {
             cell.removeTools();
         })
 
         // 鼠标移入移出节点
-        this.graph.on('node:mouseenter', FunctionExt.debounce(({e}) => {
+        this.graph.on('node:mouseenter', FunctionExt.debounce(({ e }) => {
             const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
             this.showPorts(ports, true);
         }), 500);
-        this.graph.on('node:mouseleave', ({e}) => {
+        this.graph.on('node:mouseleave', ({ e }) => {
             const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
             this.showPorts(ports, false);
         });
@@ -214,7 +214,7 @@ export class CanvasComponent {
             this.showPorts(ports, false);
         })
 
-        this.graph.on('node:click', ({node, e}) => {
+        this.graph.on('node:click', ({ node, e }) => {
             console.log('node')
             const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
             this.showPorts(ports, false);
@@ -242,7 +242,7 @@ export class CanvasComponent {
 
     public Draw($event: HmiDraw) {
         let node!: Node
-        let {component} = $event;
+        let { component } = $event;
         switch (component.type) {
             case "line":
                 //注册组件
@@ -269,7 +269,7 @@ export class CanvasComponent {
                     node = this.graph.createNode({
                         shape: component.id,
                         ...component.meta,
-                        data: {id: component.id, ...(component.meta.data || {})},
+                        data: { id: component.id, ...(component.meta.data || {}) },
                         tools
                         // ports
                     })
@@ -290,7 +290,7 @@ export class CanvasComponent {
                 if (component.content) node = this.graph.createNode({
                     shape: component.id,
                     ...component.meta,
-                    data: {id: component.id},
+                    data: { id: component.id },
                     ports
                 })
                 break;

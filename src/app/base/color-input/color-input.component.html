@@ -1,0 +1,7 @@
+<input nz-input nzSize="small" [value]="color||'none'" [style.color]="color" [colorPicker]="color"
+    (colorPickerChange)="change($event)" [cpEyeDropper]="true" [cpUseRootViewContainer]="true" cpPresetLabel="历史记录"
+    [cpPresetColors]="getPresentColors()" (cpPresetColorsChange)="setPresentColors($event)"
+    [cpExtraTemplate]="suffixIconClear">
+<ng-template #suffixIconClear>
+    <a (click)="clearColor()">清空输入框</a>
+</ng-template>
