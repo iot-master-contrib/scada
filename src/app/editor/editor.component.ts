@@ -57,6 +57,7 @@ export class EditorComponent implements OnInit {
             this.rs.get(`api/project/${this.id}`).subscribe((res) => {
                 this.project = res.data;
                 //this.content = JSON.stringify(resData, undefined, '\t');
+                this.canvas.graph.fromJSON(this.project.pages[0].content)
             });
         }
     }
@@ -64,12 +65,6 @@ export class EditorComponent implements OnInit {
     onDrag($event: HmiDraw) {
         this.canvas.Draw($event)
     }
-
-    saveProjectSettings(project: HmiProject) {
-        this.project = project;
-        localStorage.setItem('project_setting', JSON.stringify(project));
-    }
-
 
     handleSave() {
         this.project.pages[this.index].content = this.canvas.graph.toJSON()

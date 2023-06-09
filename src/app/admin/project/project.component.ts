@@ -81,9 +81,9 @@ export class ProjectComponent {
   }
 
   add() {
-    this.router.navigateByUrl(`admin/project/create`);
+    this.router.navigateByUrl(`/edit`);
   }
   handleEdit(id: string) {
-    this.router.navigateByUrl(`admin/project/edit/` + id);
+    this.router.navigateByUrl(`/edit/` + id);
   }
 }
