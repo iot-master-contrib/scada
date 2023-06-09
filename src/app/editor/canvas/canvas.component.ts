@@ -22,21 +22,11 @@ import { graphBgc } from 'src/app/components/configs/graph';
 @Component({
     selector: 'app-canvas',
     templateUrl: './canvas.component.html',
-    styleUrls: ['./canvas.component.scss']
+    styleUrls: ['./canvas.component.scss'],
 })
 
 export class CanvasComponent {
-
-    @Input() set width(w: number) {
-        this.graph.resize(w)
-    }
-
-    @Input() set height(h: number) {
-        this.graph.resize(undefined, h)
-    }
-
     public graph: Graph;
-
 
     dnd: Dnd;
 
@@ -46,9 +36,9 @@ export class CanvasComponent {
     constructor(private element: ElementRef, private injector: Injector) {
         this.graph = new Graph({
             container: element.nativeElement,
-            width: 800,
-            // height: 600,
-            autoResize: true,
+            //width: 800,
+            //height: 600,
+            //autoResize: true,
             background: {
                 color: graphBgc.color, // 设置画布背景颜色
             },
@@ -69,7 +59,7 @@ export class CanvasComponent {
                 ],
             },
             panning: {//画布是否可以拖拽平移，默认禁用
-                enabled: true,
+                enabled: false,
                 eventTypes: ['rightMouseDown']
             },
             mousewheel: {

@@ -1,6 +1,9 @@
 <div class="header" (click)="open = !open">
     <span nz-icon [nzType]="open ? 'caret-up': 'caret-down'" nzTheme="outline"></span>
-    {{title}}
+    <span class="title">{{title}}</span>
+    <span>
+        <ng-content select="[more]"></ng-content>
+    </span>
 </div>
 <div class="content" [ngClass]="{close:!open}">
     <div class="inner">

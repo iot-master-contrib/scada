@@ -14,8 +14,9 @@ export class ToolbarComponent {
     @Input() project!: HmiProject;
     // 1200X340
     @Input() graph!: Graph;
-    @Output() onSaveProjectSettings = new EventEmitter<HmiProject>()
+
     @Output() onSave = new EventEmitter()
+
     constructor(
         private modal: NzModalService,
         private msg: NzMessageService,
@@ -242,7 +243,10 @@ export class ToolbarComponent {
                     type: 'primary',
                     onClick: componentInstance => {
                         const value = componentInstance!.group.value
-                        this.onSaveProjectSettings.emit(value);
+                        Object.assign(this.project, value)
+                        console.log("project setting", value)
+                        //this.graph.resize(value.width, value.height)
+                        //this.onSaveProjectSettings.emit(value);
                         modal.destroy()
                     }
                 },

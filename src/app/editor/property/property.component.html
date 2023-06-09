@@ -1,5 +1,6 @@
 <app-collapse title="页面管理">
-    <app-pages [graph]="graph" [project]="project" (onSaveProjectSettings)="onSaveProjectSettings.emit($event)">
+    <span more nz-icon nzType="plus" nzTheme="outline" title="添加页面" (click)="pages.handleEdit();$event.stopPropagation()"></span>
+    <app-pages [graph]="graph" [project]="project" (onPageChange)="onSaveProjectSettings.emit($event)" #pages>
     </app-pages>
 </app-collapse>
 

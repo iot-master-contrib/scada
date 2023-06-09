@@ -8,15 +8,18 @@ import { HmiProject } from "../../hmi";
   styleUrls: ['./project-setting.component.scss']
 })
 export class ProjectSettingComponent {
+
   @Input() set project(obj: HmiProject) {
     if (obj) {
       this.setData(obj);
     }
   };
+
   group!: FormGroup;
   constructor(private fb: FormBuilder,) {
     this.build()
   }
+
   build(obj?: any) {
     obj = obj || {}
     this.group = this.fb.group({
@@ -26,6 +29,7 @@ export class ProjectSettingComponent {
       height: [obj.height || '', []],
     })
   }
+
   setData(resData: any) {
     const odata = this.group.value;
     for (const key in odata) {

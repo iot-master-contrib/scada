@@ -7,6 +7,14 @@
     cursor: pointer;
     font-weight: bold;
     font-size: 1.1em;
+    user-select: none;
+    align-items: center;
+
+    display: flex;
+
+    .title{
+        flex: 1;
+    }
 }
 
 .content {

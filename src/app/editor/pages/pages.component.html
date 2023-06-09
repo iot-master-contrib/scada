@@ -1,11 +1,7 @@
-<button (click)="handleEdit()">
-    <i type="button" nz-icon nzType="plus"></i>
-    添加页面
-</button>
 <table>
-    <tr *ngFor="let trData of project.pages; let i=index;">
+    <tr *ngFor="let page of project.pages; let i=index;" (click)="open(index)">
         <td>
-            {{trData.name}}
+            {{page.name}}
         </td>
         <td>
             <nz-space>

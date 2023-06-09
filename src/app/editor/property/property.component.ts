@@ -18,7 +18,9 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class PropertyComponent {
     @Input() project!: HmiProject;
-    @Output() onSaveProjectSettings = new EventEmitter<HmiProject>();
+
+    @Output() onSaveProjectSettings = new EventEmitter<number>();
+
     selected: any = [];
 
     textProperties: HmiProperty[] = [
@@ -165,4 +167,7 @@ export class PropertyComponent {
         });
     }
 
+    addPage() {
+
+    }
 }

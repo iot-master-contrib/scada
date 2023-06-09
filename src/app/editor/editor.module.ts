@@ -53,6 +53,7 @@ import { PagesComponent } from './pages/pages.component';
 import { PageSettingComponent } from './page-setting/page-setting.component';
 import { ProjectSettingComponent } from './project-setting/project-setting.component';
 import { BackgroundComponent } from './background/background.component';
+import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 
 @NgModule({
     declarations: [
@@ -96,6 +97,7 @@ import { BackgroundComponent } from './background/background.component';
         NzCheckboxModule,
         BaseModule,
         NzSelectModule,
+        NzInputNumberModule,
     ],
     providers:[{
         provide:NzMessageService

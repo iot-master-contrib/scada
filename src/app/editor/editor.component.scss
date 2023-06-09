@@ -16,12 +16,26 @@ app-toolbar{
 }
 
 .body {
-    display: flex;
     flex: 1;
+    display: flex;
     overflow: hidden;
 
-    app-canvas{
+    .content {
         flex: 1;
+        height: 100%;
+        position: relative;
+
+        padding: 10px;
+        background-color: #f0f0f0;
+
+        //弹性盒子居中，超出区域会显示有问题
+        //display: flex;
+        //flex-direction: column;
+
+        //justify-content: center;
+        //align-items: center;
+        //vertical-align: middle;
+
         overflow: auto;
     }
 }

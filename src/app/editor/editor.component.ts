@@ -13,6 +13,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class EditorComponent implements OnInit {
 
+
     id: any = ''
     initalproject: HmiProject = {
         id: '',
@@ -27,6 +28,7 @@ export class EditorComponent implements OnInit {
             }
         ]
     }
+
     project!: HmiProject
 
     @ViewChild("canvas") canvas!: CanvasComponent
@@ -37,11 +39,15 @@ export class EditorComponent implements OnInit {
         private msg: NzMessageService,
         private router: Router,
         private route: ActivatedRoute,) {
+
         this.project = Object.assign(
             this.initalproject,
             JSON.parse(localStorage.getItem('project_setting') || '{}'),
         );
+
+        console.log(window)
         console.log(this.project)
+
         title.setTitle(this.project.name)
     }
 
