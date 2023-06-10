@@ -23,14 +23,14 @@ export class ComponentService {
     }
 
     load() {
-        this.rs.get("api/collection/list", {limit: 99999}).subscribe(res=>{
+        this.rs.get("api/collection/list", {limit: 99999}).subscribe(res => {
             this.RegisterCollection(res.data)
             this.loadComponent();
         })
     }
 
     loadComponent() {
-        this.rs.get("api/component/list", {limit: 99999}).subscribe(res=>{
+        this.rs.get("api/component/list", {limit: 99999}).subscribe(res => {
             this.RegisterComponent(res.data)
         })
     }
@@ -45,7 +45,8 @@ export class ComponentService {
 
     public RegisterCollection(collection: HmiCollection) {
         this.collections.push(collection)
-        collection.components?.forEach(c => {
+        collection.components = collection.components || []
+        collection.components.forEach(c => {
             this.components[c.id] = c
         })
     }
