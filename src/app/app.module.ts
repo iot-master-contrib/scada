@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewerComponent } from './viewer/viewer.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import {NzNotificationService} from "ng-zorro-antd/notification";
 
 registerLocaleData(zh);
 
@@ -30,7 +31,8 @@ registerLocaleData(zh);
     providers: [
         { provide: APP_BASE_HREF, useValue: '/app/scada/' },
         { provide: NZ_I18N, useValue: zh_CN },
-        { provide: NzMessageService }
+        { provide: NzMessageService },
+        NzNotificationService,
     ],
     bootstrap: [AppComponent]
 })

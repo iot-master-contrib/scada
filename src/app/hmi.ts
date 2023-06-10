@@ -1,4 +1,4 @@
-import {Edge, Node, Registry} from "@antv/x6";
+import {Cell, Edge, Node, Registry} from "@antv/x6";
 import {Component} from "@angular/core";
 
 export declare interface HmiComponent {
@@ -15,16 +15,27 @@ export declare interface HmiComponent {
 
     meta?: Node.Metadata | Edge.Metadata
 
+    //Angular组件
     content?: any //Component
 
+    //是否已经注册
     registered?: boolean
 
+    //配置属性
     properties?: HmiProperty[]
 
+    //开放的数据绑定
     bindings?: HmiComponentBinding[]
 
+    //开放的事件
     events?: HmiComponentEvent[]
 
+    //animations?:
+
+    //事件响应
+    listeners?: { [event: string]: (cell: Cell, event?: any) => void }
+
+    //集合名
     collection?: string
 }
 

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, filter, map } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { NzMessageService } from 'ng-zorro-antd/message';
+import {NzNotificationService} from "ng-zorro-antd/notification";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class RequestService {
 
   constructor(
     private http: HttpClient,
-    private message: NzMessageService,
+    private message: NzNotificationService,
     private route: Router
   ) { }
 
@@ -49,7 +49,8 @@ export class RequestService {
           }
           // 有错误统一显示并不是好的做法
           if (!hideErrorMsg) {
-            this.message.create('error', ret.error);
+              this.message.error("接口错误", ret.error)
+            //this.message.create('error', ret.error);
           }
           throw ret.error; //不抛出Error类型，方便外面直接处理
         }

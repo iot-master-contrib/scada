@@ -109,4 +109,22 @@ export const ElectricSwitch: HmiComponent = {
         },
     },
     properties: [],
+    listeners: {
+        "click": (cell, event) => {
+            const attrPath = 'attrs/switch/transform';
+            const target = cell.data.value ? switchClose : switchOpen;
+            cell.data.value = !cell.data.value;
+            cell.transition(attrPath, target, {
+                interp: (a: string, b: string) => {
+                    const reg = /-?\d+/g
+                    const start = parseInt(a.match(reg)![0], 10)
+                    const end = parseInt(b.match(reg)![0], 10)
+                    const d = end - start
+                    return (t: number) => {
+                        return `rotate(${start + d * t} ${switchCenter.x} ${switchCenter.y})`
+                    }
+                },
+            })
+        }
+    }
 }

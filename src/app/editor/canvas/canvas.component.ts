@@ -211,28 +211,15 @@ export class CanvasComponent {
         })
 
         this.graph.on('node:click', ({node, e}) => {
-            console.log('node')
+            //console.log('node')
             const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
             this.showPorts(ports, false);
+        });
 
-            const data = node.data;
-
-            //TODO 移动到switch.ts中
-            if (/electric-switch/.test(data.id)) {
-                const attrPath = 'attrs/switch/transform';
-                const target = data.value ? switchClose : switchOpen;
-                data.value = !data.value;
-                node.transition(attrPath, target, {
-                    interp: (a: string, b: string) => {
-                        const reg = /-?\d+/g
-                        const start = parseInt(a.match(reg)![0], 10)
-                        const end = parseInt(b.match(reg)![0], 10)
-                        const d = end - start
-                        return (t: number) => {
-                            return `rotate(${start + d * t} ${switchCenter.x} ${switchCenter.y})`
-                        }
-                    },
-                })
+        this.graph.on('cell:click', ({cell, e}) => {
+            let cmp = this.cs.GetComponent(cell.shape)
+            if (cmp && cmp.listeners && cmp.listeners["click"]) {
+                cmp.listeners["click"](cell, e)
             }
         });
 
