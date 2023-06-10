@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Title } from "@angular/platform-browser";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Title} from "@angular/platform-browser";
 import {HmiComponent, HmiDraw, HmiProject, projectTemplate} from "../hmi";
-import { CanvasComponent } from "./canvas/canvas.component";
-import { RequestService } from "../request.service";
-import { NzMessageService } from "ng-zorro-antd/message";
-import { ActivatedRoute, Router } from "@angular/router";
+import {CanvasComponent} from "./canvas/canvas.component";
+import {RequestService} from "../request.service";
+import {NzMessageService} from "ng-zorro-antd/message";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ComponentService} from "../component.service";
 
 @Component({
     selector: 'app-editor',
@@ -24,7 +25,9 @@ export class EditorComponent implements OnInit {
         private rs: RequestService,
         private msg: NzMessageService,
         private router: Router,
-        private route: ActivatedRoute,) {
+        private route: ActivatedRoute,
+        protected cs: ComponentService,
+    ) {
 
         title.setTitle(this.project.name)
     }

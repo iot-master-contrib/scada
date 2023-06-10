@@ -1,5 +1,5 @@
 <div class="header" (click)="open = !open">
-    <span nz-icon [nzType]="open ? 'caret-up': 'caret-down'" nzTheme="outline"></span>
+    <span nz-icon nzType="caret-right" [nzRotate]="open ? 90 : 0" nzTheme="outline"></span>
     <span class="title">{{title}}</span>
     <span>
         <ng-content select="[more]"></ng-content>

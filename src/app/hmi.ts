@@ -84,8 +84,9 @@ export function createPathComponent(cmp: HmiPathComponent): HmiComponent {
 }
 
 export declare interface HmiCollection {
+    id: string
     name: string
-    nameEn: string
+    //nameEn: string
     components: HmiComponent[]
 }
 

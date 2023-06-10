@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, Output, ViewContainerRef } from '@angular/core';
 import { HmiComponent, HmiProject, HmiProperty } from "../../hmi";
 import { Cell, Graph } from "@antv/x6";
-import { COMPONENTS } from "../../components/components";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { EditTableComponent } from 'src/app/base/edit-table/edit-table.component';
 import { RequestService } from '../../request.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import {ComponentService} from "../../component.service";
 
 @Component({
     selector: 'app-property',
@@ -69,14 +69,8 @@ export class PropertyComponent {
                     this.formLinePosition.patchValue({ source, target });
                 }
 
-                //找到组件 TODO 应该索引
-                COMPONENTS.find(g => g.components.find(c => {
-                    if (c.id === this.cell.shape) {
-                        this.cmp = c
-                        return true
-                    }
-                    return false
-                }))
+                //找到组件
+                this.cmp = this.cs.GetComponent(this.cell.shape)
             }
         })
     }
@@ -92,6 +86,7 @@ export class PropertyComponent {
         private fb: FormBuilder,
         private modal: NzModalService,
         private viewContainerRef: ViewContainerRef,
+        private cs: ComponentService,
         private rs: RequestService,
         private msg: NzMessageService
     ) {

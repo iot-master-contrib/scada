@@ -10,7 +10,7 @@
     </ng-template>
 </div>
 <div class="collections">
-    <app-collection *ngFor="let c of collections" [data]="c" (onDraw)="onDrag.emit($event)"></app-collection>
+    <app-collection *ngFor="let c of cs.collections" [data]="c" (onDraw)="onDrag.emit($event)"></app-collection>
 </div>
 
 
