@@ -17,6 +17,8 @@ type HmiProject struct {
 }
 
 type HmiPage struct {
-	Name    string `json:"name,omitempty"`
-	Content any    `json:"content,omitempty"`
+	Name            string `json:"name,omitempty"`
+	Content         any    `json:"content,omitempty"`
+	BackgroundColor string `json:"background_color,omitempty"`
+	BackgroundImage string `json:"background_image,omitempty"`
 }

@@ -274,6 +274,7 @@ export class CanvasComponent {
     public Render(page: HmiPage) {
         page.content?.cells?.forEach((cell: any) => {
             const cmp = this.cs.GetComponent(cell.shape)
+            //TODO 使用filter 过滤掉找不到组件的情况
             this.Register(cmp)
         })
         this.graph.fromJSON(page.content)

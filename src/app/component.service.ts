@@ -24,14 +24,14 @@ export class ComponentService {
 
     load() {
         this.rs.get("api/collection/list", {limit: 99999}).subscribe(res => {
-            this.RegisterCollection(res.data)
+            res.data?.forEach((c:any)=>this.RegisterCollection(c))
             this.loadComponent();
         })
     }
 
     loadComponent() {
         this.rs.get("api/component/list", {limit: 99999}).subscribe(res => {
-            this.RegisterComponent(res.data)
+            res.data?.forEach((c:any)=>this.RegisterComponent(c))
         })
     }
 

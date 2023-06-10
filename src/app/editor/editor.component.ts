@@ -62,8 +62,10 @@ export class EditorComponent implements OnInit {
     }
 
     handlePageChange($event: number) {
+        //保存当前页
         this.project.pages[this.index].content = this.canvas.graph.toJSON()
         this.index = $event
-        this.canvas.graph.fromJSON(this.project.pages[this.index].content)
+        //渲染新页
+        this.canvas.Render(this.project.pages[this.index])
     }
 }

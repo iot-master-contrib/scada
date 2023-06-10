@@ -24,7 +24,7 @@ export class ToolbarComponent {
     ) { }
     handleSave() {
         this.onSave.emit();
-        console.log("save", this.graph.toJSON())
+        //console.log("save", this.graph.toJSON())
     }
 
     handleExport() {

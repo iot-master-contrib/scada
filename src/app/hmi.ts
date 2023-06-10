@@ -125,6 +125,8 @@ export declare interface HmiProject {
 export declare interface HmiPage {
     name: string
     content: any
+    background_color?: string
+    background_image?: string
 }
 
 export function projectTemplate(): HmiProject {
