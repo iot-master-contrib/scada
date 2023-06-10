@@ -12,7 +12,7 @@ import {Export} from "@antv/x6-plugin-export";
 import {Dnd} from "@antv/x6-plugin-dnd";
 import {register} from "@antv/x6-angular-shape";
 
-import {HmiComponent, HmiDraw} from "../../hmi";
+import {HmiComponent, HmiDraw, HmiPage} from "../../hmi";
 
 import {ports} from 'src/app/components/configs/ports';
 import {ComponentService} from "../../component.service";
@@ -238,11 +238,45 @@ export class CanvasComponent {
 
     }
 
-    public Render(data: any) {
-        data.cells?.forEach((cell: any) => {
-            //cell.shape
+    public Register(component: HmiComponent) {
+        if (component.registered)
+            return
+
+        switch (component.type) {
+            case "line":
+            case "edge":
+                //注册线
+                if (component.extends) {
+                    Graph.registerEdge(component.id, component.extends)
+                    component.registered = true
+                }
+                break
+            case "shape":
+                //注册衍生组件
+                if (component.extends) {
+                    Graph.registerNode(component.id, component.extends)
+                    component.registered = true
+                }
+                break;
+            case "angular":
+                register({
+                    shape: component.id,
+                    content: component.content,
+                    width: 100,
+                    height: 60,
+                    injector: this.injector,
+                })
+                component.registered = true
+                break;
+        }
+    }
+
+    public Render(page: HmiPage) {
+        page.content?.cells?.forEach((cell: any) => {
+            const cmp = this.cs.GetComponent(cell.shape)
+            this.Register(cmp)
         })
-        this.graph.fromJSON(data)
+        this.graph.fromJSON(page.content)
     }
 
     public Draw($event: HmiDraw) {
@@ -275,7 +309,7 @@ export class CanvasComponent {
                         shape: component.id,
                         ...component.meta,
                         data: {id: component.id, ...(component.meta.data || {})},
-                        tools
+                        //tools
                         // ports
                     })
                 }

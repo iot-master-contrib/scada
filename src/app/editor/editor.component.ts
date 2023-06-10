@@ -39,7 +39,8 @@ export class EditorComponent implements OnInit {
                 this.project = res.data;
                 //this.content = JSON.stringify(resData, undefined, '\t');
                 this.title.setTitle(this.project.name)
-                this.canvas.graph.fromJSON(this.project.pages[0].content)
+                //this.canvas.graph.fromJSON(this.project.pages[0].content)
+                this.canvas.Render(this.project.pages[0])
             });
         }
     }
