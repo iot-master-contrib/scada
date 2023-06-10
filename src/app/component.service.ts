@@ -1,6 +1,13 @@
 import {Injectable} from '@angular/core';
 import {RequestService} from "./request.service";
-import {HmiCollection, HmiComponent} from "./hmi";
+import {
+    createImageComponent,
+    createPathComponent,
+    HmiCollection,
+    HmiComponent,
+    HmiImageComponent,
+    HmiPathComponent
+} from "./hmi";
 import {BaseComponents, ChartComponent} from "./components/components";
 import {IndustryComponents} from "./components/industry/components";
 import {ElectricComponents} from "./components/electric/components";
@@ -33,6 +40,22 @@ export class ComponentService {
         this.rs.get("api/component/list", {limit: 99999}).subscribe(res => {
             res.data?.forEach((c:any)=>this.RegisterComponent(c))
         })
+        this.rs.get("api/image/list", {limit: 99999}).subscribe(res => {
+            res.data?.forEach((c:any)=>this.RegisterImage(c))
+        })
+        this.rs.get("api/path/list", {limit: 99999}).subscribe(res => {
+            res.data?.forEach((c:any)=>this.RegisterPath(c))
+        })
+    }
+
+    public RegisterImage(component: HmiImageComponent) {
+        const c = createImageComponent(component)
+        this.RegisterComponent(c)
+    }
+    
+    public RegisterPath(component: HmiPathComponent) {
+        const c = createPathComponent(component)
+        this.RegisterComponent(c)
     }
 
     public RegisterComponent(component: HmiComponent) {
