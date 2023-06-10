@@ -69,7 +69,7 @@ export class CanvasComponent {
                 eventTypes: ['rightMouseDown']
             },
             mousewheel: {
-                enabled: true,
+                enabled: false,
                 modifiers: ['ctrl', 'meta'],
             },
             connecting: { //连线交互

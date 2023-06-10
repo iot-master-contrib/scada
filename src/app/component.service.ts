@@ -38,9 +38,11 @@ export class ComponentService {
     public RegisterComponent(component: HmiComponent) {
         this.components[component.id] = component
         this.collections.forEach(c => {
-            if (c.id == component.collection)
+            if (c.id == component.collection) {
                 c.components.push(component)
+            }
         })
+        //TODO 处理未分类组件
     }
 
     public RegisterCollection(collection: HmiCollection) {

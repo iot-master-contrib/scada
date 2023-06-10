@@ -44,7 +44,6 @@ export declare interface HmiImageComponent {
     id: string
     name: string
     url: string
-    icon?: string
     collection?: string
 }
 
@@ -52,7 +51,7 @@ export function createImageComponent(cmp: HmiImageComponent): HmiComponent {
     return {
         id: cmp.id,
         name: cmp.name,
-        icon: cmp.icon || cmp.url,
+        icon: cmp.url,
         type: "shape",
         extends: {inherit: "image"},
         meta: {width: 100, height: 80, imageUrl: cmp.url},

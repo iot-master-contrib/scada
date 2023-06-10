@@ -39,6 +39,20 @@ definitions:
       error:
         type: string
     type: object
+  api.ReplyData-types_HmiImage:
+    properties:
+      data:
+        $ref: '#/definitions/types.HmiImage'
+      error:
+        type: string
+    type: object
+  api.ReplyData-types_HmiPath:
+    properties:
+      data:
+        $ref: '#/definitions/types.HmiPath'
+      error:
+        type: string
+    type: object
   api.ReplyData-types_HmiProject:
     properties:
       data:
@@ -62,6 +76,28 @@ definitions:
       data:
         items:
           $ref: '#/definitions/types.HmiComponent'
+        type: array
+      error:
+        type: string
+      total:
+        type: integer
+    type: object
+  api.ReplyList-types_HmiImage:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/types.HmiImage'
+        type: array
+      error:
+        type: string
+      total:
+        type: integer
+    type: object
+  api.ReplyList-types_HmiPath:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/types.HmiPath'
         type: array
       error:
         type: string
@@ -140,10 +176,46 @@ definitions:
       name:
         type: string
     type: object
+  types.HmiImage:
+    properties:
+      collection:
+        type: string
+      created:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      updated:
+        type: string
+      url:
+        type: string
+    type: object
   types.HmiPage:
     properties:
+      background_color:
+        type: string
+      background_image:
+        type: string
       content: {}
       name:
+        type: string
+    type: object
+  types.HmiPath:
+    properties:
+      collection:
+        type: string
+      created:
+        type: string
+      icon:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      path:
+        type: string
+      updated:
         type: string
     type: object
   types.HmiProject:
@@ -577,6 +649,382 @@ paths:
       summary: 查询组件
       tags:
       - component
+  /image/{id}:
+    get:
+      consumes:
+      - application/json
+      description: 获取图片组件
+      parameters:
+      - description: 图片组件ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiImage'
+      summary: 获取图片组件
+      tags:
+      - image
+    post:
+      consumes:
+      - application/json
+      description: 修改图片组件
+      parameters:
+      - description: 图片组件ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 图片组件信息
+        in: body
+        name: image
+        required: true
+        schema:
+          $ref: '#/definitions/types.HmiImage'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiImage'
+      summary: 修改图片组件
+      tags:
+      - image
+  /image/{id}/delete:
+    get:
+      consumes:
+      - application/json
+      description: 删除图片组件
+      parameters:
+      - description: 图片组件ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiImage'
+      summary: 删除图片组件
+      tags:
+      - image
+  /image/count:
+    post:
+      consumes:
+      - application/json
+      description: 查询图片组件数量
+      parameters:
+      - description: 查询参数
+        in: body
+        name: search
+        required: true
+        schema:
+          $ref: '#/definitions/api.ParamSearch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-int64'
+      summary: 查询图片组件数量
+      tags:
+      - image
+  /image/create:
+    post:
+      consumes:
+      - application/json
+      description: 创建图片组件
+      parameters:
+      - description: 图片组件信息
+        in: body
+        name: search
+        required: true
+        schema:
+          $ref: '#/definitions/types.HmiImage'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiImage'
+      summary: 创建图片组件
+      tags:
+      - image
+  /image/export:
+    get:
+      consumes:
+      - application/json
+      description: 导出图片组件
+      produces:
+      - application/octet-stream
+      responses: {}
+      summary: 导出图片组件
+      tags:
+      - product
+  /image/import:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 导入图片组件
+      parameters:
+      - description: 压缩包
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-int64'
+      summary: 导入图片组件
+      tags:
+      - product
+  /image/list:
+    get:
+      consumes:
+      - application/json
+      description: 查询图片组件
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: skip
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyList-types_HmiImage'
+      summary: 查询图片组件
+      tags:
+      - image
+  /image/search:
+    post:
+      consumes:
+      - application/json
+      description: 查询图片组件
+      parameters:
+      - description: 查询参数
+        in: body
+        name: search
+        required: true
+        schema:
+          $ref: '#/definitions/api.ParamSearch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyList-types_HmiImage'
+      summary: 查询图片组件
+      tags:
+      - image
+  /path/{id}:
+    get:
+      consumes:
+      - application/json
+      description: 获取路径组件
+      parameters:
+      - description: 路径组件ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiPath'
+      summary: 获取路径组件
+      tags:
+      - path
+    post:
+      consumes:
+      - application/json
+      description: 修改路径组件
+      parameters:
+      - description: 路径组件ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 路径组件信息
+        in: body
+        name: path
+        required: true
+        schema:
+          $ref: '#/definitions/types.HmiPath'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiPath'
+      summary: 修改路径组件
+      tags:
+      - path
+  /path/{id}/delete:
+    get:
+      consumes:
+      - application/json
+      description: 删除路径组件
+      parameters:
+      - description: 路径组件ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiPath'
+      summary: 删除路径组件
+      tags:
+      - path
+  /path/count:
+    post:
+      consumes:
+      - application/json
+      description: 查询路径组件数量
+      parameters:
+      - description: 查询参数
+        in: body
+        name: search
+        required: true
+        schema:
+          $ref: '#/definitions/api.ParamSearch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-int64'
+      summary: 查询路径组件数量
+      tags:
+      - path
+  /path/create:
+    post:
+      consumes:
+      - application/json
+      description: 创建路径组件
+      parameters:
+      - description: 路径组件信息
+        in: body
+        name: search
+        required: true
+        schema:
+          $ref: '#/definitions/types.HmiPath'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-types_HmiPath'
+      summary: 创建路径组件
+      tags:
+      - path
+  /path/export:
+    get:
+      consumes:
+      - application/json
+      description: 导出路径组件
+      produces:
+      - application/octet-stream
+      responses: {}
+      summary: 导出路径组件
+      tags:
+      - product
+  /path/import:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 导入路径组件
+      parameters:
+      - description: 压缩包
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-int64'
+      summary: 导入路径组件
+      tags:
+      - product
+  /path/list:
+    get:
+      consumes:
+      - application/json
+      description: 查询路径组件
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: skip
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyList-types_HmiPath'
+      summary: 查询路径组件
+      tags:
+      - path
+  /path/search:
+    post:
+      consumes:
+      - application/json
+      description: 查询路径组件
+      parameters:
+      - description: 查询参数
+        in: body
+        name: search
+        required: true
+        schema:
+          $ref: '#/definitions/api.ParamSearch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyList-types_HmiPath'
+      summary: 查询路径组件
+      tags:
+      - path
   /project/{id}:
     get:
       consumes:

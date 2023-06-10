@@ -264,4 +264,8 @@ export class ToolbarComponent {
         save_link.download = name;
         save_link.click();
     }
+
+    handleScale($event: Event) {
+        console.log("handleScale", $event)
+    }
 }
