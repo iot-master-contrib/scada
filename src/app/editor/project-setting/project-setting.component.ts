@@ -11,7 +11,8 @@ export class ProjectSettingComponent {
 
   @Input() set project(obj: HmiProject) {
     if (obj) {
-      this.setData(obj);
+      //this.setData(obj);
+      this.group.patchValue(obj)
     }
   };
 
@@ -25,8 +26,8 @@ export class ProjectSettingComponent {
     this.group = this.fb.group({
       name: [obj.name || '', [Validators.required]],
       desc: [obj.desc || '', []],
-      width: [obj.width || '', []],
-      height: [obj.height || '', []],
+      width: [obj.width || 400, [Validators.required]],
+      height: [obj.height || 400, [Validators.required]],
     })
   }
 

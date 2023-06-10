@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from "@angular/platform-browser";
-import { HmiComponent, HmiDraw, HmiProject } from "../hmi";
+import {HmiComponent, HmiDraw, HmiProject, projectTemplate} from "../hmi";
 import { CanvasComponent } from "./canvas/canvas.component";
 import { RequestService } from "../request.service";
 import { NzMessageService } from "ng-zorro-antd/message";
@@ -14,21 +14,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class EditorComponent implements OnInit {
     id: any = ''
 
-    initalproject: HmiProject = {
-        id: '',
-        name: '组态编辑器',
-        desc: '',
-        width: window.screen.width, //自动获取屏幕尺寸
-        height: window.screen.height,
-        pages: [
-            {
-                name: "首页",
-                content: {}
-            }
-        ]
-    }
-
-    project!: HmiProject
+    project: HmiProject = projectTemplate()
     index = 0;
 
     @ViewChild("canvas") canvas!: CanvasComponent
@@ -40,14 +26,6 @@ export class EditorComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,) {
 
-        this.project = Object.assign(
-            this.initalproject,
-            JSON.parse(localStorage.getItem('project_setting') || '{}'),
-        );
-
-        console.log(window)
-        console.log(this.project)
-
         title.setTitle(this.project.name)
     }
 
@@ -57,6 +35,7 @@ export class EditorComponent implements OnInit {
             this.rs.get(`api/project/${this.id}`).subscribe((res) => {
                 this.project = res.data;
                 //this.content = JSON.stringify(resData, undefined, '\t');
+                this.title.setTitle(this.project.name)
                 this.canvas.graph.fromJSON(this.project.pages[0].content)
             });
         }

@@ -17,7 +17,6 @@ import { HmiComponent, HmiDraw } from "../../hmi";
 import { ports } from 'src/app/components/configs/ports';
 import { switchOpen, switchClose, switchCenter } from 'src/app/components/configs/electric-components';
 
-import { graphBgc } from 'src/app/components/configs/graph';
 
 @Component({
     selector: 'app-canvas',
@@ -40,12 +39,12 @@ export class CanvasComponent {
             //height: 600,
             //autoResize: true,
             background: {
-                color: graphBgc.color, // 设置画布背景颜色
+                //color: graphBgc.color, // 设置画布背景颜色
             },
             grid: {
                 size: 10,      // 网格大小 10px
                 visible: JSON.parse(localStorage.getItem("show_grid") || 'true'), // 渲染网格背景
-                type: graphBgc.gridType,
+                type: "mesh",
                 args: [
                     {
                         color: '#f0f0f0', // 主网格线颜色

@@ -125,3 +125,19 @@ export declare interface HmiPage {
     name: string
     content: any
 }
+
+export function projectTemplate(): HmiProject {
+    return {
+        id: '',
+        name: '组态工程',
+        desc: '',
+        width: window.screen.width, //自动获取屏幕尺寸
+        height: window.screen.height,
+        pages: [
+            {
+                name: "首页",
+                content: {}
+            }
+        ]
+    }
+}

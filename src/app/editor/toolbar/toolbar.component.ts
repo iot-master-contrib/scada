@@ -227,7 +227,7 @@ export class ToolbarComponent {
 
     settingProject() {
         const modal: NzModalRef = this.modal.create({
-            nzTitle: '编辑项目信息',
+            nzTitle: '编辑工程信息',
             nzContent: ProjectSettingComponent,
             nzComponentParams: {
                 project: this.project
