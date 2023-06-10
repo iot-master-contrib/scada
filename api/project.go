@@ -108,9 +108,9 @@ func projectRouter(app *gin.RouterGroup) {
 
 	app.POST("/count", curd.ApiCount[types.HmiProject]())
 
-	app.POST("/search", curd.ApiSearch[types.HmiProject]("id", "name", "desc"))
+	app.POST("/search", curd.ApiSearch[types.HmiProject]("id", "name", "desc", "version", "updated", "created"))
 
-	app.GET("/list", curd.ApiList[types.HmiProject]("id", "name", "desc"))
+	app.GET("/list", curd.ApiList[types.HmiProject]("id", "name", "desc", "version", "updated", "created"))
 
 	app.POST("/create", curd.ApiCreateHook[types.HmiProject](curd.GenerateRandomId[types.HmiProject](12), nil))
 

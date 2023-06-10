@@ -108,9 +108,9 @@ func componentRouter(app *gin.RouterGroup) {
 
 	app.POST("/count", curd.ApiCount[types.HmiComponent]())
 
-	app.POST("/search", curd.ApiSearch[types.HmiComponent]("id", "name", "icon", "type", "collection"))
+	app.POST("/search", curd.ApiSearch[types.HmiComponent]("id", "name", "icon", "type", "collection", "version", "updated", "created"))
 
-	app.GET("/list", curd.ApiList[types.HmiComponent]("id", "name", "icon", "type", "collection"))
+	app.GET("/list", curd.ApiList[types.HmiComponent]("id", "name", "icon", "type", "collection", "version", "updated", "created"))
 
 	app.POST("/create", curd.ApiCreateHook[types.HmiComponent](curd.GenerateRandomId[types.HmiComponent](12), nil))
 
