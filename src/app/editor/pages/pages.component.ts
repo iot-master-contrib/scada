@@ -77,4 +77,9 @@ export class PagesComponent {
         this.index = index
         this.onPageChange.emit(index)
     }
+
+    handleCopy(i: number) {
+
+
+    }
 }

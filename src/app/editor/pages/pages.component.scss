@@ -1,12 +1,25 @@
-table{
-    width: 100%;
-    tr{
-        td{
-            width: 50%;
-            padding: 5px;
-        }
-        td:last-child{
-            text-align: right;
+.page {
+    position: relative;
+    padding: 3px 5px;
+
+    .tools {
+        position: absolute;
+        right: 5px;
+        top: 3px;
+        display: none;
+        //visibility: hidden;
+    }
+
+    &.selected {
+        background-color: #e1e1e1;
+        //font-weight: bold;
+    }
+    &:hover {
+        background-color: #f0f0f0;
+
+        & > .tools {
+            display: block;
+            //visibility: visible;
         }
     }
 }

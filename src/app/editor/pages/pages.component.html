@@ -1,15 +1,9 @@
-<table>
-    <tr *ngFor="let page of project.pages; let i=index;">
-        <td (click)="open(i)">
-            {{page.name}}
-        </td>
-        <td>
-            <nz-space>
-                <span nz-icon *nzSpaceItem nzType="edit" nzTheme="outline" title="重命名" style="cursor:pointer;"
-                    (click)="handleEdit(i)"></span>
-                <span nz-icon *nzSpaceItem nzType="delete" nzTheme="outline" title="删除" style="cursor:pointer;"
-                    (click)="handleDel(i)"></span>
-            </nz-space>
-        </td>
-    </tr>
-</table>
+<div class="page" [ngClass]="{selected:i==index}"
+     *ngFor="let page of project.pages; let i=index;" (click)="open(i)">
+    {{page.name}}
+    <div class="tools" (click)="$event.stopPropagation()">
+        <span nz-icon nzType="copy" title="复制" (click)="handleCopy(i)"></span>
+        <span nz-icon nzType="edit" title="重命名" (click)="handleEdit(i)"></span>
+        <span nz-icon nzType="delete" title="删除" (click)="handleDel(i)"></span>
+    </div>
+</div>
