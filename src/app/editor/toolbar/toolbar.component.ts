@@ -44,12 +44,12 @@ export class ToolbarComponent {
 
     handleCut() {
         this.graph.getSelectedCells().forEach(c => c.removeTools())
-        this.graph.cut(this.graph.getSelectedCells())
+        this.graph.cut(this.graph.getSelectedCells(), {deep: true})
     }
 
     handleCopy() {
         this.graph.getSelectedCells().forEach(c => c.removeTools())
-        this.graph.copy(this.graph.getSelectedCells())
+        this.graph.copy(this.graph.getSelectedCells(), {deep: true})
     }
 
     handlePaste() {
