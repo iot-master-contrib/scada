@@ -81,9 +81,9 @@ export class ProjectComponent {
   }
 
   add() {
-    this.router.navigateByUrl(`/edit`);
+    this.router.navigateByUrl(`edit`);
   }
   handleEdit(id: string) {
-    this.router.navigateByUrl(`/edit/` + id);
+    this.router.navigateByUrl(`edit/` + id);
   }
 }
