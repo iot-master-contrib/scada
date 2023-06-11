@@ -11,6 +11,7 @@ export declare interface HmiComponent {
 
     type: string
 
+    internal?: boolean
     extends?: any //继承 shape 或 edge
 
     meta?: Node.Metadata | Edge.Metadata

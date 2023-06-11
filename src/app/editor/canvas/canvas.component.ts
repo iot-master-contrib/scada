@@ -198,22 +198,22 @@ export class CanvasComponent {
 
         // 鼠标移入移出节点
         this.graph.on('node:mouseenter', FunctionExt.debounce(({e}) => {
-            const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
-            this.showPorts(ports, true);
+            //const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
+            //this.showPorts(ports, true);
         }), 500);
         this.graph.on('node:mouseleave', ({e}) => {
-            const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
-            this.showPorts(ports, false);
+            //const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
+            //this.showPorts(ports, false);
         });
         this.graph.on('blank:click', () => {
-            const ports = document.querySelectorAll(".x6-port-body");
-            this.showPorts(ports, false);
+            //const ports = document.querySelectorAll(".x6-port-body");
+            //this.showPorts(ports, false);
         })
 
         this.graph.on('node:click', ({node, e}) => {
             //console.log('node')
-            const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
-            this.showPorts(ports, false);
+            //const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
+            //this.showPorts(ports, false);
         });
 
         this.graph.on('cell:click', ({cell, e}) => {
@@ -225,7 +225,7 @@ export class CanvasComponent {
     }
 
     public Register(component: HmiComponent) {
-        if (component.registered)
+        if (component.registered || component.internal)
             return
 
         switch (component.type) {
