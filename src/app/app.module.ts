@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewerComponent } from './viewer/viewer.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {ComponentService} from "./component.service";
 
 registerLocaleData(zh);
 
@@ -33,6 +34,7 @@ registerLocaleData(zh);
         { provide: NZ_I18N, useValue: zh_CN },
         { provide: NzMessageService },
         NzNotificationService,
+        //ComponentService,
     ],
     bootstrap: [AppComponent]
 })

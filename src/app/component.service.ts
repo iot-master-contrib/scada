@@ -11,8 +11,8 @@ import {
 import {BaseComponents, ChartComponent} from "./components/components";
 import {IndustryComponents} from "./components/industry/components";
 import {ElectricComponents} from "./components/electric/components";
-import {Subject} from "rxjs";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {Subject} from "rxjs";
 import {Graph} from "@antv/x6";
 import {register} from "@antv/x6-angular-shape";
 
