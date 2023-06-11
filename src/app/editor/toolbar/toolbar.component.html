@@ -87,7 +87,7 @@
     <i nz-icon nzType="setting" title="工程设置"></i>
 </a>
 
-<nz-select (change)="handleScale($event)">
+<nz-select [ngModel]="scale" (ngModelChange)="handleScale($event)" [ngModelOptions]="{standalone: true}">
     <nz-option nzLabel="25%" [nzValue]="0.25"></nz-option>
     <nz-option nzLabel="50%" [nzValue]="0.5"></nz-option>
     <nz-option nzLabel="75%" [nzValue]="0.75"></nz-option>

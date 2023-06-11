@@ -5,6 +5,7 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { HmiProject } from "../../hmi";
 import { ProjectSettingComponent } from '../project-setting/project-setting.component';
 import {ComponentService} from "../../component.service";
+
 @Component({
     selector: 'app-toolbar',
     templateUrl: './toolbar.component.html',
@@ -17,6 +18,9 @@ export class ToolbarComponent {
     @Input() graph!: Graph;
 
     @Output() onSave = new EventEmitter()
+
+    @Input() scale = 1
+    @Output() scaleChange = new EventEmitter<number>()
 
     constructor(
         private cs: ComponentService,
@@ -278,7 +282,10 @@ export class ToolbarComponent {
         save_link.click();
     }
 
-    handleScale($event: Event) {
-        console.log("handleScale", $event)
+    handleScale($event: number) {
+        //console.log("handleScale", $event)
+        this.scaleChange.emit($event)
+        this.graph.zoomTo($event)
+        //this.graph.resize()
     }
 }

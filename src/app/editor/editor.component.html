@@ -1,8 +1,10 @@
-<app-toolbar [graph]="canvas.graph" [project]="project" (onSave)="handleSave()"></app-toolbar>
+<app-toolbar [graph]="canvas.graph" [project]="project" (onSave)="handleSave()" [(scale)]="scale"></app-toolbar>
 <div class="body">
     <app-library (onDrag)="onDrag($event)"></app-library>
     <div class="content">
-        <app-canvas #canvas [style.width]="project.width+'px'" [style.height]="project.height+'px'"></app-canvas>
+        <app-canvas #canvas
+                    [style.width]="project.width*scale+'px'"
+                    [style.height]="project.height*scale+'px'"></app-canvas>
     </div>
     <app-property [graph]="canvas.graph" [project]="project" (onPageChange)="handlePageChange($event)"></app-property>
 </div>

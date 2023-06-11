@@ -18,6 +18,8 @@ export class EditorComponent implements OnInit {
     project: HmiProject = projectTemplate()
     index = 0;
 
+    scale = 1
+
     @ViewChild("canvas") canvas!: CanvasComponent
 
     constructor(
