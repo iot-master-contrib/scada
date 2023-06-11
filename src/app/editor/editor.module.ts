@@ -31,7 +31,7 @@ import {
     GroupOutline,
     UngroupOutline
 } from '@ant-design/icons-angular/icons';
-import {CollectionComponent} from './library/collection/collection.component';
+
 import {ComponentsModule} from "../components/components.module";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {ColorPickerModule} from "ngx-color-picker";
@@ -55,6 +55,9 @@ import {ProjectSettingComponent} from './project-setting/project-setting.compone
 import {BackgroundComponent} from './background/background.component';
 import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 import {ComponentService} from "../component.service";
+import { BindingComponent } from './binding/binding.component';
+import { ListenerComponent } from './listener/listener.component';
+import { AnimateComponent } from './animate/animate.component';
 
 @NgModule({
     declarations: [
@@ -64,13 +67,15 @@ import {ComponentService} from "../component.service";
         PropertyComponent,
         PropertyInputComponent,
         ToolbarComponent,
-        CollectionComponent,
         SetDataComponent,
         CollapseComponent,
         PagesComponent,
         PageSettingComponent,
         ProjectSettingComponent,
         BackgroundComponent,
+        BindingComponent,
+        ListenerComponent,
+        AnimateComponent,
     ],
     imports: [
         CommonModule,

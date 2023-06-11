@@ -33,9 +33,8 @@ export class ComponentService {
     public collections: HmiCollection[] = []
     public components: { [id: string]: HmiComponent } = {}
 
-    constructor(private injector: Injector,
-                private rs: RequestService,
-                private ns: NzNotificationService) {
+    constructor(private rs: RequestService, private ns: NzNotificationService) {
+
         this.PutCollection(BaseComponents)
         this.PutCollection(ChartComponent)
         this.PutCollection(IndustryComponents)
@@ -115,7 +114,7 @@ export class ComponentService {
     }
 
 
-    public CheckRegister(component: HmiComponent) {
+    public CheckRegister(component: HmiComponent, injector?: Injector) {
         if (component.registered || component.internal)
             return
 
@@ -141,16 +140,17 @@ export class ComponentService {
                     content: component.content,
                     width: 100,
                     height: 60,
-                    injector: this.injector,
+                    // @ts-ignore
+                    injector: injector,
                 })
                 component.registered = true
                 break;
         }
     }
 
-    public Get(id: string): HmiComponent {
+    public Get(id: string, injector?: Injector): HmiComponent {
         const cmp = this.components[id]
-        cmp && this.CheckRegister(cmp)
+        cmp && this.CheckRegister(cmp, injector)
         return cmp
     }
 

@@ -21,7 +21,7 @@ export class PropertyComponent {
 
     @Output() onPageChange = new EventEmitter<number>();
 
-    selected: any = [];
+    selected: Cell[] = [];
 
     textProperties: HmiProperty[] = [
         { name: "文本", path: "attrs/text/text", type: "text" },
@@ -122,47 +122,8 @@ export class PropertyComponent {
             this.cell.setSize(this.formSize.value)
         }
     }
+
     onLinePositionChange($event: Event) {
         this.cell.setProp(this.formLinePosition.value);
-    }
-
-    handleEditData() {
-        const modal: NzModalRef = this.modal.create({
-            nzContent: EditTableComponent,
-            nzComponentParams: {
-                listData: [{
-                    title: '属性名',
-                    keyName: 'name'
-                }, {
-                    title: '属性值',
-                    keyName: 'content'
-                }],
-                data: this.cell.data
-            },
-            nzViewContainerRef: this.viewContainerRef,
-            nzFooter: [
-                {
-                    label: '取消',
-                    onClick: () => modal.destroy()
-                },
-                {
-                    label: '保存',
-                    type: 'primary',
-                    onClick: () => {
-                        const editTable = modal.getContentComponent();
-                        const { dataObj, arr } = editTable.save();
-                        this.cell.setData(dataObj, { overwrite: true });
-                        // this.rs.post('/app/scada/api/project/create', { Pages: arr }).subscribe((res) => {
-                        //     this.msg.success('保存成功');
-                        // });
-                        modal.destroy();
-                    }
-                },
-            ]
-        });
-    }
-
-    addPage() {
-
     }
 }

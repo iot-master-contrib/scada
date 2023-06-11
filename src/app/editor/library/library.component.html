@@ -10,7 +10,11 @@
     </ng-template>
 </div>
 <div class="collections">
-    <app-collection *ngFor="let c of cs.collections" [data]="c" (onDraw)="onDrag.emit($event)"></app-collection>
+    <app-collapse [title]="c.name" *ngFor="let c of cs.collections">
+        <div class="item" [title]="c.name" *ngFor="let c of c.components" (dragstart)="onDragStart($event, c)">
+            <img class="icon" [src]="c.icon" [alt]="c.name">
+        </div>
+    </app-collapse>
 </div>
 
 

@@ -14,7 +14,6 @@ import {register} from "@antv/x6-angular-shape";
 
 import {HmiComponent, HmiDraw, HmiPage} from "../../hmi";
 
-import {ports} from 'src/app/components/configs/ports';
 import {ComponentService} from "../../component.service";
 
 
@@ -190,7 +189,7 @@ export class CanvasComponent {
             //this.showPorts(ports, false);
         });
 
-        this.graph.on("cell:selected", ()=>{
+        this.graph.on("cell:selected", () => {
         })
 
         this.graph.on('cell:click', ({cell, e}) => {
@@ -216,7 +215,7 @@ export class CanvasComponent {
 
     public Render(page: HmiPage) {
         page.content?.cells?.forEach((cell: any) => {
-            const cmp = this.cs.Get(cell.shape)
+            const cmp = this.cs.Get(cell.shape, this.injector)
             //TODO 使用filter 过滤掉找不到组件的情况
         })
         this.graph.fromJSON(page.content)
@@ -227,7 +226,7 @@ export class CanvasComponent {
         let {component} = $event;
 
         //检查是否已经注册
-        this.cs.CheckRegister(component)
+        this.cs.CheckRegister(component, this.injector)
 
         switch (component.type) {
             case "line":
@@ -254,7 +253,7 @@ export class CanvasComponent {
                     shape: component.id,
                     ...component.meta,
                     data: {id: component.id},
-                    ports
+                    //ports
                 })
                 break;
         }

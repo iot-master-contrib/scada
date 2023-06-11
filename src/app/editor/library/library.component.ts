@@ -16,6 +16,10 @@ export class LibraryComponent {
     ) {
     }
 
+    onDragStart($event: DragEvent, c: HmiComponent) {
+        this.onDrag.emit({ event: $event, component: c });
+    }
+
     handleClick() {
 
     }
