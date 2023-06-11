@@ -81,6 +81,6 @@
     <app-binding [cell]="cell" [component]="cmp"></app-binding>
 </app-collapse>
 
-<app-collapse title="事件响应" *ngIf="selected.length == 1 && cmp?.events?.length">
+<app-collapse title="事件响应" *ngIf="selected.length == 1 && cmp">
     <app-listener [cell]="cell" [component]="cmp"></app-listener>
 </app-collapse>

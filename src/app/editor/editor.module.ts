@@ -58,6 +58,8 @@ import {ComponentService} from "../component.service";
 import { BindingComponent } from './binding/binding.component';
 import { ListenerComponent } from './listener/listener.component';
 import { AnimateComponent } from './animate/animate.component';
+import { ListenerSettingComponent } from './listener-setting/listener-setting.component';
+import { BindingSettingComponent } from './binding-setting/binding-setting.component';
 
 @NgModule({
     declarations: [
@@ -76,6 +78,8 @@ import { AnimateComponent } from './animate/animate.component';
         BindingComponent,
         ListenerComponent,
         AnimateComponent,
+        ListenerSettingComponent,
+        BindingSettingComponent,
     ],
     imports: [
         CommonModule,

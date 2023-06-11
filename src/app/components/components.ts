@@ -27,9 +27,20 @@ export const BaseComponents: HmiCollection = {
         {name: '输入框', id: 'input', icon: '/app/scada/assets/input.svg', type: "angular", content: InputComponent},
         {name: '表格', id: 'table', icon: '/app/scada/assets/table.svg', type: "angular", content: TableComponent},
         {name: '时间', id: 'time', icon: '/app/scada/assets/time.svg', type: "angular", content: TimeComponent},
-        {name: '开关', id: 'switch', icon: '/app/scada/assets/switch.svg', type: "angular", content: SwitchComponent},
+        {
+            name: '开关', id: 'switch', icon: '/app/scada/assets/switch.svg', type: "angular", content: SwitchComponent,
+            bindings: [{label: '开关', name: 'switch', type: ""}],
+            events: [{label: '变化', name: 'change'}],
+
+        },
         {name: '滑块', id: 'slider', icon: '/app/scada/assets/slider.svg', type: "angular", content: SliderComponent},
-        {name: '进度条', id: 'progress', icon: '/app/scada/assets/progress.svg', type: "angular", content: ProgressComponent},
+        {
+            name: '进度条',
+            id: 'progress',
+            icon: '/app/scada/assets/progress.svg',
+            type: "angular",
+            content: ProgressComponent
+        },
     ]
 }
 

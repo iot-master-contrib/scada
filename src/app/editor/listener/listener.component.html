@@ -1,1 +1,7 @@
-<p>listener works!</p>
+<div (click)="edit(click)">
+    点击 : {{cell.data?.listeners?.click}}
+</div>
+
+<div *ngFor="let e of component?.events" (click)="edit(e)">
+    {{e.label}} : {{cell.data?.listeners?.[e.name]}}
+</div>

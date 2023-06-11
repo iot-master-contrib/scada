@@ -10,7 +10,6 @@ import {History} from "@antv/x6-plugin-history";
 import {Selection} from "@antv/x6-plugin-selection";
 import {Export} from "@antv/x6-plugin-export";
 import {Dnd} from "@antv/x6-plugin-dnd";
-import {register} from "@antv/x6-angular-shape";
 
 import {HmiComponent, HmiDraw, HmiPage} from "../../hmi";
 
@@ -22,7 +21,6 @@ import {ComponentService} from "../../component.service";
     templateUrl: './canvas.component.html',
     styleUrls: ['./canvas.component.scss'],
 })
-
 export class CanvasComponent {
     public graph: Graph;
 
@@ -107,9 +105,6 @@ export class CanvasComponent {
 
         this.dnd = new Dnd({target: this.graph});
 
-        //this.graph.fromJSON(data)
-        this.graph.toJSON()
-
         this.graph.bindKey('ctrl+s', (e) => {
             this.graph.exportPNG();
             e.preventDefault()
@@ -118,10 +113,11 @@ export class CanvasComponent {
         //快捷键
         this.graph.bindKey('ctrl+z', () => this.graph.undo())
         this.graph.bindKey('ctrl+y', () => this.graph.redo())
-        this.graph.bindKey('ctrl+x', () => this.graph.cut(this.graph.getSelectedCells()))
-        this.graph.bindKey('ctrl+c', () => this.graph.copy(this.graph.getSelectedCells()))
+        this.graph.bindKey('ctrl+x', () => this.graph.cut(this.graph.getSelectedCells(), {deep: true}))
+        this.graph.bindKey('ctrl+c', () => this.graph.copy(this.graph.getSelectedCells(), {deep: true}))
         this.graph.bindKey('ctrl+v', () => this.graph.resetSelection(this.graph.paste()))
         this.graph.bindKey('backspace', () => this.graph.getSelectedCells().forEach(cell => cell.remove()))
+        this.graph.bindKey('delete', () => this.graph.getSelectedCells().forEach(cell => cell.remove()))
 
         this.graph.container.onmousemove = (event) => {
             if (this.line) {
