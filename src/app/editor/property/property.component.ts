@@ -70,7 +70,7 @@ export class PropertyComponent {
                 }
 
                 //找到组件
-                this.cmp = this.cs.GetComponent(this.cell.shape)
+                this.cmp = this.cs.Get(this.cell.shape)
             }
         })
     }

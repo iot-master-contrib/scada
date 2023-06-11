@@ -1,6 +1,6 @@
-import {Component, ElementRef, Injector, Input} from '@angular/core';
+import {Component, ElementRef, Injector} from '@angular/core';
 
-import {Edge, FunctionExt, Graph, Model, Node, Shape} from '@antv/x6';
+import {Edge, FunctionExt, Graph, Node, Shape} from '@antv/x6';
 
 import {Transform} from "@antv/x6-plugin-transform";
 import {Snapline} from "@antv/x6-plugin-snapline";
@@ -16,9 +16,6 @@ import {HmiComponent, HmiDraw, HmiPage} from "../../hmi";
 
 import {ports} from 'src/app/components/configs/ports';
 import {ComponentService} from "../../component.service";
-import {switchCenter, switchClose, switchOpen} from "../../components/electric/switch";
-
-//import { switchOpen, switchClose, switchCenter } from 'src/app/components/electric/components';
 
 
 @Component({
@@ -113,9 +110,6 @@ export class CanvasComponent {
                 },
             },
         });
-        // this.graph.enableHistory()
-        // this.graph.enableClipboard()
-        // this.graph.enableKeyboard()
 
         //补充插件
         this.graph.use(new Keyboard({enabled: true}));
@@ -217,51 +211,17 @@ export class CanvasComponent {
         });
 
         this.graph.on('cell:click', ({cell, e}) => {
-            let cmp = this.cs.GetComponent(cell.shape)
+            let cmp = this.cs.Get(cell.shape)
             // @ts-ignore
             cmp?.listeners?.click(cell, e)
         });
 
     }
 
-    public Register(component: HmiComponent) {
-        if (component.registered || component.internal)
-            return
-
-        switch (component.type) {
-            case "line":
-            case "edge":
-                //注册线
-                if (component.extends) {
-                    Graph.registerEdge(component.id, component.extends)
-                    component.registered = true
-                }
-                break
-            case "shape":
-                //注册衍生组件
-                if (component.extends) {
-                    Graph.registerNode(component.id, component.extends)
-                    component.registered = true
-                }
-                break;
-            case "angular":
-                register({
-                    shape: component.id,
-                    content: component.content,
-                    width: 100,
-                    height: 60,
-                    injector: this.injector,
-                })
-                component.registered = true
-                break;
-        }
-    }
-
     public Render(page: HmiPage) {
         page.content?.cells?.forEach((cell: any) => {
-            const cmp = this.cs.GetComponent(cell.shape)
+            const cmp = this.cs.Get(cell.shape)
             //TODO 使用filter 过滤掉找不到组件的情况
-            this.Register(cmp)
         })
         this.graph.fromJSON(page.content)
     }
@@ -269,24 +229,15 @@ export class CanvasComponent {
     public Draw($event: HmiDraw) {
         let node!: Node
         let {component} = $event;
+
+        //检查是否已经注册
+        this.cs.CheckRegister(component)
+
         switch (component.type) {
             case "line":
-                //注册组件
-                if (component.extends && !component.registered) {
-                    Graph.registerEdge(component.id, component.extends)
-                    component.registered = true
-                }
                 this.line = component;
-                // this.graph.createEdge({
-                //     shape: component.id,
-                // })
                 return
             case "shape":
-                //注册衍生组件
-                if (component.extends && !component.registered) {
-                    Graph.registerNode(component.id, component.extends)
-                    component.registered = true
-                }
                 if (component.meta) {
                     let tools: any = ['node-editor'];
                     if (component.id === 'text-block') {
@@ -303,17 +254,7 @@ export class CanvasComponent {
                 break;
             case "angular":
                 //避免重复注册
-                if (!component.registered) {
-                    register({
-                        shape: component.id,
-                        content: component.content,
-                        width: 100,
-                        height: 60,
-                        injector: this.injector,
-                    })
-                    component.registered = true
-                }
-                if (component.content) node = this.graph.createNode({
+                node = this.graph.createNode({
                     shape: component.id,
                     ...component.meta,
                     data: {id: component.id},

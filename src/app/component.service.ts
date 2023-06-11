@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Injector} from '@angular/core';
 import {RequestService} from "./request.service";
 import {
     createImageComponent,
@@ -13,6 +13,8 @@ import {IndustryComponents} from "./components/industry/components";
 import {ElectricComponents} from "./components/electric/components";
 import {Subject} from "rxjs";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {Graph} from "@antv/x6";
+import {register} from "@antv/x6-angular-shape";
 
 @Injectable({
     providedIn: 'root'
@@ -30,45 +32,47 @@ export class ComponentService {
     public collections: HmiCollection[] = []
     public components: { [id: string]: HmiComponent } = {}
 
-    constructor(private rs: RequestService, private ns: NzNotificationService) {
-        this.RegisterCollection(BaseComponents)
-        this.RegisterCollection(ChartComponent)
-        this.RegisterCollection(IndustryComponents)
-        this.RegisterCollection(ElectricComponents)
+    constructor(private injector: Injector,
+                private rs: RequestService,
+                private ns: NzNotificationService) {
+        this.PutCollection(BaseComponents)
+        this.PutCollection(ChartComponent)
+        this.PutCollection(IndustryComponents)
+        this.PutCollection(ElectricComponents)
 
         this.load()
     }
 
     load() {
         this.rs.get("api/collection/list", {limit: 99999}).subscribe(res => {
-            res.data?.forEach((c: any) => this.RegisterCollection(c))
+            res.data?.forEach((c: any) => this.PutCollection(c))
             this.loadComponent();
         })
     }
 
     loadComponent() {
         this.rs.get("api/component/list", {limit: 99999}).subscribe(res => {
-            res.data?.forEach((c: any) => this.RegisterComponent(c))
+            res.data?.forEach((c: any) => this.PutComponent(c))
         })
         this.rs.get("api/image/list", {limit: 99999}).subscribe(res => {
-            res.data?.forEach((c: any) => this.RegisterImage(c))
+            res.data?.forEach((c: any) => this.PutImage(c))
         })
         this.rs.get("api/path/list", {limit: 99999}).subscribe(res => {
-            res.data?.forEach((c: any) => this.RegisterPath(c))
+            res.data?.forEach((c: any) => this.PutPath(c))
         })
     }
 
-    public RegisterImage(component: HmiImageComponent) {
+    public PutImage(component: HmiImageComponent) {
         const c = createImageComponent(component)
-        this.RegisterComponent(c)
+        this.PutComponent(c)
     }
 
-    public RegisterPath(component: HmiPathComponent) {
+    public PutPath(component: HmiPathComponent) {
         const c = createPathComponent(component)
-        this.RegisterComponent(c)
+        this.PutComponent(c)
     }
 
-    public RegisterComponent(component: HmiComponent) {
+    public PutComponent(component: HmiComponent) {
         this.components[component.id] = component
         this.collections.forEach(c => {
             if (c.id == component.collection) {
@@ -95,7 +99,7 @@ export class ComponentService {
         }
     }
 
-    public RegisterCollection(collection: HmiCollection) {
+    public PutCollection(collection: HmiCollection) {
         this.collections.push(collection)
         collection.components = collection.components || []
         collection.components.forEach(c => {
@@ -103,8 +107,44 @@ export class ComponentService {
         })
     }
 
-    public GetComponent(id: string): HmiComponent {
-        return this.components[id]
+
+    public CheckRegister(component: HmiComponent) {
+        if (component.registered || component.internal)
+            return
+
+        switch (component.type) {
+            case "line":
+            case "edge":
+                //注册线
+                if (component.extends) {
+                    Graph.registerEdge(component.id, component.extends)
+                    component.registered = true
+                }
+                break
+            case "shape":
+                //注册衍生组件
+                if (component.extends) {
+                    Graph.registerNode(component.id, component.extends)
+                    component.registered = true
+                }
+                break;
+            case "angular":
+                register({
+                    shape: component.id,
+                    content: component.content,
+                    width: 100,
+                    height: 60,
+                    injector: this.injector,
+                })
+                component.registered = true
+                break;
+        }
+    }
+
+    public Get(id: string): HmiComponent {
+        const cmp = this.components[id]
+        this.CheckRegister(cmp)
+        return cmp
     }
 
 
