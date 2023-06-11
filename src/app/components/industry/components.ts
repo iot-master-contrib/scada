@@ -26,7 +26,6 @@ const images: HmiImageComponent[] = [
 ]
 
 export const IndustryComponents: HmiCollection = {
-    id: "industry",
     name: '工业组件',
     components: images.map(img=>createImageComponent(img))
 }

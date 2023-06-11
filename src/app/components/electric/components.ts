@@ -27,7 +27,6 @@ const images: HmiImageComponent[] = [
 ]
 
 export const ElectricComponents: HmiCollection = {
-    id: "electric",
     name: '电力组件',
     components: images.map(img => createImageComponent(img)).concat([ElectricSwitch])
 }

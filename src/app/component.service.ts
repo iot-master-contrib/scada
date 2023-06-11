@@ -48,13 +48,6 @@ export class ComponentService {
     }
 
     load() {
-        this.rs.get("api/collection/list", {limit: 99999}).subscribe(res => {
-            res.data?.forEach((c: any) => this.PutCollection(c))
-            this.loadComponent();
-        })
-    }
-
-    loadComponent() {
         this.rs.get("api/component/list", {limit: 99999}).subscribe(res => {
             res.data?.forEach((c: any) => this.PutComponent(c))
         })
@@ -78,12 +71,22 @@ export class ComponentService {
 
     public PutComponent(component: HmiComponent) {
         this.components[component.id] = component
-        this.collections.forEach(c => {
-            if (c.id == component.collection) {
-                c.components.push(component)
+
+        //找集合 TODO 索引一下？？？
+        if (component.collection) {
+            let found = false;
+            this.collections.forEach(c => {
+                if (c.name == component.collection) {
+                    c.components.push(component)
+                    found = true
+                }
+            })
+            if (!found) {
+                this.collections.push({name: component.collection, components: [component]})
             }
-        })
-        //TODO 处理未分类组件
+        } else {
+            //TODO 处理未分类组件
+        }
 
         //编译监听事件
         if (component.listeners) {

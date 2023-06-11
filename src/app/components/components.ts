@@ -18,7 +18,6 @@ import {ButtonComponent} from "./button/button.component";
 
 
 export const BaseComponents: HmiCollection = {
-    id: 'base',
     name: '基础组件',
     components: [
         BaseLine, BaseCircle, BaseEllipse, BaseRect,
@@ -35,7 +34,6 @@ export const BaseComponents: HmiCollection = {
 }
 
 export const ChartComponent: HmiCollection = {
-    id: 'chart',
     name: '图表组件',
     components: [
         {name: '柱状图', id: 'chart-bar', icon: '/app/scada/assets/chart-bar.svg', type: "angular"},

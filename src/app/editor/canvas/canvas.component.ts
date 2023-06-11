@@ -39,9 +39,6 @@ export class CanvasComponent {
 
         this.graph = new Graph({
             container: element.nativeElement,
-            //width: 800,
-            //height: 600,
-            //autoResize: true,
             background: {
                 //color: graphBgc.color, // 设置画布背景颜色
             },
@@ -49,25 +46,6 @@ export class CanvasComponent {
                 size: 10,      // 网格大小 10px
                 visible: JSON.parse(localStorage.getItem("show_grid") || 'true'), // 渲染网格背景
                 type: "mesh",
-                args: [
-                    {
-                        color: '#f0f0f0', // 主网格线颜色
-                        thickness: 1, // 主网格线宽度
-                    },
-                    {
-                        color: '#d0d0d0', // 次网格线颜色
-                        thickness: 1, // 次网格线宽度
-                        factor: 4, // 主次网格线间隔
-                    },
-                ],
-            },
-            panning: {//画布是否可以拖拽平移，默认禁用
-                enabled: false,
-                eventTypes: ['rightMouseDown']
-            },
-            mousewheel: {
-                enabled: false,
-                modifiers: ['ctrl', 'meta'],
             },
             connecting: { //连线交互
                 snap: false,//是否自动吸附
