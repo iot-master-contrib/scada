@@ -11,6 +11,7 @@ type HmiComponent struct {
 	Properties []HmiProperty         `json:"properties,omitempty"`
 	Bindings   []HmiComponentBinding `json:"bindings,omitempty"`
 	Events     []HmiComponentEvent   `json:"events,omitempty"`
+	Listeners  map[string]string     `json:"listeners,omitempty" xomr:"json"`
 	Collection string                `json:"collection,omitempty" xorm:"index"`
 	Version    int                   `json:"version,omitempty" xorm:"version"`
 	Updated    time.Time             `json:"updated" xorm:"updated"`

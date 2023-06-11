@@ -12,6 +12,7 @@ import {BaseComponents, ChartComponent} from "./components/components";
 import {IndustryComponents} from "./components/industry/components";
 import {ElectricComponents} from "./components/electric/components";
 import {Subject} from "rxjs";
+import {NzNotificationService} from "ng-zorro-antd/notification";
 
 @Injectable({
     providedIn: 'root'
@@ -29,7 +30,7 @@ export class ComponentService {
     public collections: HmiCollection[] = []
     public components: { [id: string]: HmiComponent } = {}
 
-    constructor(private rs: RequestService) {
+    constructor(private rs: RequestService, private ns: NzNotificationService) {
         this.RegisterCollection(BaseComponents)
         this.RegisterCollection(ChartComponent)
         this.RegisterCollection(IndustryComponents)
@@ -75,6 +76,23 @@ export class ComponentService {
             }
         })
         //TODO 处理未分类组件
+
+        //编译监听事件
+        if (component.listeners) {
+            for (let k in component.listeners) {
+                if (!component.listeners.hasOwnProperty(k)) return
+                const func = component.listeners[k]
+                if (typeof func === "string") {
+                    //编译
+                    try {
+                        // @ts-ignore
+                        component.listeners[k] = new Function('cell', 'event', func)
+                    } catch (e: any) {
+                        this.ns.error("编译错误", e.message)
+                    }
+                }
+            }
+        }
     }
 
     public RegisterCollection(collection: HmiCollection) {
