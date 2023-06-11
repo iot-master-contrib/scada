@@ -218,9 +218,8 @@ export class CanvasComponent {
 
         this.graph.on('cell:click', ({cell, e}) => {
             let cmp = this.cs.GetComponent(cell.shape)
-            if (cmp && cmp.listeners && cmp.listeners["click"]) {
-                cmp.listeners["click"](cell, e)
-            }
+            // @ts-ignore
+            cmp?.listeners?.click(cell, e)
         });
 
     }
