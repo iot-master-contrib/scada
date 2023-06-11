@@ -1,10 +1,11 @@
 import {Injectable, Injector} from '@angular/core';
 import {RequestService} from "./request.service";
 import {
+    createHtmlComponent,
     createImageComponent,
     createPathComponent,
     HmiCollection,
-    HmiComponent,
+    HmiComponent, HmiHtmlComponent,
     HmiImageComponent,
     HmiPathComponent
 } from "./hmi";
@@ -13,7 +14,7 @@ import {IndustryComponents} from "./components/industry/components";
 import {ElectricComponents} from "./components/electric/components";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {Subject} from "rxjs";
-import {Graph} from "@antv/x6";
+import {Cell, Graph, Shape} from "@antv/x6";
 import {register} from "@antv/x6-angular-shape";
 import {BaseGroup} from "./components/base/group";
 
@@ -56,6 +57,9 @@ export class ComponentService {
         this.rs.get("api/path/list", {limit: 99999}).subscribe(res => {
             res.data?.forEach((c: any) => this.PutPath(c))
         })
+        this.rs.get("api/html/list", {limit: 99999}).subscribe(res => {
+            res.data?.forEach((c: any) => this.PutHtml(c))
+        })
     }
 
     public PutImage(component: HmiImageComponent) {
@@ -67,6 +71,12 @@ export class ComponentService {
         const c = createPathComponent(component)
         this.PutComponent(c)
     }
+
+    public PutHtml(component: HmiHtmlComponent) {
+        const c = createHtmlComponent(component)
+        this.PutComponent(c)
+    }
+
 
     public PutComponent(component: HmiComponent) {
         this.components[component.id] = component
@@ -143,6 +153,16 @@ export class ComponentService {
                     Graph.registerNode(component.id, component.extends)
                     component.registered = true
                 }
+                break;
+            case "html":
+                //注册衍生组件
+                Shape.HTML.register({
+                    shape: component.id,
+                    effects: component.effects,
+                    html: component.html as (cell: Cell) => HTMLHtmlElement,
+                    ...component.extends
+                })
+                component.registered = true
                 break;
             // case "angular":
             //     register({

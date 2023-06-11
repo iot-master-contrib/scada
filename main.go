@@ -45,7 +45,11 @@ func main() {
 
 func Sync() error {
 	return db.Engine.Sync2(
-		new(types.HmiProject), new(types.HmiComponent), new(types.HmiCollection),
+		new(types.HmiProject),
+		new(types.HmiComponent),
+		new(types.HmiHtml),
+		new(types.HmiPath),
+		new(types.HmiImage),
 	)
 }
 

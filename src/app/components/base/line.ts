@@ -1,4 +1,4 @@
-import { HmiComponent } from "../../hmi";
+import {HmiComponent} from "../../hmi";
 import {createStrokeProperties} from "../properties";
 
 export const BaseLine: HmiComponent = {
@@ -40,7 +40,7 @@ export const BaseLine: HmiComponent = {
                 targetMarker: null,
             },
         },
-        tools: ['edge-editor'],
+        tools: {items: ['edge-editor']},
     },
     meta: {},
     properties: [

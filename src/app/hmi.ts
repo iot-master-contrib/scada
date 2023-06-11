@@ -12,7 +12,7 @@ export declare interface HmiComponent {
     type: "line" | "shape" | "html"
 
     internal?: boolean
-    extends?: any //继承 shape 或 edge
+    extends?: Node.Properties | Edge.Properties //继承 shape 或 edge
 
     meta?: Node.Metadata | Edge.Metadata
 
@@ -97,6 +97,28 @@ export function createPathComponent(cmp: HmiPathComponent): HmiComponent {
         collection: cmp.collection
     }
 }
+
+
+export declare interface HmiHtmlComponent {
+    id: string
+    name: string
+    icon: string
+    html: string
+    collection?: string
+}
+
+export function createHtmlComponent(cmp: HmiHtmlComponent): HmiComponent {
+    return {
+        id: cmp.id,
+        name: cmp.name,
+        icon: cmp.icon,
+        type: "html",
+        effects: ['data'],
+        html: cmp.html,
+        collection: cmp.collection
+    }
+}
+
 
 export declare interface HmiCollection {
     name: string
