@@ -103,6 +103,17 @@ export class ComponentService {
                 }
             }
         }
+
+        //HTML组件
+        if (typeof component.html === "string") {
+            //编译
+            try {
+                // @ts-ignore
+                component.html = new Function('cell', func)
+            } catch (e: any) {
+                this.ns.error("编译错误", e.message)
+            }
+        }
     }
 
     public PutCollection(collection: HmiCollection) {

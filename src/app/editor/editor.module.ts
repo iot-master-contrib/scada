@@ -32,7 +32,6 @@ import {
     UngroupOutline
 } from '@ant-design/icons-angular/icons';
 
-import {ComponentsModule} from "../components/components.module";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {ColorPickerModule} from "ngx-color-picker";
 import {NzModalModule} from 'ng-zorro-antd/modal';
@@ -85,7 +84,6 @@ import { BindingSettingComponent } from './binding-setting/binding-setting.compo
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        ComponentsModule,
         EditorRoutingModule,
         NzIconModule.forChild([
             SaveOutline, ExportOutline, UndoOutline, RedoOutline, ScissorOutline,
