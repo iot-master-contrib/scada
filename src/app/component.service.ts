@@ -15,6 +15,7 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
 import {Subject} from "rxjs";
 import {Graph} from "@antv/x6";
 import {register} from "@antv/x6-angular-shape";
+import {BaseGroup} from "./components/base/group";
 
 @Injectable({
     providedIn: 'root'
@@ -39,6 +40,9 @@ export class ComponentService {
         this.PutCollection(ChartComponent)
         this.PutCollection(IndustryComponents)
         this.PutCollection(ElectricComponents)
+
+        this.PutComponent(BaseGroup)
+        //this.PutComponent(BaseGroup)
 
         this.load()
     }
@@ -143,7 +147,7 @@ export class ComponentService {
 
     public Get(id: string): HmiComponent {
         const cmp = this.components[id]
-        this.CheckRegister(cmp)
+        cmp && this.CheckRegister(cmp)
         return cmp
     }
 

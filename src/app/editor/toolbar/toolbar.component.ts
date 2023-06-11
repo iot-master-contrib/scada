@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { HmiProject } from "../../hmi";
 import { ProjectSettingComponent } from '../project-setting/project-setting.component';
+import {ComponentService} from "../../component.service";
 @Component({
     selector: 'app-toolbar',
     templateUrl: './toolbar.component.html',
@@ -18,6 +19,7 @@ export class ToolbarComponent {
     @Output() onSave = new EventEmitter()
 
     constructor(
+        private cs: ComponentService,
         private modal: NzModalService,
         private msg: NzMessageService,
         private viewContainerRef: ViewContainerRef,
@@ -176,35 +178,55 @@ export class ToolbarComponent {
 
     handleGroup() {
         let boxes = this.graph.getSelectedCells().map(n => n.getBBox())
+        //let zIndex = this.graph.getSelectedCells().reduce((p,n) => p.zIndex < n.zIndex ? p.zIndex : n.zIndex)
         let meta = {
-            x: boxes.reduce((p, n) => p.x < n.x ? p : n).x,
-            y: boxes.reduce((p, n) => p.y < n.y ? p : n).y,
-            right: boxes.reduce((p, n) => p.right > n.right ? p : n).right,
-            bottom: boxes.reduce((p, n) => p.bottom > n.bottom ? p : n).bottom,
+            x: boxes.reduce((p, n) => p.x < n.x ? p : n).x - 10,
+            y: boxes.reduce((p, n) => p.y < n.y ? p : n).y - 10,
+            right: boxes.reduce((p, n) => p.right > n.right ? p : n).right + 10,
+            bottom: boxes.reduce((p, n) => p.bottom > n.bottom ? p : n).bottom + 10,
         }
         console.log("group", meta)
+
+        this.cs.Get("group")
         let parent = this.graph.addNode({
-            shape: "rect",
-            x: meta.x, y: meta.y,
+            shape: "group",
+            x: meta.x,
+            y: meta.y,
             width: meta.right - meta.x,
             height: meta.bottom - meta.y,
             attrs: {
                 //TODO 透明 zindex处理
-                body: {
-                    fill: "none",
-                    stroke: "none"
-                }
+                // body: {
+                //     fill: "none",
+                //     stroke: '#666',
+                //     strokeWidth: 2,
+                //     strokeDasharray: "8 4",
+                // }
             }
         })
+        parent.setVisible(false)
+
         //this.graph.getSelectedCells().forEach(cell => cell.setParent(parent))
-        this.graph.getSelectedCells().forEach(cell => parent.addChild(cell))
+        this.graph.getSelectedCells().forEach(cell => {
+            //if (cell.shape == "group" || cell.getChildCount() > 0)
+            // @ts-ignore
+            //cell.setZIndex(parent.zIndex + cell.zIndex)
+            parent.addChild(cell)
+        })
     }
 
     handleUngroup() {
         this.graph.getSelectedCells().forEach(cell => {
             //if (cell.hasParent()) return;
-            cell.setChildren(null);
-            cell.remove() //TODO 会误删除
+            if (cell.shape == "group") {
+                cell.getChildren()?.forEach(c=>{
+                    c.setParent(null)
+                    //cell.removeChild(c)
+                    //cell.eachChild()
+                })
+                cell.setChildren(null);
+                cell.remove() //TODO 会误删除
+            }
         })
     }
 

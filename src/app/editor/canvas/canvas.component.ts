@@ -121,6 +121,7 @@ export class CanvasComponent {
             enabled: true,
             multiple: true,
             rubberband: true,
+            rubberEdge: true,
             movable: true,
             strict: true,
             showNodeSelectionBox: true
@@ -158,6 +159,7 @@ export class CanvasComponent {
         }
 
         this.graph.on('edge:selected', FunctionExt.debounce(({edge}) => {
+
             edge.addTools([{
                 name: 'source-arrowhead',
                 args: {
@@ -210,12 +212,33 @@ export class CanvasComponent {
             //this.showPorts(ports, false);
         });
 
+        this.graph.on("cell:selected", ()=>{
+            this.graph.getSelectedCells().forEach(cell=>{
+                if (cell.hasParent()) {
+                    cell.getParent()?.setVisible(true)
+                }
+            })
+        })
+
         this.graph.on('cell:click', ({cell, e}) => {
             let cmp = this.cs.Get(cell.shape)
             // @ts-ignore
-            cmp?.listeners?.click(cell, e)
+            cmp?.listeners?.click?.call(this, cell, e)
         });
 
+        this.graph.on('cell:mouseenter', ({cell, e}) => {
+            //console.log("cell:mouseenter", cell.shape)
+            let cmp = this.cs.Get(cell.shape)
+            // @ts-ignore
+            cmp?.listeners?.mouseenter?.call(this, cell, e)
+        });
+
+        this.graph.on('cell:mouseleave', ({cell, e}) => {
+            //console.log("cell:mouseleave")
+            let cmp = this.cs.Get(cell.shape)
+            // @ts-ignore
+            cmp?.listeners?.mouseleave?.call(this, cell, e)
+        });
     }
 
     public Render(page: HmiPage) {
