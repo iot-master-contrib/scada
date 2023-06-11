@@ -114,13 +114,12 @@ export class ComponentService {
     }
 
 
-    public CheckRegister(component: HmiComponent, injector?: Injector) {
+    public CheckRegister(component: HmiComponent) {
         if (component.registered || component.internal)
             return
 
         switch (component.type) {
             case "line":
-            case "edge":
                 //注册线
                 if (component.extends) {
                     Graph.registerEdge(component.id, component.extends)
@@ -134,23 +133,23 @@ export class ComponentService {
                     component.registered = true
                 }
                 break;
-            case "angular":
-                register({
-                    shape: component.id,
-                    content: component.content,
-                    width: 100,
-                    height: 60,
-                    // @ts-ignore
-                    injector: injector,
-                })
-                component.registered = true
-                break;
+            // case "angular":
+            //     register({
+            //         shape: component.id,
+            //         content: component.content,
+            //         width: 100,
+            //         height: 60,
+            //         // @ts-ignore
+            //         injector: injector,
+            //     })
+            //     component.registered = true
+            //     break;
         }
     }
 
-    public Get(id: string, injector?: Injector): HmiComponent {
+    public Get(id: string): HmiComponent {
         const cmp = this.components[id]
-        cmp && this.CheckRegister(cmp, injector)
+        cmp && this.CheckRegister(cmp)
         return cmp
     }
 

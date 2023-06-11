@@ -9,7 +9,7 @@ export declare interface HmiComponent {
 
     icon: string
 
-    type: string
+    type: "line" | "shape" | "html"
 
     internal?: boolean
     extends?: any //继承 shape 或 edge
@@ -17,7 +17,11 @@ export declare interface HmiComponent {
     meta?: Node.Metadata | Edge.Metadata
 
     //Angular组件
-    content?: any //Component
+    //content?: any //Component
+
+    //html组件
+    effects?: string[]
+    html?: ((cell: Cell) => void) | string
 
     //是否已经注册
     registered?: boolean

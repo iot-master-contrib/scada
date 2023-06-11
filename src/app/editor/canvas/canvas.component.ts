@@ -211,7 +211,7 @@ export class CanvasComponent {
 
     public Render(page: HmiPage) {
         page.content?.cells?.forEach((cell: any) => {
-            const cmp = this.cs.Get(cell.shape, this.injector)
+            const cmp = this.cs.Get(cell.shape)
             //TODO 使用filter 过滤掉找不到组件的情况
         })
         this.graph.fromJSON(page.content)
@@ -222,7 +222,7 @@ export class CanvasComponent {
         let {component} = $event;
 
         //检查是否已经注册
-        this.cs.CheckRegister(component, this.injector)
+        this.cs.CheckRegister(component)
 
         switch (component.type) {
             case "line":
@@ -243,15 +243,15 @@ export class CanvasComponent {
                     })
                 }
                 break;
-            case "angular":
-                //避免重复注册
-                node = this.graph.createNode({
-                    shape: component.id,
-                    ...component.meta,
-                    data: {id: component.id},
-                    //ports
-                })
-                break;
+            // case "angular":
+            //     //避免重复注册
+            //     node = this.graph.createNode({
+            //         shape: component.id,
+            //         ...component.meta,
+            //         data: {id: component.id},
+            //         //ports
+            //     })
+            //     break;
         }
         if (node && $event.event)
             this.dnd.start(node, $event.event);
