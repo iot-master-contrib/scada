@@ -194,23 +194,14 @@ export class ToolbarComponent {
             y: meta.y,
             width: meta.right - meta.x,
             height: meta.bottom - meta.y,
-            attrs: {
-                //TODO 透明 zindex处理
-                // body: {
-                //     fill: "none",
-                //     stroke: '#666',
-                //     strokeWidth: 2,
-                //     strokeDasharray: "8 4",
-                // }
-            }
         })
-        parent.setVisible(false)
+        //parent.setVisible(false)
 
         //this.graph.getSelectedCells().forEach(cell => cell.setParent(parent))
         this.graph.getSelectedCells().forEach(cell => {
             //if (cell.shape == "group" || cell.getChildCount() > 0)
             // @ts-ignore
-            //cell.setZIndex(parent.zIndex + cell.zIndex)
+            cell.setZIndex(parent.zIndex + cell.zIndex)
             parent.addChild(cell)
         })
     }

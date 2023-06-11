@@ -213,11 +213,6 @@ export class CanvasComponent {
         });
 
         this.graph.on("cell:selected", ()=>{
-            this.graph.getSelectedCells().forEach(cell=>{
-                if (cell.hasParent()) {
-                    cell.getParent()?.setVisible(true)
-                }
-            })
         })
 
         this.graph.on('cell:click', ({cell, e}) => {

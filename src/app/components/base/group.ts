@@ -25,7 +25,7 @@ export const BaseGroup: HmiComponent = {
     listeners: {
         mouseenter: (cell, event) => {
             console.log("group enter")
-            cell.setAttrByPath("rect/stroke", "#000")
+            cell.setAttrByPath("rect/stroke", "#666")
         },
         mouseleave: (cell, event) => {
             console.log("group leave")
