@@ -11,38 +11,38 @@
 
 <ng-template #totalTemplate let-total>总共 {{ total }} 条</ng-template>
 <nz-table #basicTable [nzData]="datum" [nzFrontPagination]="false" [nzLoading]="loading" nzShowPagination
-    [nzTotal]="total" nzShowSizeChanger [nzShowTotal]="totalTemplate" (nzPageSizeChange)="pageSizeChange($event)"
-    (nzPageIndexChange)="pageIndexChange($event)" [nzPageSize]="pageSize" [nzPageIndex]="pageIndex"
-    (nzQueryParams)="onQuery($event)">
+          [nzTotal]="total" nzShowSizeChanger [nzShowTotal]="totalTemplate" (nzPageSizeChange)="pageSizeChange($event)"
+          (nzPageIndexChange)="pageIndexChange($event)" [nzPageSize]="pageSize" [nzPageIndex]="pageIndex"
+          (nzQueryParams)="onQuery($event)">
     <thead>
-        <tr>
-            <th nzColumnKey="id" [nzSortFn]="true">ID</th>
-            <th nzColumnKey="name">名称</th>
-            <th nzColumnKey="created" [nzSortFn]="true">创建日期</th>
-            <th nzColumnKey="updated" [nzSortFn]="true">更新日期</th>
-            <th>操作</th>
-        </tr>
+    <tr>
+        <th nzColumnKey="id" [nzSortFn]="true">ID</th>
+        <th nzColumnKey="name">名称</th>
+        <th nzColumnKey="created" [nzSortFn]="true">创建日期</th>
+        <th nzColumnKey="updated" [nzSortFn]="true">更新日期</th>
+        <th>操作</th>
+    </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let data of basicTable.data; let i = index">
-            <td>{{data.id}}</td>
-            <td>{{data.name}}</td>
-            <td>{{data.created | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-            <td>{{data.updated | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-            <td>
-                <a target="_blank" [href]="'view/'+data.id">
-                    <i nz-icon nzType="eye"></i>
-                </a>
-                <nz-divider nzType="vertical"></nz-divider>
-                <a (click)="handleEdit(data.id)">
-                    <i nz-icon nzType="edit"></i>
-                </a>
-                <nz-divider nzType="vertical"></nz-divider>
-                <a nz-popconfirm nzPopconfirmTitle="确定删除?" (nzOnConfirm)="delete(data.id)" (nzOnCancel)="cancel()"
-                    nzPopconfirmPlacement="topLeft">
-                    <i nz-icon nzType="delete"></i>
-                </a>
-            </td>
-        </tr>
+    <tr *ngFor="let data of basicTable.data; let i = index">
+        <td>{{data.id}}</td>
+        <td>{{data.name}}</td>
+        <td>{{data.created | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+        <td>{{data.updated | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+        <td>
+            <a target="_blank" [href]="'view/'+data.id+'?panning=1&mousewheel=1'">
+                <i nz-icon nzType="eye"></i>
+            </a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a (click)="handleEdit(data.id)">
+                <i nz-icon nzType="edit"></i>
+            </a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a nz-popconfirm nzPopconfirmTitle="确定删除?" (nzOnConfirm)="delete(data.id)" (nzOnCancel)="cancel()"
+               nzPopconfirmPlacement="topLeft">
+                <i nz-icon nzType="delete"></i>
+            </a>
+        </td>
+    </tr>
     </tbody>
 </nz-table>

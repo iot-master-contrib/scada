@@ -10,13 +10,14 @@ import {BaseImage} from "./base/image";
 import {ChartGauge} from "./chart/gauge";
 import {ChartBar} from "./chart/bar";
 import {ChartLine} from "./chart/line";
+import {BaseNumber} from "./base/number";
 
 
 export const BaseComponents: HmiCollection = {
     name: '基础组件',
     components: [
         BaseLine, BaseCircle, BaseEllipse, BaseRect,
-        BaseTriangle, BaseText, BaseImage,
+        BaseTriangle, BaseText, BaseNumber, BaseImage,
     ]
 }
 
