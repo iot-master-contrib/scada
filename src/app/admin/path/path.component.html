@@ -1,0 +1,65 @@
+<nz-space>
+    <button *nzSpaceItem nz-button nzType="primary" (click)="reload()">
+        <i nz-icon nzType="reload" [nzSpin]="loading"></i>
+        刷新
+    </button>
+
+    <button *nzSpaceItem nz-button nzType="primary" (click)="handleCreate()">
+        <i nz-icon nzType="plus"></i>
+        创建组件
+    </button>
+</nz-space>
+
+<ng-template #totalTemplate let-total>总共 {{ total }} 条</ng-template>
+<nz-table
+    #basicTable
+    [nzData]="datum"
+    [nzLoading]="loading"
+    nzShowPagination
+    nzShowSizeChanger
+    [nzFrontPagination]="false"
+    [nzTotal]="total"
+    [nzShowTotal]="totalTemplate"
+    (nzPageSizeChange)="pageSizeChange($event)"
+    (nzPageIndexChange)="pageIndexChange($event)"
+    [nzPageSize]="pageSize"
+    [nzPageIndex]="pageIndex"
+    (nzQueryParams)="onQuery($event)"
+>
+    <thead>
+    <tr>
+        <th nzColumnKey="id" [nzSortFn]="true">ID</th>
+        <th nzColumnKey="name" [nzSortFn]="true">名称</th>
+        <th nzColumnKey="icon">图标</th>
+        <th nzColumnKey="collection">集合</th>
+        <th nzColumnKey="created" [nzSortFn]="true">日期</th>
+
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr
+        *ngFor="let data of basicTable.data; let i = index"
+        (dblclick)="open(data.id)"
+    >
+        <td>{{ data.id }}</td>
+        <td>{{ data.name }}</td>
+        <td><img [src]="data.icon"></td>
+        <td>{{data.collection}}</td>
+        <td>{{ data.created | date }}</td>
+
+        <td>
+            <a (click)="handleEdit(data.id)">
+                <i nz-icon nzType="edit"></i>
+            </a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a
+                nz-popconfirm
+                nzPopconfirmTitle="确定删除?"
+                (nzOnConfirm)="delete(data.id)">
+                <i nz-icon nzType="delete"></i>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</nz-table>

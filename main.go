@@ -16,16 +16,19 @@ import (
 func App() *model.App {
 	return &model.App{
 		Id:   "scada",
-		Name: "所有组态",
+		Name: "Web组态",
 		Entries: []model.AppEntry{{
 			Path: "app/scada/admin/project",
 			Name: "所有工程",
 		}, {
-			Path: "app/scada/admin/component",
-			Name: "所有组件",
+			Path: "app/scada/admin/path",
+			Name: "图片组件",
 		}, {
-			Path: "app/scada/admin/project",
-			Name: "所有集合",
+			Path: "app/scada/admin/path",
+			Name: "路径组件",
+		}, {
+			Path: "app/scada/admin/component",
+			Name: "高级组件",
 		}},
 		Type:    "tcp",
 		Address: "http://localhost" + web.GetOptions().Addr,
