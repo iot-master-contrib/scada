@@ -26,10 +26,14 @@ export class ViewerComponent implements OnInit {
         protected cs: ComponentService,
         private route: ActivatedRoute,
     ) {
+        let mousewheel = route.snapshot.queryParams['mousewheel']
+        let panning = route.snapshot.queryParams['panning']
         //title.setTitle(this.project.name)
         this.graph = new Graph({
             container: element.nativeElement,
             interacting: false,
+            mousewheel: mousewheel == "true" || mousewheel == "1",
+            panning: panning == "true" || panning == "1",
         });
 
         this.graph.on('cell:click', ({cell, e}) => {
