@@ -30,6 +30,10 @@
             <td>{{data.created | date:'yyyy-MM-dd HH:mm:ss'}}</td>
             <td>{{data.updated | date:'yyyy-MM-dd HH:mm:ss'}}</td>
             <td>
+                <a target="_blank" [href]="'view/'+data.id">
+                    <i nz-icon nzType="eye"></i>
+                </a>
+                <nz-divider nzType="vertical"></nz-divider>
                 <a (click)="handleEdit(data.id)">
                     <i nz-icon nzType="edit"></i>
                 </a>

@@ -214,6 +214,10 @@ export class CanvasComponent {
             const cmp = this.cs.Get(cell.shape)
             //TODO 使用filter 过滤掉找不到组件的情况
         })
+        this.graph.drawBackground({
+            color: page.background_color,
+            image: page.background_image,
+        })
         this.graph.fromJSON(page.content)
     }
 
