@@ -124,6 +124,24 @@ export class ComponentService {
                 this.ns.error("编译错误", e.message)
             }
         }
+
+
+        //数据绑定钩子
+        if (component.hooks) {
+            for (let k in component.hooks) {
+                if (!component.hooks.hasOwnProperty(k)) return
+                const func = component.hooks[k]
+                if (typeof func === "string") {
+                    //编译
+                    try {
+                        // @ts-ignore
+                        component.hooks[k] = new Function('value', 'cell', func)
+                    } catch (e: any) {
+                        this.ns.error("编译错误", e.message)
+                    }
+                }
+            }
+        }
     }
 
     public PutCollection(collection: HmiCollection) {
