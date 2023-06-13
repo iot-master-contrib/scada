@@ -1,4 +1,4 @@
-import { HmiCollection } from "../../hmi";
+import { HmiCollection } from "../hmi";
 import { ElectricSwitch } from "./switch";
 import { HmiSvgComponent, createSvgComponent } from "../creator";
 const images: HmiSvgComponent[] = [
@@ -27,6 +27,6 @@ const images: HmiSvgComponent[] = [
 ]
 export const ElectricComponents: HmiCollection = {
     name: '电力组件',
-    // components: images.map(img => createImageComponent(img)).concat([ElectricSwitch])
+    // hmi: images.map(img => createImageComponent(img)).concat([ElectricSwitch])
     components: images.map(img => createSvgComponent(img))
 }

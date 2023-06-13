@@ -1,4 +1,4 @@
-import {HmiCollection} from "../../hmi";
+import {HmiCollection} from "../hmi";
 import {createImageComponent, HmiImageComponent} from "../creator";
 
 const images: HmiImageComponent[] = [

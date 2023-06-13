@@ -1,5 +1,4 @@
-import {Cell, Edge, Node, Registry} from "@antv/x6";
-import {Component} from "@angular/core";
+import {Cell, Edge, Node} from "@antv/x6";
 
 export declare interface HmiComponent {
 
@@ -8,7 +7,9 @@ export declare interface HmiComponent {
     name: string
 
     icon: string
-    svgIcon?:any
+    svg?: string
+    image?: string
+
     type: "line" | "shape" | "html" | "svg"
 
     internal?: boolean

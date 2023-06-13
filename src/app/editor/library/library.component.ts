@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { HmiComponent, HmiDraw } from "../../hmi";
+import { HmiComponent, HmiDraw } from "../../../hmi/hmi";
 import { ComponentService } from "../../component.service";
 
 @Component({

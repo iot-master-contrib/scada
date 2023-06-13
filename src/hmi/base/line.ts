@@ -1,4 +1,4 @@
-import {HmiComponent} from "../../hmi";
+import {HmiComponent} from "../hmi";
 import {createStrokeProperties} from "../properties";
 
 export const BaseLine: HmiComponent = {

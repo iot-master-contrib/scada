@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, ViewContainerRef } from '@angul
 import { Graph, Node } from "@antv/x6";
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import { HmiProject } from "../../hmi";
+import { HmiProject } from "../../../hmi/hmi";
 import { ProjectSettingComponent } from '../project-setting/project-setting.component';
 import {ComponentService} from "../../component.service";
 

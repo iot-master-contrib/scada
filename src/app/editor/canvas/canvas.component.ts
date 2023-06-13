@@ -11,7 +11,7 @@ import { Selection } from "@antv/x6-plugin-selection";
 import { Export } from "@antv/x6-plugin-export";
 import { Dnd } from "@antv/x6-plugin-dnd";
 
-import { HmiComponent, HmiDraw, HmiPage } from "../../hmi";
+import { HmiComponent, HmiDraw, HmiPage } from "../../../hmi/hmi";
 
 import { ComponentService } from "../../component.service";
 

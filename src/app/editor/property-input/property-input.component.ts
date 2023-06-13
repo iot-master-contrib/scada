@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Cell} from "@antv/x6";
-import {HmiProperty} from 'src/app/hmi';
+import {HmiProperty} from 'src/hmi/hmi';
 
 @Component({
     selector: 'app-property-input',

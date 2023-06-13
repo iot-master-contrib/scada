@@ -1,4 +1,4 @@
-import { HmiComponent } from "../../hmi";
+import { HmiComponent } from "../hmi";
 
 export const BaseTriangle: HmiComponent = {
     name: '三角形', id: 'triangle', icon: '/app/scada/assets/triangle.svg', type: "shape",

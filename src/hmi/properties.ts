@@ -1,4 +1,4 @@
-import {HmiProperty} from "../hmi";
+import {HmiProperty} from "./hmi";
 
 export function createStrokeProperties(id: string): HmiProperty[] {
     return [

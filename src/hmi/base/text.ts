@@ -1,4 +1,4 @@
-import {HmiComponent} from "../../hmi";
+import {HmiComponent} from "../hmi";
 import {createStrokeProperties, TextProperties} from "../properties";
 
 export const BaseText: HmiComponent = {

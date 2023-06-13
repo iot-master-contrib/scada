@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output, ViewContainerRef} from '@angular/core';
-import {HmiProject} from "../../hmi";
+import {HmiProject} from "../../../hmi/hmi";
 import {Graph} from "@antv/x6";
 import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
 import {PageSettingComponent} from '../page-setting/page-setting.component';

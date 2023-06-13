@@ -1,4 +1,4 @@
-import {HmiComponent} from "../../hmi";
+import {HmiComponent} from "../hmi";
 
 export const ChartGauge: HmiComponent = {
     name: '仪表盘', id: 'chart-gauge', icon: '/app/scada/assets/chart-gauge.svg', type: "html",

@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Title} from "@angular/platform-browser";
-import {HmiComponent, HmiDraw, HmiProject, projectTemplate} from "../hmi";
+import {HmiComponent, HmiDraw, HmiProject, projectTemplate} from "../../hmi/hmi";
 import {CanvasComponent} from "./canvas/canvas.component";
 import {RequestService} from "../request.service";
 import {NzMessageService} from "ng-zorro-antd/message";

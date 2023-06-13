@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HmiProject } from "../../hmi";
+import { HmiProject } from "../../../hmi/hmi";
 
 @Component({
   selector: 'app-project-setting',

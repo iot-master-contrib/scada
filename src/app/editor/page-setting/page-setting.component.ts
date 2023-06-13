@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { RequestService } from "../../request.service";
 import { NzMessageService } from "ng-zorro-antd/message";
-import { HmiPage } from 'src/app/hmi';
+import { HmiPage } from 'src/hmi/hmi';
 @Component({
   selector: 'app-page-setting',
   templateUrl: './page-setting.component.html',

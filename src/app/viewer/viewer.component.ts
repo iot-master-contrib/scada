@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
-import {HmiPage, HmiProject} from '../hmi';
+import {HmiPage, HmiProject} from '../../hmi/hmi';
 import {Graph} from "@antv/x6";
 import {Title} from "@angular/platform-browser";
 import {RequestService} from "../request.service";

@@ -1,4 +1,4 @@
-import {HmiCollection, HmiComponent} from "../hmi";
+import {HmiCollection, HmiComponent} from "./hmi";
 
 import {BaseLine} from "./base/line";
 import {BaseCircle} from "./base/circle";

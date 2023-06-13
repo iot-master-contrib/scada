@@ -1,7 +1,7 @@
-import {HmiComponent} from "../../hmi";
+import {HmiComponent} from "../hmi";
 
-export const ChartBar: HmiComponent = {
-    name: '柱状图', id: 'chart-bar', icon: '/app/scada/assets/chart-bar.svg', type: "html",
+export const ChartLine: HmiComponent = {
+    name: '折线图', id: 'chart-line', icon: '/app/scada/assets/chart-line.svg', type: "html",
     meta: {width: 100, height: 100},
     effects: ["data"],
     html: (cell)=>{

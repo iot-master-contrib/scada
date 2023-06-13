@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Cell, Graph} from "@antv/x6";
-import {HmiComponent, HmiProject} from "../../hmi";
+import {HmiComponent, HmiProject} from "../../../hmi/hmi";
 import {ComponentService} from "../../component.service";
 
 @Component({

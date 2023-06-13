@@ -1,14 +1,14 @@
 import { Injectable, Injector } from '@angular/core';
 import { RequestService } from "./request.service";
-import { HmiCollection, HmiComponent } from "./hmi";
-import { BaseComponents, ChartComponent } from "./components/components";
-import { IndustryComponents } from "./components/industry/components";
-import { ElectricComponents } from "./components/electric/components";
+import { HmiCollection, HmiComponent } from "../hmi/hmi";
+import { BaseComponents, ChartComponent } from "../hmi/components";
+import { IndustryComponents } from "../hmi/industry/components";
+import { ElectricComponents } from "../hmi/electric/components";
 import { NzNotificationService } from "ng-zorro-antd/notification";
 import { Subject } from "rxjs";
 import { Cell, Graph, Shape } from "@antv/x6";
 
-import { BaseGroup } from "./components/base/group";
+import { BaseGroup } from "../hmi/base/group";
 import {
     createHtmlComponent,
     createImageComponent,
@@ -16,7 +16,7 @@ import {
     HmiHtmlComponent,
     HmiImageComponent,
     HmiPathComponent
-} from "./components/creator";
+} from "../hmi/creator";
 
 
 import { HttpClient } from '@angular/common/http';
@@ -158,10 +158,6 @@ export class ComponentService {
         this.collections.push(collection)
         collection.components = collection.components || []
         collection.components.forEach(c => {
-            this.httpClient.get(c.icon, { responseType: 'text' })
-                .subscribe((svgIcon: any) => {
-                    c.svgIcon = svgIcon;
-                });
             this.components[c.id] = c
         })
     }
@@ -196,21 +192,21 @@ export class ComponentService {
                 })
                 component.registered = true
                 break;
-            case "svg":
-                Shape.HTML.register({
-                    shape: component.id,
-                    width: 100,
-                    height: 80,
-                    effect: ["data"],
-                    html: (cell) => {
-                        let { color } = cell.getData();
-                        const div = document.createElement("span");
-                        div.innerHTML = component.svgIcon;
-                        div.style.background = color
-                        return div
-                    },
-                });
-                break;
+            // case "svg":
+            //     Shape.HTML.register({
+            //         shape: component.id,
+            //         width: 100,
+            //         height: 80,
+            //         effect: ["data"],
+            //         html: (cell) => {
+            //             let { color } = cell.getData();
+            //             const div = document.createElement("span");
+            //             div.innerHTML = component.svgIcon;
+            //             div.style.background = color
+            //             return div
+            //         },
+            //     });
+            //     break;
             // case "angular":
             //     register({
             //         shape: component.id,

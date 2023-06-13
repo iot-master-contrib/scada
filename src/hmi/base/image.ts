@@ -1,4 +1,4 @@
-import {HmiComponent} from "../../hmi";
+import {HmiComponent} from "../hmi";
 
 export const BaseImage: HmiComponent = {
     name: '图片',
