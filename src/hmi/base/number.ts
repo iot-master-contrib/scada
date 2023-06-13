@@ -1,8 +1,9 @@
 import {HmiComponent} from "../hmi";
 import {createStrokeProperties, TextProperties} from "../properties";
+import {NumberSvg} from "./number.embed";
 
 export const BaseNumber: HmiComponent = {
-    name: '数值', id: 'number', icon: '/app/scada/assets/number.svg', type: "shape",
+    name: '数值', id: 'number', svg: NumberSvg, type: "shape",
     extends: {inherit: "rect"},
     meta: {
         width: 100,

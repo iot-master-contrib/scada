@@ -1,7 +1,8 @@
 import {HmiComponent} from "../hmi";
+import {BarSvg} from "./bar.embed";
 
 export const ChartBar: HmiComponent = {
-    name: '柱状图', id: 'chart-bar', icon: '/app/scada/assets/chart-bar.svg', type: "html",
+    name: '柱状图', id: 'chart-bar', svg: BarSvg, type: "html",
     meta: {width: 100, height: 100},
     effects: ["data"],
     html: (cell)=>{

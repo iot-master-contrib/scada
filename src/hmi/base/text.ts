@@ -1,8 +1,9 @@
 import {HmiComponent} from "../hmi";
 import {createStrokeProperties, TextProperties} from "../properties";
+import {TextSvg} from "./text.embed";
 
 export const BaseText: HmiComponent = {
-    name: '文本', id: 'text', icon: '/app/scada/assets/text.svg', type: "shape",
+    name: '文本', id: 'text', svg: TextSvg, type: "shape",
     extends: {inherit: "rect"},
     meta: {
         width: 100,

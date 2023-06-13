@@ -1,8 +1,9 @@
 import {HmiComponent} from "../hmi";
 import {createStrokeProperties} from "../properties";
+import {LineSvg} from "./line.embed";
 
 export const BaseLine: HmiComponent = {
-    name: '线条', id: 'line', icon: '/app/scada/assets/line.svg', type: "line",
+    name: '线条', id: 'line', svg: LineSvg, type: "line",
     extends: {
         inherit: "edge",
         markup: [

@@ -1,9 +1,10 @@
 import {HmiComponent} from "../hmi";
+import {ImageSvg} from "./image.embed";
 
 export const BaseImage: HmiComponent = {
     name: '图片',
     id: 'image',
-    icon: '/app/scada/assets/image.svg',
+    svg: ImageSvg,
     type: "shape", internal:true,
     meta: {
         width: 100, height: 80,

@@ -12,7 +12,9 @@
 <div class="collections">
     <app-collapse [title]="c.name" *ngFor="let c of cs.collections">
         <div class="item" [title]="c.name" *ngFor="let c of c.components" (dragstart)="onDragStart($event, c)">
-            <img class="icon" [src]="c.icon" [alt]="c.name">
+            <img *ngIf="c.icon" class="icon" [src]="c.icon" [alt]="c.name">
+            <div *ngIf="c.svg" class="icon"[innerHTML]="c.svg | html"></div>
+<!--            <app-html [innerHTML]="c.svg" *ngIf="c.svg" class="icon" [content]="c.svg"></app-html>-->
         </div>
     </app-collapse>
 </div>

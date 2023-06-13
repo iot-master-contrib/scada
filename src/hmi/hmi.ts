@@ -4,11 +4,10 @@ export declare interface HmiComponent {
 
     id: string
 
-    name: string
+    name?: string
 
-    icon: string
+    icon?: string
     svg?: string
-    image?: string
 
     type: "line" | "shape" | "html" | "svg"
 

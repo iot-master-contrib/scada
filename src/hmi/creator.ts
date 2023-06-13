@@ -1,6 +1,7 @@
-import { HmiComponent } from "./hmi";
-import { createStrokeProperties } from "./properties";
-
+import {HmiComponent} from "./hmi";
+import {createStrokeProperties} from "./properties";
+//import {Markup} from "@antv/x6/src/view/markup";
+import {Markup, Registry} from "@antv/x6";
 
 
 export declare interface HmiImageComponent {
@@ -17,8 +18,8 @@ export function createImageComponent(cmp: HmiImageComponent): HmiComponent {
         name: cmp.name,
         icon: cmp.url,
         type: "shape",
-        extends: { inherit: "image" },
-        meta: { width: 100, height: 80, imageUrl: cmp.url },
+        extends: {inherit: "image"},
+        meta: {width: 100, height: 80, imageUrl: cmp.url},
         properties: [],
         collection: cmp.collection
     }
@@ -40,8 +41,8 @@ export function createPathComponent(cmp: HmiPathComponent): HmiComponent {
         name: cmp.name,
         icon: cmp.icon,
         type: "shape",
-        extends: { inherit: "path" },
-        meta: { width: 100, height: 80, path: cmp.path },
+        extends: {inherit: "path"},
+        meta: {width: 100, height: 80, path: cmp.path},
         properties: [],
         collection: cmp.collection
     }
@@ -50,7 +51,7 @@ export function createPathComponent(cmp: HmiPathComponent): HmiComponent {
 
 export declare interface HmiHtmlComponent {
     id: string
-    name: string
+    name?: string
     icon: string
     html: string
     collection?: string
@@ -71,9 +72,10 @@ export function createHtmlComponent(cmp: HmiHtmlComponent): HmiComponent {
 
 export declare interface HmiSvgComponent {
     id: string
-    name: string
-    icon: string
-    svgIcon?: any;
+    name?: string
+    svg: string
+    markup?: Markup,
+    attrs?: Registry.Attr.CellAttrs,
     collection?: string
 }
 
@@ -81,12 +83,10 @@ export function createSvgComponent(cmp: HmiSvgComponent): HmiComponent {
     return {
         id: cmp.id,
         name: cmp.name,
-        icon: cmp.icon,
+        svg: cmp.svg,
         type: "svg",
-        effects: ['data'],
+        extends: {markup: cmp.markup, attrs: cmp.attrs},
         collection: cmp.collection,
-        properties: [
-            ...createStrokeProperties('foreignObject/body')
-        ],
+        properties: [],
     }
 }
