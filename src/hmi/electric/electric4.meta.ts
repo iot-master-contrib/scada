@@ -4,14 +4,21 @@ export const  Electric4Meta = {
 	"width": 800,
 	"height": 800,
 	"viewBox": "0 0 16 16",
+	"version": "1.1",
+	"xmlns": "http://www.w3.org/2000/svg",
+	"fill": "none",
+	"stroke": "#000000",
+	"stroke-linecap'": "round",
+	"stroke-linejoin'": "round",
+	"stroke-width": "1.5",
 	"markup": [
 		{
 			"tagName": "path",
-			"selector": "path0"
+			"selector": "path1"
 		}
 	],
 	"attrs": {
-		"path0": {
+		"path1": {
 			"refD": "m8 1.75v6.5m4.25-5s2 1.29822 2 4.75-2.79822 6.25-6.25 6.25-6.25-2.79822-6.25-6.25 2-4.75 2-4.75"
 		}
 	}

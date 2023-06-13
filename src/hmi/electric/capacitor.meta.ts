@@ -4,6 +4,26 @@ export const  CapacitorMeta = {
 	"width": 800,
 	"height": 800,
 	"viewBox": "0 0 460 460",
-	"markup": [],
-	"attrs": {}
+	"version": "1.1",
+	"xmlns": "http://www.w3.org/2000/svg",
+	"xmlns:xlink": "http://www.w3.org/1999/xlink",
+	"fill": "#000000",
+	"markup": [
+		{
+			"tagName": "polygon",
+			"selector": "polygon1"
+		},
+		{
+			"tagName": "polygon",
+			"selector": "polygon2"
+		}
+	],
+	"attrs": {
+		"polygon1": {
+			"refPoints": "460,215 314,215 314,50 284,50 284,410 314,410 314,245 460,245 \t"
+		},
+		"polygon2": {
+			"refPoints": "146,215 0,215 0,245 146,245 146,410 176,410 176,50 146,50 \t"
+		}
+	}
 }

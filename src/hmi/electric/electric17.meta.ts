@@ -4,18 +4,11 @@ export const  Electric17Meta = {
 	"width": 800,
 	"height": 800,
 	"viewBox": "0 0 24 24",
+	"xmlns": "http://www.w3.org/2000/svg",
 	"markup": [
 		{
 			"tagName": "rect",
-			"selector": "rect0"
-		},
-		{
-			"tagName": "circle",
-			"selector": "circle0"
-		},
-		{
-			"tagName": "circle",
-			"selector": "circle1"
+			"selector": "rect1"
 		},
 		{
 			"tagName": "circle",
@@ -30,54 +23,62 @@ export const  Electric17Meta = {
 			"selector": "circle4"
 		},
 		{
-			"tagName": "line",
-			"selector": "line0"
+			"tagName": "circle",
+			"selector": "circle5"
+		},
+		{
+			"tagName": "circle",
+			"selector": "circle6"
 		},
 		{
 			"tagName": "line",
-			"selector": "line1"
+			"selector": "line7"
+		},
+		{
+			"tagName": "line",
+			"selector": "line8"
 		}
 	],
 	"attrs": {
-		"rect0": {
+		"rect1": {
 			"refX": 1.5,
 			"refY": 1.5,
 			"refWidth": 21,
 			"refHeight": 21,
 			"refRx": 1.91
 		},
-		"circle0": {
+		"circle2": {
 			"refCx": 12,
 			"refCy": 12,
 			"refR": 6.68
 		},
-		"circle1": {
+		"circle3": {
 			"refCx": 4.36,
 			"refCy": 4.36,
-			"refR": 0.95
-		},
-		"circle2": {
-			"refCx": 19.64,
-			"refCy": 4.36,
-			"refR": 0.95
-		},
-		"circle3": {
-			"refCx": 19.64,
-			"refCy": 19.64,
 			"refR": 0.95
 		},
 		"circle4": {
+			"refCx": 19.64,
+			"refCy": 4.36,
+			"refR": 0.95
+		},
+		"circle5": {
+			"refCx": 19.64,
+			"refCy": 19.64,
+			"refR": 0.95
+		},
+		"circle6": {
 			"refCx": 4.36,
 			"refCy": 19.64,
 			"refR": 0.95
 		},
-		"line0": {
+		"line7": {
 			"refX1": 9.14,
 			"refY1": 10.09,
 			"refX2": 9.14,
 			"refY2": 13.91
 		},
-		"line1": {
+		"line8": {
 			"refX1": 14.86,
 			"refY1": 10.09,
 			"refX2": 14.86,

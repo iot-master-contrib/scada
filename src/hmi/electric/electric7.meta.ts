@@ -4,18 +4,11 @@ export const  Electric7Meta = {
 	"width": 800,
 	"height": 800,
 	"viewBox": "0 0 64 64",
+	"xmlns": "http://www.w3.org/2000/svg",
 	"markup": [
 		{
 			"tagName": "polygon",
-			"selector": "polygon0"
-		},
-		{
-			"tagName": "path",
-			"selector": "path0"
-		},
-		{
-			"tagName": "path",
-			"selector": "path1"
+			"selector": "polygon1"
 		},
 		{
 			"tagName": "path",
@@ -34,40 +27,48 @@ export const  Electric7Meta = {
 			"selector": "path5"
 		},
 		{
+			"tagName": "path",
+			"selector": "path6"
+		},
+		{
+			"tagName": "path",
+			"selector": "path7"
+		},
+		{
 			"tagName": "polyline",
-			"selector": "polyline0"
+			"selector": "polyline8"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect0"
+			"selector": "rect9"
 		}
 	],
 	"attrs": {
-		"polygon0": {
+		"polygon1": {
 			"refPoints": "43 60.75 21 60.75 24 37.75 40 37.75 43 60.75"
 		},
-		"path0": {
+		"path2": {
 			"refD": "M39,23.75a12,12,0,1,0-14,0"
 		},
-		"path1": {
+		"path3": {
 			"refD": "M25,31.75v-10a2,2,0,0,1,2-2H37a2,2,0,0,1,2,2v10"
 		},
-		"path2": {
+		"path4": {
 			"refD": "M32.89,16.45l-1.78-.9L32.38,13H30a1,1,0,0,1-.89-1.45l2-4,1.78.9L31.62,11H34a1,1,0,0,1,.89,1.45Z"
 		},
-		"path3": {
+		"path5": {
 			"refD": "M43.88,59.75,41,37.62l-2,.26,1,7.87H24l1-7.87-2-.26L20.12,59.75H17v2H47v-2ZM41.32,55.6l-7.23-3.94,6.27-3.42Zm-4.24-7.85L32,50.52l-5.08-2.77Zm-13.44.49,6.27,3.42L22.68,55.6Zm-1.28,9.81L32,52.8l9.64,5.25.22,1.7H22.14Z"
 		},
-		"path4": {
+		"path6": {
 			"refD": "M49,35.75H43v-2h5v-11h2v12A1,1,0,0,1,49,35.75Z"
 		},
-		"path5": {
+		"path7": {
 			"refD": "M21,35.75H15a1,1,0,0,1-1-1v-12h2v11h5Z"
 		},
-		"polyline0": {
+		"polyline8": {
 			"refPoints": "30 31.75 30 26.75 34 26.75 34 31.75"
 		},
-		"rect0": {
+		"rect9": {
 			"refX": 21,
 			"refY": 31.75,
 			"refWidth": 22,

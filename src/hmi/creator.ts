@@ -87,7 +87,7 @@ export function createSvgComponent(cmp: HmiSvgComponent): HmiComponent {
         name: cmp.name,
         svg: cmp.svg,
         type: "svg",
-        extends: {width:cmp.width, height:cmp.height, markup: cmp.markup, attrs: cmp.attrs},
+        extends: {width:100, height:100, markup: cmp.markup, attrs: cmp.attrs},
         collection: cmp.collection,
         properties: [
 

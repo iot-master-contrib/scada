@@ -4,11 +4,8 @@ export const  Electric10Meta = {
 	"width": 800,
 	"height": 800,
 	"viewBox": "0 0 24 24",
+	"xmlns": "http://www.w3.org/2000/svg",
 	"markup": [
-		{
-			"tagName": "path",
-			"selector": "path0"
-		},
 		{
 			"tagName": "path",
 			"selector": "path1"
@@ -18,31 +15,35 @@ export const  Electric10Meta = {
 			"selector": "path2"
 		},
 		{
-			"tagName": "line",
-			"selector": "line0"
+			"tagName": "path",
+			"selector": "path3"
 		},
 		{
 			"tagName": "line",
-			"selector": "line1"
+			"selector": "line4"
+		},
+		{
+			"tagName": "line",
+			"selector": "line5"
 		}
 	],
 	"attrs": {
-		"path0": {
+		"path1": {
 			"refD": "M1.5,6.27H11a0,0,0,0,1,0,0V11a2.86,2.86,0,0,1-2.86,2.86H4.36A2.86,2.86,0,0,1,1.5,11V6.27A0,0,0,0,1,1.5,6.27Z"
 		},
-		"path1": {
+		"path2": {
 			"refD": "M4.36,13.91H8.18a0,0,0,0,1,0,0v1.91a1.91,1.91,0,0,1-1.91,1.91h0a1.91,1.91,0,0,1-1.91-1.91V13.91A0,0,0,0,1,4.36,13.91Z"
 		},
-		"path2": {
+		"path3": {
 			"refD": "M6.27,17.73v.47a4.3,4.3,0,0,0,4.3,4.3h0a4.29,4.29,0,0,0,4.29-4.3V10.09a3.82,3.82,0,0,1,3.82-3.82h0a3.82,3.82,0,0,1,3.82,3.82V23.45"
 		},
-		"line0": {
+		"line4": {
 			"refX1": 3.41,
 			"refY1": 0.55,
 			"refX2": 3.41,
 			"refY2": 6.27
 		},
-		"line1": {
+		"line5": {
 			"refX1": 9.14,
 			"refY1": 0.55,
 			"refX2": 9.14,

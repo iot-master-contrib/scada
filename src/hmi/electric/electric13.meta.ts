@@ -4,6 +4,307 @@ export const  Electric13Meta = {
 	"width": 800,
 	"height": 800,
 	"viewBox": "0 0 64 64",
-	"markup": [],
-	"attrs": {}
+	"version": "1.1",
+	"xmlns": "http://www.w3.org/2000/svg",
+	"xmlns:xlink": "http://www.w3.org/1999/xlink",
+	"markup": [
+		{
+			"tagName": "path",
+			"selector": "path1"
+		},
+		{
+			"tagName": "path",
+			"selector": "path2"
+		},
+		{
+			"tagName": "path",
+			"selector": "path3"
+		},
+		{
+			"tagName": "path",
+			"selector": "path4"
+		},
+		{
+			"tagName": "path",
+			"selector": "path5"
+		},
+		{
+			"tagName": "path",
+			"selector": "path6"
+		},
+		{
+			"tagName": "path",
+			"selector": "path7"
+		},
+		{
+			"tagName": "polyline",
+			"selector": "polyline8"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect9"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect10"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect11"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect12"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect13"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect14"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect15"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect16"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect17"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect18"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect19"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect20"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect21"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect22"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect23"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect24"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect25"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect26"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect27"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect28"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect29"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect30"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect31"
+		},
+		{
+			"tagName": "rect",
+			"selector": "rect32"
+		}
+	],
+	"attrs": {
+		"path1": {
+			"refD": "M56,10h4c1.1,0,2,0.9,2,2v20l0,0h-8l0,0V12C54,10.9,54.9,10,56,10z"
+		},
+		"path2": {
+			"refD": "M59,7h-2V4H47v3h-2V3c0-0.6,0.4-1,1-1h12c0.6,0,1,0.4,1,1V7z"
+		},
+		"path3": {
+			"refD": "M44,10V8c0-1.1,0.9-2,2-2l0,0c1.1,0,2,0.9,2,2v2"
+		},
+		"path4": {
+			"refD": "M56,10V8c0-1.1,0.9-2,2-2l0,0c1.1,0,2,0.9,2,2v2"
+		},
+		"path5": {
+			"refD": "M20,22h32c5.5,0,10,4.5,10,10v10c0,5.5-4.5,10-10,10H20c-5.5,0-10-4.5-10-10V32C10,26.5,14.5,22,20,22z"
+		},
+		"path6": {
+			"refD": "M44,10h4c1.1,0,2,0.9,2,2v10l0,0h-8l0,0V12C42,10.9,42.9,10,44,10z"
+		},
+		"path7": {
+			"refD": "M59,38h-2v-6c0-2.8-2.2-5-5-5v-2c3.9,0,7,3.1,7,7V38z"
+		},
+		"polyline8": {
+			"refPoints": "10,32 6,32 6,42 10,42  "
+		},
+		"rect9": {
+			"refX": 2,
+			"refY": 32,
+			"refWidth": 4,
+			"refHeight": 30
+		},
+		"rect10": {
+			"refX": 2,
+			"refY": 57,
+			"refWidth": 4,
+			"refHeight": 2
+		},
+		"rect11": {
+			"refX": 34,
+			"refY": 2,
+			"refWidth": 4,
+			"refHeight": 20
+		},
+		"rect12": {
+			"refX": 34,
+			"refY": 2,
+			"refWidth": 4,
+			"refHeight": 4
+		},
+		"rect13": {
+			"refX": 2,
+			"refY": 2,
+			"refWidth": 4,
+			"refHeight": 20
+		},
+		"rect14": {
+			"refX": 2,
+			"refY": 2,
+			"refWidth": 4,
+			"refHeight": 4
+		},
+		"rect15": {
+			"refX": 6,
+			"refY": 4,
+			"refWidth": 28,
+			"refHeight": 2
+		},
+		"rect16": {
+			"refX": 6,
+			"refY": 9,
+			"refWidth": 28,
+			"refHeight": 2
+		},
+		"rect17": {
+			"refX": 6,
+			"refY": 14,
+			"refWidth": 28,
+			"refHeight": 2
+		},
+		"rect18": {
+			"refX": 6,
+			"refY": 19,
+			"refWidth": 28,
+			"refHeight": 2
+		},
+		"rect19": {
+			"refX": 33,
+			"refY": 22,
+			"refWidth": 2,
+			"refHeight": 30
+		},
+		"rect20": {
+			"refX": 25,
+			"refY": 22,
+			"refWidth": 2,
+			"refHeight": 30
+		},
+		"rect21": {
+			"refX": 26,
+			"refY": 31,
+			"refWidth": 8,
+			"refHeight": 2
+		},
+		"rect22": {
+			"refX": 26,
+			"refY": 27,
+			"refWidth": 8,
+			"refHeight": 2
+		},
+		"rect23": {
+			"refX": 26,
+			"refY": 35,
+			"refWidth": 8,
+			"refHeight": 2
+		},
+		"rect24": {
+			"refX": 26,
+			"refY": 39,
+			"refWidth": 8,
+			"refHeight": 2
+		},
+		"rect25": {
+			"refX": 26,
+			"refY": 43,
+			"refWidth": 8,
+			"refHeight": 2
+		},
+		"rect26": {
+			"refX": 26,
+			"refY": 47,
+			"refWidth": 8,
+			"refHeight": 2
+		},
+		"rect27": {
+			"refX": 19,
+			"refY": 52,
+			"refWidth": 4,
+			"refHeight": 6
+		},
+		"rect28": {
+			"refX": 49,
+			"refY": 52,
+			"refWidth": 4,
+			"refHeight": 6
+		},
+		"rect29": {
+			"refX": 42,
+			"refY": 13,
+			"refWidth": 8,
+			"refHeight": 2
+		},
+		"rect30": {
+			"refX": 54,
+			"refY": 13,
+			"refWidth": 8,
+			"refHeight": 2
+		},
+		"rect31": {
+			"refX": 2,
+			"refY": 35,
+			"refWidth": 4,
+			"refHeight": 2
+		},
+		"rect32": {
+			"refX": 15,
+			"refY": 58,
+			"refWidth": 42,
+			"refHeight": 4
+		}
+	}
 }

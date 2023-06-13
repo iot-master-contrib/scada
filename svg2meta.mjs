@@ -85,29 +85,47 @@ async function parseSvg(filename) {
     const parser = new xml2js.Parser();
     const obj = await parser.parseStringPromise(content.toString())
     //console.dir(obj.svg)
+    console.log("parse", filename, obj.svg.$)
 
-    let {width, height, viewBox} = obj.svg.$
     const markup = {
-        width: parseInt(width) || 0,
-        height: parseInt(height) || 0,
-        viewBox,
+        width: parseInt(obj.svg.$.width) || 100,
+        height: parseInt(obj.svg.$.height) || 100,
+        viewBox: obj.svg.$.viewBox,
+        version: obj.svg.$.version,
+        xmlns: obj.svg.$.xmlns,
+        "xmlns:xlink": obj.svg.$['xmlns:xlink'],
+        fill: obj.svg.$.fill,
+        stroke: obj.svg.$.stroke,
+        "stroke-linecap'": obj.svg.$['stroke-linecap'],
+        "stroke-linejoin'": obj.svg.$['stroke-linejoin'],
+        "stroke-width": obj.svg.$['stroke-width'],
         markup: [],
         attrs: {}
     }
 
-    for (let k in obj.svg) {
-        if (!obj.svg.hasOwnProperty(k)) continue
-        if (tags.indexOf(k) === -1) continue
+    let i = 1
 
-        obj.svg[k].forEach((s, i) => {
-            markup.markup.push({
-                tagName: k,
-                selector: k + i,
-                //attrs: parseRefs(s.$)
+    function parse(obj) {
+        for (let k in obj) {
+            if (!obj.hasOwnProperty(k)) continue
+            //群组调用子级
+            if (k === "g") obj[k].forEach(gg => parse(gg))
+            if (tags.indexOf(k) === -1) continue
+
+            obj[k].forEach(s => {
+                markup.markup.push({
+                    tagName: k,
+                    selector: k + i,
+                    //attrs: parseRefs(s.$)
+                })
+                markup.attrs[k + i] = parseRefs(s.$)
+
+                i++
             })
-            markup.attrs[k + i] = parseRefs(s.$)
-        })
+        }
     }
+
+    parse(obj.svg)
 
     return markup
 }
