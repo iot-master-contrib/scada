@@ -74,8 +74,8 @@ export declare interface HmiSvgComponent {
     id: string
     name?: string
     svg: string
-    width?: number,
-    height?: number,
+    width: number,
+    height: number,
     markup?: Markup,
     attrs?: Registry.Attr.CellAttrs,
     collection?: string
@@ -87,10 +87,10 @@ export function createSvgComponent(cmp: HmiSvgComponent): HmiComponent {
         name: cmp.name,
         svg: cmp.svg,
         type: "svg",
-        extends: {width:100, height:100, markup: cmp.markup, attrs: cmp.attrs},
+        extends: {width:cmp.width, height:cmp.height, markup: cmp.markup, attrs: cmp.attrs},
         collection: cmp.collection,
         properties: [
-            
+
         ],
     }
 }

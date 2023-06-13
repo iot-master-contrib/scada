@@ -86,8 +86,11 @@ async function parseSvg(filename) {
     const obj = await parser.parseStringPromise(content.toString())
     //console.dir(obj.svg)
 
+    let {width, height, viewBox} = obj.svg.$
     const markup = {
-        root: obj.svg.$,
+        width: parseInt(width) || 0,
+        height: parseInt(height) || 0,
+        viewBox,
         markup: [],
         attrs: {}
     }
