@@ -1,4 +1,5 @@
-import {HmiComponent} from "../hmi";
+import { HmiComponent } from "../hmi";
+import { createStrokeProperties } from "./properties";
 
 export function createImageComponent(cmp: HmiImageComponent): HmiComponent {
     return {
@@ -6,8 +7,8 @@ export function createImageComponent(cmp: HmiImageComponent): HmiComponent {
         name: cmp.name,
         icon: cmp.url,
         type: "shape",
-        extends: {inherit: "image"},
-        meta: {width: 100, height: 80, imageUrl: cmp.url},
+        extends: { inherit: "image" },
+        meta: { width: 100, height: 80, imageUrl: cmp.url },
         properties: [],
         collection: cmp.collection
     }
@@ -37,8 +38,8 @@ export function createPathComponent(cmp: HmiPathComponent): HmiComponent {
         name: cmp.name,
         icon: cmp.icon,
         type: "shape",
-        extends: {inherit: "path"},
-        meta: {width: 100, height: 80, path: cmp.path},
+        extends: { inherit: "path" },
+        meta: { width: 100, height: 80, path: cmp.path },
         properties: [],
         collection: cmp.collection
     }
@@ -62,5 +63,28 @@ export function createHtmlComponent(cmp: HmiHtmlComponent): HmiComponent {
         effects: ['data'],
         html: cmp.html,
         collection: cmp.collection
+    }
+}
+
+export declare interface HmiSvgComponent {
+    id: string
+    name: string
+    icon: string
+    svgIcon?: any;
+    collection?: string
+}
+
+
+export function createSvgComponent(cmp: HmiSvgComponent): HmiComponent {
+    return {
+        id: cmp.id,
+        name: cmp.name,
+        icon: cmp.icon,
+        type: "svg",
+        effects: ['data'],
+        collection: cmp.collection,
+        properties: [
+            ...createStrokeProperties('foreignObject/body')
+        ],
     }
 }

@@ -1,19 +1,19 @@
-import {Component, ElementRef, Injector} from '@angular/core';
+import { Component, ElementRef, Injector, ViewContainerRef } from '@angular/core';
 
-import {Edge, FunctionExt, Graph, Node, Shape} from '@antv/x6';
+import { Edge, FunctionExt, Graph, Node, Shape, Color } from '@antv/x6';
 
-import {Transform} from "@antv/x6-plugin-transform";
-import {Snapline} from "@antv/x6-plugin-snapline";
-import {Clipboard} from "@antv/x6-plugin-clipboard";
-import {Keyboard} from "@antv/x6-plugin-keyboard";
-import {History} from "@antv/x6-plugin-history";
-import {Selection} from "@antv/x6-plugin-selection";
-import {Export} from "@antv/x6-plugin-export";
-import {Dnd} from "@antv/x6-plugin-dnd";
+import { Transform } from "@antv/x6-plugin-transform";
+import { Snapline } from "@antv/x6-plugin-snapline";
+import { Clipboard } from "@antv/x6-plugin-clipboard";
+import { Keyboard } from "@antv/x6-plugin-keyboard";
+import { History } from "@antv/x6-plugin-history";
+import { Selection } from "@antv/x6-plugin-selection";
+import { Export } from "@antv/x6-plugin-export";
+import { Dnd } from "@antv/x6-plugin-dnd";
 
-import {HmiComponent, HmiDraw, HmiPage} from "../../hmi";
+import { HmiComponent, HmiDraw, HmiPage } from "../../hmi";
 
-import {ComponentService} from "../../component.service";
+import { ComponentService } from "../../component.service";
 
 
 @Component({
@@ -32,7 +32,9 @@ export class CanvasComponent {
     constructor(
         private cs: ComponentService,
         private element: ElementRef,
-        private injector: Injector) {
+        private injector: Injector,
+        private viewContainerRef: ViewContainerRef,
+       ) {
 
         this.graph = new Graph({
             container: element.nativeElement,
@@ -87,11 +89,11 @@ export class CanvasComponent {
         });
 
         //补充插件
-        this.graph.use(new Keyboard({enabled: true}));
-        this.graph.use(new Transform({resizing: {enabled: true}, rotating: {enabled: true}}));
-        this.graph.use(new Snapline({enabled: true}))
-        this.graph.use(new Clipboard({enabled: true}))
-        this.graph.use(new History({enabled: true}));
+        this.graph.use(new Keyboard({ enabled: true }));
+        this.graph.use(new Transform({ resizing: { enabled: true }, rotating: { enabled: true } }));
+        this.graph.use(new Snapline({ enabled: true }))
+        this.graph.use(new Clipboard({ enabled: true }))
+        this.graph.use(new History({ enabled: true }));
         this.graph.use(new Selection({//选中
             enabled: true,
             multiple: true,
@@ -103,7 +105,7 @@ export class CanvasComponent {
         }));
         this.graph.use(new Export());
 
-        this.dnd = new Dnd({target: this.graph});
+        this.dnd = new Dnd({ target: this.graph });
 
         this.graph.bindKey('ctrl+s', (e) => {
             this.graph.exportPNG();
@@ -113,8 +115,8 @@ export class CanvasComponent {
         //快捷键
         this.graph.bindKey('ctrl+z', () => this.graph.undo())
         this.graph.bindKey('ctrl+y', () => this.graph.redo())
-        this.graph.bindKey('ctrl+x', () => this.graph.cut(this.graph.getSelectedCells(), {deep: true}))
-        this.graph.bindKey('ctrl+c', () => this.graph.copy(this.graph.getSelectedCells(), {deep: true}))
+        this.graph.bindKey('ctrl+x', () => this.graph.cut(this.graph.getSelectedCells(), { deep: true }))
+        this.graph.bindKey('ctrl+c', () => this.graph.copy(this.graph.getSelectedCells(), { deep: true }))
         this.graph.bindKey('ctrl+v', () => this.graph.resetSelection(this.graph.paste()))
         this.graph.bindKey('backspace', () => this.graph.getSelectedCells().forEach(cell => cell.remove()))
         this.graph.bindKey('delete', () => this.graph.getSelectedCells().forEach(cell => cell.remove()))
@@ -131,7 +133,7 @@ export class CanvasComponent {
             }
         }
 
-        this.graph.on('edge:selected', FunctionExt.debounce(({edge}) => {
+        this.graph.on('edge:selected', FunctionExt.debounce(({ edge }) => {
 
             edge.addTools([{
                 name: 'source-arrowhead',
@@ -161,16 +163,16 @@ export class CanvasComponent {
             }])
         }))
 
-        this.graph.on('edge:unselected', ({cell}) => {
+        this.graph.on('edge:unselected', ({ cell }) => {
             cell.removeTools();
         })
 
         // 鼠标移入移出节点
-        this.graph.on('node:mouseenter', FunctionExt.debounce(({e}) => {
+        this.graph.on('node:mouseenter', FunctionExt.debounce(({ e }) => {
             //const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
             //this.showPorts(ports, true);
         }), 500);
-        this.graph.on('node:mouseleave', ({e}) => {
+        this.graph.on('node:mouseleave', ({ e }) => {
             //const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
             //this.showPorts(ports, false);
         });
@@ -179,7 +181,7 @@ export class CanvasComponent {
             //this.showPorts(ports, false);
         })
 
-        this.graph.on('node:click', ({node, e}) => {
+        this.graph.on('node:click', ({ node, e }) => {
             //console.log('node')
             //const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
             //this.showPorts(ports, false);
@@ -188,20 +190,20 @@ export class CanvasComponent {
         this.graph.on("cell:selected", () => {
         })
 
-        this.graph.on('cell:click', ({cell, e}) => {
+        this.graph.on('cell:click', ({ cell, e }) => {
             let cmp = this.cs.Get(cell.shape)
             // @ts-ignore
             cmp?.listeners?.click?.call(this, cell, e)
         });
 
-        this.graph.on('cell:mouseenter', ({cell, e}) => {
+        this.graph.on('cell:mouseenter', ({ cell, e }) => {
             //console.log("cell:mouseenter", cell.shape)
             let cmp = this.cs.Get(cell.shape)
             // @ts-ignore
             cmp?.listeners?.mouseenter?.call(this, cell, e)
         });
 
-        this.graph.on('cell:mouseleave', ({cell, e}) => {
+        this.graph.on('cell:mouseleave', ({ cell, e }) => {
             //console.log("cell:mouseleave")
             let cmp = this.cs.Get(cell.shape)
             // @ts-ignore
@@ -223,7 +225,7 @@ export class CanvasComponent {
 
     public Draw($event: HmiDraw) {
         let node!: Node
-        let {component} = $event;
+        let { component } = $event;
 
         //检查是否已经注册
         this.cs.CheckRegister(component)
@@ -249,6 +251,19 @@ export class CanvasComponent {
                     })
                 }
                 break;
+            case "svg":
+                node = this.graph.createNode({
+                    shape: component.id,
+                    ...component.meta,
+                    data: { id: component.id, color: ''},
+                    //ports
+                })
+                setInterval(() => {
+                    node.setData({
+                        color: Color.random().toHex(),
+                    })
+                }, 2000)
+                break;
             // case "angular":
             //     //避免重复注册
             //     node = this.graph.createNode({
@@ -259,6 +274,7 @@ export class CanvasComponent {
             //     })
             //     break;
         }
+        console.log(node)
         if (node && $event.event)
             this.dnd.start(node, $event.event);
     }

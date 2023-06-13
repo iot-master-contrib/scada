@@ -1,14 +1,14 @@
-import {Injectable, Injector} from '@angular/core';
-import {RequestService} from "./request.service";
-import {HmiCollection, HmiComponent} from "./hmi";
-import {BaseComponents, ChartComponent} from "./components/components";
-import {IndustryComponents} from "./components/industry/components";
-import {ElectricComponents} from "./components/electric/components";
-import {NzNotificationService} from "ng-zorro-antd/notification";
-import {Subject} from "rxjs";
-import {Cell, Graph, Shape} from "@antv/x6";
-import {register} from "@antv/x6-angular-shape";
-import {BaseGroup} from "./components/base/group";
+import { Injectable, Injector } from '@angular/core';
+import { RequestService } from "./request.service";
+import { HmiCollection, HmiComponent } from "./hmi";
+import { BaseComponents, ChartComponent } from "./components/components";
+import { IndustryComponents } from "./components/industry/components";
+import { ElectricComponents } from "./components/electric/components";
+import { NzNotificationService } from "ng-zorro-antd/notification";
+import { Subject } from "rxjs";
+import { Cell, Graph, Shape } from "@antv/x6";
+import { register } from "@antv/x6-angular-shape";
+import { BaseGroup } from "./components/base/group";
 import {
     createHtmlComponent,
     createImageComponent,
@@ -17,6 +17,9 @@ import {
     HmiImageComponent,
     HmiPathComponent
 } from "./components/creator";
+import { SvgComponent } from './base/svg/svg.component';
+import { HttpClient } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
     providedIn: 'root'
@@ -34,7 +37,13 @@ export class ComponentService {
     public collections: HmiCollection[] = []
     public components: { [id: string]: HmiComponent } = {}
 
-    constructor(private rs: RequestService, private ns: NzNotificationService) {
+    constructor(
+        private rs: RequestService,
+        private ns: NzNotificationService,
+        private injector: Injector,
+        private httpClient: HttpClient,
+        private sanitizer: DomSanitizer
+    ) {
 
         this.PutCollection(BaseComponents)
         this.PutCollection(ChartComponent)
@@ -148,6 +157,10 @@ export class ComponentService {
         this.collections.push(collection)
         collection.components = collection.components || []
         collection.components.forEach(c => {
+            this.httpClient.get(c.icon, { responseType: 'text' })
+                .subscribe((svgIcon: any) => {
+                    c.svgIcon = svgIcon;
+                });
             this.components[c.id] = c
         })
     }
@@ -182,6 +195,21 @@ export class ComponentService {
                 })
                 component.registered = true
                 break;
+            case "svg":
+                Shape.HTML.register({
+                    shape: component.id,
+                    width: 100,
+                    height: 80,
+                    effect: ["data"],
+                    html: (cell) => {
+                        let { color } = cell.getData();
+                        const div = document.createElement("span");
+                        div.innerHTML = component.svgIcon;
+                        div.style.background = color
+                        return div
+                    },
+                });
+                break;
             // case "angular":
             //     register({
             //         shape: component.id,
@@ -201,6 +229,5 @@ export class ComponentService {
         cmp && this.CheckRegister(cmp)
         return cmp
     }
-
 
 }
