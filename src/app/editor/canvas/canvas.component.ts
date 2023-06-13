@@ -234,14 +234,16 @@ export class CanvasComponent {
                 return
             case "shape":
                 if (component.meta) {
-                    let tools: any = ['node-editor'];
-                    if (component.id === 'text-block') {
-                        tools = [];
-                    }
+                    // let tools: any = ['node-editor'];
+                    // if (component.id === 'text-block') {
+                    //     tools = [];
+                    // }
+                    let data: any = {}
+                    component.bindings?.forEach(b => data[b.name] = b.default)
                     node = this.graph.createNode({
                         shape: component.id,
                         ...component.meta,
-                        data: {id: component.id, ...(component.meta.data || {})},
+                        data: data,
                         //tools
                         // ports
                     })

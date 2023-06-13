@@ -47,7 +47,8 @@ export declare interface HmiComponent {
 export declare interface HmiComponentBinding {
     name: string
     label: string
-    type: string
+    type?: string
+    default?: any
 }
 
 export declare interface HmiComponentEvent {

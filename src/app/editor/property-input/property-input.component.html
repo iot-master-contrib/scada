@@ -1,10 +1,11 @@
 <ng-container [ngSwitch]="property.type">
-    <input nz-input nzSize="small" *ngSwitchCase="'text'" placeholder="空" [value]="cell.getPropByPath(property.path) || ''"
+    <input nz-input nzSize="small" *ngSwitchCase="'text'" placeholder="空"
+           [value]="cell.getPropByPath(property.path) || ''"
            (change)="inputChange($event)">
-    <input nz-input nzSize="small" *ngSwitchCase="'number'" type="number" [value]="cell.getPropByPath(property.path)"
-           (change)="inputChange($event)">
-    <input nz-input nzSize="small" *ngSwitchCase="'stroke'" type="number" [value]="cell.getPropByPath(property.path)"
-           (change)="inputChange($event)">
+    <nz-input-number nzSize="small" *ngSwitchCase="'number'" [ngModel]="cell.getPropByPath(property.path)"
+                     (ngModelChange)="change($event)"></nz-input-number>
+    <nz-input-number nzSize="small" *ngSwitchCase="'stroke'" [ngModel]="cell.getPropByPath(property.path)"
+                     (ngModelChange)="change($event)"></nz-input-number>
     <input nz-input nzSize="small" *ngSwitchCase="'boolean'" type="checkbox" [value]="cell.getPropByPath(property.path)"
            (change)="inputChange($event)">
     <input nz-input nzSize="small" *ngSwitchCase="'color'"
