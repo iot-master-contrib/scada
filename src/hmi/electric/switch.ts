@@ -1,4 +1,5 @@
 import {HmiComponent} from "../hmi";
+import {SwitchSvg} from "./switch.embed";
 
 
 export const switchCenter = {
@@ -10,7 +11,7 @@ export const switchOpen = `rotate(-30 ${switchCenter.x} ${switchCenter.y})`
 export const switchClose = `rotate(-12 ${switchCenter.x} ${switchCenter.y})`;
 
 export const ElectricSwitch: HmiComponent = {
-    name: '', id: 'electric-switch', icon: `/app/scada/assets/electric/switch.svg`, type: "shape",
+    name: '', id: 'electric-switch', svg: SwitchSvg, type: "shape",
     extends: {inherit: "rect"},
     meta: {
         width: 120, height: 130,
