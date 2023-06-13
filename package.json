@@ -29,12 +29,14 @@
     "@antv/x6-plugin-snapline": "^2.1.7",
     "@antv/x6-plugin-transform": "^2.1.7",
     "@ctrl/ngx-codemirror": "^6.1.0",
+    "camelcase": "^7.0.1",
     "codemirror": "^5.65.13",
     "lodash-es": "^4.17.21",
     "ng-zorro-antd": "^15.1.0",
     "ngx-color-picker": "^14.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "xml2js": "^0.6.0",
     "zone.js": "^0.13.0"
   },
   "devDependencies": {
