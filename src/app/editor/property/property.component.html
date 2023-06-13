@@ -63,19 +63,6 @@
 
 </app-collapse>
 
-<app-collapse title="文本属性" *ngIf="cmp && cell.isNode() && cell.shape!='text-block'">
-    <table>
-        <tr *ngFor="let p of textProperties">
-            <td>
-                {{p.name}}
-            </td>
-            <td>
-                <app-property-input [property]="p" [cell]="cell"></app-property-input>
-            </td>
-        </tr>
-    </table>
-</app-collapse>
-
 
 <app-collapse title="数据绑定" *ngIf="selected.length == 1 && cmp?.bindings?.length">
     <app-binding [cell]="cell" [component]="cmp"></app-binding>

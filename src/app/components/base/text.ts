@@ -1,5 +1,5 @@
 import {HmiComponent} from "../../hmi";
-import {createStrokeProperties} from "../properties";
+import {createStrokeProperties, TextProperties} from "../properties";
 
 export const BaseText: HmiComponent = {
     name: '文本', id: 'text', icon: '/app/scada/assets/text.svg', type: "shape",
@@ -17,10 +17,7 @@ export const BaseText: HmiComponent = {
         }
     },
     properties: [
-        //{ name: "文本", path: "attrs/label/text", type: "text" },
-        //{ name: "颜色", path: "attrs/label/fill", type: "color" },
-        // { name: "字体", path: "attrs/text/fontFamily", type: "font" },
-        //{ name: "字号", path: "attrs/label/fontSize", type: "stroke" },
+        ...TextProperties,
         ...createStrokeProperties('rect'),
     ],
 }

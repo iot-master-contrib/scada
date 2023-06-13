@@ -32,6 +32,9 @@ export declare interface HmiComponent {
     //开放的数据绑定
     bindings?: HmiComponentBinding[]
 
+    //数据绑定的钩子
+    hooks?: { [name: string]: ((value: any, cell: Cell) => void) | string }
+
     //开放的事件
     events?: HmiComponentEvent[]
 
@@ -47,14 +50,14 @@ export declare interface HmiComponent {
 export declare interface HmiComponentBinding {
     name: string
     label: string
-    type: string
+    type?: string
+    default?: any
 }
 
 export declare interface HmiComponentEvent {
     name: string
     label: string
 }
-
 
 
 export declare interface HmiCollection {
