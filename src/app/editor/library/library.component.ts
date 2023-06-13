@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {HmiComponent, HmiDraw} from "../../hmi";
-import {ComponentService} from "../../component.service";
+import { Component, EventEmitter, Output } from '@angular/core';
+import { HmiComponent, HmiDraw } from "../../hmi";
+import { ComponentService } from "../../component.service";
 
 @Component({
     selector: 'app-library',

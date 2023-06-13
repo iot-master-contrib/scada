@@ -1,5 +1,5 @@
-import {Injectable, Injector} from '@angular/core';
-import {RequestService} from "./request.service";
+import { Injectable, Injector } from '@angular/core';
+import { RequestService } from "./request.service";
 import {
     createHtmlComponent,
     createImageComponent,
@@ -9,14 +9,14 @@ import {
     HmiImageComponent,
     HmiPathComponent
 } from "./hmi";
-import {BaseComponents, ChartComponent} from "./components/components";
-import {IndustryComponents} from "./components/industry/components";
-import {ElectricComponents} from "./components/electric/components";
-import {NzNotificationService} from "ng-zorro-antd/notification";
-import {Subject} from "rxjs";
-import {Cell, Graph, Shape} from "@antv/x6";
-import {register} from "@antv/x6-angular-shape";
-import {BaseGroup} from "./components/base/group";
+import { BaseComponents, ChartComponent } from "./components/components";
+import { IndustryComponents } from "./components/industry/components";
+import { ElectricComponents } from "./components/electric/components";
+import { NzNotificationService } from "ng-zorro-antd/notification";
+import { Subject } from "rxjs";
+import { Cell, Graph, Shape } from "@antv/x6";
+import { register } from "@antv/x6-angular-shape";
+import { BaseGroup } from "./components/base/group";
 
 @Injectable({
     providedIn: 'root'
@@ -48,16 +48,16 @@ export class ComponentService {
     }
 
     load() {
-        this.rs.get("api/component/list", {limit: 99999}).subscribe(res => {
+        this.rs.get("api/component/list", { limit: 99999 }).subscribe(res => {
             res.data?.forEach((c: any) => this.PutComponent(c))
         })
-        this.rs.get("api/image/list", {limit: 99999}).subscribe(res => {
+        this.rs.get("api/image/list", { limit: 99999 }).subscribe(res => {
             res.data?.forEach((c: any) => this.PutImage(c))
         })
-        this.rs.get("api/path/list", {limit: 99999}).subscribe(res => {
+        this.rs.get("api/path/list", { limit: 99999 }).subscribe(res => {
             res.data?.forEach((c: any) => this.PutPath(c))
         })
-        this.rs.get("api/html/list", {limit: 99999}).subscribe(res => {
+        this.rs.get("api/html/list", { limit: 99999 }).subscribe(res => {
             res.data?.forEach((c: any) => this.PutHtml(c))
         })
     }
@@ -91,7 +91,7 @@ export class ComponentService {
                 }
             })
             if (!found) {
-                this.collections.push({name: component.collection, components: [component]})
+                this.collections.push({ name: component.collection, components: [component] })
             }
         } else {
             //TODO 处理未分类组件
