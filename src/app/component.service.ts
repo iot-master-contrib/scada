@@ -7,7 +7,7 @@ import { ElectricComponents } from "./components/electric/components";
 import { NzNotificationService } from "ng-zorro-antd/notification";
 import { Subject } from "rxjs";
 import { Cell, Graph, Shape } from "@antv/x6";
-import { register } from "@antv/x6-angular-shape";
+
 import { BaseGroup } from "./components/base/group";
 import {
     createHtmlComponent,
@@ -17,7 +17,8 @@ import {
     HmiImageComponent,
     HmiPathComponent
 } from "./components/creator";
-import { SvgComponent } from './base/svg/svg.component';
+
+
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 

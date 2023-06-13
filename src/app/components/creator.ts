@@ -1,6 +1,16 @@
 import { HmiComponent } from "../hmi";
 import { createStrokeProperties } from "./properties";
 
+
+
+export declare interface HmiImageComponent {
+    id: string
+    name: string
+    url: string
+    collection?: string
+}
+
+
 export function createImageComponent(cmp: HmiImageComponent): HmiComponent {
     return {
         id: cmp.id,
@@ -14,14 +24,6 @@ export function createImageComponent(cmp: HmiImageComponent): HmiComponent {
     }
 }
 
-
-
-export declare interface HmiImageComponent {
-    id: string
-    name: string
-    url: string
-    collection?: string
-}
 
 export declare interface HmiPathComponent {
     id: string
@@ -66,6 +68,7 @@ export function createHtmlComponent(cmp: HmiHtmlComponent): HmiComponent {
     }
 }
 
+
 export declare interface HmiSvgComponent {
     id: string
     name: string
@@ -73,7 +76,6 @@ export declare interface HmiSvgComponent {
     svgIcon?: any;
     collection?: string
 }
-
 
 export function createSvgComponent(cmp: HmiSvgComponent): HmiComponent {
     return {
