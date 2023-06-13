@@ -1,4 +1,5 @@
-import { createImageComponent, HmiCollection, HmiImageComponent } from "../../hmi";
+import {HmiCollection} from "../../hmi";
+import {createImageComponent, HmiImageComponent} from "../creator";
 
 const images: HmiImageComponent[] = [
     { id: 'industry-pipe1', name: '', url: '/app/scada/assets/industry/pipe1.svg' },

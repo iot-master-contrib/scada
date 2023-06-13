@@ -1,5 +1,6 @@
-import {createImageComponent, HmiCollection, HmiImageComponent} from "../../hmi";
+import {HmiCollection} from "../../hmi";
 import {ElectricSwitch} from "./switch";
+import {createImageComponent, HmiImageComponent} from "../creator";
 
 const images: HmiImageComponent[] = [
     {id: 'electric-1', name: '', url: '/app/scada/assets/electric/electric1.svg'},
