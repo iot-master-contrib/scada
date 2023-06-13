@@ -8,8 +8,8 @@ export declare interface HmiComponent {
     name: string
 
     icon: string
-
-    type: "line" | "shape" | "html"
+    svgIcon?:any
+    type: "line" | "shape" | "html" | "svg"
 
     internal?: boolean
     extends?: Node.Properties | Edge.Properties //继承 shape 或 edge

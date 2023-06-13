@@ -8,14 +8,17 @@ import { EditTableComponent } from './edit-table/edit-table.component';
 import { NzInputModule } from "ng-zorro-antd/input";
 import { NzButtonModule } from "ng-zorro-antd/button";
 import { ColorInputComponent } from './color-input/color-input.component';
+import { SvgComponent } from './svg/svg.component';
 @NgModule({
   declarations: [
     EditTableComponent,
     ColorInputComponent,
+    SvgComponent,
   ],
   exports: [
     EditTableComponent,
-    ColorInputComponent
+    ColorInputComponent,
+    SvgComponent,
   ],
   imports: [
     CommonModule,
