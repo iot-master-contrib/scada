@@ -1,5 +1,5 @@
 import {HmiComponent} from "../../hmi";
-import {createStrokeProperties} from "../properties";
+import {createStrokeProperties, TextProperties} from "../properties";
 
 export const BaseNumber: HmiComponent = {
     name: '数值', id: 'number', icon: '/app/scada/assets/number.svg', type: "shape",
@@ -13,6 +13,7 @@ export const BaseNumber: HmiComponent = {
         },
     },
     properties: [
+        ...TextProperties,
         ...createStrokeProperties('rect'),
         {name: "小数位数", path: `data/fixed`, type: "number", default: 0},
     ],

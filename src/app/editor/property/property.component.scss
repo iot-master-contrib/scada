@@ -16,12 +16,12 @@ table {
         //border-spacing: 0;
     }
 
-    :first-child(tr) {
-        min-width: 80px;
-    }
-
     tr {
-        display: flex;
-        justify-content: space-between;
+        //display: flex;
+        //justify-content: space-between;
+
+        td:first-child {
+            min-width: 80px;
+        }
     }
 }
