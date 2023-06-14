@@ -41,7 +41,7 @@ export declare interface HmiComponent {
     //animations?:
 
     //事件响应
-    listeners?: { [event: string]: ((cell: Cell, event?: any) => void) | string }
+    listeners?: { [event: string]: ((cell: Cell, event?: any, emitter?: any) => void) | string }
 
     //集合名
     collection?: string

@@ -1,10 +1,11 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {HmiPage, HmiProject} from '../../hmi/hmi';
-import {Graph} from "@antv/x6";
+import {Cell, Graph} from "@antv/x6";
 import {Title} from "@angular/platform-browser";
 import {RequestService} from "../request.service";
 import {ComponentService} from "../component.service";
 import {ActivatedRoute} from "@angular/router";
+import {NzNotificationService} from "ng-zorro-antd/notification";
 
 @Component({
     selector: 'app-viewer',
@@ -25,6 +26,7 @@ export class ViewerComponent implements OnInit {
         private rs: RequestService,
         protected cs: ComponentService,
         private route: ActivatedRoute,
+        private ns: NzNotificationService,
     ) {
         let mousewheel = route.snapshot.queryParams['mousewheel']
         let panning = route.snapshot.queryParams['panning']
@@ -40,6 +42,9 @@ export class ViewerComponent implements OnInit {
             let cmp = this.cs.Get(cell.shape)
             // @ts-ignore
             cmp?.listeners?.click?.call(this, cell, e)
+
+            // 处理用户绑定的点击事件
+            cell.data.listeners?.click?.call(this, cell, e)
         });
 
         this.graph.on('cell:mouseenter', ({cell, e}) => {
@@ -55,6 +60,13 @@ export class ViewerComponent implements OnInit {
             // @ts-ignore
             cmp?.listeners?.mouseleave?.call(this, cell, e)
         });
+
+        this.graph.on("cell:custom", (e: any) => {
+            console.log('cell:custom', e.event, e.value)
+
+            // 处理用户绑定的点击事件
+            e.cell?.data.listeners?.[e.event]?.call(this, e.cell, e.value)
+        })
     }
 
     public Render(page: HmiPage) {
@@ -67,6 +79,23 @@ export class ViewerComponent implements OnInit {
             image: page.background_image,
         })
         this.graph.fromJSON(page.content)
+
+        //TODO 调用组件的init
+
+        //监听事件
+        this.graph.getCells().forEach(cell => {
+            for (const k in cell.data.listeners) {
+                if (!cell.data.listeners.hasOwnProperty(k)) continue
+                const func = cell.data.listeners[k]
+                if (typeof func === "string" && func.length > 0) {
+                    try { // @ts-ignore
+                        cell.data.listeners[k] = new Function('cell', 'event', func)
+                    } catch (e: any) {
+                        this.ns.error("编译错误", e.message)
+                    }
+                }
+            }
+        })
     }
 
     ngOnInit(): void {

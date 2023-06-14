@@ -1,5 +1,6 @@
 import {HmiComponent} from "../hmi";
 import {SwitchSvg} from "./switch.embed";
+import {Cell} from "@antv/x6";
 
 
 export const switchCenter = {
@@ -110,22 +111,41 @@ export const ElectricSwitch: HmiComponent = {
         },
     },
     properties: [],
-    listeners: {
-        "click": (cell, event) => {
-            const attrPath = 'attrs/switch/transform';
-            const target = cell.data.value ? switchClose : switchOpen;
-            cell.data.value = !cell.data.value;
-            cell.transition(attrPath, target, {
-                interp: (a: string, b: string) => {
-                    const reg = /-?\d+/g
-                    const start = parseInt(a.match(reg)![0], 10)
-                    const end = parseInt(b.match(reg)![0], 10)
-                    const d = end - start
-                    return (t: number) => {
-                        return `rotate(${start + d * t} ${switchCenter.x} ${switchCenter.y})`
-                    }
-                },
-            })
+    bindings: [
+        {name: 'value', label: "数值", default: 12.06},
+    ],
+    events: [
+        {name: 'change', label: "变化"},
+    ],
+    hooks: {
+        value(value, cell) {
+            cell.data.value = value;
+            switchChange(cell)
         }
-    }
+    },
+    listeners: {
+        click(cell, event) {
+            cell.data.value = !cell.data.value;
+            switchChange(cell)
+            cell.notify("custom", {cell, event: 'change', value: cell.data.value})
+        }
+    },
+}
+
+function switchChange(cell: Cell) {
+    console.log('electric switch change', cell.data.value)
+
+    const attrPath = 'attrs/switch/transform';
+    const target = cell.data.value ? switchClose : switchOpen;
+    cell.transition(attrPath, target, {
+        interp: (a: string, b: string) => {
+            const reg = /-?\d+/g
+            const start = parseInt(a.match(reg)![0], 10)
+            const end = parseInt(b.match(reg)![0], 10)
+            const d = end - start
+            return (t: number) => {
+                return `rotate(${start + d * t} ${switchCenter.x} ${switchCenter.y})`
+            }
+        },
+    })
 }
