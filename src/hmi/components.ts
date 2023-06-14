@@ -7,10 +7,11 @@ import {BaseRect} from "./base/rect";
 import {BaseTriangle} from "./base/triangle";
 import {BaseText} from "./base/text";
 import {BaseImage} from "./base/image";
+import {BaseNumber} from "./base/number";
+
 import {ChartGauge} from "./chart/gauge";
 import {ChartBar} from "./chart/bar";
 import {ChartLine} from "./chart/line";
-import {BaseNumber} from "./base/number";
 
 
 export const BaseComponents: HmiCollection = {

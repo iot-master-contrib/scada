@@ -21,6 +21,7 @@ import {
 
 import {HttpClient} from '@angular/common/http';
 import {DomSanitizer} from '@angular/platform-browser';
+import {GeometryComponents} from "../hmi/geometry/components";
 
 @Injectable({
     providedIn: 'root'
@@ -47,6 +48,7 @@ export class ComponentService {
     ) {
 
         this.PutCollection(BaseComponents)
+        this.PutCollection(GeometryComponents)
         this.PutCollection(ChartComponent)
         this.PutCollection(IndustryComponents)
         this.PutCollection(ElectricComponents)
