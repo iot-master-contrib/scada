@@ -12,7 +12,7 @@ export const  Electric3Meta = {
 		{
 			"tagName": "path",
 			"selector": "path1",
-			"groupSelector": "group1"
+			"groupSelector": "all"
 		}
 	],
 	"attrs": {

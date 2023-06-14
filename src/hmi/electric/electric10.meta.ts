@@ -9,27 +9,27 @@ export const  Electric10Meta = {
 		{
 			"tagName": "path",
 			"selector": "path1",
-			"groupSelector": "group1"
+			"groupSelector": "all"
 		},
 		{
 			"tagName": "path",
 			"selector": "path2",
-			"groupSelector": "group1"
+			"groupSelector": "all"
 		},
 		{
 			"tagName": "path",
 			"selector": "path3",
-			"groupSelector": "group1"
+			"groupSelector": "all"
 		},
 		{
 			"tagName": "line",
 			"selector": "line4",
-			"groupSelector": "group1"
+			"groupSelector": "all"
 		},
 		{
 			"tagName": "line",
 			"selector": "line5",
-			"groupSelector": "group1"
+			"groupSelector": "all"
 		}
 	],
 	"attrs": {

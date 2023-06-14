@@ -9,12 +9,12 @@ export const  SwitchMeta = {
 		{
 			"tagName": "rect",
 			"selector": "rect1",
-			"groupSelector": "group1"
+			"groupSelector": "all"
 		},
 		{
 			"tagName": "path",
 			"selector": "path2",
-			"groupSelector": "group1"
+			"groupSelector": "all"
 		}
 	],
 	"attrs": {

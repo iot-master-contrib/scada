@@ -116,7 +116,7 @@ async function parseSvg(filename) {
                 markup.markup.push({
                     tagName: k,
                     selector: k + i,
-                    groupSelector: 'group1'
+                    groupSelector: 'all'
                     //attrs: parseRefs(s.$)
                 })
                 markup.attrs[k + i] = parseRefs(s.$)
