@@ -21,7 +21,7 @@ export const  SwitchMeta = {
 		"rect1": {
 			"refWidth": 24,
 			"refHeight": 24,
-			"refFill": "none"
+			"fill": "none"
 		},
 		"path2": {
 			"refD": "M23,14v2H17V14ZM14,8.93h0L12.59,7.51h0l-.7-.7L4.81,13.88l-.1.12H1v2H7v-.07l7-7Z"

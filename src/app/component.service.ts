@@ -63,15 +63,15 @@ export class ComponentService {
         this.rs.get("api/component/list", {limit: 99999}).subscribe(res => {
             res.data?.forEach((c: any) => this.PutComponent(c))
         })
-        this.rs.get("api/image/list", {limit: 99999}).subscribe(res => {
-            res.data?.forEach((c: any) => this.PutImage(c))
-        })
-        this.rs.get("api/path/list", {limit: 99999}).subscribe(res => {
-            res.data?.forEach((c: any) => this.PutPath(c))
-        })
-        this.rs.get("api/html/list", {limit: 99999}).subscribe(res => {
-            res.data?.forEach((c: any) => this.PutHtml(c))
-        })
+        // this.rs.get("api/image/list", {limit: 99999}).subscribe(res => {
+        //     res.data?.forEach((c: any) => this.PutImage(c))
+        // })
+        // this.rs.get("api/path/list", {limit: 99999}).subscribe(res => {
+        //     res.data?.forEach((c: any) => this.PutPath(c))
+        // })
+        // this.rs.get("api/html/list", {limit: 99999}).subscribe(res => {
+        //     res.data?.forEach((c: any) => this.PutHtml(c))
+        // })
     }
 
     public PutImage(component: HmiImageComponent) {
