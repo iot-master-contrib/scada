@@ -10,7 +10,8 @@ export const  ArrowUpBoldMeta = {
 	"markup": [
 		{
 			"tagName": "path",
-			"selector": "path1"
+			"selector": "path1",
+			"groupSelector": "group1"
 		}
 	],
 	"attrs": {

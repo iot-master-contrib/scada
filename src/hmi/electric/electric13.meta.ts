@@ -10,131 +10,163 @@ export const  Electric13Meta = {
 	"markup": [
 		{
 			"tagName": "path",
-			"selector": "path1"
+			"selector": "path1",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path2"
+			"selector": "path2",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path3"
+			"selector": "path3",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path4"
+			"selector": "path4",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path5"
+			"selector": "path5",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path6"
+			"selector": "path6",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path7"
+			"selector": "path7",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "polyline",
-			"selector": "polyline8"
+			"selector": "polyline8",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect9"
+			"selector": "rect9",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect10"
+			"selector": "rect10",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect11"
+			"selector": "rect11",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect12"
+			"selector": "rect12",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect13"
+			"selector": "rect13",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect14"
+			"selector": "rect14",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect15"
+			"selector": "rect15",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect16"
+			"selector": "rect16",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect17"
+			"selector": "rect17",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect18"
+			"selector": "rect18",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect19"
+			"selector": "rect19",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect20"
+			"selector": "rect20",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect21"
+			"selector": "rect21",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect22"
+			"selector": "rect22",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect23"
+			"selector": "rect23",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect24"
+			"selector": "rect24",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect25"
+			"selector": "rect25",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect26"
+			"selector": "rect26",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect27"
+			"selector": "rect27",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect28"
+			"selector": "rect28",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect29"
+			"selector": "rect29",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect30"
+			"selector": "rect30",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect31"
+			"selector": "rect31",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect32"
+			"selector": "rect32",
+			"groupSelector": "group1"
 		}
 	],
 	"attrs": {

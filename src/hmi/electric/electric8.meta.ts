@@ -8,59 +8,73 @@ export const  Electric8Meta = {
 	"markup": [
 		{
 			"tagName": "polygon",
-			"selector": "polygon1"
+			"selector": "polygon1",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "polygon",
-			"selector": "polygon2"
+			"selector": "polygon2",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path3"
+			"selector": "path3",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path4"
+			"selector": "path4",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path5"
+			"selector": "path5",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path6"
+			"selector": "path6",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path7"
+			"selector": "path7",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path8"
+			"selector": "path8",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path9"
+			"selector": "path9",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path10"
+			"selector": "path10",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path11"
+			"selector": "path11",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path12"
+			"selector": "path12",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path13"
+			"selector": "path13",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect14"
+			"selector": "rect14",
+			"groupSelector": "group1"
 		}
 	],
 	"attrs": {
