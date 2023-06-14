@@ -6,6 +6,7 @@ import {RequestService} from "../request.service";
 import {ComponentService} from "../component.service";
 import {ActivatedRoute} from "@angular/router";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {MqttService} from "ngx-mqtt";
 
 @Component({
     selector: 'app-viewer',
@@ -27,6 +28,7 @@ export class ViewerComponent implements OnInit {
         protected cs: ComponentService,
         private route: ActivatedRoute,
         private ns: NzNotificationService,
+        private mqtt: MqttService,
     ) {
         let mousewheel = route.snapshot.queryParams['mousewheel']
         let panning = route.snapshot.queryParams['panning']
@@ -97,6 +99,17 @@ export class ViewerComponent implements OnInit {
 
         //监听事件
         this.graph.getCells().forEach(cell => {
+            //数据绑定
+            for (const k in cell.data.bindings) {
+                if (!cell.data.bindings.hasOwnProperty(k)) continue
+                const binding: any = cell.data.bindings[k]
+                //binding
+                const topic = `up/property/${binding.project}/${binding.device}`
+
+
+            }
+
+            //事件处理编译
             for (const k in cell.data.listeners) {
                 if (!cell.data.listeners.hasOwnProperty(k)) continue
                 const func = cell.data.listeners[k]

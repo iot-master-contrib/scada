@@ -13,9 +13,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewerComponent } from './viewer/viewer.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import {NzNotificationService} from "ng-zorro-antd/notification";
-import {ComponentService} from "./component.service";
+import {IMqttServiceOptions, MqttModule} from "ngx-mqtt";
 
 registerLocaleData(zh);
+
+const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+    hostname: window.location.hostname,
+    port: parseInt(window.location.port),
+    path: '/mqtt',
+};
 
 @NgModule({
     declarations: [
@@ -35,6 +41,7 @@ registerLocaleData(zh);
         { provide: NzMessageService },
         NzNotificationService,
         //ComponentService,
+        MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
     ],
     bootstrap: [AppComponent]
 })
