@@ -90,7 +90,7 @@ export function createSvgComponent(cmp: HmiSvgComponent): HmiComponent {
         extends: {width:100, height:100, markup: cmp.markup, attrs: cmp.attrs},
         collection: cmp.collection,
         properties: [
-
+        ...createStrokeProperties('group1')
         ],
     }
 }

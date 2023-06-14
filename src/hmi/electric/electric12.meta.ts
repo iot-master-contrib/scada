@@ -9,15 +9,18 @@ export const  Electric12Meta = {
 	"markup": [
 		{
 			"tagName": "path",
-			"selector": "path1"
+			"selector": "path1",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path2"
+			"selector": "path2",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path3"
+			"selector": "path3",
+			"groupSelector": "group1"
 		}
 	],
 	"attrs": {

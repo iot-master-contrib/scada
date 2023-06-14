@@ -8,39 +8,48 @@ export const  Electric7Meta = {
 	"markup": [
 		{
 			"tagName": "polygon",
-			"selector": "polygon1"
+			"selector": "polygon1",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path2"
+			"selector": "path2",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path3"
+			"selector": "path3",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path4"
+			"selector": "path4",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path5"
+			"selector": "path5",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path6"
+			"selector": "path6",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "path",
-			"selector": "path7"
+			"selector": "path7",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "polyline",
-			"selector": "polyline8"
+			"selector": "polyline8",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "rect",
-			"selector": "rect9"
+			"selector": "rect9",
+			"groupSelector": "group1"
 		}
 	],
 	"attrs": {

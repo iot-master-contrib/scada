@@ -8,35 +8,43 @@ export const  Electric17Meta = {
 	"markup": [
 		{
 			"tagName": "rect",
-			"selector": "rect1"
+			"selector": "rect1",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "circle",
-			"selector": "circle2"
+			"selector": "circle2",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "circle",
-			"selector": "circle3"
+			"selector": "circle3",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "circle",
-			"selector": "circle4"
+			"selector": "circle4",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "circle",
-			"selector": "circle5"
+			"selector": "circle5",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "circle",
-			"selector": "circle6"
+			"selector": "circle6",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "line",
-			"selector": "line7"
+			"selector": "line7",
+			"groupSelector": "group1"
 		},
 		{
 			"tagName": "line",
-			"selector": "line8"
+			"selector": "line8",
+			"groupSelector": "group1"
 		}
 	],
 	"attrs": {
