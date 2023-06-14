@@ -33,7 +33,7 @@ export declare interface HmiComponent {
     bindings?: HmiComponentBinding[]
 
     //数据绑定的钩子
-    hooks?: { [name: string]: ((value: any, cell: Cell) => void) | string }
+    hooks?: { [name: string]: ((cell: Cell, value: any) => void) | string }
 
     //开放的事件
     events?: HmiComponentEvent[]

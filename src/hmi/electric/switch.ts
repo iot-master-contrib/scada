@@ -118,7 +118,7 @@ export const ElectricSwitch: HmiComponent = {
         {name: 'change', label: "变化"},
     ],
     hooks: {
-        value(value, cell) {
+        value(cell, value) {
             cell.data.value = value;
             switchChange(cell)
         }

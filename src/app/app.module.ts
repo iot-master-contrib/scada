@@ -34,6 +34,7 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
         FormsModule,
         HttpClientModule,
         BrowserAnimationsModule,
+        MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
     ],
     providers: [
         { provide: APP_BASE_HREF, useValue: '/app/scada/' },
@@ -41,7 +42,6 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
         { provide: NzMessageService },
         NzNotificationService,
         //ComponentService,
-        MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
     ],
     bootstrap: [AppComponent]
 })

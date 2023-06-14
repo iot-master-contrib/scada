@@ -22,7 +22,7 @@ export const BaseNumber: HmiComponent = {
         {name: 'value', label: "数值", default: 12.06},
     ],
     hooks: {
-        value(value, cell) {
+        value(cell, value) {
             let fixed = cell.getPropByPath("data/fixed") || 0
             cell.setPropByPath("attrs/text/text", value?.toFixed(fixed))
         }

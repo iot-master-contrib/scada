@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit} from '@angular/core';
 import {HmiPage, HmiProject} from '../../hmi/hmi';
 import {Cell, Graph} from "@antv/x6";
 import {Title} from "@angular/platform-browser";
@@ -7,19 +7,22 @@ import {ComponentService} from "../component.service";
 import {ActivatedRoute} from "@angular/router";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {MqttService} from "ngx-mqtt";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'app-viewer',
     templateUrl: './viewer.component.html',
     styleUrls: ['./viewer.component.scss']
 })
-export class ViewerComponent implements OnInit {
+export class ViewerComponent implements OnInit, OnDestroy {
     id: any = ''
 
     project!: HmiProject
     graph!: Graph;
 
     index = 0;
+
+    subs: Subscription[] = []
 
     constructor(
         private title: Title,
@@ -99,14 +102,24 @@ export class ViewerComponent implements OnInit {
 
         //监听事件
         this.graph.getCells().forEach(cell => {
+            const cmp = this.cs.Get(cell.shape)
             //数据绑定
             for (const k in cell.data.bindings) {
                 if (!cell.data.bindings.hasOwnProperty(k)) continue
                 const binding: any = cell.data.bindings[k]
                 //binding
-                const topic = `up/property/${binding.project}/${binding.device}`
-
-
+                const topic = `up/property/${binding.product}/${binding.device}`
+                console.log("subscribe topic", topic)
+                const sub = this.mqtt.observe(topic).subscribe(res => {
+                    const values = JSON.parse(res.payload.toString())
+                    console.log("mqtt", topic, values)
+                    try { //@ts-ignore
+                        cmp.hooks?.[k]?.call(this, cell, values[binding.variable])
+                    } catch (e: any) {
+                        this.ns.error("数据绑定错误", e.message)
+                    }
+                })
+                this.subs.push(sub)
             }
 
             //事件处理编译
@@ -132,8 +145,14 @@ export class ViewerComponent implements OnInit {
             this.Render(this.project.pages[0])
         });
     }
+    ngOnDestroy(): void {
+        this.subs.forEach(sub=>{
+            sub.unsubscribe
+        })
+    }
 
     handlePageChange($event: number) {
         this.Render(this.project.pages[this.index])
     }
+
 }

@@ -17,11 +17,19 @@ export class BindingComponent {
     }
 
     edit(e: HmiComponentEvent) {
+        this.cell.data.bindings ||= {}
         this.ms.create({
             nzTitle: `编辑 ${e.label} 数据绑定`,
-            nzContent: BindingSettingComponent
+            nzContent: BindingSettingComponent,
+            nzComponentParams: {
+                content: this.cell.data.bindings[e.name] || {}
+            },
+            nzOnOk: ({ group }) => {
+                //const bindings = this.cell.data.bindings || {};
+                this.cell.data.bindings[e.name] = group.value
+            }
         })
-        //TODO OK中，将脚本回传 至 cell.data.bindings[e.name]
+        //TODO OK中，回传 至 cell.data.bindings[e.name]
     }
 
 }
