@@ -42,7 +42,6 @@ import {NzLayoutModule} from 'ng-zorro-antd/layout';
 import {NzSpaceModule} from 'ng-zorro-antd/space';
 import {NzTabsModule} from 'ng-zorro-antd/tabs';
 import {NzCheckboxModule} from 'ng-zorro-antd/checkbox';
-import {SetDataComponent} from './set-data/set-data.component';
 import {BaseModule} from '../base/base.module';
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {CollapseComponent} from './collapse/collapse.component';
@@ -68,7 +67,6 @@ import { BindingSettingComponent } from './binding-setting/binding-setting.compo
         PropertyComponent,
         PropertyInputComponent,
         ToolbarComponent,
-        SetDataComponent,
         CollapseComponent,
         PagesComponent,
         PageSettingComponent,

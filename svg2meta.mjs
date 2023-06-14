@@ -50,32 +50,35 @@ const tags = ["path", "rect", "line", "circle", "ellipse", "polyline", "polygon"
 
 
 //number, string
-const refs = [
-    "d", //path
-    "x", "y", "width", "height", //rect
-    "x1", "y1", "x2", "y2", //line
-    "rx", "ry", "cx", "cy", //ellipse
-    "r", //circle
-    "points", //poly
-    "fill",
-    "stroke",
-    "stroke-width",
-    "stroke-linecap",
-    "stroke-linejoin",
-]
+const refs = {
+    "d": 1, //path
+    "x": 1, "y": 1, "width": 1, "height": 1, //rect
+    "x1": 1, "y1": 1, "x2": 1, "y2": 1, //line
+    "rx": 1, "ry": 1, "cx": 1, "cy": 1, //ellipse
+    "r": 1, //circle
+    "points": 1, //poly
+    "fill": 0,
+    "stroke": 0,
+    "stroke-width": 0,
+    "stroke-linecap": 0,
+    "stroke-linejoin": 0,
+}
 
 function parseRefs(xml) {
     const attrs = {}
 
-    refs.forEach(ref => {
+    for (let ref in refs) {
+        if (!refs.hasOwnProperty(ref)) continue
+        let type = refs[ref]
+
         if (xml.hasOwnProperty(ref)) {
             const value = xml[ref]
-            const key = camelCase('ref-' + ref)
+            const key = type===1 ? camelCase('ref-' + ref): ref
             attrs[key] = value
             if (/^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$/.test(value))
                 attrs[key] = parseFloat(value)
         }
-    })
+    }
 
     return attrs
 }
