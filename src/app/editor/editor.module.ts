@@ -58,6 +58,7 @@ import { ListenerComponent } from './listener/listener.component';
 import { AnimateComponent } from './animate/animate.component';
 import { ListenerSettingComponent } from './listener-setting/listener-setting.component';
 import { BindingSettingComponent } from './binding-setting/binding-setting.component';
+import {CodemirrorModule} from '@ctrl/ngx-codemirror';
 
 @NgModule({
     declarations: [
@@ -104,6 +105,7 @@ import { BindingSettingComponent } from './binding-setting/binding-setting.compo
         BaseModule,
         NzSelectModule,
         NzInputNumberModule,
+        CodemirrorModule
     ],
     providers: [
         {provide: NzMessageService,},
