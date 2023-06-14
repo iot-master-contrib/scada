@@ -10,13 +10,14 @@ export const  ArrowRightBlockMeta = {
 	"markup": [
 		{
 			"tagName": "path",
-			"selector": "path1"
+			"selector": "path1",
+			"groupSelector": "all"
 		}
 	],
 	"attrs": {
 		"path1": {
 			"refD": "M256 512l512 409.6V102.4L256 512z",
-			"refFill": "#333333"
+			"fill": "#333333"
 		}
 	}
 }

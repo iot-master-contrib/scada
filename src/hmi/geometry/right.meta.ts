@@ -10,13 +10,14 @@ export const  RightMeta = {
 	"markup": [
 		{
 			"tagName": "path",
-			"selector": "path1"
+			"selector": "path1",
+			"groupSelector": "all"
 		}
 	],
 	"attrs": {
 		"path1": {
 			"refD": "M680.448 168.448l-72.192 72.704L827.904 460.8H0v102.4h827.904l-219.648 219.648 72.192 72.704L1024 512l-343.552-343.552z",
-			"refFill": "#333333"
+			"fill": "#333333"
 		}
 	}
 }

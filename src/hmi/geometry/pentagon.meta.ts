@@ -10,13 +10,14 @@ export const  PentagonMeta = {
 	"markup": [
 		{
 			"tagName": "path",
-			"selector": "path1"
+			"selector": "path1",
+			"groupSelector": "all"
 		}
 	],
 	"attrs": {
 		"path1": {
 			"refD": "M512 210.176l320.512 232.832L710.059 819.84H313.94L191.488 443.008 512 210.176z m405.76 205.141L512 120.491 106.24 415.317l154.965 477.014h501.59l155.008-477.014z",
-			"refFill": "#333333"
+			"fill": "#333333"
 		}
 	}
 }

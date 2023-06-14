@@ -10,13 +10,14 @@ export const  ArrowLeftMeta = {
 	"markup": [
 		{
 			"tagName": "path",
-			"selector": "path1"
+			"selector": "path1",
+			"groupSelector": "all"
 		}
 	],
 	"attrs": {
 		"path1": {
 			"refD": "M753.152 138.752l-72.704-72.704L235.008 512l445.44 445.952 72.704-72.704L379.392 512l373.76-373.248z",
-			"refFill": "#333333"
+			"fill": "#333333"
 		}
 	}
 }
