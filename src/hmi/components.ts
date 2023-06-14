@@ -12,6 +12,7 @@ import {BaseNumber} from "./base/number";
 import {ChartGauge} from "./chart/gauge";
 import {ChartBar} from "./chart/bar";
 import {ChartLine} from "./chart/line";
+import {BaseSwitch} from "./base/switch";
 
 
 export const BaseComponents: HmiCollection = {
@@ -19,6 +20,7 @@ export const BaseComponents: HmiCollection = {
     components: [
         BaseLine, BaseCircle, BaseEllipse, BaseRect,
         BaseTriangle, BaseText, BaseNumber, BaseImage,
+        BaseSwitch,
     ]
 }
 
