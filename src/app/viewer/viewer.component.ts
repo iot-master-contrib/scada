@@ -39,33 +39,46 @@ export class ViewerComponent implements OnInit {
         });
 
         this.graph.on('cell:click', ({cell, e}) => {
-            let cmp = this.cs.Get(cell.shape)
-            // @ts-ignore
-            cmp?.listeners?.click?.call(this, cell, e)
+            try {
+                // 处理用户绑定的点击事件
+                cell.data.listeners?.click?.call(this, cell, e)
 
-            // 处理用户绑定的点击事件
-            cell.data.listeners?.click?.call(this, cell, e)
+                let cmp = this.cs.Get(cell.shape)
+                // @ts-ignore
+                cmp?.listeners?.click?.call(this, cell, e)
+            } catch (e: any) {
+                this.ns.error("点击事件处理错误", e.message)
+            }
         });
 
         this.graph.on('cell:mouseenter', ({cell, e}) => {
-            //console.log("cell:mouseenter", cell.shape)
-            let cmp = this.cs.Get(cell.shape)
-            // @ts-ignore
-            cmp?.listeners?.mouseenter?.call(this, cell, e)
+            try {
+                let cmp = this.cs.Get(cell.shape)
+                // @ts-ignore
+                cmp?.listeners?.mouseenter?.call(this, cell, e)
+            } catch (e: any) {
+                this.ns.error("鼠标事件处理错误", e.message)
+            }
         });
 
         this.graph.on('cell:mouseleave', ({cell, e}) => {
-            //console.log("cell:mouseleave")
-            let cmp = this.cs.Get(cell.shape)
-            // @ts-ignore
-            cmp?.listeners?.mouseleave?.call(this, cell, e)
+            try {
+                let cmp = this.cs.Get(cell.shape)
+                // @ts-ignore
+                cmp?.listeners?.mouseleave?.call(this, cell, e)
+            } catch (e: any) {
+                this.ns.error("鼠标事件处理错误", e.message)
+            }
         });
 
         this.graph.on("cell:custom", (e: any) => {
-            console.log('cell:custom', e.event, e.value)
-
+            //console.log('cell:custom', e.event, e.value)
             // 处理用户绑定的点击事件
-            e.cell?.data.listeners?.[e.event]?.call(this, e.cell, e.value)
+            try {
+                e.cell?.data.listeners?.[e.event]?.call(this, e.cell, e.value)
+            } catch (e: any) {
+                this.ns.error("组件事件响应处理错误", e.message)
+            }
         })
     }
 
