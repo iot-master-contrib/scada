@@ -103,7 +103,10 @@ export class ViewerComponent implements OnInit, OnDestroy {
         //监听事件
         this.graph.getCells().forEach(cell => {
             const cmp = this.cs.Get(cell.shape)
+
             //数据绑定
+            this.subs.forEach(sub => sub.unsubscribe())
+            this.subs = []
             for (const k in cell.data.bindings) {
                 if (!cell.data.bindings.hasOwnProperty(k)) continue
                 const binding: any = cell.data.bindings[k]
@@ -145,10 +148,9 @@ export class ViewerComponent implements OnInit, OnDestroy {
             this.Render(this.project.pages[0])
         });
     }
+
     ngOnDestroy(): void {
-        this.subs.forEach(sub=>{
-            sub.unsubscribe
-        })
+        this.subs.forEach(sub => sub.unsubscribe())
     }
 
     handlePageChange($event: number) {
