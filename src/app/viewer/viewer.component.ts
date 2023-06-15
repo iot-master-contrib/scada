@@ -23,6 +23,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
     index = 0;
 
     subs: Subscription[] = []
+    topics: { [topic: string]: ((values: any) => void)[] } = {}
 
     constructor(
         private title: Title,
@@ -110,19 +111,30 @@ export class ViewerComponent implements OnInit, OnDestroy {
             for (const k in cell.data.bindings) {
                 if (!cell.data.bindings.hasOwnProperty(k)) continue
                 const binding: any = cell.data.bindings[k]
+                console.log("binding", cmp.id, k, binding)
+
                 //binding
                 const topic = `up/property/${binding.product}/${binding.device}`
-                console.log("subscribe topic", topic)
-                const sub = this.mqtt.observe(topic).subscribe(res => {
-                    const values = JSON.parse(res.payload.toString())
-                    console.log("mqtt", topic, values)
+                //订阅同一主题，只会响应最后一个，比较郁闷
+                if (!this.topics[topic]) {
+                    this.topics[topic] = []
+                    const sub = this.mqtt.observe(topic).subscribe(res => {
+                        const values = JSON.parse(res.payload.toString())
+                        console.log(res.topic, res.payload)
+                        this.topics[topic].forEach(fn => fn(values))
+                    })
+                    this.subs.push(sub)
+                }
+
+                //加入回调
+                this.topics[topic].push((values: any) => {
+                    console.log("data", cmp.id, k, binding, values)
                     try { //@ts-ignore
                         cmp.hooks?.[k]?.call(this, cell, values[binding.variable])
                     } catch (e: any) {
                         this.ns.error("数据绑定错误", e.message)
                     }
                 })
-                this.subs.push(sub)
             }
 
             //事件处理编译
