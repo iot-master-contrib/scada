@@ -5,7 +5,6 @@ export const  Electric4Meta = {
 	"height": 100,
 	"viewBox": "0 0 24 24",
 	"xmlns": "http://www.w3.org/2000/svg",
-	"fill": "rgba(255,255,255,0.16)",
 	"markup": [
 		{
 			"tagName": "path",
