@@ -21,7 +21,6 @@ if (stat.isFile()) {
         const stat = fs.statSync(filename)
         const ext = path.extname(file)
         if (stat.isFile() && ext === ".svg") {
-            console.log("🚀 ~ file: svg2meta.mjs:29 ~ filename:", filename)
             await convert(filename)
         }
     })
