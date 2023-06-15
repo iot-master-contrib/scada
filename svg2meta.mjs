@@ -17,11 +17,11 @@ if (stat.isFile()) {
 } else {
     let files = fs.readdirSync(input)
     files.forEach(async file => {
-        allPath = "";
         const filename = path.join(input, file)
         const stat = fs.statSync(filename)
         const ext = path.extname(file)
         if (stat.isFile() && ext === ".svg") {
+            console.log("🚀 ~ file: svg2meta.mjs:29 ~ filename:", filename)
             await convert(filename)
         }
     })
@@ -39,7 +39,6 @@ async function convert(filename) {
     variable = camelCase(variable, { pascalCase: true })
 
     fs.appendFileSync(out, `export const  ${variable} = `)
-
     let meta = await parseSvg(filename)
     const content = JSON.stringify(meta, undefined, '\t')
 
@@ -94,6 +93,7 @@ async function parseSvg(filename) {
     const obj = await parser.parseStringPromise(content.toString())
     //console.dir(obj.svg)
     console.log("parse", filename, obj.svg.$)
+    allPath = "";
     const markup = {
         width: parseInt(obj.svg.$.width) || 100,
         height: parseInt(obj.svg.$.height) || 100,
