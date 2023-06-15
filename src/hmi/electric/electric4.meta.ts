@@ -16,8 +16,8 @@ export const  Electric4Meta = {
 	"attrs": {
 		"path1": {
 			"refD": "M12 4V12M17.2916 5.99999C18.9525 7.46588 20 9.61061 20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 9.61061 5.04752 7.46588 6.70837 5.99999",
+			"fill": "none",
 			"stroke": "#000000",
-			"stroke-width": 2,
 			"stroke-linecap": "round",
 			"stroke-linejoin": "round"
 		}
