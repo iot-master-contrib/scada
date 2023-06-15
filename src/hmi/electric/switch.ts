@@ -110,7 +110,9 @@ export const ElectricSwitch: HmiComponent = {
             },
         },
     },
-    properties: [],
+    properties: [
+        {path: 'data/disabled', name: "禁用", type: "boolean"},
+    ],
     bindings: [
         {name: 'value', label: "数值", default: 12.06},
     ],
@@ -125,6 +127,9 @@ export const ElectricSwitch: HmiComponent = {
     },
     listeners: {
         click(cell, event) {
+            //禁用不响应
+            if (cell.data.disabled)
+                return
             cell.data.value = !cell.data.value;
             switchChange(cell)
             cell.notify("custom", {cell, event: 'change', value: cell.data.value})

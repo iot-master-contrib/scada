@@ -60,6 +60,7 @@ import { ListenerSettingComponent } from './listener-setting/listener-setting.co
 import { BindingSettingComponent } from './binding-setting/binding-setting.component';
 import {CodemirrorModule} from '@ctrl/ngx-codemirror';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import {NzSwitchModule} from "ng-zorro-antd/switch";
 
 @NgModule({
     declarations: [
@@ -107,7 +108,8 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
         NzSelectModule,
         NzInputNumberModule,
         CodemirrorModule,
-        NzTagModule
+        NzTagModule,
+        NzSwitchModule
     ],
     providers: [
         {provide: NzMessageService,},

@@ -74,7 +74,7 @@ const images: HmiPathComponent[] = [
     { id: 'industry-pipe10', name: '', svg: Pipe10Svg, ...Pipe10Meta },
     { id: 'industry-pipe11', name: '', svg: Pipe11Svg, ...Pipe11Meta },
 ]
-console.log(images, '--images')
+//console.log(images, '--images')
 export const IndustryComponents: HmiCollection = {
     name: '工业组件',
     components: images.map(img => createPathComponent(img))
