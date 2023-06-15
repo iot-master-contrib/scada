@@ -20,9 +20,6 @@ export function createImageComponent(cmp: HmiImageComponent): HmiComponent {
         type: "shape",
         extends: { inherit: "image" },
         meta: { width: 100, height: 80, imageUrl: cmp.url },
-        properties: [
-            ...createStrokeProperties('path')
-        ],
         collection: cmp.collection
     }
 }
@@ -45,7 +42,9 @@ export function createPathComponent(cmp: HmiPathComponent): HmiComponent {
         type: "shape",
         extends: { inherit: "path" },
         meta: { width: 100, height: 80, path: cmp.path },
-        properties: [],
+        properties: [
+            ...createStrokeProperties('path')
+        ],
         collection: cmp.collection
     }
 }
