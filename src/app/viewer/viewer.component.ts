@@ -9,6 +9,11 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
 import {MqttService} from "ngx-mqtt";
 import {Subscription} from "rxjs";
 
+
+//import "fengari-web"
+
+//declare var fengari as any
+
 @Component({
     selector: 'app-viewer',
     templateUrl: './viewer.component.html',
@@ -84,7 +89,10 @@ export class ViewerComponent implements OnInit, OnDestroy {
             } catch (e: any) {
                 this.ns.error("组件事件响应处理错误", e.message)
             }
-        })
+        });
+
+        //@ts-ignore
+        //fengari.load("a+1")()
     }
 
     public Render(page: HmiPage) {
