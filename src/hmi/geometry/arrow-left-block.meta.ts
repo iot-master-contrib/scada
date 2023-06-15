@@ -16,8 +16,7 @@ export const  ArrowLeftBlockMeta = {
 	],
 	"attrs": {
 		"path1": {
-			"refD": "M256 102.4v819.2l512-409.6L256 102.4z",
-			"fill": "#333333"
+			"refD": "M256 102.4v819.2l512-409.6L256 102.4z"
 		}
 	}
 }
