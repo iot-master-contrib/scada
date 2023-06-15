@@ -23,7 +23,6 @@ export class ViewerComponent implements OnInit, OnDestroy {
     index = 0;
 
     subs: Subscription[] = []
-    topics: { [topic: string]: ((values: any) => void)[] } = {}
 
     constructor(
         private title: Title,
@@ -101,13 +100,15 @@ export class ViewerComponent implements OnInit, OnDestroy {
 
         //TODO 调用组件的init
 
+        //清空订阅
+        this.subs.forEach(sub => sub.unsubscribe())
+        this.subs = []
+
         //监听事件
         this.graph.getCells().forEach(cell => {
             const cmp = this.cs.Get(cell.shape)
 
             //数据绑定
-            this.subs.forEach(sub => sub.unsubscribe())
-            this.subs = []
             for (const k in cell.data.bindings) {
                 if (!cell.data.bindings.hasOwnProperty(k)) continue
                 const binding: any = cell.data.bindings[k]
@@ -116,18 +117,8 @@ export class ViewerComponent implements OnInit, OnDestroy {
                 //binding
                 const topic = `up/property/${binding.product}/${binding.device}`
                 //订阅同一主题，只会响应最后一个，比较郁闷
-                if (!this.topics[topic]) {
-                    this.topics[topic] = []
-                    const sub = this.mqtt.observe(topic).subscribe(res => {
-                        const values = JSON.parse(res.payload.toString())
-                        console.log(res.topic, res.payload)
-                        this.topics[topic].forEach(fn => fn(values))
-                    })
-                    this.subs.push(sub)
-                }
-
-                //加入回调
-                this.topics[topic].push((values: any) => {
+                const sub = this.mqtt.observe(topic).subscribe(res => {
+                    const values = JSON.parse(res.payload.toString())
                     console.log("data", cmp.id, k, binding, values)
                     try { //@ts-ignore
                         cmp.hooks?.[k]?.call(this, cell, values[binding.variable])
@@ -135,6 +126,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
                         this.ns.error("数据绑定错误", e.message)
                     }
                 })
+                this.subs.push(sub)
             }
 
             //事件处理编译
