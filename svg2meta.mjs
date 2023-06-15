@@ -7,6 +7,7 @@ const input = process.argv[2] || '.'
 const output = process.argv[3]
 
 const prefix = ""
+let allPath = "";
 
 console.log('convert', input, output)
 
@@ -16,6 +17,7 @@ if (stat.isFile()) {
 } else {
     let files = fs.readdirSync(input)
     files.forEach(async file => {
+        allPath = "";
         const filename = path.join(input, file)
         const stat = fs.statSync(filename)
         const ext = path.extname(file)
@@ -34,7 +36,7 @@ async function convert(filename) {
     fs.appendFileSync(out, `// From ${filename} \n`)
 
     let variable = prefix + base + "_meta"
-    variable = camelCase(variable, {pascalCase: true})
+    variable = camelCase(variable, { pascalCase: true })
 
     fs.appendFileSync(out, `export const  ${variable} = `)
 
@@ -47,7 +49,6 @@ async function convert(filename) {
 
 
 const tags = ["path", "rect", "line", "circle", "ellipse", "polyline", "polygon"]
-
 
 //number, string
 const refs = {
@@ -73,8 +74,12 @@ function parseRefs(xml) {
 
         if (xml.hasOwnProperty(ref)) {
             const value = xml[ref]
-            const key = type===1 ? camelCase('ref-' + ref): ref
+
+            const key = type === 1 ? camelCase('ref-' + ref) : ref
             attrs[key] = value
+            if (type === 1) {
+                allPath += `${value},`;
+            }
             if (/^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$/.test(value))
                 attrs[key] = parseFloat(value)
         }
@@ -89,7 +94,6 @@ async function parseSvg(filename) {
     const obj = await parser.parseStringPromise(content.toString())
     //console.dir(obj.svg)
     console.log("parse", filename, obj.svg.$)
-
     const markup = {
         width: parseInt(obj.svg.$.width) || 100,
         height: parseInt(obj.svg.$.height) || 100,
@@ -103,7 +107,7 @@ async function parseSvg(filename) {
         "stroke-linejoin'": obj.svg.$['stroke-linejoin'],
         "stroke-width": obj.svg.$['stroke-width'],
         markup: [],
-        attrs: {}
+        attrs: {},
     }
 
     let i = 1
@@ -130,6 +134,6 @@ async function parseSvg(filename) {
     }
 
     parse(obj.svg)
-
+    markup.path = allPath;
     return markup
 }

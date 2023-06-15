@@ -71,7 +71,6 @@ const images: HmiSvgComponent[] = [
     // { id: 'electric-capacitor', name: '', svg: CapacitorSvg, ...CapacitorMeta },
     { id: 'electric-arrow', name: '', svg: ArrowUpBoldSvg, ...ArrowUpBoldMeta },
 ]
-console.log(images, '--images')
 export const ElectricComponents: HmiCollection = {
     name: '电力组件',
     // hmi: images.map(img => createImageComponent(img)).concat([ElectricSwitch])

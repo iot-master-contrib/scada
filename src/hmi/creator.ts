@@ -1,7 +1,7 @@
-import {HmiComponent} from "./hmi";
-import {createStrokeProperties} from "./properties";
+import { HmiComponent } from "./hmi";
+import { createStrokeProperties } from "./properties";
 //import {Markup} from "@antv/x6/src/view/markup";
-import {Markup, Registry} from "@antv/x6";
+import { Markup, Registry } from "@antv/x6";
 
 
 export declare interface HmiImageComponent {
@@ -18,9 +18,11 @@ export function createImageComponent(cmp: HmiImageComponent): HmiComponent {
         name: cmp.name,
         icon: cmp.url,
         type: "shape",
-        extends: {inherit: "image"},
-        meta: {width: 100, height: 80, imageUrl: cmp.url},
-        properties: [],
+        extends: { inherit: "image" },
+        meta: { width: 100, height: 80, imageUrl: cmp.url },
+        properties: [
+            ...createStrokeProperties('path')
+        ],
         collection: cmp.collection
     }
 }
@@ -29,7 +31,7 @@ export function createImageComponent(cmp: HmiImageComponent): HmiComponent {
 export declare interface HmiPathComponent {
     id: string
     name: string
-    icon: string
+    svg: string
     path: string
     collection?: string
 }
@@ -39,10 +41,10 @@ export function createPathComponent(cmp: HmiPathComponent): HmiComponent {
     return {
         id: cmp.id,
         name: cmp.name,
-        icon: cmp.icon,
+        svg: cmp.svg,
         type: "shape",
-        extends: {inherit: "path"},
-        meta: {width: 100, height: 80, path: cmp.path},
+        extends: { inherit: "path" },
+        meta: { width: 100, height: 80, path: cmp.path },
         properties: [],
         collection: cmp.collection
     }
@@ -87,10 +89,10 @@ export function createSvgComponent(cmp: HmiSvgComponent): HmiComponent {
         name: cmp.name,
         svg: cmp.svg,
         type: "svg",
-        extends: {width:100, height:100, markup: cmp.markup, attrs: cmp.attrs},
+        extends: { width: 100, height: 100, markup: cmp.markup, attrs: cmp.attrs },
         collection: cmp.collection,
         properties: [
-        ...createStrokeProperties('all')
+            ...createStrokeProperties('all')
         ],
     }
 }
