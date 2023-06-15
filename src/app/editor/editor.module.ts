@@ -59,6 +59,7 @@ import { AnimateComponent } from './animate/animate.component';
 import { ListenerSettingComponent } from './listener-setting/listener-setting.component';
 import { BindingSettingComponent } from './binding-setting/binding-setting.component';
 import {CodemirrorModule} from '@ctrl/ngx-codemirror';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 @NgModule({
     declarations: [
@@ -105,7 +106,8 @@ import {CodemirrorModule} from '@ctrl/ngx-codemirror';
         BaseModule,
         NzSelectModule,
         NzInputNumberModule,
-        CodemirrorModule
+        CodemirrorModule,
+        NzTagModule
     ],
     providers: [
         {provide: NzMessageService,},

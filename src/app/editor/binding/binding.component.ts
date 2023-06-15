@@ -1,13 +1,13 @@
-import {Component, Input} from '@angular/core';
-import {Cell} from "@antv/x6";
-import {HmiComponent, HmiComponentEvent} from "../../../hmi/hmi";
-import {NzModalService} from "ng-zorro-antd/modal";
-import {BindingSettingComponent} from "../binding-setting/binding-setting.component";
+import { Component, Input } from '@angular/core';
+import { Cell } from "@antv/x6";
+import { HmiComponent, HmiComponentEvent } from "../../../hmi/hmi";
+import { NzModalService } from "ng-zorro-antd/modal";
+import { BindingSettingComponent } from "../binding-setting/binding-setting.component";
 
 @Component({
-  selector: 'app-binding',
-  templateUrl: './binding.component.html',
-  styleUrls: ['./binding.component.scss']
+    selector: 'app-binding',
+    templateUrl: './binding.component.html',
+    styleUrls: ['./binding.component.scss']
 })
 export class BindingComponent {
     @Input() cell!: Cell

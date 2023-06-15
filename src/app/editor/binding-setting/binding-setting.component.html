@@ -1,4 +1,20 @@
 <form nz-form [formGroup]="group">
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="device">设备ID</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-select nzAllowClear nzShowSearch nzServerSearch formControlName="device" (nzOnSearch)="onSearch($event)"
+                (ngModelChange)="handleChange($event)">
+                <ng-container *ngFor="let item of optionList">
+                    <nz-option *ngIf="!isLoading" [nzValue]="item['id']" [nzLabel]="item['name']+'-'+item['id']">
+                    </nz-option>
+                </ng-container>
+                <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+                    <span nz-icon nzType="loading" class="loading-icon"></span>
+                    Loading Data...
+                </nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
 
     <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="product">产品ID</nz-form-label>
@@ -8,16 +24,12 @@
     </nz-form-item>
 
     <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="device">设备ID</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24">
-            <input nz-input formControlName="device" />
-        </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="variable">变量</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-            <input nz-input formControlName="variable" />
+            <nz-select nzShowSearch nzAllowClear formControlName="variable">
+                <nz-option *ngFor="let item of variableList" [nzLabel]="item['name']" [nzValue]="item['name']">
+                </nz-option>
+            </nz-select>
         </nz-form-control>
     </nz-form-item>
 
