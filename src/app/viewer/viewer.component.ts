@@ -147,6 +147,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
             const cmp = this.cs.Get(cell.shape)
 
             //数据绑定
+            if (cell.data.bindings)
             for (const k in cell.data.bindings) {
                 if (!cell.data.bindings.hasOwnProperty(k)) continue
                 const binding: any = cell.data.bindings[k]
@@ -168,6 +169,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
             }
 
             //事件处理编译
+            if (cell.data.listeners)
             for (const k in cell.data.listeners) {
                 if (!cell.data.listeners.hasOwnProperty(k)) continue
                 const func = cell.data.listeners[k]
