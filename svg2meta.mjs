@@ -2,6 +2,9 @@ import fs from "fs"
 import path from "path"
 import xml2js from 'xml2js'
 import camelCase from 'camelcase';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const svg2Path = require('./svg2path.js')
 
 const input = process.argv[2] || '.'
 const output = process.argv[3]
@@ -51,11 +54,11 @@ const tags = ["path", "rect", "line", "circle", "ellipse", "polyline", "polygon"
 //number, string
 const refs = {
     "d": 1, //path
-    "x": 1, "y": 1, "width": 1, "height": 1, //rect
-    "x1": 1, "y1": 1, "x2": 1, "y2": 1, //line
-    "rx": 1, "ry": 1, "cx": 1, "cy": 1, //ellipse
-    "r": 1, //circle
-    "points": 1, //poly
+    // "x": 1, "y": 1, "width": 1, "height": 1, //rect
+    // "x1": 1, "y1": 1, "x2": 1, "y2": 1, //line
+    // "rx": 1, "ry": 1, "cx": 1, "cy": 1, //ellipse
+    // "r": 1, //circle
+    // "points": 1, //poly
     "fill": 0,
     "stroke": 0,
     "stroke-width": 0,
@@ -111,21 +114,23 @@ async function parseSvg(filename) {
 
     let i = 1
 
+    const tag = 'path';
     function parse(obj) {
         for (let k in obj) {
             if (!obj.hasOwnProperty(k)) continue
             //群组调用子级
             if (k === "g") obj[k].forEach(gg => parse(gg))
             if (tags.indexOf(k) === -1) continue
-
             obj[k].forEach(s => {
                 markup.markup.push({
-                    tagName: k,
-                    selector: k + i,
+                    tagName: tag,
+                    selector: tag + i,
                     groupSelector: 'all'
                     //attrs: parseRefs(s.$)
                 })
-                markup.attrs[k + i] = parseRefs(s.$)
+                s.$.d = svg2Path(k, s.$);//把所有标签转成path  返回路径
+                // markup.attrs[k + i] = parseRefs(s.$)
+                markup.attrs[tag + i] = parseRefs(s.$)
 
                 i++
             })

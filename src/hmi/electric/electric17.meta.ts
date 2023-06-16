@@ -7,90 +7,71 @@ export const  Electric17Meta = {
 	"xmlns": "http://www.w3.org/2000/svg",
 	"markup": [
 		{
-			"tagName": "rect",
-			"selector": "rect1",
+			"tagName": "path",
+			"selector": "path1",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "circle",
-			"selector": "circle2",
+			"tagName": "path",
+			"selector": "path2",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "circle",
-			"selector": "circle3",
+			"tagName": "path",
+			"selector": "path3",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "circle",
-			"selector": "circle4",
+			"tagName": "path",
+			"selector": "path4",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "circle",
-			"selector": "circle5",
+			"tagName": "path",
+			"selector": "path5",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "circle",
-			"selector": "circle6",
+			"tagName": "path",
+			"selector": "path6",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "line",
-			"selector": "line7",
+			"tagName": "path",
+			"selector": "path7",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "line",
-			"selector": "line8",
+			"tagName": "path",
+			"selector": "path8",
 			"groupSelector": "all"
 		}
 	],
 	"attrs": {
-		"rect1": {
-			"refX": 1.5,
-			"refY": 1.5,
-			"refWidth": 21,
-			"refHeight": 21,
-			"refRx": 1.91
+		"path1": {
+			"refD": "M1.5 3.41a1.91 1.91 0 0 1 1.91 -1.91h17.18a1.91 1.91 0 0 1 1.91 1.91v17.18a1.91 1.91 0 0 1 -1.91 1.91h-17.18a1.91 1.91 0 0 1 -1.91 -1.91z"
 		},
-		"circle2": {
-			"refCx": 12,
-			"refCy": 12,
-			"refR": 6.68
+		"path2": {
+			"refD": "M5.32 12a6.68 6.68 0 1 0 13.36 0a6.68 6.68 0 1 0 -13.36 0z"
 		},
-		"circle3": {
-			"refCx": 4.36,
-			"refCy": 4.36,
-			"refR": 0.95
+		"path3": {
+			"refD": "M3.41 4.36a0.95 0.95 0 1 0 1.9 0a0.95 0.95 0 1 0 -1.9 0z"
 		},
-		"circle4": {
-			"refCx": 19.64,
-			"refCy": 4.36,
-			"refR": 0.95
+		"path4": {
+			"refD": "M18.69 4.36a0.95 0.95 0 1 0 1.9 0a0.95 0.95 0 1 0 -1.9 0z"
 		},
-		"circle5": {
-			"refCx": 19.64,
-			"refCy": 19.64,
-			"refR": 0.95
+		"path5": {
+			"refD": "M18.69 19.64a0.95 0.95 0 1 0 1.9 0a0.95 0.95 0 1 0 -1.9 0z"
 		},
-		"circle6": {
-			"refCx": 4.36,
-			"refCy": 19.64,
-			"refR": 0.95
+		"path6": {
+			"refD": "M3.41 19.64a0.95 0.95 0 1 0 1.9 0a0.95 0.95 0 1 0 -1.9 0z"
 		},
-		"line7": {
-			"refX1": 9.14,
-			"refY1": 10.09,
-			"refX2": 9.14,
-			"refY2": 13.91
+		"path7": {
+			"refD": "M9.14 10.09L9.14 13.91"
 		},
-		"line8": {
-			"refX1": 14.86,
-			"refY1": 10.09,
-			"refX2": 14.86,
-			"refY2": 13.91
+		"path8": {
+			"refD": "M14.86 10.09L14.86 13.91"
 		}
-	}
+	},
+	"path": "M1.5 3.41a1.91 1.91 0 0 1 1.91 -1.91h17.18a1.91 1.91 0 0 1 1.91 1.91v17.18a1.91 1.91 0 0 1 -1.91 1.91h-17.18a1.91 1.91 0 0 1 -1.91 -1.91z,M5.32 12a6.68 6.68 0 1 0 13.36 0a6.68 6.68 0 1 0 -13.36 0z,M3.41 4.36a0.95 0.95 0 1 0 1.9 0a0.95 0.95 0 1 0 -1.9 0z,M18.69 4.36a0.95 0.95 0 1 0 1.9 0a0.95 0.95 0 1 0 -1.9 0z,M18.69 19.64a0.95 0.95 0 1 0 1.9 0a0.95 0.95 0 1 0 -1.9 0z,M3.41 19.64a0.95 0.95 0 1 0 1.9 0a0.95 0.95 0 1 0 -1.9 0z,M9.14 10.09L9.14 13.91,M14.86 10.09L14.86 13.91,"
 }

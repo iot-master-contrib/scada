@@ -10,22 +10,23 @@ export const  CapacitorMeta = {
 	"fill": "#000000",
 	"markup": [
 		{
-			"tagName": "polygon",
-			"selector": "polygon1",
+			"tagName": "path",
+			"selector": "path1",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "polygon",
-			"selector": "polygon2",
+			"tagName": "path",
+			"selector": "path2",
 			"groupSelector": "all"
 		}
 	],
 	"attrs": {
-		"polygon1": {
-			"refPoints": "460,215 314,215 314,50 284,50 284,410 314,410 314,245 460,245 \t"
+		"path1": {
+			"refD": "M460 215L314 215 314 50 284 50 284 410 314 410 314 245 460 245z"
 		},
-		"polygon2": {
-			"refPoints": "146,215 0,215 0,245 146,245 146,410 176,410 176,50 146,50 \t"
+		"path2": {
+			"refD": "M146 215L0 215 0 245 146 245 146 410 176 410 176 50 146 50z"
 		}
-	}
+	},
+	"path": "M460 215L314 215 314 50 284 50 284 410 314 410 314 245 460 245z,M146 215L0 215 0 245 146 245 146 410 176 410 176 50 146 50z,"
 }

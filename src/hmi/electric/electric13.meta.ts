@@ -7,6 +7,7 @@ export const  Electric13Meta = {
 	"version": "1.1",
 	"xmlns": "http://www.w3.org/2000/svg",
 	"xmlns:xlink": "http://www.w3.org/1999/xlink",
+	"fill": "#000",
 	"markup": [
 		{
 			"tagName": "path",
@@ -44,128 +45,128 @@ export const  Electric13Meta = {
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "polyline",
-			"selector": "polyline8",
+			"tagName": "path",
+			"selector": "path8",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect9",
+			"tagName": "path",
+			"selector": "path9",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect10",
+			"tagName": "path",
+			"selector": "path10",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect11",
+			"tagName": "path",
+			"selector": "path11",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect12",
+			"tagName": "path",
+			"selector": "path12",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect13",
+			"tagName": "path",
+			"selector": "path13",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect14",
+			"tagName": "path",
+			"selector": "path14",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect15",
+			"tagName": "path",
+			"selector": "path15",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect16",
+			"tagName": "path",
+			"selector": "path16",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect17",
+			"tagName": "path",
+			"selector": "path17",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect18",
+			"tagName": "path",
+			"selector": "path18",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect19",
+			"tagName": "path",
+			"selector": "path19",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect20",
+			"tagName": "path",
+			"selector": "path20",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect21",
+			"tagName": "path",
+			"selector": "path21",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect22",
+			"tagName": "path",
+			"selector": "path22",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect23",
+			"tagName": "path",
+			"selector": "path23",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect24",
+			"tagName": "path",
+			"selector": "path24",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect25",
+			"tagName": "path",
+			"selector": "path25",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect26",
+			"tagName": "path",
+			"selector": "path26",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect27",
+			"tagName": "path",
+			"selector": "path27",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect28",
+			"tagName": "path",
+			"selector": "path28",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect29",
+			"tagName": "path",
+			"selector": "path29",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect30",
+			"tagName": "path",
+			"selector": "path30",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect31",
+			"tagName": "path",
+			"selector": "path31",
 			"groupSelector": "all"
 		},
 		{
-			"tagName": "rect",
-			"selector": "rect32",
+			"tagName": "path",
+			"selector": "path32",
 			"groupSelector": "all"
 		}
 	],
@@ -191,152 +192,81 @@ export const  Electric13Meta = {
 		"path7": {
 			"refD": "M59,38h-2v-6c0-2.8-2.2-5-5-5v-2c3.9,0,7,3.1,7,7V38z"
 		},
-		"polyline8": {
-			"refPoints": "10,32 6,32 6,42 10,42  "
+		"path8": {
+			"refD": "M10 32L6 32 6 42 10 42"
 		},
-		"rect9": {
-			"refX": 2,
-			"refY": 32,
-			"refWidth": 4,
-			"refHeight": 30
+		"path9": {
+			"refD": "M2 32h4v30h-4z"
 		},
-		"rect10": {
-			"refX": 2,
-			"refY": 57,
-			"refWidth": 4,
-			"refHeight": 2
+		"path10": {
+			"refD": "M2 57h4v2h-4z"
 		},
-		"rect11": {
-			"refX": 34,
-			"refY": 2,
-			"refWidth": 4,
-			"refHeight": 20
+		"path11": {
+			"refD": "M34 2h4v20h-4z"
 		},
-		"rect12": {
-			"refX": 34,
-			"refY": 2,
-			"refWidth": 4,
-			"refHeight": 4
+		"path12": {
+			"refD": "M34 2h4v4h-4z"
 		},
-		"rect13": {
-			"refX": 2,
-			"refY": 2,
-			"refWidth": 4,
-			"refHeight": 20
+		"path13": {
+			"refD": "M2 2h4v20h-4z"
 		},
-		"rect14": {
-			"refX": 2,
-			"refY": 2,
-			"refWidth": 4,
-			"refHeight": 4
+		"path14": {
+			"refD": "M2 2h4v4h-4z"
 		},
-		"rect15": {
-			"refX": 6,
-			"refY": 4,
-			"refWidth": 28,
-			"refHeight": 2
+		"path15": {
+			"refD": "M6 4h28v2h-28z"
 		},
-		"rect16": {
-			"refX": 6,
-			"refY": 9,
-			"refWidth": 28,
-			"refHeight": 2
+		"path16": {
+			"refD": "M6 9h28v2h-28z"
 		},
-		"rect17": {
-			"refX": 6,
-			"refY": 14,
-			"refWidth": 28,
-			"refHeight": 2
+		"path17": {
+			"refD": "M6 14h28v2h-28z"
 		},
-		"rect18": {
-			"refX": 6,
-			"refY": 19,
-			"refWidth": 28,
-			"refHeight": 2
+		"path18": {
+			"refD": "M6 19h28v2h-28z"
 		},
-		"rect19": {
-			"refX": 33,
-			"refY": 22,
-			"refWidth": 2,
-			"refHeight": 30
+		"path19": {
+			"refD": "M33 22h2v30h-2z"
 		},
-		"rect20": {
-			"refX": 25,
-			"refY": 22,
-			"refWidth": 2,
-			"refHeight": 30
+		"path20": {
+			"refD": "M25 22h2v30h-2z"
 		},
-		"rect21": {
-			"refX": 26,
-			"refY": 31,
-			"refWidth": 8,
-			"refHeight": 2
+		"path21": {
+			"refD": "M26 31h8v2h-8z"
 		},
-		"rect22": {
-			"refX": 26,
-			"refY": 27,
-			"refWidth": 8,
-			"refHeight": 2
+		"path22": {
+			"refD": "M26 27h8v2h-8z"
 		},
-		"rect23": {
-			"refX": 26,
-			"refY": 35,
-			"refWidth": 8,
-			"refHeight": 2
+		"path23": {
+			"refD": "M26 35h8v2h-8z"
 		},
-		"rect24": {
-			"refX": 26,
-			"refY": 39,
-			"refWidth": 8,
-			"refHeight": 2
+		"path24": {
+			"refD": "M26 39h8v2h-8z"
 		},
-		"rect25": {
-			"refX": 26,
-			"refY": 43,
-			"refWidth": 8,
-			"refHeight": 2
+		"path25": {
+			"refD": "M26 43h8v2h-8z"
 		},
-		"rect26": {
-			"refX": 26,
-			"refY": 47,
-			"refWidth": 8,
-			"refHeight": 2
+		"path26": {
+			"refD": "M26 47h8v2h-8z"
 		},
-		"rect27": {
-			"refX": 19,
-			"refY": 52,
-			"refWidth": 4,
-			"refHeight": 6
+		"path27": {
+			"refD": "M19 52h4v6h-4z"
 		},
-		"rect28": {
-			"refX": 49,
-			"refY": 52,
-			"refWidth": 4,
-			"refHeight": 6
+		"path28": {
+			"refD": "M49 52h4v6h-4z"
 		},
-		"rect29": {
-			"refX": 42,
-			"refY": 13,
-			"refWidth": 8,
-			"refHeight": 2
+		"path29": {
+			"refD": "M42 13h8v2h-8z"
 		},
-		"rect30": {
-			"refX": 54,
-			"refY": 13,
-			"refWidth": 8,
-			"refHeight": 2
+		"path30": {
+			"refD": "M54 13h8v2h-8z"
 		},
-		"rect31": {
-			"refX": 2,
-			"refY": 35,
-			"refWidth": 4,
-			"refHeight": 2
+		"path31": {
+			"refD": "M2 35h4v2h-4z"
 		},
-		"rect32": {
-			"refX": 15,
-			"refY": 58,
-			"refWidth": 42,
-			"refHeight": 4
+		"path32": {
+			"refD": "M15 58h42v4h-42z"
 		}
-	}
+	},
+	"path": "M56,10h4c1.1,0,2,0.9,2,2v20l0,0h-8l0,0V12C54,10.9,54.9,10,56,10z,M59,7h-2V4H47v3h-2V3c0-0.6,0.4-1,1-1h12c0.6,0,1,0.4,1,1V7z,M44,10V8c0-1.1,0.9-2,2-2l0,0c1.1,0,2,0.9,2,2v2,M56,10V8c0-1.1,0.9-2,2-2l0,0c1.1,0,2,0.9,2,2v2,M20,22h32c5.5,0,10,4.5,10,10v10c0,5.5-4.5,10-10,10H20c-5.5,0-10-4.5-10-10V32C10,26.5,14.5,22,20,22z,M44,10h4c1.1,0,2,0.9,2,2v10l0,0h-8l0,0V12C42,10.9,42.9,10,44,10z,M59,38h-2v-6c0-2.8-2.2-5-5-5v-2c3.9,0,7,3.1,7,7V38z,M10 32L6 32 6 42 10 42,M2 32h4v30h-4z,M2 57h4v2h-4z,M34 2h4v20h-4z,M34 2h4v4h-4z,M2 2h4v20h-4z,M2 2h4v4h-4z,M6 4h28v2h-28z,M6 9h28v2h-28z,M6 14h28v2h-28z,M6 19h28v2h-28z,M33 22h2v30h-2z,M25 22h2v30h-2z,M26 31h8v2h-8z,M26 27h8v2h-8z,M26 35h8v2h-8z,M26 39h8v2h-8z,M26 43h8v2h-8z,M26 47h8v2h-8z,M19 52h4v6h-4z,M49 52h4v6h-4z,M42 13h8v2h-8z,M54 13h8v2h-8z,M2 35h4v2h-4z,M15 58h42v4h-42z,"
 }

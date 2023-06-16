@@ -26,6 +26,7 @@ export function createImageComponent(cmp: HmiImageComponent): HmiComponent {
 
 
 export declare interface HmiPathComponent {
+    fill?: string;
     id: string
     name: string
     svg: string
@@ -41,7 +42,7 @@ export function createPathComponent(cmp: HmiPathComponent): HmiComponent {
         svg: cmp.svg,
         type: "shape",
         extends: { inherit: "path" },
-        meta: { width: 100, height: 80, path: cmp.path },
+        meta: { width: 100, height: 80, path: cmp.path, attrs: { path: { fill: cmp.fill || 'none' } } },
         properties: [
             ...createStrokeProperties('path')
         ],
