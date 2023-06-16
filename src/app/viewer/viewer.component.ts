@@ -72,7 +72,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
         this.graph.on('cell:click', ({cell, e}) => {
             try {
                 // 处理用户绑定的点击事件
-                cell.data.listeners?.click?.call(this, cell, e, this.tools)
+                cell.data?.listeners?.click?.call(this, cell, e, this.tools)
 
                 let cmp = this.cs.Get(cell.shape)
                 // @ts-ignore
@@ -147,7 +147,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
             const cmp = this.cs.Get(cell.shape)
 
             //数据绑定
-            if (cell.data.bindings)
+            if (cell.data?.bindings)
                 for (const k in cell.data.bindings) {
                     if (!cell.data.bindings.hasOwnProperty(k)) continue
                     const binding: any = cell.data.bindings[k]
@@ -169,7 +169,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
                 }
 
             //事件处理编译
-            if (cell.data.listeners)
+            if (cell.data?.listeners)
                 for (const k in cell.data.listeners) {
                     if (!cell.data.listeners.hasOwnProperty(k)) continue
                     const func = cell.data.listeners[k]
