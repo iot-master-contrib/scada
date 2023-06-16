@@ -2,8 +2,8 @@
     <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="device">设备ID</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-            <nz-select nzAllowClear nzShowSearch nzServerSearch formControlName="device" (nzOnSearch)="onSearch($event)"
-                (ngModelChange)="handleChange($event)">
+            <nz-select nzAllowClear nzShowSearch nzServerSearch formControlName="device" nzPlaceHolder="输入设备名称可搜索"
+                (nzOnSearch)="onSearch($event)" (ngModelChange)="handleChange($event)">
                 <ng-container *ngFor="let item of optionList">
                     <nz-option *ngIf="!isLoading" [nzValue]="item['id']" [nzLabel]="item['name']+'-'+item['id']">
                     </nz-option>
@@ -19,7 +19,7 @@
     <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="product">产品ID</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-            <input nz-input formControlName="product" />
+            <input nz-input formControlName="product" readonly />
         </nz-form-control>
     </nz-form-item>
 
