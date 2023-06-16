@@ -8,6 +8,8 @@ import {ActivatedRoute} from "@angular/router";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {MqttService} from "ngx-mqtt";
 import {Subscription} from "rxjs";
+import {NzModalService} from "ng-zorro-antd/modal";
+import {WindowComponent} from "./window/window.component";
 
 
 //import "fengari-web"
@@ -29,6 +31,24 @@ export class ViewerComponent implements OnInit, OnDestroy {
 
     subs: Subscription[] = []
 
+    tools: any = {
+        go: (page: string) => {
+            this.project.pages.forEach(value => {
+                if (value.name == page)
+                    this.Render(value)
+            })
+        },
+        window: (url: string, width = 400, height = 300) => {
+            this.ms.create({
+                nzContent: WindowComponent,
+                nzComponentParams: {url, width, height},
+                nzWidth: width + 48,
+                nzFooter: null,
+            })
+        },
+
+    }
+
     constructor(
         private title: Title,
         private element: ElementRef,
@@ -36,6 +56,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
         protected cs: ComponentService,
         private route: ActivatedRoute,
         private ns: NzNotificationService,
+        private ms: NzModalService,
         private mqtt: MqttService,
     ) {
         let mousewheel = route.snapshot.queryParams['mousewheel']
@@ -51,11 +72,11 @@ export class ViewerComponent implements OnInit, OnDestroy {
         this.graph.on('cell:click', ({cell, e}) => {
             try {
                 // 处理用户绑定的点击事件
-                cell.data.listeners?.click?.call(this, cell, e)
+                cell.data.listeners?.click?.call(this, cell, e, this.tools)
 
                 let cmp = this.cs.Get(cell.shape)
                 // @ts-ignore
-                cmp?.listeners?.click?.call(this, cell, e)
+                cmp?.listeners?.click?.call(this, cell, e, this.tools)
             } catch (e: any) {
                 this.ns.error("点击事件处理错误", e.message)
             }
@@ -65,7 +86,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
             try {
                 let cmp = this.cs.Get(cell.shape)
                 // @ts-ignore
-                cmp?.listeners?.mouseenter?.call(this, cell, e)
+                cmp?.listeners?.mouseenter?.call(this, cell, e, this.tools)
             } catch (e: any) {
                 this.ns.error("鼠标事件处理错误", e.message)
             }
@@ -75,7 +96,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
             try {
                 let cmp = this.cs.Get(cell.shape)
                 // @ts-ignore
-                cmp?.listeners?.mouseleave?.call(this, cell, e)
+                cmp?.listeners?.mouseleave?.call(this, cell, e, this.tools)
             } catch (e: any) {
                 this.ns.error("鼠标事件处理错误", e.message)
             }
@@ -85,7 +106,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
             //console.log('cell:custom', e.event, e.value)
             // 处理用户绑定的点击事件
             try {
-                e.cell?.data.listeners?.[e.event]?.call(this, e.cell, e.value)
+                e.cell?.data.listeners?.[e.event]?.call(this, e.cell, e.value, this.tools)
             } catch (e: any) {
                 this.ns.error("组件事件响应处理错误", e.message)
             }
@@ -93,6 +114,8 @@ export class ViewerComponent implements OnInit, OnDestroy {
 
         //@ts-ignore
         //fengari.load("a+1")()
+
+
     }
 
     evaluate(expr: string, params: any) {
@@ -100,7 +123,6 @@ export class ViewerComponent implements OnInit, OnDestroy {
         const values = Object.values(params);
         return (new Function(...keys, 'return ' + expr))(...values)
     }
-
 
 
     public Render(page: HmiPage) {
@@ -151,7 +173,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
                 const func = cell.data.listeners[k]
                 if (typeof func === "string" && func.length > 0) {
                     try { // @ts-ignore
-                        cell.data.listeners[k] = new Function('cell', 'event', func)
+                        cell.data.listeners[k] = new Function('cell', 'event', 'tools', func)
                     } catch (e: any) {
                         this.ns.error("编译错误", e.message)
                     }
