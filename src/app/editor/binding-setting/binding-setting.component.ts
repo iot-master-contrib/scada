@@ -14,11 +14,14 @@ export class BindingSettingComponent {
     group!: FormGroup;
     isLoading: boolean = false;
     optionList = [];
-    variableList = [];
+    variableList: any = [];
     @Input() set content(data: any) {
-        const { product } = data;
-        if (product) {
+        const { product, device } = data;
+        if (device) {
+            this.onSearch(device);
             this.getVariableList(product);
+        } else {
+            this.onSearch('');
         }
         this.group.patchValue(data);
     }
@@ -27,7 +30,6 @@ export class BindingSettingComponent {
         private rs: RequestService,
     ) {
         this.build()
-        this.onSearch('');
     }
 
     build(obj?: any) {
@@ -42,7 +44,8 @@ export class BindingSettingComponent {
         this.isLoading = true;
         this.rs.post('/api/device/search', {
             keyword: {
-                name: value
+                name: value,
+                id: value
             },
             limit: 20,
             skip: 0
@@ -53,13 +56,16 @@ export class BindingSettingComponent {
         });
     }
     handleChange(value: string) {
+        this.variableList = [];
         const obj = this.optionList.find((item) => item['id'] === value) || { product_id: "" };
-        this.group.patchValue({ product: obj.product_id });
+        this.group.patchValue({ product: obj.product_id, variable: '' });
         this.getVariableList(obj.product_id);
     }
     getVariableList(product_id: string) {
-        this.rs.get(`/api/product/${product_id}`).subscribe(res => {
-            this.variableList = res && res.data && res.data.properties || [];
-        })
+        if (product_id) {
+            this.rs.get(`/api/product/${product_id}`).subscribe(res => {
+                this.variableList = res && res.data && res.data.properties || [];
+            })
+        }
     }
 }
