@@ -148,39 +148,42 @@ export class ViewerComponent implements OnInit, OnDestroy {
 
             //数据绑定
             if (cell.data.bindings)
-            for (const k in cell.data.bindings) {
-                if (!cell.data.bindings.hasOwnProperty(k)) continue
-                const binding: any = cell.data.bindings[k]
-                console.log("binding", cmp.id, k, binding)
+                for (const k in cell.data.bindings) {
+                    if (!cell.data.bindings.hasOwnProperty(k)) continue
+                    const binding: any = cell.data.bindings[k]
+                    console.log("binding", cmp.id, k, binding)
 
-                //binding
-                const topic = `up/property/${binding.product}/${binding.device}`
-                //订阅同一主题，只会响应最后一个，比较郁闷
-                const sub = this.mqtt.observe(topic).subscribe(res => {
-                    const values = JSON.parse(res.payload.toString())
-                    console.log("data", cmp.id, k, binding, values)
-                    try { //@ts-ignore
-                        cmp.hooks?.[k]?.call(this, cell, values[binding.variable])
-                    } catch (e: any) {
-                        this.ns.error("数据绑定错误", e.message)
-                    }
-                })
-                this.subs.push(sub)
-            }
+                    //binding
+                    const topic = `up/property/${binding.product}/${binding.device}`
+                    //订阅同一主题，只会响应最后一个，比较郁闷
+                    const sub = this.mqtt.observe(topic).subscribe(res => {
+                        const values = JSON.parse(res.payload.toString())
+                        console.log("data", cmp.id, k, binding, values)
+                        try { //@ts-ignore
+                            cmp.hooks?.[k]?.call(this, cell, values[binding.variable])
+                        } catch (e: any) {
+                            this.ns.error("数据绑定错误", e.message)
+                        }
+                    })
+                    this.subs.push(sub)
+                }
 
             //事件处理编译
             if (cell.data.listeners)
-            for (const k in cell.data.listeners) {
-                if (!cell.data.listeners.hasOwnProperty(k)) continue
-                const func = cell.data.listeners[k]
-                if (typeof func === "string" && func.length > 0) {
-                    try { // @ts-ignore
-                        cell.data.listeners[k] = new Function('cell', 'event', 'tools', func)
-                    } catch (e: any) {
-                        this.ns.error("编译错误", e.message)
+                for (const k in cell.data.listeners) {
+                    if (!cell.data.listeners.hasOwnProperty(k)) continue
+                    const func = cell.data.listeners[k]
+                    if (typeof func === "string" && func.length > 0) {
+                        try { // @ts-ignore
+                            cell.data.listeners[k] = new Function('cell', 'event', 'tools', func)
+                        } catch (e: any) {
+                            this.ns.error("脚本编译错误" + k, func + ' ' + e.message)
+                            cell.data.listeners[k] = () => {
+                                this.ns.error("组件脚本错误" + k, func + ' ' + e.message)
+                            }
+                        }
                     }
                 }
-            }
         })
     }
 
