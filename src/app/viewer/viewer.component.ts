@@ -46,6 +46,12 @@ export class ViewerComponent implements OnInit, OnDestroy {
                 nzFooter: null,
             })
         },
+        open: (url: string, blank = false) => {
+            if (blank)
+                window.open(url)
+            else
+                location.href = url
+        },
 
     }
 
@@ -59,14 +65,17 @@ export class ViewerComponent implements OnInit, OnDestroy {
         private ms: NzModalService,
         private mqtt: MqttService,
     ) {
+
         let mousewheel = route.snapshot.queryParams['mousewheel']
         let panning = route.snapshot.queryParams['panning']
+
         //title.setTitle(this.project.name)
         this.graph = new Graph({
             container: element.nativeElement,
             interacting: false,
             mousewheel: mousewheel == "true" || mousewheel == "1",
             panning: panning == "true" || panning == "1",
+            //autoResize: true,
         });
 
         this.graph.on('cell:click', ({cell, e}) => {
@@ -135,6 +144,12 @@ export class ViewerComponent implements OnInit, OnDestroy {
             image: page.background_image,
         })
         this.graph.fromJSON(page.content)
+
+        let zoom = this.route.snapshot.queryParams['zoom']
+        if (zoom == "true" || zoom == "1") {
+            this.graph.zoomToFit();
+            this.graph.centerContent(); // 将画布中元素居中展示
+        }
 
         //TODO 调用组件的init
 
