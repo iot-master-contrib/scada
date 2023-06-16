@@ -95,6 +95,14 @@ export class ViewerComponent implements OnInit, OnDestroy {
         //fengari.load("a+1")()
     }
 
+    evaluate(expr: string, params: any) {
+        const keys = Object.keys(params);
+        const values = Object.values(params);
+        return (new Function(...keys, 'return ' + expr))(...values)
+    }
+
+
+
     public Render(page: HmiPage) {
         page.content?.cells?.forEach((cell: any) => {
             const cmp = this.cs.Get(cell.shape)
