@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 
 @Component({
@@ -7,10 +7,13 @@ import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
     styleUrls: ['./window.component.scss']
 })
 export class WindowComponent {
-    safeUrl!: SafeResourceUrl;
+    @ViewChild("iframe") iframe!: ElementRef;
 
+    @Input() title = "窗口"
     @Input() width = 400
     @Input() height = 300
+
+    safeUrl!: SafeResourceUrl;
 
     @Input() set url(u: any) {
         this.safeUrl = this.san.bypassSecurityTrustResourceUrl(u);
@@ -18,5 +21,12 @@ export class WindowComponent {
 
     constructor(private san: DomSanitizer) {
         //this._url = san.bypassSecurityTrustResourceUrl("http://image.baidu.com")
+    }
+
+    load(event:any) {
+        console.log('iframe load', event)
+        const win = this.iframe.nativeElement.contentWindow
+        this.title = win.document.title
+
     }
 }

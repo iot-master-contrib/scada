@@ -1,1 +1,3 @@
-<iframe [src]="safeUrl" [style.width]="width+'px'" [style.height]="height+'px'"></iframe>
+<div *nzModalTitle>{{title}}</div>
+<iframe [src]="safeUrl" [style.width]="width+'px'" [style.height]="height+'px'" #iframe (load)="load($event)"></iframe>
+

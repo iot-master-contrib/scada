@@ -38,10 +38,10 @@ export class ViewerComponent implements OnInit, OnDestroy {
                     this.Render(value)
             })
         },
-        window: (url: string, width = 400, height = 300) => {
+        window: (url: string, width = 400, height = 300, title='窗口') => {
             this.ms.create({
                 nzContent: WindowComponent,
-                nzComponentParams: {url, width, height},
+                nzComponentParams: {url, width, height, title},
                 nzWidth: width + 48,
                 nzFooter: null,
             })

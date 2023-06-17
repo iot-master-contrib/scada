@@ -24,6 +24,7 @@ export class ProjectSettingComponent {
   build(obj?: any) {
     obj = obj || {}
     this.group = this.fb.group({
+      id: [obj.id || '', [Validators.required]],
       name: [obj.name || '', [Validators.required]],
       desc: [obj.desc || '', []],
       width: [obj.width || 400, [Validators.required]],

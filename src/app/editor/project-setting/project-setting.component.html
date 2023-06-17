@@ -1,5 +1,12 @@
 <form nz-form [formGroup]="group">
     <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzRequired nzFor="id">ID</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzErrorTip="ID不可为空!">
+            <input nz-input name="id" formControlName="id" />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
         <nz-form-label [nzSpan]="5" nzRequired nzFor="name">名称</nz-form-label>
         <nz-form-control [nzSpan]="16" nzErrorTip="名称不可为空!">
             <input nz-input name="name" formControlName="name" />
