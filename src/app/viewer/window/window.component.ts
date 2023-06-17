@@ -23,10 +23,17 @@ export class WindowComponent {
         //this._url = san.bypassSecurityTrustResourceUrl("http://image.baidu.com")
     }
 
-    load(event:any) {
+    load(event: any) {
         console.log('iframe load', event)
         const win = this.iframe.nativeElement.contentWindow
         this.title = win.document.title
+        //可能没有加载完
+        setTimeout(() => {
+            this.title = win.document.title
+        }, 500)
+        setTimeout(() => {
+            this.title = win.document.title
+        }, 2000)
 
     }
 }
