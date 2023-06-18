@@ -5,6 +5,7 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { HmiProject } from "../../../hmi/hmi";
 import { ProjectSettingComponent } from '../project-setting/project-setting.component';
 import {ComponentService} from "../../component.service";
+import {AboutComponent} from "../about/about.component";
 
 @Component({
     selector: 'app-toolbar',
@@ -287,5 +288,13 @@ export class ToolbarComponent {
         this.scaleChange.emit($event)
         this.graph.zoomTo($event)
         //this.graph.resize()
+    }
+
+    about() {
+        this.modal.create({
+            nzTitle: '关于',
+            nzContent: AboutComponent,
+            nzFooter: null,
+        })
     }
 }

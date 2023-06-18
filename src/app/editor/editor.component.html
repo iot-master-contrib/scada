@@ -1,10 +1,13 @@
 <app-toolbar [graph]="canvas.graph" [project]="project" (onSave)="handleSave()" [(scale)]="scale"></app-toolbar>
-<div class="body">
-    <app-library (onDrag)="onDrag($event)"></app-library>
+<div class="body" (mousemove)="onMoseMove($event)" (mouseup)="onMouseUp($event)">
+    <app-library [style.width]="leftWidth+'px'" (onDrag)="onDrag($event)"></app-library>
+    <div class="splitter" (mousedown)="onLeftDown($event)"></div>
     <div class="content">
         <app-canvas #canvas
                     [style.width]="project.width*scale+'px'"
                     [style.height]="project.height*scale+'px'"></app-canvas>
     </div>
-    <app-property [graph]="canvas.graph" [project]="project" (onPageChange)="handlePageChange($event)"></app-property>
+    <div class="splitter" (mousedown)="onRightDown($event)"></div>
+    <app-property [style.width]="rightWidth+'px'" [graph]="canvas.graph" [project]="project"
+                  (onPageChange)="handlePageChange($event)"></app-property>
 </div>

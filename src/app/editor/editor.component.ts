@@ -18,7 +18,7 @@ export class EditorComponent implements OnInit {
     project: HmiProject = projectTemplate()
     index = 0;
 
-    scale = 1
+    scale = 1;
 
     @ViewChild("canvas") canvas!: CanvasComponent
 
@@ -69,5 +69,46 @@ export class EditorComponent implements OnInit {
         this.index = $event
         //渲染新页
         this.canvas.Render(this.project.pages[this.index])
+    }
+
+
+    leftWidth = 200;
+    leftWidthMin = 200;
+    rightWidth = 250;
+    rightWidthMin = 250;
+    leftOn = false;
+    rightOn = false;
+    lastX = 0;
+
+
+    onLeftDown($event: MouseEvent) {
+        //console.log('left down', $event)
+        this.leftOn = true
+        this.lastX = $event.screenX
+    }
+
+    onRightDown($event: MouseEvent) {
+        this.rightOn = true
+        this.lastX = $event.screenX
+    }
+
+    onMoseMove($event: MouseEvent) {
+        let dx = $event.screenX - this.lastX;
+        if (this.leftOn) {
+            if (dx < 0 && this.leftWidth <= this.leftWidthMin)
+                return
+            this.leftWidth += $event.screenX - this.lastX
+        }
+        if (this.rightOn) {
+            if (dx > 0 && this.rightWidth <= this.rightWidthMin)
+                return
+            this.rightWidth -= $event.screenX - this.lastX
+        }
+        this.lastX = $event.screenX
+    }
+
+    onMouseUp($event: MouseEvent) {
+        this.leftOn = false
+        this.rightOn = false
     }
 }

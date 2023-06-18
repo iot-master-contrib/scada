@@ -20,6 +20,15 @@ app-toolbar{
     display: flex;
     overflow: hidden;
 
+    .splitter {
+        width: 8px;
+        background-color: #c9c9c9;
+        cursor: col-resize;
+        //background: linear-gradient(90deg, #f0f0f0 33%, #c9c9c9 0, #c9c9c9 66%, #ffffff 0);
+        //background-size: 100% 100%;
+
+    }
+
     .content {
         flex: 1;
         height: 100%;

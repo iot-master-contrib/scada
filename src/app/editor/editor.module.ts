@@ -61,6 +61,7 @@ import { BindingSettingComponent } from './binding-setting/binding-setting.compo
 import {CodemirrorModule} from '@ctrl/ngx-codemirror';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import {NzSwitchModule} from "ng-zorro-antd/switch";
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
     declarations: [
@@ -80,6 +81,7 @@ import {NzSwitchModule} from "ng-zorro-antd/switch";
         AnimateComponent,
         ListenerSettingComponent,
         BindingSettingComponent,
+        AboutComponent,
     ],
     imports: [
         CommonModule,
