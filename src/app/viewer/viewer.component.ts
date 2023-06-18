@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {HmiPage, HmiProject} from '../../hmi/hmi';
 import {Cell, Graph} from "@antv/x6";
 import {Title} from "@angular/platform-browser";
@@ -34,8 +34,8 @@ export class ViewerComponent implements OnDestroy {
 
     mousewheel = false
     panning = false
-    center = false
-    fit = false
+    full = false
+    padding = 10
 
     tools: any = {
         go: (page: string) => {
@@ -80,8 +80,7 @@ export class ViewerComponent implements OnDestroy {
 
         this.mousewheel = getSwitch("mousewheel")
         this.panning = getSwitch("panning")
-        this.center = getSwitch("center")
-        this.fit = getSwitch("fit")
+        this.full = getSwitch("full")
 
         //title.setTitle(this.project.name)
         this.graph = new Graph({
@@ -89,7 +88,7 @@ export class ViewerComponent implements OnDestroy {
             interacting: false,
             mousewheel: this.mousewheel,
             panning: this.panning,
-            //autoResize: true,
+            autoResize: this.full,
         });
 
         this.graph.on('cell:click', ({cell, e}) => {
@@ -147,7 +146,6 @@ export class ViewerComponent implements OnDestroy {
         return (new Function(...keys, 'return ' + expr))(...values)
     }
 
-
     public Render(page: HmiPage) {
         page.content?.cells?.forEach((cell: any) => {
             const cmp = this.cs.Get(cell.shape)
@@ -159,9 +157,10 @@ export class ViewerComponent implements OnDestroy {
         })
         this.graph.fromJSON(page.content)
 
-        if (this.center) this.graph.centerContent()
-        if (this.fit) this.graph.zoomToFit()
-
+        if (this.full) {
+            this.graph.centerContent()
+            this.graph.zoomToFit({padding: this.padding})
+        }
 
         //TODO 调用组件的init
 
@@ -219,9 +218,25 @@ export class ViewerComponent implements OnDestroy {
         this.rs.get(`api/project/${this.id}`).subscribe((res) => {
             this.project = res.data;
             this.title.setTitle(this.project.name)
-            this.graph.resize(this.project.width, this.project.height)
+            if (this.full)
+                this.graph.resize(window.innerWidth, window.innerHeight)
+            else
+                this.graph.resize(this.project.width, this.project.height)
             this.Render(this.project.pages[0])
         });
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event: any) {
+        if (!this.full) return
+
+        //console.log(event.target)
+        const width = event.target.innerWidth;
+        const height = event.target.innerHeight;
+
+        this.graph.resize(width, height)
+        this.graph.centerContent()
+        this.graph.zoomToFit({padding: this.padding})
     }
 
     ngOnDestroy(): void {
