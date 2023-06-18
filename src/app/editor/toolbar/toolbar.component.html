@@ -56,7 +56,7 @@
 
 <nz-divider nzType="vertical"></nz-divider>
 
-<a (click)="handleMoveTop()" nz-button>
+<a (click)="handleMoveTop()" nz-button [disabled]="!graph.getSelectedCellCount()">
     <i nz-icon nzType="vertical-right" title="置顶" [nzRotate]="90"></i>
 </a>
 <a (click)="handleMoveUp()" nz-button [disabled]="graph.getSelectedCellCount()!=1">
@@ -65,7 +65,7 @@
 <a (click)="handleMoveDown()" nz-button [disabled]="graph.getSelectedCellCount()!=1">
     <i nz-icon nzType="down" title="下移一层"></i>
 </a>
-<a (click)="handleMoveBottom()" nz-button>
+<a (click)="handleMoveBottom()" nz-button [disabled]="!graph.getSelectedCellCount()">
     <i nz-icon nzType="vertical-left" title="置底" [nzRotate]="90"></i>
 </a>
 
