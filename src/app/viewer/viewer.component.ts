@@ -10,6 +10,7 @@ import {MqttService} from "ngx-mqtt";
 import {Subscription} from "rxjs";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {WindowComponent} from "./window/window.component";
+import {functions} from "lodash-es";
 
 
 //import "fengari-web"
@@ -21,7 +22,7 @@ import {WindowComponent} from "./window/window.component";
     templateUrl: './viewer.component.html',
     styleUrls: ['./viewer.component.scss']
 })
-export class ViewerComponent implements OnInit, OnDestroy {
+export class ViewerComponent implements OnDestroy {
     id: any = ''
 
     project!: HmiProject
@@ -31,6 +32,11 @@ export class ViewerComponent implements OnInit, OnDestroy {
 
     subs: Subscription[] = []
 
+    mousewheel = false
+    panning = false
+    center = false
+    fit = false
+
     tools: any = {
         go: (page: string) => {
             this.project.pages.forEach(value => {
@@ -38,7 +44,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
                     this.Render(value)
             })
         },
-        window: (url: string, width = 400, height = 300, title='窗口') => {
+        window: (url: string, width = 400, height = 300, title = '窗口') => {
             this.ms.create({
                 nzContent: WindowComponent,
                 nzComponentParams: {url, width, height, title},
@@ -65,16 +71,24 @@ export class ViewerComponent implements OnInit, OnDestroy {
         private ms: NzModalService,
         private mqtt: MqttService,
     ) {
+        this.load()
 
-        let mousewheel = route.snapshot.queryParams['mousewheel']
-        let panning = route.snapshot.queryParams['panning']
+        function getSwitch(name: string) {
+            let val = route.snapshot.queryParams[name]
+            return val == "true" || val == "1"
+        }
+
+        this.mousewheel = getSwitch("mousewheel")
+        this.panning = getSwitch("panning")
+        this.center = getSwitch("center")
+        this.fit = getSwitch("fit")
 
         //title.setTitle(this.project.name)
         this.graph = new Graph({
             container: element.nativeElement,
             interacting: false,
-            mousewheel: mousewheel == "true" || mousewheel == "1",
-            panning: panning == "true" || panning == "1",
+            mousewheel: this.mousewheel,
+            panning: this.panning,
             //autoResize: true,
         });
 
@@ -145,11 +159,9 @@ export class ViewerComponent implements OnInit, OnDestroy {
         })
         this.graph.fromJSON(page.content)
 
-        let zoom = this.route.snapshot.queryParams['zoom']
-        if (zoom == "true" || zoom == "1") {
-            this.graph.zoomToFit();
-            this.graph.centerContent(); // 将画布中元素居中展示
-        }
+        if (this.center) this.graph.centerContent()
+        if (this.fit) this.graph.zoomToFit()
+
 
         //TODO 调用组件的init
 
@@ -202,11 +214,12 @@ export class ViewerComponent implements OnInit, OnDestroy {
         })
     }
 
-    ngOnInit(): void {
+    load(): void {
         this.id = this.route.snapshot.paramMap.get('id');
         this.rs.get(`api/project/${this.id}`).subscribe((res) => {
             this.project = res.data;
             this.title.setTitle(this.project.name)
+            this.graph.resize(this.project.width, this.project.height)
             this.Render(this.project.pages[0])
         });
     }

@@ -6,8 +6,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./color-input.component.scss']
 })
 export class ColorInputComponent {
+
   @Input() color = '';
   @Output() colorChange = new EventEmitter<number>();
+
   change(color: any) {
     console.log("property change", color)
     this.colorChange.emit(color);
@@ -23,6 +25,7 @@ export class ColorInputComponent {
     }
     this.setPresentColors(colors)
   }
+
   getPresentColors() {
     let str = localStorage.getItem("bgc-colors")
     if (str) {

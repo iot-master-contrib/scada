@@ -10,6 +10,7 @@ import { HmiPage } from 'src/hmi/hmi';
 })
 export class PageSettingComponent {
   group!: FormGroup;
+
   @Input() set row(data: HmiPage) {
     if (data) {
       this.group.setValue({ name: data.name });
