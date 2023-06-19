@@ -1,18 +1,38 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-
+import { Component, EventEmitter, Input, Output, forwardRef, OnInit, } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'app-color-input',
   templateUrl: './color-input.component.html',
-  styleUrls: ['./color-input.component.scss']
+  styleUrls: ['./color-input.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => ColorInputComponent),
+    multi: true
+  }]
 })
-export class ColorInputComponent {
-
-  @Input() color = '';
+export class ColorInputComponent implements OnInit, ControlValueAccessor {
+  onChanged: any = () => {
+  }
+  onTouched: any = () => {
+  }
+  ngOnInit(): void {
+  }
+  writeValue(obj: any): void {
+    this.color = obj || '';
+    console.log("🚀 ~ file:", obj, this.color)
+  }
+  registerOnChange(fn: any): void {
+    this.onChanged = fn;
+  }
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
   @Output() colorChange = new EventEmitter<number>();
-
-  change(color: any) {
+  color: any;
+  colorPickerChange(color: any) {
     console.log("property change", color)
-    this.colorChange.emit(color);
+    this.color = color;
+    this.onChanged(color);
     //保存历史
     let colors = this.getPresentColors()
     let index = colors.indexOf(color)
@@ -25,7 +45,6 @@ export class ColorInputComponent {
     }
     this.setPresentColors(colors)
   }
-
   getPresentColors() {
     let str = localStorage.getItem("bgc-colors")
     if (str) {
@@ -42,5 +61,7 @@ export class ColorInputComponent {
   }
 
   clearColor() {
+    this.color = '';
+    this.onChanged(this.color);
   }
 }

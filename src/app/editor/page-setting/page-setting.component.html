@@ -1,11 +1,37 @@
-<form nz-form [formGroup]="group">
+<form nz-form
+      [formGroup]="group">
     <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="nameErrorTpl">
-            <input nz-input formControlName="name" />
-            <ng-template #nameErrorTpl let-control>
-                <ng-container *ngIf="control.hasError('required')">请输入名称!</ng-container>
-            </ng-template>
+        <nz-form-label [nzSm]="6"
+                       [nzXs]="24"
+                       nzRequired
+                       nzFor="name">名称</nz-form-label>
+        <nz-form-control [nzSm]="14"
+                         [nzXs]="24"
+                         nzErrorTip="请输入名称!">
+            <input nz-input
+                   formControlName="name" />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="6"
+                       [nzXs]="24"
+                       nzFor="background_color">背景颜色</nz-form-label>
+        <nz-form-control [nzSm]="14"
+                         [nzXs]="24">
+            <app-color-input formControlName="background_color"></app-color-input>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="6"
+                       [nzXs]="24"
+                       nzFor="background_image">背景图片</nz-form-label>
+        <nz-form-control [nzSm]="14"
+                         [nzXs]="24">
+            <input nz-input
+                   formControlName="background_image"
+                   placeholder="输入图片地址" />
         </nz-form-control>
     </nz-form-item>
 </form>

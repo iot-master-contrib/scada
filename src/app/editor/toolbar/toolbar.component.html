@@ -2,11 +2,20 @@
     <i nz-icon nzType="save" title="保存"></i>
     保存
 </a>
-<a nz-button (click)="handleExport()">
+<!-- <a nz-dropdown (click)="handleExport()">
     <i nz-icon nzType="export" title="导出"></i>
     导出
-</a>
-
+</a> -->
+<button nz-button nz-dropdown [nzDropdownMenu]="exportDropDownMenu">
+    <i nz-icon nzType="down"></i>导出</button>
+<nz-dropdown-menu #exportDropDownMenu="nzDropdownMenu">
+    <ul nz-menu>
+      <li nz-menu-item (click)="handleExport('SVG')">导出SVG</li>
+      <li nz-menu-item (click)="handleExport('PNG')">导出PNG</li>
+      <li nz-menu-item (click)="handleExport('JPEG')">导出JPEG</li>
+      <li nz-menu-item (click)="handleExport('file')">导出文件</li>
+    </ul>
+  </nz-dropdown-menu>
 <nz-divider nzType="vertical"></nz-divider>
 
 <a (click)="handleUndo()" nz-button [disabled]="!graph.canUndo()" title="撤销(ctrl+z)">

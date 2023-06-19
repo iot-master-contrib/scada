@@ -1,9 +1,10 @@
-import {Component, EventEmitter, Input, Output, ViewContainerRef} from '@angular/core';
-import {HmiProject} from "../../../hmi/hmi";
-import {Graph} from "@antv/x6";
-import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
-import {PageSettingComponent} from '../page-setting/page-setting.component';
-import {NzMessageService} from "ng-zorro-antd/message";
+import { Component, EventEmitter, Input, Output, ViewContainerRef } from '@angular/core';
+import { HmiPage, HmiProject } from "../../../hmi/hmi";
+import { Graph } from "@antv/x6";
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { PageSettingComponent } from '../page-setting/page-setting.component';
+import { NzMessageService } from "ng-zorro-antd/message";
+import { reset } from 'mousetrap';
 
 @Component({
     selector: 'app-pages',
@@ -34,7 +35,7 @@ export class PagesComponent {
             nzTitle: isNew ? '新增页面' : '编辑页面',
             nzContent: PageSettingComponent,
             nzComponentParams: {
-                row: isNew ? {name: '', content: {}} : this.project.pages[i]
+                row: isNew ? { name: '', content: {} } : this.project.pages[i]
             },
             nzViewContainerRef: this.viewContainerRef,
             nzFooter: [
@@ -46,14 +47,18 @@ export class PagesComponent {
                     label: '保存',
                     type: 'primary',
                     onClick: componentInstance => {
-                        const value = componentInstance?.group.value;
-                        if (isNew) {
-                            this.project.pages.push({name: value.name, content: {}});
-                        } else {
-                            this.project.pages[i].name = value.name;
-                        }
-                        this.onPageChange.emit(0);
-                        modal.destroy()
+                        return componentInstance?.submit().then((page: HmiPage) => {
+                            if (isNew) {
+                                this.project.pages.push(page);
+                            } else {
+                                this.project.pages[i] = page;
+                            }
+                            this.onPageChange.emit(0);
+                            modal.destroy()
+                        }).catch((err) => {
+                            return false
+                        })
+
                     }
                 },
             ]

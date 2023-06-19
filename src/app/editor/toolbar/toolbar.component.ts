@@ -4,8 +4,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { HmiProject } from "../../../hmi/hmi";
 import { ProjectSettingComponent } from '../project-setting/project-setting.component';
-import {ComponentService} from "../../component.service";
-import {AboutComponent} from "../about/about.component";
+import { ComponentService } from "../../component.service";
+import { AboutComponent } from "../about/about.component";
 
 @Component({
     selector: 'app-toolbar',
@@ -34,9 +34,23 @@ export class ToolbarComponent {
         //console.log("save", this.graph.toJSON())
     }
 
-    handleExport() {
-        // this.graph.exportJPEG()
-        this.savefiles(this.graph.toJSON(), Date.now() + '')
+    handleExport(type: string) {
+        console.log(this.graph);
+        switch (type) {
+            case 'SVG':
+                this.graph.exportSVG();
+                break;
+            case 'PNG':
+                this.graph.exportPNG();
+                break;
+            case 'JPEG':
+                // 有点问题
+                this.graph.exportJPEG();
+                break;
+            case 'file':
+                this.savefiles(this.graph.toJSON(), Date.now() + '');
+                break;
+        }
     }
 
     handleUndo() {
@@ -49,12 +63,12 @@ export class ToolbarComponent {
 
     handleCut() {
         this.graph.getSelectedCells().forEach(c => c.removeTools())
-        this.graph.cut(this.graph.getSelectedCells(), {deep: true})
+        this.graph.cut(this.graph.getSelectedCells(), { deep: true })
     }
 
     handleCopy() {
         this.graph.getSelectedCells().forEach(c => c.removeTools())
-        this.graph.copy(this.graph.getSelectedCells(), {deep: true})
+        this.graph.copy(this.graph.getSelectedCells(), { deep: true })
     }
 
     handlePaste() {
@@ -215,7 +229,7 @@ export class ToolbarComponent {
         this.graph.getSelectedCells().forEach(cell => {
             //if (cell.hasParent()) return;
             if (cell.shape == "group") {
-                cell.getChildren()?.forEach(c=>{
+                cell.getChildren()?.forEach(c => {
                     c.setParent(null)
                     //cell.removeChild(c)
                     //cell.eachChild()

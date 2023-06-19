@@ -4,10 +4,6 @@
     </app-pages>
 </app-collapse>
 
-<app-collapse title="页面背景">
-    <app-background [graph]="graph"></app-background>
-</app-collapse>
-
 <app-collapse title="控件属性" *ngIf="selected.length && cmp">
     <form [formGroup]="formPosition" (change)="onPositionChange($event)" *ngIf="cell.isNode();">
         <table>
