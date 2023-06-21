@@ -9,18 +9,21 @@ import {NzInputModule} from "ng-zorro-antd/input";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {ColorInputComponent} from './color-input/color-input.component';
 import { HtmlPipe } from './html.pipe';
+import { AttachSelectComponent } from './attach-select/attach-select.component';
 
 @NgModule({
     declarations: [
         EditTableComponent,
         ColorInputComponent,
         HtmlPipe,
+        AttachSelectComponent,
 
     ],
     exports: [
         EditTableComponent,
         ColorInputComponent,
         HtmlPipe,
+        AttachSelectComponent
     ],
     providers: [HtmlPipe],
     imports: [

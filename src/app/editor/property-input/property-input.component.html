@@ -20,6 +20,26 @@
     <!--    <input nz-input nzSize="small" *ngSwitchCase="'boolean'" type="checkbox"-->
     <!--           [value]="cell.getPropByPath(property.path)"-->
     <!--           (change)="inputChange($event)">-->
+    <nz-input-group [nzSuffix]="suffixIconSearch"
+                    nzSize="small"
+                    *ngSwitchCase="'image'"
+                    style="padding-right: 0;">
+        <input type="text"
+               nz-input
+               placeholder="空"
+               [value]="cell.getPropByPath(property.path) || ''"
+               (change)="inputChange($event)" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+        <button nz-button
+                nzSize="small"
+                nzType="primary"
+                nzSearch>
+            <span nz-icon
+                  nzType="search"
+                  (click)="handleSelectImage()"></span>
+        </button>
+    </ng-template>
     <input nz-input
            nzSize="small"
            *ngSwitchCase="'color'"

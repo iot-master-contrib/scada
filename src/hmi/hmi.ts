@@ -1,4 +1,4 @@
-import {Cell, Edge, Node} from "@antv/x6";
+import { Cell, Edge, Node } from "@antv/x6";
 
 export declare interface HmiComponent {
 
@@ -79,7 +79,7 @@ export declare interface HmiProperty {
     name: string
     path: string
     type: "number" | "text" | "color" | "select" |
-        "boolean" | "font" | "font-size" | "font-style" | "stroke"
+    "boolean" | "font" | "font-size" | "font-style" | "stroke" | "image"
     default?: any
     options?: HmiPropertyOption[]
     max?: number
