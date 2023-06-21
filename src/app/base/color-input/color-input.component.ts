@@ -19,7 +19,6 @@ export class ColorInputComponent implements OnInit, ControlValueAccessor {
   }
   writeValue(obj: any): void {
     this.color = obj || '';
-    console.log("🚀 ~ file:", obj, this.color)
   }
   registerOnChange(fn: any): void {
     this.onChanged = fn;
