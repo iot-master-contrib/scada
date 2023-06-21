@@ -1,17 +1,28 @@
 <ng-container [ngSwitch]="property.type">
-    <input nz-input nzSize="small" *ngSwitchCase="'text'" placeholder="空"
+    <input nz-input
+           nzSize="small"
+           *ngSwitchCase="'text'"
+           placeholder="空"
            [value]="cell.getPropByPath(property.path) || ''"
            (change)="inputChange($event)">
-    <nz-input-number nzSize="small" *ngSwitchCase="'number'" [ngModel]="cell.getPropByPath(property.path)"
+    <nz-input-number nzSize="small"
+                     *ngSwitchCase="'number'"
+                     [ngModel]="cell.getPropByPath(property.path)"
                      (ngModelChange)="change($event)"></nz-input-number>
-    <nz-input-number nzSize="small" *ngSwitchCase="'stroke'" [ngModel]="cell.getPropByPath(property.path)"
+    <nz-input-number nzSize="small"
+                     *ngSwitchCase="'stroke'"
+                     [ngModel]="cell.getPropByPath(property.path)"
                      (ngModelChange)="change($event)"></nz-input-number>
-    <nz-switch nzSize="small" *ngSwitchCase="'boolean'" [ngModel]="cell.getPropByPath(property.path)"
+    <nz-switch nzSize="small"
+               *ngSwitchCase="'boolean'"
+               [ngModel]="cell.getPropByPath(property.path)"
                (ngModelChange)="change($event)"></nz-switch>
-<!--    <input nz-input nzSize="small" *ngSwitchCase="'boolean'" type="checkbox"-->
-<!--           [value]="cell.getPropByPath(property.path)"-->
-<!--           (change)="inputChange($event)">-->
-    <input nz-input nzSize="small" *ngSwitchCase="'color'"
+    <!--    <input nz-input nzSize="small" *ngSwitchCase="'boolean'" type="checkbox"-->
+    <!--           [value]="cell.getPropByPath(property.path)"-->
+    <!--           (change)="inputChange($event)">-->
+    <input nz-input
+           nzSize="small"
+           *ngSwitchCase="'color'"
            [value]="cell.getPropByPath(property.path)||'none'"
            [style.color]="cell.getPropByPath(property.path)"
            [colorPicker]="cell.getPropByPath(property.path)"
@@ -25,7 +36,10 @@
     <ng-template #suffixIconClear>
         <a (click)="clearColor()">清空输入框</a>
     </ng-template>
-    <select *ngSwitchCase="'select'" [value]="cell.getPropByPath(property.path)" (change)="inputChange($event)">
-        <option *ngFor="let o of property.options" [value]="o.value">{{o.name}}</option>
+    <select *ngSwitchCase="'select'"
+            [value]="cell.getPropByPath(property.path)"
+            (change)="inputChange($event)">
+        <option *ngFor="let o of property.options"
+                [value]="o.value">{{o.name}}</option>
     </select>
 </ng-container>
