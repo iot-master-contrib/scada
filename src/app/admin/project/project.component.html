@@ -1,13 +1,5 @@
-<nz-space>
-    <button *nzSpaceItem nz-button nzType="primary" (click)="reload()">
-        <i nz-icon nzType="reload" [nzSpin]="loading"></i>
-        刷新
-    </button>
-    <button *nzSpaceItem nz-button nzType="primary" (click)="add()">
-        <i nz-icon nzType="plus"></i>
-        新增
-    </button>
-</nz-space>
+<app-common-header title="工程" moduleName="project" (onSearch)="search($event)" (onAdd)="add()" (onLoad)="load()">
+</app-common-header>
 
 <ng-template #totalTemplate let-total>总共 {{ total }} 条</ng-template>
 <nz-table #basicTable [nzData]="datum" [nzFrontPagination]="false" [nzLoading]="loading" nzShowPagination

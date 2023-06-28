@@ -8,22 +8,32 @@ import {EditTableComponent} from './edit-table/edit-table.component';
 import {NzInputModule} from "ng-zorro-antd/input";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {ColorInputComponent} from './color-input/color-input.component';
-import { HtmlPipe } from './html.pipe';
-import { AttachSelectComponent } from './attach-select/attach-select.component';
+import {HtmlPipe} from './html.pipe';
+import {AttachSelectComponent} from './attach-select/attach-select.component';
+import {CommonHeaderComponent} from "./common-header/common-header.component";
+import {NzLayoutModule} from "ng-zorro-antd/layout";
+import {NzPageHeaderModule} from "ng-zorro-antd/page-header";
+import {NzSpaceModule} from "ng-zorro-antd/space";
+import {NzUploadModule} from "ng-zorro-antd/upload";
+import {SearchBoxComponent} from "./search-box/search-box.component";
 
 @NgModule({
     declarations: [
+        SearchBoxComponent,
         EditTableComponent,
         ColorInputComponent,
         HtmlPipe,
         AttachSelectComponent,
+        CommonHeaderComponent,
 
     ],
     exports: [
+        SearchBoxComponent,
         EditTableComponent,
         ColorInputComponent,
         HtmlPipe,
-        AttachSelectComponent
+        AttachSelectComponent,
+        CommonHeaderComponent,
     ],
     providers: [HtmlPipe],
     imports: [
@@ -35,6 +45,10 @@ import { AttachSelectComponent } from './attach-select/attach-select.component';
         NzIconModule,
         NzInputModule,
         NzButtonModule,
+        NzLayoutModule,
+        NzPageHeaderModule,
+        NzSpaceModule,
+        NzUploadModule,
     ]
 })
 export class BaseModule {
