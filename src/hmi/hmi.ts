@@ -9,7 +9,7 @@ export declare interface HmiComponent {
     icon?: string
     svg?: string
 
-    type: "line" | "shape" | "html" | "svg"
+    type: "line" | "shape" | "html" | "svg" | "chart"
 
     internal?: boolean
     extends?: Node.Properties | Edge.Properties //继承 shape 或 edge

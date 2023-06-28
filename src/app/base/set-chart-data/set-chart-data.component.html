@@ -1,0 +1,47 @@
+<nz-steps [nzCurrent]="current">
+    <nz-step nzTitle="设置数据"></nz-step>
+    <nz-step nzTitle="预览"></nz-step>
+    <nz-step nzTitle="生成图表"></nz-step>
+</nz-steps>
+
+<table *ngIf="current===0"
+    class="step-1-table">
+    <tr>
+        <td>数据源：</td>
+        <td>
+            <nz-radio-group [(ngModel)]="form.radioValue">
+                <label nz-radio
+                    nzValue="static">静态数据</label>
+                <label nz-radio
+                    nzValue="dynamic">动态数据</label>
+            </nz-radio-group>
+        </td>
+    </tr>
+    <tr *ngIf="form.radioValue==='static'">
+        <td>数据预览：</td>
+        <td>
+            行：<input nz-input
+                style="width: 100px;"
+                [(ngModel)]="form.rows" />
+            列：<input nz-input
+                style="width: 100px;"
+                [(ngModel)]="form.cols" />
+        </td>
+    </tr>
+</table>
+
+
+<div style="text-align: center;margin-top:20px;">
+    <button nz-button
+        (click)="pre()"
+        style="margin-right: 10px;"
+        *ngIf="current > 0">
+        <span>上一步</span>
+    </button>
+    <button nz-button
+        nzType="primary"
+        (click)="next()"
+        *ngIf="current < 2">
+        <span>下一步</span>
+    </button>
+</div>

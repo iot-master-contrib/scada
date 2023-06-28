@@ -1,14 +1,14 @@
-import {Injectable, Injector} from '@angular/core';
-import {RequestService} from "./request.service";
-import {HmiCollection, HmiComponent} from "../hmi/hmi";
-import {BaseComponents, ChartComponent} from "../hmi/components";
-import {IndustryComponents} from "../hmi/industry/components";
-import {ElectricComponents} from "../hmi/electric/components";
-import {NzNotificationService} from "ng-zorro-antd/notification";
-import {Subject} from "rxjs";
-import {Cell, Graph, Shape} from "@antv/x6";
+import { Injectable, Injector } from '@angular/core';
+import { RequestService } from "./request.service";
+import { HmiCollection, HmiComponent } from "../hmi/hmi";
+import { BaseComponents, ChartComponent } from "../hmi/components";
+import { IndustryComponents } from "../hmi/industry/components";
+import { ElectricComponents } from "../hmi/electric/components";
+import { NzNotificationService } from "ng-zorro-antd/notification";
+import { Subject } from "rxjs";
+import { Cell, Graph, Shape } from "@antv/x6";
 
-import {BaseGroup} from "../hmi/base/group";
+import { BaseGroup } from "../hmi/base/group";
 import {
     createHtmlComponent,
     createImageComponent,
@@ -19,10 +19,11 @@ import {
 } from "../hmi/creator";
 
 
-import {HttpClient} from '@angular/common/http';
-import {DomSanitizer} from '@angular/platform-browser';
-import {GeometryComponents} from "../hmi/geometry/components";
-
+import { HttpClient } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
+import { GeometryComponents } from "../hmi/geometry/components";
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { SetChartDataComponent } from './base/set-chart-data/set-chart-data.component';
 @Injectable({
     providedIn: 'root'
 })
@@ -44,7 +45,8 @@ export class ComponentService {
         private ns: NzNotificationService,
         private injector: Injector,
         private httpClient: HttpClient,
-        private sanitizer: DomSanitizer
+        private sanitizer: DomSanitizer,
+        private modal: NzModalService
     ) {
 
         this.PutCollection(BaseComponents)
@@ -60,7 +62,7 @@ export class ComponentService {
     }
 
     load() {
-        this.rs.get("api/component/list", {limit: 99999}).subscribe(res => {
+        this.rs.get("api/component/list", { limit: 99999 }).subscribe(res => {
             res.data?.forEach((c: any) => this.PutComponent(c))
         })
         // this.rs.get("api/image/list", {limit: 99999}).subscribe(res => {
@@ -103,7 +105,7 @@ export class ComponentService {
                 }
             })
             if (!found) {
-                this.collections.push({name: component.collection, components: [component]})
+                this.collections.push({ name: component.collection, components: [component] })
             }
         } else {
             //TODO 处理未分类组件
@@ -185,31 +187,20 @@ export class ComponentService {
                     component.registered = true
                 }
                 break;
-            case "html":
-                //注册衍生组件
-                Shape.HTML.register({
-                    shape: component.id,
-                    effects: component.effects,
-                    html: component.html as (cell: Cell) => HTMLHtmlElement,
-                    ...component.extends
-                })
-                component.registered = true
+            case "chart":
+                // Shape.HTML.register({
+                //     shape: component.id,
+                //     effects: component.effects,
+                //     html: component.html as (cell: Cell) => HTMLHtmlElement,
+                //     ...component.extends
+                // })
+                // component.registered = true
+                this.modal.create({
+                    nzTitle: "配置图表",
+                    nzContent: SetChartDataComponent,
+                    nzFooter: null,
+                });
                 break;
-            // case "svg":
-            //     Shape.HTML.register({
-            //         shape: component.id,
-            //         width: 100,
-            //         height: 80,
-            //         effect: ["data"],
-            //         html: (cell) => {
-            //             let {color} = cell.getData();
-            //             const div = document.createElement("span");
-            //             div.innerHTML = component.svgIcon;
-            //             div.style.background = color
-            //             return div
-            //         },
-            //     });
-            //     break;
             // case "angular":
             //     register({
             //         shape: component.id,

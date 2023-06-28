@@ -250,6 +250,9 @@ export class CanvasComponent {
                     // ports
                 })
                 break;
+            case "chart":
+                console.log(1111111);
+                break;
             // case "angular":
             //     //避免重复注册
             //     node = this.graph.createNode({
