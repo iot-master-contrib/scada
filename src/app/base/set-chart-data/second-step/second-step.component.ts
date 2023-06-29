@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { RequestService } from 'src/app/request.service';
+import { Component } from '@angular/core';
 import * as echarts from 'echarts';
 
 @Component({
@@ -8,9 +7,7 @@ import * as echarts from 'echarts';
   styleUrls: ['./second-step.component.scss']
 })
 export class SecondStepComponent {
-  chart: any
-
-  constructor(private rs: RequestService) {
+  constructor() {
     const fn = setInterval(() => {
       const mainEle: any = document.getElementById('main');
       if (mainEle) {
