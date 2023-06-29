@@ -4,32 +4,10 @@
     <nz-step nzTitle="生成图表"></nz-step>
 </nz-steps>
 
-<table *ngIf="current===0"
-    class="step-1-table">
-    <tr>
-        <td>数据源：</td>
-        <td>
-            <nz-radio-group [(ngModel)]="form.radioValue">
-                <label nz-radio
-                    nzValue="static">静态数据</label>
-                <label nz-radio
-                    nzValue="dynamic">动态数据</label>
-            </nz-radio-group>
-        </td>
-    </tr>
-    <tr *ngIf="form.radioValue==='static'">
-        <td>数据预览：</td>
-        <td>
-            行：<input nz-input
-                style="width: 100px;"
-                [(ngModel)]="form.rows" />
-            列：<input nz-input
-                style="width: 100px;"
-                [(ngModel)]="form.cols" />
-        </td>
-    </tr>
-</table>
-
+<app-first-step [style]="'display:'+(current==0?'block':'none')"
+    #firstStep></app-first-step>
+<app-second-step [style]="'display:'+(current==1?'block':'none')"
+    #secondStep></app-second-step>
 
 <div style="text-align: center;margin-top:20px;">
     <button nz-button

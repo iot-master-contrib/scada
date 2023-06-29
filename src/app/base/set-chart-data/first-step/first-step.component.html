@@ -1,0 +1,42 @@
+<table class="step-1-table">
+    <tr>
+        <td>数据源：</td>
+        <td>
+            <nz-radio-group [(ngModel)]="form.radioValue">
+                <label nz-radio
+                    nzValue="static">静态数据</label>
+                <label nz-radio
+                    nzValue="dynamic">动态数据</label>
+            </nz-radio-group>
+        </td>
+    </tr>
+    <tr *ngIf="form.radioValue==='static'">
+        <td style="vertical-align: top;">数据预览：</td>
+        <td>
+            行： <nz-input-number [(ngModel)]="form.rows"
+                (ngModelChange)="handleRowsBlur($event)"
+                [nzMin]="1"></nz-input-number>
+            列：<nz-input-number [(ngModel)]="form.cols"
+                (ngModelChange)="handleColsBlur($event)"
+                [nzMin]="1"></nz-input-number>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th *ngFor="let head of headArr">{{head}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of tableData;let i = index;">
+                        <td>{{i+1}}</td>
+                        <td *ngFor="let key of headArr;">
+                            <input nz-input
+                                [(ngModel)]="row[key]" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>

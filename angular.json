@@ -61,7 +61,7 @@
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "src/styles.less"
             ],
-            "scripts": []
+            "scripts": ["node_modules/echarts/dist/echarts.js"]
           },
           "configurations": {
             "production": {

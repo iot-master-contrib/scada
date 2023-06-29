@@ -19,7 +19,12 @@ import { SearchBoxComponent } from "./search-box/search-box.component";
 import { SetChartDataComponent } from './set-chart-data/set-chart-data.component';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
-
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { FirstStepComponent } from './set-chart-data/first-step/first-step.component';
+import { SecondStepComponent } from './set-chart-data/second-step/second-step.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+import * as echarts from 'echarts';
 @NgModule({
     declarations: [
         SearchBoxComponent,
@@ -29,6 +34,8 @@ import { NzStepsModule } from 'ng-zorro-antd/steps';
         AttachSelectComponent,
         CommonHeaderComponent,
         SetChartDataComponent,
+        FirstStepComponent,
+        SecondStepComponent,
 
     ],
     exports: [
@@ -55,7 +62,10 @@ import { NzStepsModule } from 'ng-zorro-antd/steps';
         NzSpaceModule,
         NzUploadModule,
         NzRadioModule,
-        NzStepsModule
+        NzStepsModule,
+        NzTableModule,
+        NzInputNumberModule,
+        NgxEchartsModule
     ]
 })
 export class BaseModule {

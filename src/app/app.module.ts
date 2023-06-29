@@ -12,8 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewerComponent } from './viewer/viewer.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import {NzNotificationService} from "ng-zorro-antd/notification";
-import {IMqttServiceOptions, MqttModule} from "ngx-mqtt";
+import { NzNotificationService } from "ng-zorro-antd/notification";
+import { IMqttServiceOptions, MqttModule } from "ngx-mqtt";
 
 registerLocaleData(zh);
 
