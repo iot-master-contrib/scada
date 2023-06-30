@@ -32,7 +32,6 @@ export class SetChartComponent {
   handleCreateGraph() {
     const echartsOption = this.secondStep.option;
     const ele = document.getElementsByTagName("app-second-step")[0].getElementsByTagName("canvas")[0];
-
     const { component } = this;
     Shape.HTML.register({
       shape: component.id,
@@ -43,6 +42,7 @@ export class SetChartComponent {
         return ele
       },
     });
+    component.registered = true;
     this.#modal.destroy({ echartsOption });
   }
 }

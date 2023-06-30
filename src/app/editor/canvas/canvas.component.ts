@@ -262,26 +262,18 @@ export class CanvasComponent {
                         component,
                     },
                     nzFooter: null,
-                }).afterClose.subscribe(({ echartsOption }) => {
+                }).afterClose.subscribe((res) => {
+                    if (!component.registered) return
                     this.graph.addNode({
                         shape: component.id,
                         x: 60,
                         y: 100,
                         data: {
-                            echartsOption
+                            echartsOption: res && res.echartsOption
                         }
                     })
                 })
                 break;
-            // case "angular":
-            //     //避免重复注册
-            //     node = this.graph.createNode({
-            //         shape: component.id,
-            //         ...component.meta,
-            //         data: {id: component.id},
-            //         //ports
-            //     })
-            //     break;
         }
         console.log(node)
         if (node && $event.event)

@@ -185,7 +185,6 @@ export class ComponentService {
                 }
                 break;
             case "chart":
-                component.registered = true
                 break;
             // case "angular":
             //     register({
