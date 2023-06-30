@@ -15,7 +15,7 @@ import { HmiComponent, HmiDraw, HmiPage } from "../../../hmi/hmi";
 
 import { ComponentService } from "../../component.service";
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { SetChartDataComponent } from 'src/app/base/set-chart-data/set-chart-data.component';
+import { SetChartComponent } from '../set-chart/set-chart.component';
 
 
 @Component({
@@ -257,7 +257,7 @@ export class CanvasComponent {
                 this.modal.create({
                     nzTitle: "配置图表",
                     nzMaskClosable: false,//点击蒙版不允许关闭
-                    nzContent: SetChartDataComponent,
+                    nzContent: SetChartComponent,
                     nzComponentParams: {
                         component,
                     },

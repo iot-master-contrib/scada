@@ -73,14 +73,11 @@ export class FirstStepComponent {
       }
     })
     console.log(tableData)
-    // return {
-    // tableData:this.tableData,
-    // headArr: this.headArr
-    // };
-    return [
-      { 'x': '衬衫', 'y1': 5 },
-      { 'x': '羊毛衫', 'y1': 20 },
-      { 'x': '雪纺衫', 'y1': 36 },
-    ];
+    return tableData;
+    // return [
+    //   { 'x': '衬衫', 'y1': 5 },
+    //   { 'x': '羊毛衫', 'y1': 20 },
+    //   { 'x': '雪纺衫', 'y1': 36 },
+    // ];
   }
 }

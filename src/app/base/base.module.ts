@@ -16,14 +16,10 @@ import { NzPageHeaderModule } from "ng-zorro-antd/page-header";
 import { NzSpaceModule } from "ng-zorro-antd/space";
 import { NzUploadModule } from "ng-zorro-antd/upload";
 import { SearchBoxComponent } from "./search-box/search-box.component";
-import { SetChartDataComponent } from './set-chart-data/set-chart-data.component';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-import { FirstStepComponent } from './set-chart-data/first-step/first-step.component';
-import { NgxEchartsModule } from 'ngx-echarts';
-import { SecondStepComponent } from './set-chart-data/second-step/second-step.component';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 @NgModule({
@@ -34,9 +30,6 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
         HtmlPipe,
         AttachSelectComponent,
         CommonHeaderComponent,
-        SetChartDataComponent,
-        FirstStepComponent,
-        SecondStepComponent,
 
     ],
     exports: [
@@ -46,7 +39,6 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
         HtmlPipe,
         AttachSelectComponent,
         CommonHeaderComponent,
-        SetChartDataComponent,
     ],
     providers: [HtmlPipe],
     imports: [
@@ -66,7 +58,6 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
         NzStepsModule,
         NzTableModule,
         NzInputNumberModule,
-        NgxEchartsModule,
         NzSpinModule
     ]
 })

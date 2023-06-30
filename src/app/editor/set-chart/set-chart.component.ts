@@ -4,11 +4,11 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
 import { HmiComponent } from 'src/hmi/hmi';
 
 @Component({
-  selector: 'app-set-chart-data',
-  templateUrl: './set-chart-data.component.html',
-  styleUrls: ['./set-chart-data.component.scss']
+  selector: 'app-set-chart',
+  templateUrl: './set-chart.component.html',
+  styleUrls: ['./set-chart.component.scss']
 })
-export class SetChartDataComponent {
+export class SetChartComponent {
   @Input("component") component!: HmiComponent
   @ViewChild('firstStep') firstStep: any;
   @ViewChild('secondStep') secondStep: any;

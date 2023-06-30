@@ -53,7 +53,6 @@ export class SecondStepComponent {
       default:
         break;
     }
-    // 指定图表的配置项和数据
 
     this.isSpinning = false;
     this.option = {
