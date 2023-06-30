@@ -18,6 +18,20 @@ export class FirstStepComponent {
   constructor() {
     this.setColumns();
     this.setRows();
+
+    const fn = setInterval(() => {
+      const tableCont = document.querySelector('#tableContent');
+      if (tableCont) {
+        clearInterval(fn);
+        function scrollHandle(this: any, e: Event) {
+          var scrollTop = this.scrollTop;
+          this.querySelector('thead').style.transform = 'translateY(' + scrollTop + 'px)';
+        }
+        tableCont?.addEventListener('scroll', scrollHandle);
+      }
+    })
+
+
   }
   setColumns() {
     // 列

@@ -18,25 +18,29 @@
                 [nzMin]="1"></nz-input-number>
             列：<nz-input-number [(ngModel)]="form.cols"
                 (ngModelChange)="handleColsBlur($event)"
-                [nzMin]="1"></nz-input-number>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>序号</th>
-                        <th *ngFor="let head of headArr">{{head}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let row of tableData;let i = index;">
-                        <td>{{i+1}}</td>
-                        <td *ngFor="let key of headArr;">
-                            <input nz-input
-                                [(ngModel)]="row[key]" />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                [nzMin]="1"
+                [nzMax]="10"></nz-input-number>
+            <div class='table-content'
+                id='tableContent'>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th *ngFor="let head of headArr">{{head}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of tableData;let i = index;">
+                            <td>{{i+1}}</td>
+                            <td *ngFor="let key of headArr;">
+                                <input nz-input
+                                    style="position: static;"
+                                    [(ngModel)]="row[key]" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </td>
     </tr>
 </table>
