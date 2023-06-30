@@ -14,7 +14,6 @@ import { ViewerComponent } from './viewer/viewer.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzNotificationService } from "ng-zorro-antd/notification";
 import { IMqttServiceOptions, MqttModule } from "ngx-mqtt";
-import { DynamicComponentDirective } from './dynamic-component.directive';
 
 registerLocaleData(zh);
 
@@ -28,7 +27,6 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     declarations: [
         AppComponent,
         ViewerComponent,
-        DynamicComponentDirective,
     ],
     imports: [
         BrowserModule,
