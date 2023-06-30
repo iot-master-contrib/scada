@@ -12,6 +12,7 @@ import { BaseNumber } from "./base/number";
 import { ChartGauge } from "./chart/gauge";
 import { ChartBar } from "./chart/bar";
 import { ChartLine } from "./chart/line";
+import { ChartPie } from "./chart/pie";
 import { BaseSwitch } from "./base/switch";
 import { BaseButton } from "./base/button";
 
@@ -27,7 +28,7 @@ export const BaseComponents: HmiCollection = {
 export const ChartComponent: HmiCollection = {
     name: '图表组件',
     components: [
-        ChartGauge, ChartBar, ChartLine,
+        ChartGauge, ChartBar, ChartLine, ChartPie
     ]
 }
 

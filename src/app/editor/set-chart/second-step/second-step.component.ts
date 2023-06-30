@@ -49,19 +49,38 @@ export class SecondStepComponent {
             data: seriesObj[key]
           });
         };
+        this.option = {
+          xAxis: {
+            data: xData
+          },
+          yAxis: {},
+          series
+        };
+        break;
+      case 'pie':
+        const seriesData = [];
+        for (let index = 0; index < tableData.length; index++) {
+          const item = tableData[index];
+          seriesData.push({ name: item.x, value: item.y1 });
+        }
+        this.option = {
+          legend: {
+            orient: 'vertical',
+            left: 'left'
+          },
+          series: [{
+            type: 'pie',
+            radius: '50%',
+            data: seriesData
+          }]
+        };
         break;
       default:
         break;
     }
 
     this.isSpinning = false;
-    this.option = {
-      xAxis: {
-        data: xData
-      },
-      yAxis: {},
-      series
-    };
+
     this.myChart.setOption(this.option);
   }
 }

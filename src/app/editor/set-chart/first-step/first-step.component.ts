@@ -10,7 +10,7 @@ export class FirstStepComponent {
   form = {
     radioValue: 'static',
     rows: 3,
-    cols: 3,
+    cols: 2,
   };
   tableData: any;
   headArr: any = [];
