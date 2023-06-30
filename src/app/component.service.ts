@@ -22,8 +22,6 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { GeometryComponents } from "../hmi/geometry/components";
-import { NzModalService } from 'ng-zorro-antd/modal';
-import { SetChartDataComponent } from './base/set-chart-data/set-chart-data.component';
 @Injectable({
     providedIn: 'root'
 })
@@ -46,7 +44,6 @@ export class ComponentService {
         private injector: Injector,
         private httpClient: HttpClient,
         private sanitizer: DomSanitizer,
-        private modal: NzModalService
     ) {
 
         this.PutCollection(BaseComponents)
@@ -188,18 +185,7 @@ export class ComponentService {
                 }
                 break;
             case "chart":
-                // Shape.HTML.register({
-                //     shape: component.id,
-                //     effects: component.effects,
-                //     html: component.html as (cell: Cell) => HTMLHtmlElement,
-                //     ...component.extends
-                // })
-                // component.registered = true
-                this.modal.create({
-                    nzTitle: "配置图表",
-                    nzContent: SetChartDataComponent,
-                    nzFooter: null,
-                });
+                component.registered = true
                 break;
             // case "angular":
             //     register({

@@ -22,9 +22,10 @@ import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { FirstStepComponent } from './set-chart-data/first-step/first-step.component';
-import { SecondStepComponent } from './set-chart-data/second-step/second-step.component';
 import { NgxEchartsModule } from 'ngx-echarts';
-import * as echarts from 'echarts';
+import { SecondStepComponent } from './set-chart-data/second-step/second-step.component';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+
 @NgModule({
     declarations: [
         SearchBoxComponent,
@@ -65,7 +66,8 @@ import * as echarts from 'echarts';
         NzStepsModule,
         NzTableModule,
         NzInputNumberModule,
-        NgxEchartsModule
+        NgxEchartsModule,
+        NzSpinModule
     ]
 })
 export class BaseModule {

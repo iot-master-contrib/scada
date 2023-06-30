@@ -12,7 +12,7 @@ export class FirstStepComponent {
     rows: 3,
     cols: 3,
   };
-  tableData: any = [];
+  tableData: any;
   headArr: any = [];
   rowTempl: any = {};
   constructor() {
@@ -73,6 +73,14 @@ export class FirstStepComponent {
       }
     })
     console.log(tableData)
-    return tableData;
+    // return {
+    // tableData:this.tableData,
+    // headArr: this.headArr
+    // };
+    return [
+      { 'x': '衬衫', 'y1': 5 },
+      { 'x': '羊毛衫', 'y1': 20 },
+      { 'x': '雪纺衫', 'y1': 36 },
+    ];
   }
 }
