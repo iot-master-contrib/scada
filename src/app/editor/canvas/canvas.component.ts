@@ -190,7 +190,8 @@ export class CanvasComponent {
             //this.showPorts(ports, false);
         });
 
-        this.graph.on("cell:selected", () => {
+        this.graph.on("cell:selected", (data) => {
+            console.log(111111111, data)
         })
 
         this.graph.on('cell:click', ({ cell, e }) => {
@@ -268,9 +269,7 @@ export class CanvasComponent {
                         shape: component.id,
                         x: 60,
                         y: 100,
-                        data: {
-                            echartsOption: res && res.echartsOption
-                        }
+                        data: {...res}
                     })
                 })
                 break;

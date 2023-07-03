@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Cell, Graph} from "@antv/x6";
-import {HmiComponent, HmiProject} from "../../../hmi/hmi";
-import {ComponentService} from "../../component.service";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Cell, Graph } from "@antv/x6";
+import { ECharts } from 'echarts';
+import { HmiComponent, HmiProject } from "../../../hmi/hmi";
+import { ComponentService } from "../../component.service";
 
 @Component({
     selector: 'app-property',
@@ -15,7 +16,7 @@ export class PropertyComponent {
     @Output() onPageChange = new EventEmitter<number>();
 
     selected: Cell[] = [];
-
+    echartsInstance = null
     private g!: Graph;
 
     get graph() {
@@ -26,8 +27,13 @@ export class PropertyComponent {
         this.g = g;
 
         g.on("cell:change:size", (event) => {
-            if (event.cell == this.cell)
+            if (event.cell == this.cell) {
                 this.formSize.patchValue(event.current as any)
+                if (this.isChart(this.cell.shape)) {
+                    this.resizeChart(this.cell);
+                }
+            }
+
         })
 
         g.on("cell:change:position", (event) => {
@@ -35,14 +41,15 @@ export class PropertyComponent {
                 this.formPosition.patchValue(event.current as any)
         })
 
-        g.on("cell:unselected", ({cell}) => {
+        g.on("cell:unselected", ({ cell }) => {
             if (cell == this.cell) {
                 // @ts-ignore
                 this.cmp = undefined;
+                this.echartsInstance = null;
             }
         })
 
-        g.on("selection:changed", ({selected}) => {
+        g.on("selection:changed", ({ selected }) => {
             this.selected = selected;
             if (g.getSelectedCellCount() === 1) {
                 this.cell = g.getSelectedCells()[0]
@@ -52,10 +59,14 @@ export class PropertyComponent {
                     this.formPosition.patchValue(pos)
                     const size = this.cell.getSize()
                     this.formSize.patchValue(size);
+
                 } else if (this.cell.isEdge()) {
                     const source = this.cell.getProp('source');
                     const target = this.cell.getProp('target');
-                    this.formLinePosition.patchValue({source, target});
+                    this.formLinePosition.patchValue({ source, target });
+                }
+                if (this.isChart(this.cell.shape)) {
+                    this.echartsInstance = this.cell.data.echartsInstance;
                 }
 
                 //找到组件
@@ -101,13 +112,25 @@ export class PropertyComponent {
     }
 
     onSizeChange($event: Event) {
-        //console.log("onPositionChange", this.formSize.value)
+        // console.log("onPositionChange", this.formSize.value)
         if (this.cell.isNode()) {
             this.cell.setSize(this.formSize.value)
+        }
+        if (this.isChart(this.cell.shape)) {
+            // 图表
+            this.resizeChart(this.cell);
         }
     }
 
     onLinePositionChange($event: Event) {
         this.cell.setProp(this.formLinePosition.value);
+    }
+
+    isChart(shape: string) {
+        return /^chart-/.test(shape);
+    }
+    resizeChart(cell: Cell) {
+        const { echartsInstance } = cell.data;
+        echartsInstance.resize(this.formSize.value)
     }
 }

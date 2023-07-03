@@ -46,6 +46,8 @@
         </table>
     </form>
 
+    <app-chart-form *ngIf="cell.shape.startsWith('chart-')" [echartsInstance]="echartsInstance"></app-chart-form>
+
     <table>
         <tr *ngFor="let p of cmp.properties">
             <td>

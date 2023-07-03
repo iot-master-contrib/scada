@@ -70,6 +70,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { FirstStepComponent } from './set-chart/first-step/first-step.component';
 import { SecondStepComponent } from './set-chart/second-step/second-step.component';
+import { ChartFormComponent } from './chart-form/chart-form.component';
 @NgModule({
     declarations: [
         EditorComponent,
@@ -91,7 +92,8 @@ import { SecondStepComponent } from './set-chart/second-step/second-step.compone
         AboutComponent,
         SetChartComponent,
         FirstStepComponent,
-        SecondStepComponent
+        SecondStepComponent,
+        ChartFormComponent
     ],
     imports: [
         CommonModule,

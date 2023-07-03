@@ -1,0 +1,20 @@
+<form [formGroup]="optionsForm" (change)="onSizeChange($event)">
+    <table formGroupName="title">
+        <tr>
+            <td>标题</td>
+            <td><input nz-input nzSize="small" formControlName="text"></td>
+        </tr>
+        <tr formGroupName="textStyle">
+            <td>标题颜色</td>
+            <td>
+                <app-color-input formControlName="color"></app-color-input>
+            </td>
+        </tr>
+        <tr formGroupName="textStyle">
+            <td>标题字号</td>
+            <td>
+                <input nz-input nzSize="small" type="number" formControlName="fontSize">
+            </td>
+        </tr>
+    </table>
+</form>
