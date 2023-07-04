@@ -13,7 +13,7 @@ export class ChartFormComponent {
     const fn = setInterval(() => {
       if (this.echartsInstance) {
         clearInterval(fn);
-        const option = this.echartsInstance.getOption();
+        // const option = this.echartsInstance.getOption();
       }
     }, 1000)
     this.optionsForm = this.fb.group({
