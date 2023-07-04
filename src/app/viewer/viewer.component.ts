@@ -146,30 +146,6 @@ export class ViewerComponent implements OnDestroy {
         return (new Function(...keys, 'return ' + expr))(...values)
     }
 
-
-    alarmSubs = new Set<string>();
-    subscribeAlarm(id: string) {
-        if (this.alarmSubs.has(id))
-            return
-        this.alarmSubs.add(id)
-
-        const topic = `alarm/+/${id}`
-        const sub = this.mqtt.observe(topic).subscribe(res => {
-            const alarm = JSON.parse(res.payload.toString())
-            console.log("alarm", alarm)
-            this.ns.create(
-                "error",
-                alarm.title,
-                alarm.device + ' ' + alarm.message,
-                {
-                    nzPlacement: 'top',
-                    nzDuration: 10000,//显示10秒
-                }
-            )
-        })
-        this.subs.push(sub)
-    }
-
     public Render(page: HmiPage) {
         page.content?.cells?.forEach((cell: any) => {
             const cmp = this.cs.Get(cell.shape)
@@ -215,9 +191,6 @@ export class ViewerComponent implements OnDestroy {
                         }
                     })
                     this.subs.push(sub)
-
-                    this.subscribeAlarm(binding.device)
-
                 }
 
             //事件处理编译
