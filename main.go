@@ -67,7 +67,9 @@ func Route(app *web.Engine) {
 
 func Register() error {
 	payload, _ := json.Marshal(App())
-	return mqtt.Publish("master/register", payload, false, 0)
+	token := mqtt.Publish("master/register", payload)
+	token.Wait()
+	return token.Error()
 }
 
 func Static(fs *web.FileSystem) {
