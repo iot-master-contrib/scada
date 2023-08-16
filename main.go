@@ -17,7 +17,7 @@ func App() *model.App {
 	return &model.App{
 		Id:   "scada",
 		Name: "Web组态",
-		Entries: []model.AppEntry{{
+		Entries: []*model.AppEntry{{
 			Path: "app/scada/admin/project",
 			Name: "所有工程",
 		}, {
