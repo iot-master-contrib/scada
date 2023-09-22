@@ -59,10 +59,10 @@ export class ViewerComponent implements OnDestroy {
                 location.href = url
         },
         get: (url: string, args: Object) =>{
-            this.rs.get(url, args)
+            this.rs.get(url, args).subscribe(()=>{})
         },
         post: (url: string, body: Object) =>{
-            this.rs.post(url, body)
+            this.rs.post(url, body).subscribe(()=>{})
         },
 
     }
