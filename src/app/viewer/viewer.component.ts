@@ -11,6 +11,7 @@ import {Subscription} from "rxjs";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {WindowComponent} from "./window/window.component";
 import {functions} from "lodash-es";
+import {AuthComponent} from "./auth/auth.component";
 
 
 //import "fengari-web"
@@ -58,12 +59,23 @@ export class ViewerComponent implements OnDestroy {
             else
                 location.href = url
         },
-        get: (url: string, args: Object) =>{
-            this.rs.get(url, args).subscribe(()=>{})
+        get: (url: string, args: Object) => {
+            this.rs.get(url, args).subscribe(() => {
+            })
         },
-        post: (url: string, body: Object) =>{
-            this.rs.post(url, body).subscribe(()=>{})
+        post: (url: string, body: Object) => {
+            this.rs.post(url, body).subscribe(() => {
+            })
         },
+        auth: (cb: () => {}) => {
+            this.ms.create({
+                nzContent: AuthComponent,
+                nzTitle: "请输入登录密码",
+                nzFooter: null
+            }).afterClose.subscribe(res => {
+                if (res == 'ok') cb()
+            })
+        }
 
     }
 

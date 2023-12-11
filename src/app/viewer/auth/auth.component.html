@@ -1,0 +1,20 @@
+
+
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+        <nz-form-control nzErrorTip="请输入用户名!">
+            <nz-input-group nzPrefixIcon="user" nzSize="large" style="border-radius: 10px">
+                <input type="text" nz-input formControlName="username" placeholder="用户名" nzSize="large"/>
+            </nz-input-group>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-control nzErrorTip="请输入密码!">
+            <nz-input-group nzPrefixIcon="lock" nzSize="large" style="border-radius: 10px">
+                <input type="password" nz-input formControlName="password" placeholder="密码" />
+            </nz-input-group>
+        </nz-form-control>
+    </nz-form-item>
+    <button nz-button nzSize="large" nzType="primary">登 录</button>
+</form>
+
